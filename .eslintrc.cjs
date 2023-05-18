@@ -12,7 +12,7 @@ module.exports = {
   rules: {
     "react-refresh/only-export-components": "warn",
     "react/prop-types": 0,
-    indent: ["error", 2],
+    // indent: ["error", 2],
     // quotes: ["error", "double"],
     semi: ["error", "always"],
   },
