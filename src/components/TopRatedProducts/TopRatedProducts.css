@@ -1,0 +1,17 @@
+/********featured product *******/
+.cart_bag,
+.quick_view {
+    opacity: 0;
+    visibility: visible;
+    transition: all 0.35s;
+}
+
+.prod_card:hover .cart_bag,
+.prod_card:hover .quick_view {
+    opacity: 1;
+    visibility: visible;
+}
+
+.prod_card:hover .quick_view {
+    bottom: 0
+}
