@@ -3,6 +3,7 @@ import logo from '../../images/logo/logo.png';
 import paymentImg from '../../images/logo/payment.svg';
 import paymentImg2 from '../../images/logo/payment2.svg';
 import paymentImg3 from '../../images/logo/payment3.svg';
+
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -82,7 +83,7 @@ const Footer = () => {
                             </li>
                         </ul>
                     </div>
-                    <div className="w-full  lg:w-1/5 mt-2 ">
+                    <div className="w-full lg:w-1/5 mt-2 ">
                         <h2 className="mb-4 text-sm font-semibold text-[#f7f7f7] capitalize dark:text-white">
                             Social
                         </h2>
@@ -132,10 +133,14 @@ const Footer = () => {
                         <span className="text-sm text-gray-400">
                             Payment Methods
                         </span>
-                        <img src={paymentImg} className='' alt="" />
+                        <div className="flex gap-2 bg-white py-1 px-2 rounded">
+                            <img src={paymentImg} className='' alt="" />
+                            <img src={paymentImg2} className='' alt="" />
+                            <img src={paymentImg3} className='' alt="" />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>3
         </footer>
 
     )
