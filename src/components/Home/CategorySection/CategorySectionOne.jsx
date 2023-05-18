@@ -5,7 +5,7 @@ import CategorySlider from "../../../Shared/CategorySlider/CategorySlider";
 const CategorySectionOne = () => {
   return (
     <div className="shadow-md pb-14">
-      <div className="mx-auto w-4/5">
+      <div className="mx-auto w-[90%]">
         {" "}
         <h1 className="my-7 text-xl font-semibold">Electronics & Appliances</h1>
         <hr className="my-4" />

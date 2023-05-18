@@ -27,10 +27,10 @@ const CategorySlider = ({ bannerImages }) => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src={categoryImage1} alt="" />
+          <img src={categoryImage1} className="w-full h-[600px]" alt="" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src={categoryImage2} alt="" />
+          <img src={categoryImage2} className="w-full h-[600px]" alt="" />
         </SwiperSlide>
       </Swiper>
     </>
