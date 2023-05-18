@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import CategorySectionOne from "../../components/Home/CategorySection/CategorySectionOne";
 
 const Home = () => {
-    return (
-        <div>Home</div>
-    )
-}
+  return <CategorySectionOne></CategorySectionOne>;
+};
 
-export default Home
+export default Home;
