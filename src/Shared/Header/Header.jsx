@@ -36,9 +36,9 @@ const Header = () => {
                         <span className="text-base uppercase font-medium text-white">
                             EN
                         </span>
-                        <span className="text-sm text-gray-400">
+                        <button className="text-sm text-gray-400">
                             <AiOutlineCaretDown />
-                        </span>
+                        </button>
                     </div>
                     {/* button group */}
                     <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
