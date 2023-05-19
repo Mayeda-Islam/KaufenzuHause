@@ -13,12 +13,12 @@ const CategorySectionFour = () => {
         {" "}
         <h1 className="my-7 text-xl font-semibold">Lifestyles</h1>
         <hr className="my-6" />
-        <div className="grid grid-cols-1 md:grid-rows-3 md:grid-cols-[464px_auto] gap-x-6 pb-5">
+        <div className="grid grid-cols-1 lg:grid-rows-3 md:grid-cols-[310px_auto] lg:grid-cols-[464px_auto] gap-x-6 md: pb-5">
           <div className="row-span-3 hidden md:block ">
             <CategorySlider sliderImages={sliderImages}></CategorySlider>
           </div>
           <div className="row-span-3">
-            <div className=" grid grid-cols-2 md:grid-cols-3 gap-4 ">
+            <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-2">
               {products.map((product) => (
                 <ProductCard product={product} key={product.id}></ProductCard>
               ))}
