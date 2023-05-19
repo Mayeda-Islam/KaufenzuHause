@@ -57,7 +57,7 @@ const AllCategories = () => {
                 <div className="flex items-center justify-center md:gap-4 lg:gap-6 flex-wrap lg:flex-nowrap">
                     {
                         categories.map((category) => (
-                            <div className="w-6/12 md:w-3/12 xl:w-2/12 xxl:w-1/5" key={category._id}>
+                            <div className="w-6/12 md:w-3/12 xl:w-2/12 " key={category._id}>
                                 <div className="m-3 xxl:h-[160px] md:m-0 rounded shadow-lg bg-white shadow-gray-300 px-10 py-6 text-center">
                                     <div className="flex justify-center items-center">
                                         <img src={category.categoryImg} className="w-[50px]" alt="" />
