@@ -3,6 +3,8 @@ import logo from '../../images/logo/logo.png';
 import paymentImg from '../../images/logo/payment.svg';
 import paymentImg2 from '../../images/logo/payment2.svg';
 import paymentImg3 from '../../images/logo/payment3.svg';
+import { AiOutlineMobile, AiOutlineMail } from 'react-icons/ai';
+import { IoLocationOutline } from 'react-icons/io5';
 
 import { Link } from 'react-router-dom';
 
@@ -14,10 +16,42 @@ const Footer = () => {
                 <div className="flex gap-6 justify-center lg:justify-around  flex-wrap   md1:flex-wrap lg:flex-nowrap">
                     <div className="w-full  lg:w-2/5 ">
                         <div className="">
-                            <Link to={"/"} className="flex items-center mb-5">
-                                <img src={logo} className="h-8 mr-3" alt="KaufenzuHause Logo" />
+                            <Link to={"/"} className="flex items-center mb-2">
+                                <img src={logo} className="w-[220px] mr-3" alt="KaufenzuHause Logo" />
                             </Link>
+                            <p className="text-sm text-gray-300 w-full lg:w-3/4">
+                                Machen Sie das Einkaufen von zu Hause aus einfacher.
+                            </p>
 
+                            <div className="py-3">
+                                <div className="flex items-center gap-3 mb-2">
+                                    <span className="text-2xl text-primary ">
+                                        <IoLocationOutline />
+
+                                    </span>
+                                    <h3 className="text-sm text-white">
+                                        451 Wall Street, UK, London
+                                    </h3>
+                                </div>
+                                <div className="flex items-center gap-3 mb-2">
+                                    <span className="text-2xl text-primary ">
+                                        <AiOutlineMobile />
+
+                                    </span>
+                                    <h3 className="text-sm text-white">
+                                        Phone: (064) 332-1233
+                                    </h3>
+                                </div>
+                                <div className="flex items-center gap-3 mb-2">
+                                    <span className="text-2xl text-primary ">
+                                        <AiOutlineMail />
+
+                                    </span>
+                                    <h3 className="text-sm text-white">
+                                        Email: KaufenzuHause@info.com
+                                    </h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="w-full  lg:w-1/5 mt-2">
@@ -84,7 +118,7 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="w-full lg:w-1/5 mt-2 ">
-                        <h2 className="mb-4 text-sm font-semibold text-[#f7f7f7] capitalize dark:text-white">
+                        <h2 className="mb-4 text-sm font-semibold text-[#f7f7f7] uppercase dark:text-white">
                             Social
                         </h2>
                         <ul className="text-gray-300 flex flex-col gap-y-2 text-sm font-normal capitalize mb-8">
@@ -123,9 +157,9 @@ const Footer = () => {
                     <span className="text-sm text-gray-300 sm:text-center dark:text-gray-400">
                         © 2023{" "}
                         <Link to={"/"} className="hover:underline">
-                            Renix
+                            Kaufanzuhause
                         </Link>
-                        . All Rights Reserved. <a href="https://thinkystorm.com">Develop by ThinkyStorm</a>
+                        . All Rights Reserved. <a href="https://miskaturs-portfolio.netlify.app/">Developed by Miskat and Team</a>
 
                     </span>
                     {/* footer icon */}
@@ -141,7 +175,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>3
-        </footer>
+        </footer >
 
     )
 }
