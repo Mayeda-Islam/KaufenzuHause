@@ -26,7 +26,7 @@ const CategorySlider = ({ sliderImages }) => {
       >
         {sliderImages.map((sliderImage) => (
           <SwiperSlide>
-            <img className="" src={sliderImage} alt="" />
+            <img className=" h-3/5" src={sliderImage} alt="" />
           </SwiperSlide>
         ))}
         {/* <SwiperSlide>

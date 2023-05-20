@@ -12,9 +12,9 @@ const ProductCard = ({ product }) => {
     discount,
   } = product;
   return (
-    <div className="">
-      <div className="m-3 border border-gray-200 rounded prod_card ">
-        <div className="relative overflow-hidden">
+    <div className="w-6/12 md:w-6/12 lg:w-4/12">
+      <div className="m-4 border border-gray-200 rounded prod_card ">
+        <div className="relative flex items-center justify-center overflow-hidden">
           <img
             src={img}
             className="w-[400px] md:w-[400px] h-[250px] lg:w-[300px] object-cover md:h-[210px]"

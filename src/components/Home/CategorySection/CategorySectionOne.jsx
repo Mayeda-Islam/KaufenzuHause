@@ -13,12 +13,12 @@ const CategorySectionOne = () => {
         {" "}
         <h1 className="my-7 text-xl font-semibold">Electronics & Appliances</h1>
         <hr className="my-4" />
-        <div className="grid grid-cols-1 lg:grid-rows-3 lg:grid-cols-[464px_auto] gap-x-6  pb-5">
-          <div className="row-span-3 min-h-fit hidden md:block ">
+        <div className="flex  justify-center">
+          <div className="w-4/12   hidden md:block ">
             <CategorySlider sliderImages={sliderImages}></CategorySlider>
           </div>
-          <div className="row-span-3">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-2">
+          <div className="w-8/12">
+            <div className="flex flex-wrap items-center ">
               {products.map((product) => (
                 <ProductCard product={product} key={product.id}></ProductCard>
               ))}
@@ -31,3 +31,6 @@ const CategorySectionOne = () => {
 };
 
 export default CategorySectionOne;
+
+//grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-2
+//grid grid-cols-1 lg:grid-rows-3 md:grid-cols-[480px_auto] lg:grid-cols-[500px_auto] gap-x-6  pb-5
