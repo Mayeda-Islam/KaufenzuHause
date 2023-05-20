@@ -13,8 +13,8 @@ const CategorySectionOne = () => {
         {" "}
         <h1 className="my-7 text-xl font-semibold">Electronics & Appliances</h1>
         <hr className="my-4" />
-        <div className="grid grid-cols-1  lg:grid-rows-3 md:grid-cols-[310px_auto] lg:grid-cols-[464px_auto] gap-x-6  pb-5">
-          <div className="row-span-3 min-h-full hidden md:block ">
+        <div className="grid grid-cols-1 lg:grid-rows-3 lg:grid-cols-[464px_auto] gap-x-6  pb-5">
+          <div className="row-span-3 min-h-fit hidden md:block ">
             <CategorySlider sliderImages={sliderImages}></CategorySlider>
           </div>
           <div className="row-span-3">
