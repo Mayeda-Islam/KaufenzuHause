@@ -2,6 +2,7 @@ import React from 'react'
 import slider1 from '../../../images/bannerSlider/banners/banner.png';
 import slider2 from '../../../images/bannerSlider/banners/banner2.png';
 import slider3 from '../../../images/bannerSlider/banners/banner3.png';
+import slider4 from '../../../images/bannerSlider/banner4.png';
 import sidBanner1 from '../../../images/bannerSlider/sidBanner1.png';
 import sidBanner2 from '../../../images/bannerSlider/sidBanner2.png';
 import { Pagination, Navigation, Autoplay } from 'swiper';
@@ -15,21 +16,21 @@ const BannerSlider = () => {
     const sliders = [
         {
             _id: 1,
-            bannerImg: slider1
+            bannerImg: sidBanner1
         },
         {
             _id: 2,
-            bannerImg: slider2
+            bannerImg: sidBanner1
         },
         {
             _id: 3,
-            bannerImg: slider3
+            bannerImg: sidBanner1
         }
     ]
     return (
         <section className="px-4 lg:px-8 py-10 ">
             <div className="flex gap-3 flex-wrap lg:flex-nowrap">
-                <div className="w-full lg:w-8/12">
+                <div className="w-full lg:w-8/12 h-[300px] lg:max-h-[400px] ">
 
 
 
@@ -66,11 +67,11 @@ const BannerSlider = () => {
                         }}
                         // navigation={true}
                         modules={[Pagination, Navigation, Autoplay]}
-                        className="mySwiper "
-                        autoplay={{
-                            delay: 2500,
-                            disableOnInteraction: false,
-                        }}
+                    // className="mySwiper "
+                    // autoplay={{
+                    //     delay: 2500,
+                    //     disableOnInteraction: false,
+                    // }}
                     >
                         {
                             sliders?.map((slider) => {
@@ -81,7 +82,7 @@ const BannerSlider = () => {
                                             className='rounded-lg'
 
                                         >
-                                            <img src={bannerImg} className="w-full lg:w-auto h-[300px] lg:h-[400px] rounded-lg" alt="" />
+                                            <img src={bannerImg} className="w-full h-[300px] lg:h-[400px] xxl:h-[500px] rounded-lg" alt="" />
                                         </div>
 
                                     </SwiperSlide>
@@ -93,10 +94,10 @@ const BannerSlider = () => {
 
 
                 </div>
-                <div className="w-full lg:w-4/12 ">
+                <div className="w-full lg:w-4/12 max-h-[600px]">
                     <div className="hidden  lg:flex lg:flex-col flex-row gap-3 ">
-                        <img src={sidBanner1} className=" w-full h-[150px] lg:h-auto rounded-lg" alt="" />
-                        <img src={sidBanner2} className=" w-full h-[150px] lg:h-auto rounded-lg" alt="" />
+                        <img src={sidBanner1} className=" w-full h-[150px] lg:h-[193px] xxl:h-[243px] rounded-lg" alt="" />
+                        <img src={sidBanner2} className=" w-full h-[150px] lg:h-[193px] xxl:h-[243px] rounded-lg" alt="" />
                     </div>
                     <div className=" flex flex-row lg:hidden gap-3">
                         <div className="w-6/12">

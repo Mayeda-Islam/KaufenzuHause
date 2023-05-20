@@ -11,7 +11,7 @@ const CategorySectionTwo = () => {
   const sliderImages = [categoryImage1, categoryImage2];
   return (
     <div className="shadow-md pb-14">
-      <div className="mx-auto w-4/5">
+      <div className="mx-auto w-[90%]">
         {" "}
         <h1 className="my-7 text-xl font-semibold">Gadgets</h1>
         <hr className="my-6" />
