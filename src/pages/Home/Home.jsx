@@ -13,7 +13,6 @@ const Home = () => {
       <BannerSlider />
       <AllCategories />
       <TopratedProducts />
-
       <CategorySectionOne></CategorySectionOne>
       <CategorySectionTwo></CategorySectionTwo>
       <CategorySectionThree></CategorySectionThree>
