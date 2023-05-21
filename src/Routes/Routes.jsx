@@ -6,12 +6,14 @@ import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
 import Cart from "../pages/Cart/Cart";
 import NotFound from "../pages/NotFound/NotFound";
+import ProductDetails from '../pages/ProductDetails/ProductDetails';
 
 
 export const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<Main />}>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/productDetails" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />

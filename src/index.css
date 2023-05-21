@@ -32,7 +32,39 @@ body {
   z-index: 99999
 }
 
+
+/*******slider design********/
+.slideShow_slider {
+  white-space: nowrap;
+  transition: ease 800ms;
+}
+
+
+.slide {
+  display: inline-block;
+
+  height: 450px;
+  width: 100%;
+  border-radius: 40px;
+}
+
+.slide_single {
+  display: inline-block;
+
+  width: 100%;
+  border-radius: 6px;
+}
+
+.point_r {
+  cursor: pointer !important;
+}
+
 /*******swiper custom arrow*******/
 .mySwiper:nth-child(2) {
   margin-bottom: 50px !important
+}
+
+/********mui tabs padding*******/
+.css-19kzrtu {
+  padding: 0 !important
 }
