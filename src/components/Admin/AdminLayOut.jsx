@@ -6,6 +6,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -16,10 +17,16 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import { Link, Outlet } from "react-router-dom";
+import { Collapse } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CategoryIcon from "@mui/icons-material/Category";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import SettingsSystemDaydreamIcon from "@mui/icons-material/SettingsSystemDaydream";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -87,13 +94,16 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function AdminLayOut() {
-  const menu = [
-    { sideMenu: "Inbox", icon: <InboxIcon />, linkPath: "/admin/demo" },
-    { sideMenu: "Inbox", icon: <InboxIcon />, linkPath: "/admin/demo" },
-    { sideMenu: "Inbox", icon: <InboxIcon />, linkPath: "/admin/demo" },
-  ];
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [nestedOpen, setNestedOpen] = React.useState([]);
+  const handleClick = (index) => {
+    setNestedOpen((prev) => {
+      const newState = [...prev];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -103,11 +113,91 @@ export default function AdminLayOut() {
     setOpen(false);
   };
 
+  const menu = [
+    {
+      title: "Dashboard",
+      icon: <DashboardIcon />,
+      linkPath: "/admin",
+    },
+    {
+      title: "Profile",
+      icon: <AccountCircleIcon />,
+      linkPath: "/admin/profile",
+    },
+    {
+      title: "Orders",
+      icon: <AddShoppingCartIcon />,
+      linkPath: "/admin/orders",
+      items: [
+        { title: "Ordered Product", linkPath: "/admin/orders/orderedProducts" },
+        {
+          title: "Delivered Product",
+          linkPath: "/admin/orders/deliveredProducts",
+        },
+      ],
+    },
+    {
+      title: "Category",
+      icon: <CategoryIcon />,
+      linkPath: "/admin/category",
+      items: [
+        {
+          title: "Add Category",
+
+          linkPath: "/admin/category/addCategory",
+        },
+        {
+          title: "Category List",
+
+          linkPath: "/admin/category/categoryList",
+        },
+      ],
+    },
+    {
+      title: "Product",
+      icon: <InventoryIcon />,
+      linkPath: "/admin/product",
+      items: [
+        {
+          title: "Add Product",
+
+          linkPath: "/admin/product/addProduct",
+        },
+        {
+          title: "All Product",
+
+          linkPath: "/admin/product/allProduct",
+        },
+      ],
+    },
+    {
+      title: "System Setting",
+      icon: <SettingsSystemDaydreamIcon />,
+      linkPath: "/admin/system-setting",
+      items: [
+        {
+          title: "Hero slider",
+
+          linkPath: "/admin/systemSetting/heroSlider",
+        },
+        {
+          title: "Side Banner",
+
+          linkPath: "/admin/systemSetting/sideBanner",
+        },
+        {
+          title: "Nav Logo",
+
+          linkPath: "/admin/systemSetting/navLogo",
+        },
+      ],
+    },
+  ];
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
+      {/* <CssBaseline /> */}
+      <AppBar className="shadow-none border-none" position="fixed" open={open}>
+        <Toolbar className="bg-white inline">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -115,6 +205,7 @@ export default function AdminLayOut() {
             edge="start"
             sx={{
               marginRight: 5,
+              color: "black",
               ...(open && { display: "none" }),
             }}
           >
@@ -122,7 +213,16 @@ export default function AdminLayOut() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer
+        PaperProps={{
+          sx: {
+            backgroundColor: "black",
+            color: "gray",
+          },
+        }}
+        variant="permanent"
+        open={open}
+      >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
@@ -133,43 +233,110 @@ export default function AdminLayOut() {
           </IconButton>
         </DrawerHeader>
         <Divider />
+
         <List>
-          {menu.map((text) => (
-            <ListItem
-              key={text.sideMenu}
-              component={Link}
-              to={text.linkPath}
-              disablePadding
-              sx={{ display: "block" }}
-            >
-              <ListItemButton
-                key={text.icon}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
+          {menu.map((text, index) => (
+            <React.Fragment key={text.title}>
+              <ListItem
+                button
+                key={text.title}
+                component={Link}
+                to={text.linkPath}
+                onClick={() => handleClick(index)}
+                disablePadding
+                sx={{ display: "block" }}
               >
-                <ListItemIcon
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
                   }}
                 >
-                  {text.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={text.sideMenu}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      color: "white",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {text.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    className="text-lg "
+                    sx={{
+                      opacity: open ? 1 : 0,
+                      fontSize: "2rem",
+                      color: "white",
+                    }}
+                  >
+                    <span className="text-2xl">{text.title}</span>
+                  </ListItemText>
+                  {open &&
+                    text.items &&
+                    (nestedOpen[index] ? (
+                      <ArrowDropDownIcon />
+                    ) : (
+                      <ArrowDropDownIcon />
+                    ))}
+                </ListItemButton>
+              </ListItem>
+
+              {open && (
+                <>
+                  {text?.items && (
+                    <Collapse
+                      in={nestedOpen[index]}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      <List component="div" disablePadding>
+                        {text.items.map((subText, subIndex) => (
+                          <ListItem
+                            button
+                            key={subText.title}
+                            component={Link}
+                            to={subText.linkPath}
+                            disablePadding
+                            sx={{ display: "block" }}
+                          >
+                            <ListItemButton
+                              sx={{
+                                minHeight: 48,
+                                justifyContent: open ? "initial" : "center",
+                                px: 4,
+                              }}
+                            >
+                              <ListItemIcon
+                                sx={{
+                                  minWidth: 0,
+                                  mr: open ? 3 : "auto",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {subText.icon}
+                              </ListItemIcon>
+                              <ListItemText
+                                primary={subText.title}
+                                sx={{
+                                  opacity: open ? 1 : 0,
+                                  fontSize: "0.8em",
+                                }}
+                              />
+                            </ListItemButton>
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Collapse>
+                  )}
+                </>
+              )}
+            </React.Fragment>
           ))}
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
         <Outlet></Outlet>
       </Box>
     </Box>

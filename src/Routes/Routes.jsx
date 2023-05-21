@@ -7,60 +7,65 @@ import Login from "../pages/Login/Login";
 import Cart from "../pages/Cart/Cart";
 import NotFound from "../pages/NotFound/NotFound";
 import AdminLayOut from "../components/Admin/AdminLayOut";
+import AdminProfile from "../components/Admin/AdminProfile";
+import AdminCategory from "../components/Admin/AdminCategory";
+import AdminProduct from "../components/Admin/AdminProduct";
+import AdminSystemSetting from "../components/Admin/AdminSystemSetting";
 
-export const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <Main></Main>,
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main></Main>,
 
-      children: [
-        {
-          path: "/",
-          element: <Home></Home>,
-        },
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
 
-        {
-          path: "/register",
-          element: <Register />,
-        },
-        {
-          path: "/login",
-          element: <Login />,
-        },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
 
-        {
-          path: "/cart",
-          element: <Cart />,
-        },
-        {
-          path: "*",
-          element: <NotFound />,
-        },
-      ],
-    },
-    {
-      path: "/admin",
-      element: <AdminLayOut></AdminLayOut>,
-      children: [
-        {
-          path: "/admin/demo",
-          element: <Home></Home>,
-        },
-      ],
-    },
-  ]
-
-  //   createRoutesFromElements(
-  //     <Route path="/" element={<Main />}>
-  //       <Route path="/" element={<Home />} />
-  //       <Route path="/register" element={<Register />} />
-  //       <Route path="/login" element={<Login />} />
-  //       <Route path="/cart" element={<Cart />} />
-  //       <Route path="*" element={<NotFound />} />
-  //       <Route path="/adminDashboard" element={<AdminLayOut></AdminLayOut>}>
-  //         <Route path="/adminDashboard/demo" element={<Home />} />
-  //       </Route>
-  //     </Route>
-  //   )
-);
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayOut></AdminLayOut>,
+    children: [
+      //   {
+      //     path: "/admin/dashboard",
+      //     element: <AdminLayOut></AdminLayOut>,
+      //   },
+      {
+        path: "/admin/profile",
+        element: <AdminProfile></AdminProfile>,
+      },
+      {
+        path: "/admin/category",
+        element: <AdminCategory></AdminCategory>,
+      },
+      {
+        path: "/admin/product",
+        element: <AdminProduct></AdminProduct>,
+      },
+      {
+        path: "/admin/system-setting",
+        element: <AdminSystemSetting></AdminSystemSetting>,
+      },
+    ],
+  },
+]);

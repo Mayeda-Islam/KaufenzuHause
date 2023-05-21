@@ -4,14 +4,14 @@
 
 /******google font******/
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap");
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 /*******banner slider gallery******/
-.grid-wrapper>div {
+.grid-wrapper > div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,12 +36,11 @@ body {
 .slider_img {
   max-width: 100%;
 
-
   border-radius: 5px;
   /* display: inline-block; */
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
   .grid-wrapper {
     display: grid;
     grid-gap: 10px;
@@ -51,11 +50,10 @@ body {
   }
 
   .double_col {
-    width: 98%
+    width: 98%;
   }
 
   .grid-wrapper .single_col {
-
     grid-column: span 1;
   }
 
@@ -65,9 +63,8 @@ body {
   }
 
   .single_col {
-
     width: 98%;
-    height: 175px
+    height: 175px;
   }
 
   .single_col img {
@@ -86,21 +83,20 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #031F4B;
+    background-color: #031f4b;
     color: #fff;
     margin: 0px 0.5rem;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
     margin-top: 30px;
-    transition: all .5s;
-    z-index: 99999
+    transition: all 0.5s;
+    z-index: 99999;
   }
 
   /*******swiper custom arrow*******/
   .mySwiper:nth-child(2) {
-    margin-bottom: 50px !important
+    margin-bottom: 50px !important;
   }
-
-
-
-
 }
+/* .css-10hburv-MuiTypography-rootcss-10hburv-MuiTypography-root {
+  font-size: 2rem !important;
+} */
