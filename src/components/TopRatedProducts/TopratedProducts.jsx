@@ -135,6 +135,11 @@ const TopratedProducts = () => {
 
                             slidesPerView: 1,
                         },
+                        // when window width is >= 400px
+                        400: {
+
+                            slidesPerView: 2,
+                        },
 
                         // when window width is >= 640px
                         640: {
@@ -144,7 +149,7 @@ const TopratedProducts = () => {
                         // when window width is >= 768px
                         768: {
 
-                            slidesPerView: 2,
+                            slidesPerView: 3,
                         },
                         // when window width is >= 1024px
                         1024: {

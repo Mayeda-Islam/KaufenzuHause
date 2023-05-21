@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { CgShoppingCart } from "react-icons/cg";
 import engFlag from "../../images/header/eng.png";
-import germanFlag from "../../images/header/ger.png";
+import germanFlag from "../../images/header/ger2.png";
 import userImg from '../../images/user-images/1.jpg';
 // mui import
 import Popover from '@mui/material/Popover';
@@ -46,6 +46,7 @@ const Header = () => {
   // user dropdown
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+  const id4 = open ? 'simple-popover' : undefined;
 
   // language dropdown
   const open2 = Boolean(anchorE2);
@@ -128,12 +129,12 @@ const Header = () => {
               <Typography >
                 <ul className="p-0 m-0">
                   <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                    <Link to={''} className="flex items-center gap-2">
-                      <img src={engFlag} className="w-[15px]" alt="" />
+                    <Link to={''} className="flex items-center gap-3">
+                      <img src={engFlag} className="w-[16px]" alt="" />
                       <span> English</span>
                     </Link>
                   </li>
-                  <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                  <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-9 w-full py-3 text-center">
                     <Link to={''} className="flex items-center gap-2">
                       <img src={germanFlag} className="w-[23px]" alt="" />
                       <span> German</span>
@@ -144,12 +145,18 @@ const Header = () => {
             </Popover>
           </div>
           {/* button group */}
-          <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
-            Register
-          </button>
-          <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
-            Login
-          </button>
+          <Link to={'/register'}>
+            <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
+              Register
+            </button>
+          </Link>
+
+
+          <Link to={'/login'}>
+            <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
+              Login
+            </button>
+          </Link>
           {/* shopping cart */}
           <span className="text-2xl text-white">
             <CgShoppingCart />
@@ -193,12 +200,12 @@ const Header = () => {
                   <ul className="p-0 m-0">
                     <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
                       <Link to={''} className="flex items-center gap-3">
-                        <img src={engFlag} className="w-[15px]" alt="" />
+                        <img src={engFlag} className="w-[16px]" alt="" />
                         <span> English</span>
                       </Link>
                     </li>
-                    <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                      <Link to={''} className="flex items-center gap-3">
+                    <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-9 w-full py-3 text-center">
+                      <Link to={''} className="flex items-center gap-2">
                         <img src={germanFlag} className="w-[23px]" alt="" />
                         <span> German</span>
                       </Link>

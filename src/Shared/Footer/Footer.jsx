@@ -30,7 +30,7 @@ const Footer = () => {
 
                                     </span>
                                     <h3 className="text-sm text-white">
-                                        451 Wall Street, UK, London
+                                        Berliner strasse,  60311,  Frankfurt am main,  Germany
                                     </h3>
                                 </div>
                                 <div className="flex items-center gap-3 mb-2">
@@ -39,7 +39,7 @@ const Footer = () => {
 
                                     </span>
                                     <h3 className="text-sm text-white">
-                                        Phone: (064) 332-1233
+                                        (049) 1766-2058329
                                     </h3>
                                 </div>
                                 <div className="flex items-center gap-3 mb-2">
