@@ -6,7 +6,7 @@ const SingleProduct = ({ product }) => {
     return (
         <Link to={'/productDetails'}>
             <div className="">
-                <div className="shadow-md shadow-gray-100 m-3 border border-gray-200 rounded prod_card ">
+                <div className="shadow-md shadow-gray-100 m-2.5 border border-gray-200 rounded prod_card ">
                     <div className="relative overflow-hidden">
                         <img src={img} className='w-full sm:w-full md:w-full h-[250px] lg:w-[300px] object-cover md:h-[210px]' />
                         {/* button group */}

@@ -1,12 +1,5 @@
 import React from 'react'
-import productImg1 from '../../images/products/pr1.jpg';
-import productImg2 from '../../images/products/pr2.jpg';
-import productImg4 from '../../images/products/pr4.jpg';
-import productImg5 from '../../images/products/pr5.jpg';
-import productImg6 from '../../images/products/pr6.jpg';
-import productImg7 from '../../images/products/pr7.jpg';
-import productImg8 from '../../images/products/pr8.jpg';
-import productImg9 from '../../images/products/pr9.jpg';
+
 import { Pagination, Navigation, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import { Link } from 'react-router-dom';
@@ -15,100 +8,10 @@ import "swiper/css/pagination";
 import "./TopRatedProducts.css";
 import SwiperCustomArrow from '../../Shared/SwiperCustomArrow/SwiperCustomArrow';
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
+import { products } from '../../Data/Placeholder';
+
 
 const TopratedProducts = () => {
-    const products = [
-        {
-            _id: 1,
-            img: productImg1,
-            title: "Logitech Driving Force Shifter (941-000132)",
-            price: "1500",
-            size: "available",
-            discount: "50%",
-            categoryName: "Electronics",
-            productStatus: "On Sale"
-        },
-        {
-            _id: 2,
-            img: productImg2,
-            title: "Logitech Driving Force Shifter (941-000132)",
-            price: "1500",
-            size: "available",
-            discount: "50%",
-            categoryName: "Electronics",
-            productStatus: "Sold Out"
-        },
-        {
-            _id: 3,
-            img: productImg6,
-            title: "Logitech Driving Force Shifter (941-000132)",
-            price: "1500",
-            size: "available",
-            discount: "50%",
-            categoryName: "Electronics",
-            productStatus: "On Sale"
-        },
-        {
-            _id: 4,
-            img: productImg4,
-            title: "Logitech Driving Force Shifter (941-000132)",
-            price: "1500",
-            size: "available",
-            discount: "50%",
-            categoryName: "Electronics",
-            productStatus: "Sold Out"
-        },
-        {
-            _id: 5,
-            img: productImg5,
-            title: "Logitech Driving Force Shifter (941-000132)",
-            price: "1500",
-            size: "available",
-            discount: "50%",
-            categoryName: "Electronics",
-            productStatus: "On Sale"
-        },
-        {
-            _id: 6,
-            img: productImg6,
-            title: "Logitech Driving Force Shifter (941-000132)",
-            price: "1500",
-            size: "available",
-            discount: "50%",
-            categoryName: "Electronics",
-            productStatus: "Sold Out"
-        },
-        {
-            _id: 7,
-            img: productImg7,
-            title: "Logitech Driving Force Shifter (941-000132)",
-            price: "1500",
-            size: "available",
-            discount: "50%",
-            categoryName: "Electronics",
-            productStatus: "Sold Out"
-        },
-        {
-            _id: 8,
-            img: productImg8,
-            title: "Logitech Driving Force Shifter (941-000132)",
-            price: "1500",
-            size: "available",
-            discount: "50%",
-            categoryName: "Electronics",
-            productStatus: "Sold Out"
-        },
-        {
-            _id: 9,
-            img: productImg9,
-            title: "Logitech Driving Force Shifter (941-000132)",
-            price: "1500",
-            size: "available",
-            discount: "50%",
-            categoryName: "Electronics",
-            productStatus: "Sold Out"
-        },
-    ];
 
 
     return (

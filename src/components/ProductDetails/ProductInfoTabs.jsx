@@ -54,8 +54,8 @@ const ProductInfoTabs = () => {
         <div>
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab label="Description" {...a11yProps(0)} />
+                    <Tabs value={value} className='' onChange={handleChange} aria-label="basic tabs example">
+                        <Tab label="Description" sx={{ fontSize: "12px" }} {...a11yProps(0)} />
                         <Tab label="Reviews" {...a11yProps(1)} />
                         <Tab label="Shipping and Delivery" {...a11yProps(2)} />
                     </Tabs>

@@ -18,6 +18,18 @@ const Header = () => {
   const [anchorE2, setAnchorE2] = React.useState(null);
   const [anchorE3, setAnchorE3] = React.useState(null);
 
+  //sticky nav on scroll
+
+  //sticky nav
+  const [stickyNav, setStickyNav] = useState(false);
+
+  useEffect(() => {
+    window.onscroll = () => {
+      setStickyNav(window.pageYOffset === 0 ? false : true);
+      return () => (window.onscroll = null);
+    };
+  }, []);
+
   const handleClickUser = (event) => {
     setAnchorEl(event.currentTarget);
   };
