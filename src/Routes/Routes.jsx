@@ -45,34 +45,36 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/admin",
+    path: "/admin/",
     element: <AdminLayOut></AdminLayOut>,
     children: [
-      /* This code block is defining a route for the dashboard page in the admin section of the
-      website. When the user navigates to the "/admin/dashboard" path, the <AdminLayOut> component
-      will be rendered as the main layout for the page. */
       {
-        path: "/admin/dashboard",
+        path: "",
         element: <AdminDashboard></AdminDashboard>,
       },
       {
-        path: "/admin/profile",
+        path: "dashboard",
+        element: <AdminDashboard></AdminDashboard>,
+      },
+
+      {
+        path: "profile",
         element: <AdminProfile></AdminProfile>,
       },
       {
-        path: "/admin/category",
+        path: "category",
         element: <AdminCategory></AdminCategory>,
       },
       {
-        path: "/admin/product",
+        path: "product",
         element: <AdminProduct></AdminProduct>,
       },
       {
-        path: "/admin/orders",
+        path: "orders",
         element: <AdminOrders></AdminOrders>,
       },
       {
-        path: "/admin/system-setting",
+        path: "system-setting",
         element: <AdminSystemSetting></AdminSystemSetting>,
       },
     ],

@@ -37,7 +37,7 @@ const AdminDashboard = () => {
         {sellsIncome.map((sellIncome) => (
           <>
             <Typography
-              className="bg-primary"
+              className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7]"
               sx={{
                 p: 2,
                 borderRadius: 2,
@@ -47,11 +47,13 @@ const AdminDashboard = () => {
               component="h2"
             >
               {sellIncome.icon}
-              <Typography sx={{ color: "gray", mt: 2 }}>
+              <Typography sx={{ color: "white", mt: 2 }}>
                 {" "}
                 {sellIncome.title}
               </Typography>
-              <Typography sx={{ fontSize: 30, fontWeight: 600, mb: 2 }}>
+              <Typography
+                sx={{ fontSize: 30, fontWeight: 600, mb: 2, color: "white" }}
+              >
                 {" "}
                 $ {sellIncome.amount}
               </Typography>
@@ -61,11 +63,12 @@ const AdminDashboard = () => {
         {ordersInfo.map((orderInfo) => (
           <>
             <Typography
-              className="bg-primary"
+              className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7]"
               sx={{
                 p: 2,
                 borderRadius: 2,
                 boxShadow: 3,
+                color: "white",
               }}
               variant="p"
               component="h2"
@@ -74,10 +77,6 @@ const AdminDashboard = () => {
                 {" "}
                 {orderInfo.title}
               </Typography>
-              {/* <Typography sx={{ fontSize: 30, fontWeight: 600, mb: 2 }}>
-              {" "}
-              $ {sellIncome.amount}
-            </Typography> */}
             </Typography>
           </>
         ))}

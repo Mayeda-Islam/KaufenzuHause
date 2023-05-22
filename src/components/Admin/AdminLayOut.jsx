@@ -121,78 +121,78 @@ export default function AdminLayOut() {
     {
       title: "Dashboard",
       icon: <DashboardIcon />,
-      linkPath: "/admin/dashboard",
+      linkPath: "dashboard",
     },
     {
       title: "Profile",
       icon: <AccountCircleIcon />,
-      linkPath: "/admin/profile",
+      linkPath: "profile",
     },
     {
       title: "Orders",
       icon: <AddShoppingCartIcon />,
-      linkPath: "/admin/orders",
+
       items: [
-        { title: "Ordered Product", linkPath: "/admin/orders/orderedProducts" },
+        { title: "Ordered Product", linkPath: "/orders/orderedProducts" },
         {
           title: "Delivered Product",
-          linkPath: "/admin/orders/deliveredProducts",
+          linkPath: "orders/deliveredProducts",
         },
       ],
     },
     {
       title: "Category",
       icon: <CategoryIcon />,
-      linkPath: "/admin/category",
+
       items: [
         {
           title: "Add Category",
 
-          linkPath: "/admin/category/addCategory",
+          linkPath: "category/addCategory",
         },
         {
           title: "Category List",
 
-          linkPath: "/admin/category/categoryList",
+          linkPath: "category/categoryList",
         },
       ],
     },
     {
       title: "Product",
       icon: <InventoryIcon />,
-      linkPath: "/admin/product",
+
       items: [
         {
           title: "Add Product",
 
-          linkPath: "/admin/product/addProduct",
+          linkPath: "product/addProduct",
         },
         {
           title: "All Product",
 
-          linkPath: "/admin/product/allProduct",
+          linkPath: "product/allProduct",
         },
       ],
     },
     {
       title: "System Setting",
       icon: <SettingsSystemDaydreamIcon />,
-      linkPath: "/admin/system-setting",
+
       items: [
         {
           title: "Hero slider",
 
-          linkPath: "/admin/systemSetting/heroSlider",
+          linkPath: "systemSetting/heroSlider",
         },
         {
           title: "Side Banner",
 
-          linkPath: "/admin/systemSetting/sideBanner",
+          linkPath: "systemSetting/sideBanner",
         },
         {
           title: "Nav Logo",
 
-          linkPath: "/admin/systemSetting/navLogo",
+          linkPath: "systemSetting/navLogo",
         },
       ],
     },

@@ -72,12 +72,12 @@ const DashboardChart = () => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
-          <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
+          <YAxis yAxisId="left" orientation="left" stroke="#031f4bee" />
+          <YAxis yAxisId="right" orientation="right" stroke="#55c3c1f7" />
           <Tooltip />
           <Legend />
-          <Bar yAxisId="left" dataKey="pv" fill="#7ED957" />
-          <Bar yAxisId="right" dataKey="uv" fill="#FFC312" />
+          <Bar yAxisId="left" dataKey="pv" fill="#031f4bee" />
+          <Bar yAxisId="right" dataKey="uv" fill="#55c3c1f7" />
         </BarChart>
       </ResponsiveContainer>
     </div>
