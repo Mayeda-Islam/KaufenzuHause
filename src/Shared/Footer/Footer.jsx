@@ -153,8 +153,8 @@ const Footer = () => {
                     </div>
                 </div>
                 <hr className="my-6 border-gray-300 border-1.5 sm:mx-auto  lg:my-6" />
-                <div className="lg:flex lg:items-center lg:justify-between">
-                    <span className="text-sm text-gray-300 sm:text-center dark:text-gray-400">
+                <div className="lg:flex lg:items-center lg:justify-between flex-col-reverse md:flex-col-reverse lg:flex-row">
+                    <span className="text-sm text-gray-300 sm:text-center dark:text-gray-400 ">
                         © 2023{" "}
                         <Link to={"/"} className="hover:underline">
                             Kaufanzuhause
@@ -163,7 +163,7 @@ const Footer = () => {
 
                     </span>
                     {/* footer icon */}
-                    <div className='flex items-center gap-3'>
+                    <div className='flex items-center gap-3 mt-3 lg:mt-0'>
                         <span className="text-sm text-gray-400">
                             Payment Methods
                         </span>

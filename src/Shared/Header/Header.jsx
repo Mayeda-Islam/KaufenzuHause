@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../images/logo/logo.png";
 import { Link } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";
@@ -17,6 +17,18 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
   const [anchorE3, setAnchorE3] = React.useState(null);
+
+  //sticky nav on scroll
+
+  //sticky nav
+  const [stickyNav, setStickyNav] = useState(false);
+
+  useEffect(() => {
+    window.onscroll = () => {
+      setStickyNav(window.pageYOffset === 0 ? false : true);
+      return () => (window.onscroll = null);
+    };
+  }, []);
 
   const handleClickUser = (event) => {
     setAnchorEl(event.currentTarget);
@@ -57,9 +69,10 @@ const Header = () => {
   const id3 = open3 ? 'simple-popover' : undefined;
 
   return (
-    <header className="bg-darkNavy py-4 px-[25px] md:px-[40px]">
+    <header className="bg-darkNavy ">
       {/* web nav */}
-      <div className=" hidden md:hidden lg:flex items-center justify-between">
+      {/* className="  items-center justify-between" */}
+      <nav className={`py-4 px-[25px] md:px-[40px] w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${stickyNav ? 'transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200' : 'bg-darkNavy'}`} >
         {/* brand logo */}
         <span className="">
           <Link>
@@ -162,9 +175,10 @@ const Header = () => {
             <CgShoppingCart />
           </span>
         </div>
-      </div>
+      </nav>
       {/* mobile nav */}
-      <div className="md:block block lg:hidden ">
+
+      <div className={`md:block block lg:hidden pt-3 pb-4 px-[25px] md:px-[40px] top-0 right-0 left-0 z-[10]  ${stickyNav ? 'transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200' : 'bg-darkNavy'}`}>
         <div className=" flex items-center justify-between">
           {/* brand logo */}
           <span className="">
@@ -258,7 +272,7 @@ const Header = () => {
         </div>
         {/* search form */}
         {/* search bar */}
-        <form className="mt-4">
+        <form className="mt-2">
           <div className="flex ">
             <div className="relative w-full rounded-lg bg-gray-50">
               <input

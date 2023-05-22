@@ -10,6 +10,10 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
+body,
+html {
+  overflow-x: hidden !important;
+}
 
 .swiper-nav-btns button {
   /* position: absolute; */
@@ -31,7 +35,6 @@ body {
   transition: all .5s;
   z-index: 99999
 }
-
 
 /*******slider design********/
 .slideShow_slider {
