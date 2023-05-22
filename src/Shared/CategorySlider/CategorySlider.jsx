@@ -1,7 +1,5 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import categoryImage1 from "../../images/category section/Home_appliances_1.jpg";
-import categoryImage2 from "../../images/category section/Home_Appliances_2_1.jpg";
 
 // Import Swiper styles
 import "swiper/css";
@@ -10,8 +8,8 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination, Autoplay } from "swiper";
 
-const CategorySlider = ({ bannerImages }) => {
-  console.log(bannerImages);
+const CategorySlider = ({ sliderImages }) => {
+  console.log(sliderImages);
   return (
     <>
       <Swiper
@@ -26,12 +24,14 @@ const CategorySlider = ({ bannerImages }) => {
         modules={[Pagination, Autoplay]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <img src={categoryImage1} className="w-full h-[600px]" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src={categoryImage2} className="w-full h-[600px]" alt="" />
-        </SwiperSlide>
+        {sliderImages.map((sliderImage) => (
+          <SwiperSlide>
+            <img className=" h-3/5" src={sliderImage} alt="" />
+          </SwiperSlide>
+        ))}
+        {/* <SwiperSlide>
+          <img src={categoryImage2} alt="" />
+        </SwiperSlide> */}
       </Swiper>
     </>
   );
