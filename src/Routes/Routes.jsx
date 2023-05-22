@@ -11,6 +11,8 @@ import AdminProfile from "../components/Admin/AdminProfile";
 import AdminCategory from "../components/Admin/AdminCategory";
 import AdminProduct from "../components/Admin/AdminProduct";
 import AdminSystemSetting from "../components/Admin/AdminSystemSetting";
+import AdminOrders from "../components/Admin/AdminOrders";
+import AdminDashboard from "../components/Admin/AdminDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -46,10 +48,13 @@ export const router = createBrowserRouter([
     path: "/admin",
     element: <AdminLayOut></AdminLayOut>,
     children: [
-      //   {
-      //     path: "/admin/dashboard",
-      //     element: <AdminLayOut></AdminLayOut>,
-      //   },
+      /* This code block is defining a route for the dashboard page in the admin section of the
+      website. When the user navigates to the "/admin/dashboard" path, the <AdminLayOut> component
+      will be rendered as the main layout for the page. */
+      {
+        path: "/admin/dashboard",
+        element: <AdminDashboard></AdminDashboard>,
+      },
       {
         path: "/admin/profile",
         element: <AdminProfile></AdminProfile>,
@@ -61,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: "/admin/product",
         element: <AdminProduct></AdminProduct>,
+      },
+      {
+        path: "/admin/orders",
+        element: <AdminOrders></AdminOrders>,
       },
       {
         path: "/admin/system-setting",

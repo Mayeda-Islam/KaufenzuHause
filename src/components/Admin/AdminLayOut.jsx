@@ -5,7 +5,6 @@ import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -16,10 +15,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import { Link, Outlet } from "react-router-dom";
-import { Collapse } from "@mui/material";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { Collapse, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CategoryIcon from "@mui/icons-material/Category";
 import InventoryIcon from "@mui/icons-material/Inventory";
@@ -91,9 +89,15 @@ const Drawer = styled(MuiDrawer, {
     ...closedMixin(theme),
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
+  "& .active-link": {
+    // Define your active link styles here
+    color: "red",
+    backgroundColor: "yellow",
+  },
 }));
 
 export default function AdminLayOut() {
+  const location = useLocation();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [nestedOpen, setNestedOpen] = React.useState([]);
@@ -117,7 +121,7 @@ export default function AdminLayOut() {
     {
       title: "Dashboard",
       icon: <DashboardIcon />,
-      linkPath: "/admin",
+      linkPath: "/admin/dashboard",
     },
     {
       title: "Profile",
@@ -226,9 +230,9 @@ export default function AdminLayOut() {
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
+              <ChevronRightIcon className="text-white" />
             ) : (
-              <ChevronLeftIcon />
+              <ChevronLeftIcon className="text-white" />
             )}
           </IconButton>
         </DrawerHeader>
@@ -237,51 +241,55 @@ export default function AdminLayOut() {
         <List>
           {menu.map((text, index) => (
             <React.Fragment key={text.title}>
-              <ListItem
-                button
-                key={text.title}
-                component={Link}
+              <NavLink
+                activeClassName="active-link"
+                className={({ isActive }) => (isActive ? "text-red" : "")}
+                key={index}
                 to={text.linkPath}
-                onClick={() => handleClick(index)}
-                disablePadding
-                sx={{ display: "block" }}
+                isActive={() => location.pathname === text.linkPath}
               >
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
+                <ListItem
+                  onClick={() => handleClick(index)}
+                  disablePadding
+                  sx={{ display: "block" }}
                 >
-                  <ListItemIcon
+                  <ListItemButton
                     sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      color: "white",
-                      justifyContent: "center",
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
                     }}
                   >
-                    {text.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    className="text-lg "
-                    sx={{
-                      opacity: open ? 1 : 0,
-                      fontSize: "2rem",
-                      color: "white",
-                    }}
-                  >
-                    <span className="text-2xl">{text.title}</span>
-                  </ListItemText>
-                  {open &&
-                    text.items &&
-                    (nestedOpen[index] ? (
-                      <ArrowDropDownIcon />
-                    ) : (
-                      <ArrowDropDownIcon />
-                    ))}
-                </ListItemButton>
-              </ListItem>
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        color: "white",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {text.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      className="text-lg "
+                      sx={{
+                        opacity: open ? 1 : 0,
+                        fontSize: "2rem",
+                        color: "white",
+                      }}
+                    >
+                      <span className="text-xl">{text.title}</span>
+                    </ListItemText>
+                    {open &&
+                      text.items &&
+                      (nestedOpen[index] ? (
+                        <ArrowDropDownIcon className="text-white" />
+                      ) : (
+                        <ArrowDropDownIcon className="text-white" />
+                      ))}
+                  </ListItemButton>
+                </ListItem>
+              </NavLink>
 
               {open && (
                 <>
@@ -293,39 +301,51 @@ export default function AdminLayOut() {
                     >
                       <List component="div" disablePadding>
                         {text.items.map((subText, subIndex) => (
-                          <ListItem
-                            button
-                            key={subText.title}
-                            component={Link}
-                            to={subText.linkPath}
-                            disablePadding
-                            sx={{ display: "block" }}
+                          <NavLink
+                            className={({ isActive, isPending }) =>
+                              isPending ? "pending" : isActive ? "text-red" : ""
+                            }
+                            key={index}
+                            to={text.linkPath}
                           >
-                            <ListItemButton
-                              sx={{
-                                minHeight: 48,
-                                justifyContent: open ? "initial" : "center",
-                                px: 4,
-                              }}
+                            <ListItem
+                              button
+                              key={subIndex}
+                              component={Link}
+                              to={subText.linkPath}
+                              disablePadding
+                              sx={{ display: "block" }}
                             >
-                              <ListItemIcon
+                              <ListItemButton
                                 sx={{
-                                  minWidth: 0,
-                                  mr: open ? 3 : "auto",
-                                  justifyContent: "center",
+                                  minHeight: 48,
+                                  justifyContent: open ? "initial" : "center",
+                                  px: 4,
                                 }}
                               >
-                                {subText.icon}
-                              </ListItemIcon>
-                              <ListItemText
-                                primary={subText.title}
-                                sx={{
-                                  opacity: open ? 1 : 0,
-                                  fontSize: "0.8em",
-                                }}
-                              />
-                            </ListItemButton>
-                          </ListItem>
+                                <ListItemIcon
+                                  sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : "auto",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  {subText.icon}
+                                </ListItemIcon>
+                                <ListItemText
+                                  sx={{
+                                    color: "white",
+                                    opacity: open ? 1 : 0,
+                                    fontSize: "0.8em",
+                                  }}
+                                >
+                                  <span className="text-xl">
+                                    {subText.title}
+                                  </span>
+                                </ListItemText>
+                              </ListItemButton>
+                            </ListItem>
+                          </NavLink>
                         ))}
                       </List>
                     </Collapse>
@@ -337,6 +357,7 @@ export default function AdminLayOut() {
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
         <Outlet></Outlet>
       </Box>
     </Box>
