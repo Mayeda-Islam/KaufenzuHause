@@ -5,7 +5,7 @@ import tv from '../../../images/categoryIcons/tv.png';
 import camera from '../../../images/categoryIcons/camera.png';
 import headPhones from '../../../images/categoryIcons/headPhones.png';
 import smartwatch from '../../../images/categoryIcons/smartwatch.png';
-
+import { Link } from 'react-router-dom';
 
 const AllCategories = () => {
     const categories = [
@@ -58,15 +58,20 @@ const AllCategories = () => {
                     {
                         categories.map((category) => (
                             <div className="w-6/12 md:w-3/12 xl:w-2/12 " key={category._id}>
-                                <div className="m-3 xxl:h-[160px] md:m-0 rounded shadow-lg bg-white shadow-gray-300 px-10 py-6 text-center">
-                                    <div className="flex justify-center items-center">
-                                        <img src={category.categoryImg} className="w-[50px]" alt="" />
+                                <Link to={'/categoryProducts'}>
+                                    <div className="m-3 xxl:h-[160px] md:m-0 rounded shadow-lg bg-white shadow-gray-300 px-10 py-6 text-center">
+                                        <div className="flex justify-center items-center">
+                                            <img src={category.categoryImg} className="w-[50px]" alt="" />
+                                        </div>
+                                        <h3 className="text-textColor font-medium text-lg  capitalize py-3">
+                                            {category.categoryName}
+                                        </h3>
                                     </div>
-                                    <h3 className="text-textColor font-medium text-lg  capitalize py-3">
-                                        {category.categoryName}
-                                    </h3>
-                                </div>
+                                </Link>
+
                             </div>
+
+
                         ))
                     }
 
