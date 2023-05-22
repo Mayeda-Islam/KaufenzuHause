@@ -26,7 +26,7 @@ const BrandFilter = () => {
                 {
 
                     brands.map((elm) => (
-                        <FormControlLabel control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 25 } }} />} label={elm} />
+                        <FormControlLabel control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: '20px' } }} />} label={elm} />
                     ))
                 }
 

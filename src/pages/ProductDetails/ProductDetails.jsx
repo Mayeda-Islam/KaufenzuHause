@@ -330,7 +330,7 @@ const ProductDetails = () => {
             {/* product tabs section*/}
             <hr className="my-9 border-0.5 border-gray-200" />
             <section>
-                <div className="w-[95%] lg:w-[93%] mx-auto ">
+                <div className="w-[94%] lg:w-[93%] mx-auto ">
 
                     <ProductInfoTabs />
                 </div>
@@ -340,18 +340,18 @@ const ProductDetails = () => {
 
             {/* related production section */}
             <section className="py-6 ">
-                <div className="w-[95%] lg:w-[93%] mx-auto ">
+                <div className="w-[94%] lg:w-[93%] mx-auto ">
                     <h2 className="text-2xl text-textColor font-semibold text-left capitalize mb-3 ml-3">
                         Related Products
                     </h2>
                     {/* section title */}
                     <div className="flex items-center justify-between">
 
-                        <div className="flex items-center justify-center flex-wrap">
+                        <div className="flex items-center  flex-wrap">
                             {
                                 products.slice(0, 8).map((product) => (
 
-                                    <div className="w-full sm:w-6/12 md:w-6/12 lg:w-3/12" key={product._id}>
+                                    <div className="w-full sm:w-6/12 md:w-4/12 lg:w-3/12 xxl:w-1/5" key={product._id}>
                                         <SingleProduct product={product} />
                                     </div>
 

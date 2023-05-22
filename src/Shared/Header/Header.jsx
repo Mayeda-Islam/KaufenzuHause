@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../images/logo/logo.png";
 import { Link } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";

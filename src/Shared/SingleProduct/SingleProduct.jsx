@@ -6,9 +6,11 @@ const SingleProduct = ({ product }) => {
     return (
         <Link to={'/productDetails'}>
             <div className="">
-                <div className="shadow-md shadow-gray-100 m-2.5 border border-gray-200 rounded prod_card ">
+                <div className="pb-2 shadow-md shadow-gray-100 m-2.5 border border-gray-200 rounded prod_card ">
                     <div className="relative overflow-hidden">
-                        <img src={img} className='w-full sm:w-full md:w-full h-[250px] lg:w-[300px] object-cover md:h-[210px]' />
+                        <div className="flex items-center justify-center">
+                            <img src={img} className='w-full sm:w-full md:w-full h-[300px]  object-cover  lg:h-[240px]' />
+                        </div>
                         {/* button group */}
                         <div className="absolute top-4 left-4 ">
                             <button className="py-1 px-3 bg-primary text-sm text-white  block rounded mb-2">
@@ -20,10 +22,7 @@ const SingleProduct = ({ product }) => {
 
 
                         </div>
-                        {/* wishlist button */}
-                        {/* <div className="absolute top-4 right-4  cart_bag">
-        <button className='bg-white border border-gray-200 shadow-xl shadow-gray-300 text-textPrimary text-lg w-10 h-10 rounded-full flex items-center justify-center'><RiShoppingBagLine /></button>
-    </div> */}
+
 
                         {/* quick view button */}
                         <div className="absolute -bottom-[100%] w-full left-0 right-0 bg-[#191919] text-center py-3 quick_view cursor-pointer">
@@ -33,8 +32,8 @@ const SingleProduct = ({ product }) => {
 
                         </div>
                     </div>
-                    {/* card footer */}
-                    <div className="p-3 overflow-hidden">
+                    {/* card body */}
+                    <div className="p-4 overflow-hidden">
                         <span className="text-sm text-gray-600 my-2 capitalize">{categoryName}</span>
                         <h3 className="text-base text-medium text-textPrimary mb-1">{title}</h3>
                         {/* rating icon */}
