@@ -19,8 +19,8 @@ const CategorySectionFour = () => {
           </div>
           <div className="w-8/12">
             <div className="flex flex-wrap items-center ">
-              {products.map((product) => (
-                <ProductCard product={product} key={product.id}></ProductCard>
+              {products.map((product, i) => (
+                <ProductCard product={product} key={i}></ProductCard>
               ))}
             </div>
           </div>
