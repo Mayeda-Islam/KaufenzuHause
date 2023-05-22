@@ -10,6 +10,10 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
+body,
+html {
+  overflow-x: hidden !important;
+}
 
 .swiper-nav-btns button {
   /* position: absolute; */

@@ -49,15 +49,10 @@ const CategorisedProducts = () => {
     }, [isOpen]);
 
     return (
-        <section className="pt-8 lg:pt-10 pb-14 bg-[#f7f7f7] relative">
+        <section className="pt-6 lg:pt-10 pb-14 bg-[#f7f7f7] relative">
             <div className=" w-[95%] mx-auto">
                 <div className="flex items-center justify-center lg:hidden mb-5 relative">
-                    <button
-                        onClick={handleToggle}
-                        className='bg-white py-1.5 rounded-md px-4 text-textColor hover:text-white text-[16px] border border-textColor flex items-center gap-2 hover:bg-textColor hover:border-textColor'>
-                        <TbFilter className='text-blue-500 text-lg' />
-                        <span>Filter</span>
-                    </button>
+
                     {/* display sidenav filter */}
                     <div
                         ref={navWrapper}
@@ -123,7 +118,14 @@ const CategorisedProducts = () => {
                     </div>
                     <div className="w-full md:w-full lg:w-9/12">
                         {/* product sorting */}
-                        <div className="text-right mr-2.5 mb-3">
+
+                        <div className="flex items-center justify-between mx-2 mb-3">
+                            <button
+                                onClick={handleToggle}
+                                className=' md:flex lg:invisible bg-white py-1.5 rounded-md px-4 text-textColor hover:text-white text-[16px] border border-textColor flex items-center gap-2 hover:bg-textColor hover:border-textColor'>
+                                <TbFilter className='text-blue-500 text-lg' />
+                                <span>Filter</span>
+                            </button>
                             <select name="" id="" className='px-4 py-3'>
                                 <option value="">Sort By: Popularity</option>
                                 <option value="">Sort By: Latest</option>
@@ -133,7 +135,7 @@ const CategorisedProducts = () => {
                         </div>
 
                         {/* product cards */}
-                        <div className="flex justify-center flex-wrap ml-2.5">
+                        <div className="flex justify-center flex-wrap lg:ml-2.5">
 
 
                             {

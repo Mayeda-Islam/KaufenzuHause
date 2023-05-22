@@ -330,7 +330,7 @@ const ProductDetails = () => {
             {/* product tabs section*/}
             <hr className="my-9 border-0.5 border-gray-200" />
             <section>
-                <div className="w-[94%] lg:w-[93%] mx-auto ">
+                <div className="w-[94%] lg:w-[90%] mx-auto ">
 
                     <ProductInfoTabs />
                 </div>
