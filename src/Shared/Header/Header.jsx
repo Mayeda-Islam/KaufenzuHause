@@ -347,8 +347,12 @@ const Header = () => {
             </div> */}
             {/* shopping cart */}
             <span className="text-2xl text-white mr-2">
-              <CgShoppingCart />
+              <Link to={'/cart'}>
+                <CgShoppingCart />
+              </Link>
+
             </span>
+
             {/* user dropdown */}
             <div>
               <button aria-describedby={id} onClick={handleClickUser}>

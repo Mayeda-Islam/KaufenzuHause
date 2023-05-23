@@ -1,7 +1,7 @@
 import React from 'react'
 import { products } from '../../Data/Placeholder'
 import { AiOutlineClose } from 'react-icons/ai';
-
+import { Link } from 'react-router-dom'
 const Cart = () => {
 
 
@@ -123,9 +123,11 @@ const Cart = () => {
                                     </tbody>
                                 </table>
                                 <div className="my-3 text-center">
-                                    <button className=" text-white py-2.5 px-14 bg-primary hover:bg-secondary  text-base  rounded-md hover:text-textPrimary  capilatize " >
-                                        Proceed To checkout
-                                    </button>
+                                    <Link to={'/checkout'}>
+                                        <button className=" text-white py-2.5 px-14 bg-primary hover:bg-secondary  text-base  rounded-md hover:text-textPrimary  capilatize " >
+                                            Proceed To checkout
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
