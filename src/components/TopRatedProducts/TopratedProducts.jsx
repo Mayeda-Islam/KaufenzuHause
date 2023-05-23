@@ -19,16 +19,16 @@ const TopratedProducts = () => {
             <div className=" w-[95%] lg:w-[90%] mx-auto">
                 {/* section title  */}
                 <div className="flex items-center justify-between">
-                    <h2 className="text-2xl text-textColor font-semibold text-left capitalize">
+                    <h2 className="text-xl md:text-2xl text-textColor font-semibold text-left capitalize">
                         Top Rated Products
                     </h2>
                     {/* view all button  */}
-                    <button className="text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
+                    <button className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
                         View All
                     </button>
                 </div>
 
-                <hr className="border border-gray-300 mt-6 mb-8" />
+                <hr className="border border-gray-300 mt-6 mb-6" />
 
                 <Swiper
 
