@@ -51,9 +51,10 @@ const CategorisedProducts = () => {
     return (
         <section className="pt-6 lg:pt-10 pb-14 bg-[#f7f7f7] relative">
             <div className=" w-[95%] mx-auto">
+                {/* display sidenav filter */}
                 <div className="flex items-center justify-center lg:hidden mb-5 relative">
 
-                    {/* display sidenav filter */}
+
                     <div
                         ref={navWrapper}
                         className={`side_nav shadow-lg shadow-gray-300 ${isOpen == true ? 'active' : ''}`}

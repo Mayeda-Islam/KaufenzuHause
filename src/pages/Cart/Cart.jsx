@@ -62,7 +62,7 @@ const Cart = () => {
                                                             {/* increment and decrement btn */}
                                                             <div className="flex itemc-center justify-centr gap-1">
                                                                 <button className="w-9 h-9 rounded  bg-gray-100 border border-gray-300">+</button>
-                                                                <span className='w-9 h-90 rounded border border-gray-300 bg-bgOne flex items-center justify-center'>5</span>
+                                                                <span className='w-9 h-9 rounded border border-gray-300 bg-bgOne flex items-center justify-center'>5</span>
                                                                 <button className="w-9 h-9 rounded  bg-gray-100 border border-gray-300">-</button>
                                                             </div>
                                                         </td>

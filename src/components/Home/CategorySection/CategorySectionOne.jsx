@@ -14,7 +14,7 @@ const CategorySectionOne = () => {
         <h1 className="my-7 text-xl font-semibold">Electronics & Appliances</h1>
         <hr className="my-4" />
         <div className="flex  justify-center">
-          <div className="w-4/12   hidden md:block ">
+          <div className="w-4/12    hidden md:block ">
             <CategorySlider sliderImages={sliderImages}></CategorySlider>
           </div>
           <div className="w-8/12">
