@@ -17,7 +17,7 @@ const TopratedProducts = () => {
     return (
         <section className="pt-10 pb-14 bg-[#f7f7f7] relative">
             <div className=" w-[95%] lg:w-[90%] mx-auto">
-                {/*  section title  */}
+                {/* section title  */}
                 <div className="flex items-center justify-between">
                     <h2 className="text-2xl text-textColor font-semibold text-left capitalize">
                         Top Rated Products
