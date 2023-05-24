@@ -233,8 +233,8 @@ const Header = () => {
 
           <h2 className="text-xl font-medium text-textColor capitalize my-4">Shopping cart</h2>
           {
-            products.slice(0, 4).map((cart) => (
-              <div className="flex  gap-6 justify-center my-2 ">
+            products.slice(0, 4).map((cart, index) => (
+              <div className="flex  gap-6 justify-center my-2 " key={index}>
 
                 {/* product image */}
                 <img src={cart.img} className="w-[65px] h-[70px] rounded-md" alt="" />
