@@ -17,6 +17,8 @@ import AdminDashboard from "../components/Admin/AdminDashboard";
 
 import ProductDetails from '../pages/ProductDetails/ProductDetails';
 import CategorisedProducts from '../pages/CategoriedProducts/CategorisedProducts';
+import Checkout from "../pages/Checkout/Checkout";
+import AboutUs from "../pages/AboutUS/AboutUs";
 
 
 export const router = createBrowserRouter([
@@ -51,6 +53,14 @@ export const router = createBrowserRouter([
             {
                 path: "/cart",
                 element: <Cart />,
+            },
+            {
+                path: "/checkout",
+                element: <Checkout />,
+            },
+            {
+                path: "aboutUs",
+                element: <AboutUs />,
             },
             {
                 path: "*",

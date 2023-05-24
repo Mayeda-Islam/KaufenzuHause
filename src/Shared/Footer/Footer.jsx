@@ -60,7 +60,7 @@ const Footer = () => {
                         </h2>
                         <ul className="text-gray-300 flex flex-col gap-y-2 text-sm font-normal capitalize mb-6">
                             <li className="">
-                                <Link to={""} className="hover:underline">
+                                <Link to={'aboutUs'} className="hover:underline">
                                     About Us
                                 </Link>
                             </li>

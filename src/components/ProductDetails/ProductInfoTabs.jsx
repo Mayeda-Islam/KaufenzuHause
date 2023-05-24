@@ -185,7 +185,7 @@ const ProductInfoTabs = () => {
                                         </div>
                                         {/* user email */}
                                         <div className="mb-3 w-full ">
-                                            <label for="repeat-password" className="block mb-2 text-[13px] font-normal text-gray-900 dark:text-white">Your Email</label>
+                                            <label htmlFor="repeat-password" className="block mb-2 text-[13px] font-normal text-gray-900 dark:text-white">Your Email</label>
                                             <input
                                                 type="text"
 
