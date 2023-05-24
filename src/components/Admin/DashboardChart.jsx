@@ -57,7 +57,7 @@ const data = [
 
 const DashboardChart = () => {
   return (
-    <div className="w-full h-[400px] mt-24 -p-4 ">
+    <div className="w-full h-[400px] mt-24  ">
       <ResponsiveContainer>
         <BarChart
           width={500}

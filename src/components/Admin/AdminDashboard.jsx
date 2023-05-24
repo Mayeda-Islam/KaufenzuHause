@@ -1,4 +1,3 @@
-import { Box, Chip, Typography } from "@mui/material";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import DashboardChart from "./DashboardChart";
 
@@ -26,12 +25,12 @@ const AdminDashboard = () => {
     { title: "Order In Progress" },
   ];
   return (
-    <div>
-      <div className="grid grid-cols-3 gap-4 text-white ">
+    <div className="container mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-4 text-white ">
         {sellsIncome.map((sellIncome) => (
           <>
             {" "}
-            <div className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7] p-4 pl-8 rounded-lg shadow-lg">
+            <div className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7] pt-6  p-4 lg:pl-8 rounded-lg shadow-lg">
               <span className="bg-green-100 text-green-800 text-xs  font-medium mr-2  px-3 py-3  rounded ">
                 {sellIncome.icon}
               </span>
