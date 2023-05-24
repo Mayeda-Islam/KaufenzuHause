@@ -26,63 +26,34 @@ const AdminDashboard = () => {
     { title: "Order In Progress" },
   ];
   return (
-    <Box>
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 4,
-        }}
-      >
+    <div>
+      <div className="grid grid-cols-3 gap-4 text-white ">
         {sellsIncome.map((sellIncome) => (
           <>
-            <Typography
-              className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7]"
-              sx={{
-                p: 2,
-                borderRadius: 2,
-                boxShadow: 3,
-              }}
-              variant="p"
-              component="h2"
-            >
-              {sellIncome.icon}
-              <Typography sx={{ color: "white", mt: 2 }}>
+            {" "}
+            <div className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7] p-4 pl-8 rounded-lg shadow-lg">
+              <span className="bg-green-100 text-green-800 text-xs  font-medium mr-2  px-3 py-3  rounded ">
+                {sellIncome.icon}
+              </span>
+              <div className=""> </div>
+              <div className="text-lg mt-6 mb-4"> {sellIncome.title}</div>
+              <div className="text-4xl mb-4">
                 {" "}
-                {sellIncome.title}
-              </Typography>
-              <Typography
-                sx={{ fontSize: 30, fontWeight: 600, mb: 2, color: "white" }}
-              >
-                {" "}
-                $ {sellIncome.amount}
-              </Typography>
-            </Typography>
+                <span className="text-gray-500">$</span> {sellIncome.amount}
+              </div>
+            </div>
           </>
         ))}
         {ordersInfo.map((orderInfo) => (
           <>
-            <Typography
-              className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7]"
-              sx={{
-                p: 2,
-                borderRadius: 2,
-                boxShadow: 3,
-                color: "white",
-              }}
-              variant="p"
-              component="h2"
-            >
-              <Typography sx={{ my: 4, pl: 4, fontSize: 28, fontWeight: 600 }}>
-                {" "}
-                {orderInfo.title}
-              </Typography>
-            </Typography>
+            <div className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7] p-12 rounded-md ">
+              <div className="text-3xl"> {orderInfo.title}</div>
+            </div>
           </>
         ))}
-      </Box>
+      </div>
       <DashboardChart></DashboardChart>
-    </Box>
+    </div>
   );
 };
 
