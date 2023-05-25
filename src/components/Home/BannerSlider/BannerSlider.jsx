@@ -28,8 +28,9 @@ const BannerSlider = () => {
     ]
     return (
         <section className="px-4 lg:px-8 py-10 ">
+
             <div className="flex gap-3 flex-wrap lg:flex-nowrap">
-                <div className="w-full lg:w-8/12 h-[300px] lg:max-h-[400px] ">
+                <div className="w-full lg:w-8/12 h-[300px] lg:h-[400px] xxl:h-500px]">
 
 
 
@@ -81,7 +82,7 @@ const BannerSlider = () => {
                                             className='rounded-lg'
 
                                         >
-                                            <img src={bannerImg} className="w-full h-[300px] lg:h-[400px] xxl:h-[500px] rounded-lg" alt="" />
+                                            <img src={bannerImg} className="w-full h-[300px] lg:h-[400px] xxl:h-[500px] rounded-lg " alt="" />
                                         </div>
 
                                     </SwiperSlide>
