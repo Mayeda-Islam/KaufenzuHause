@@ -15,8 +15,12 @@ html {
   overflow-x: hidden !important;
 }
 
+ {
+  overflow-y: hidden !important;
+}
+
 .swiper-nav-btns button {
-  /* / position: absolute; / */
+
 
   width: 50px;
   height: 50px;
@@ -36,7 +40,7 @@ html {
   z-index: 99999;
 }
 
-/*******slider design********/
+/* ******slider design******* */
 .slideShow_slider {
   white-space: nowrap;
   transition: ease 800ms;

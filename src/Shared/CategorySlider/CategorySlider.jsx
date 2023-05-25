@@ -24,9 +24,9 @@ const CategorySlider = ({ sliderImages }) => {
         modules={[Pagination, Autoplay]}
         className="mySwiper"
       >
-        {sliderImages.map((sliderImage) => (
-          <SwiperSlide>
-            <img className=" h-3/5" src={sliderImage} alt="" />
+        {sliderImages?.map((sliderImage, i) => (
+          <SwiperSlide key={i} className="my-2">
+            <img className="w-full lg:h-[740px] xxl:h-[740px] rounded-md object-cover" src={sliderImage} alt="" />
           </SwiperSlide>
         ))}
         {/* <SwiperSlide>

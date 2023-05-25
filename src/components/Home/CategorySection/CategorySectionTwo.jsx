@@ -11,18 +11,26 @@ const CategorySectionTwo = () => {
   const sliderImages = [categoryImage1, categoryImage2];
   return (
     <div className="shadow-md pb-14">
-      <div className="mx-auto w-[90%]">
+      <div className="mx-auto w-[95%] lg:w-[90%]">
         {" "}
-        <h1 className="my-7 text-xl font-semibold">Gadgets</h1>
+        <div className="flex items-center justify-between my-7">
+          <h1 className=" text-xl lg:text-2xl font-semibold">Gadgets</h1>
+          {/* view all button  */}
+          <button className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
+            View All
+          </button>
+        </div>
         <hr className="my-6" />
         <div className="flex  justify-center">
           <div className="w-4/12   hidden md:block ">
-            <CategorySlider sliderImages={sliderImages}></CategorySlider>
+            <div className="mx-2">
+              <CategorySlider sliderImages={sliderImages}></CategorySlider>
+            </div>
           </div>
-          <div className="w-8/12">
+          <div className="w-full lg:w-8/12">
             <div className="flex flex-wrap items-center ">
-              {products.map((product) => (
-                <ProductCard product={product} key={product.id}></ProductCard>
+              {products.map((product, i) => (
+                <ProductCard product={product} key={i}></ProductCard>
               ))}
             </div>
           </div>

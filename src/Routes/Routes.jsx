@@ -17,80 +17,90 @@ import AdminDashboard from "../components/Admin/AdminDashboard";
 
 import ProductDetails from '../pages/ProductDetails/ProductDetails';
 import CategorisedProducts from '../pages/CategoriedProducts/CategorisedProducts';
+import Checkout from "../pages/Checkout/Checkout";
+import AboutUs from "../pages/AboutUS/AboutUs";
 
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Main></Main>,
-
-
-    children: [
-      {
+    {
         path: "/",
-        element: <Home></Home>,
-      },
+        element: <Main></Main>,
 
-{
-  path: "/productDetails",
-    element:<ProductDetails />,
-},
-  {
-  path: "/categoryProducts",
-    element:<CategorisedProducts />,
-},
-      {
-        path: "/register",
-        element: <Register />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
 
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
-      {
-        path: "*",
-        element: <NotFound />,
-      },
-    ],
-  },
-  {
-    path: "/admin/",
-    element: <AdminLayOut></AdminLayOut>,
-    children: [
-      {
-        path: "",
-        element: <AdminDashboard></AdminDashboard>,
-      },
-      {
-        path: "dashboard",
-        element: <AdminDashboard></AdminDashboard>,
-      },
+        children: [
+            {
+                path: "/",
+                element: <Home></Home>,
+            },
 
-      {
-        path: "profile",
-        element: <AdminProfile></AdminProfile>,
-      },
-      {
-        path: "category",
-        element: <AdminCategory></AdminCategory>,
-      },
-      {
-        path: "product",
-        element: <AdminProduct></AdminProduct>,
-      },
-      {
-        path: "orders",
-        element: <AdminOrders></AdminOrders>,
-      },
-      {
-        path: "system-setting",
-        element: <AdminSystemSetting></AdminSystemSetting>,
-      },
-    ],
-  },
+            {
+                path: "/productDetails",
+                element: <ProductDetails />,
+            },
+            {
+                path: "/categoryProducts",
+                element: <CategorisedProducts />,
+            },
+            {
+                path: "/register",
+                element: <Register />,
+            },
+            {
+                path: "/login",
+                element: <Login />,
+            },
+
+            {
+                path: "/cart",
+                element: <Cart />,
+            },
+            {
+                path: "/checkout",
+                element: <Checkout />,
+            },
+            {
+                path: "aboutUs",
+                element: <AboutUs />,
+            },
+            {
+                path: "*",
+                element: <NotFound />,
+            },
+        ],
+    },
+    {
+        path: "/admin/",
+        element: <AdminLayOut></AdminLayOut>,
+        children: [
+            {
+                path: "",
+                element: <AdminDashboard></AdminDashboard>,
+            },
+            {
+                path: "dashboard",
+                element: <AdminDashboard></AdminDashboard>,
+            },
+
+            {
+                path: "profile",
+                element: <AdminProfile></AdminProfile>,
+            },
+            {
+                path: "category",
+                element: <AdminCategory></AdminCategory>,
+            },
+            {
+                path: "product",
+                element: <AdminProduct></AdminProduct>,
+            },
+            {
+                path: "orders",
+                element: <AdminOrders></AdminOrders>,
+            },
+            {
+                path: "system-setting",
+                element: <AdminSystemSetting></AdminSystemSetting>,
+            },
+        ],
+    },
 ]);

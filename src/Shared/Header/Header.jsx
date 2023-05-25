@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../../images/logo/logo.png";
 import { Link } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";
@@ -6,10 +6,12 @@ import { CgShoppingCart } from "react-icons/cg";
 import engFlag from "../../images/header/eng.png";
 import germanFlag from "../../images/header/ger2.png";
 import userImg from '../../images/user-images/1.jpg';
-// mui import
+import { AiFillCloseCircle } from 'react-icons/ai';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import { AiOutlineClose } from 'react-icons/ai';
+import './Header.css';
+import { products } from "../../Data/Placeholder";
 
 
 
@@ -68,10 +70,47 @@ const Header = () => {
   const open3 = Boolean(anchorE3);
   const id3 = open3 ? 'simple-popover' : undefined;
 
+
+  //cart sidebar display
+  const wrapper = useRef();
+  const [display, setDisplay] = useState(false);
+  const handleToggle = () => {
+    //alert('clicked')
+    display === true ? setDisplay(false) : setDisplay(true);
+
+  }
+
+
+  //close sidenav when clicking outside
+  useEffect(() => {
+
+
+    const handleClickOutside = (event) => {
+      if (display &&
+        wrapper.current &&
+        !wrapper.current.contains(event.target)
+      ) {
+        setDisplay(false);
+
+
+
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    //return wrapper.current;
+
+  }, [display]);
+
+
   return (
     <header className="bg-darkNavy ">
       {/* web nav */}
-      {/* className="  items-center justify-between" */}
+
       <nav className={`py-4 px-[25px] md:px-[40px] w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${stickyNav ? 'transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200' : 'bg-darkNavy'}`} >
         {/* brand logo */}
         <span className="">
@@ -103,9 +142,9 @@ const Header = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   ></path>
                 </svg>
@@ -125,9 +164,9 @@ const Header = () => {
                 EN
               </span>
               {/* shopping cart */}
-              <button className="text-sm text-gray-400">
+              <p className="text-sm text-gray-400 cursor-pointer">
                 <AiOutlineCaretDown />
-              </button>
+              </p>
             </button>
             <Popover
               id={id2}
@@ -171,14 +210,87 @@ const Header = () => {
             </button>
           </Link>
           {/* shopping cart */}
-          <span className="text-2xl text-white">
+          <span
+            onClick={handleToggle}
+            className="text-2xl text-white cursor-pointer">
             <CgShoppingCart />
           </span>
         </div>
       </nav>
-      {/* mobile nav */}
+      {/* cart sidebar */}
+      <div
+        ref={wrapper}
+        className={`cart_nav shadow-lg shadow-gray-300 ${display == true ? 'active' : ''}`}
 
-      <div className={`md:block block lg:hidden pt-3 pb-4 px-[25px] md:px-[40px] top-0 right-0 left-0 z-[10]  ${stickyNav ? 'transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200' : 'bg-darkNavy'}`}>
+      >
+        <button
+          className="close_btn2 "
+          onClick={handleToggle}
+        >
+          <AiFillCloseCircle />
+        </button>
+        <div className=" px-5">
+
+          <h2 className="text-xl font-medium text-textColor capitalize my-4">Shopping cart</h2>
+          {
+            products.slice(0, 4).map((cart, index) => (
+              <div className="flex  gap-6 justify-center my-2 " key={index}>
+
+                {/* product image */}
+                <img src={cart.img} className="w-[65px] h-[70px] rounded-md" alt="" />
+                {/* title and increment decrement button */}
+                <div className="">
+                  <span className="text-sm text-textColor mb-3 block">{cart.title.slice(0, 15)}</span>
+                  <div className="flex items-center justify-center gap-1">
+                    <button className="w-8 h-8 rounded  bg-gray-100 border border-gray-300">+</button>
+                    <span className='w-8 h-8 rounded border border-gray-300 bg-bgOne flex items-center justify-center'>5</span>
+                    <button className="w-8 h-8 rounded  bg-gray-100 border border-gray-300">-</button>
+                  </div>
+                  {/* subtotal price */}
+                  {/* <span className="flex items-center gap-2">
+                  <span className="text-sm text-textColor">1</span>
+                  <span className="text-sm text-textColor"></span>
+                </span> */}
+                </div>
+
+                <span className="text-sm text-textColor mb-3">${cart.price}</span>
+                <AiOutlineClose className="text-xl text-gray-500 cursor-pointer" />
+
+
+              </div>
+            ))
+          }
+
+          <hr className="my-4 border-0.5 border-gray-300" />
+          {/* subtotal amount */}
+          <div className="flex items-center justify-between">
+            <span className="text-lg font-medium text-textColor">Subtotal</span>
+            <span className="text-lg font-medium text-textColor">$3624</span>
+          </div>
+          {/* button group */}
+          <hr className="my-4 border-0.5 border-gray-300" />
+          <div className="flex items-center justify-center flex-col">
+            <Link to={'/cart'}>
+              <button
+                onClick={() => setDisplay(false)}
+                className="mb-3 block text-white py-2.5 w-[270px] bg-primary hover:bg-secondary  text-base  rounded hover:text-textPrimary  capilatize " >
+                Go To Cart
+              </button>
+            </Link>
+            <Link to={'/checkout'}>
+              <button
+                onClick={() => setDisplay(false)}
+                className="block text-white py-2.5 w-[270px] bg-secondary hover:bg-primary  text-base  rounded hover:text-textPrimary  capilatize " >
+                Proceed To checkout
+              </button>
+            </Link>
+          </div>
+
+        </div>
+      </div>
+
+      {/* mobile nav */}
+      <nav className={`md:block block lg:hidden pt-3 pb-4 px-[25px] md:px-[40px] top-0 right-0 left-0 z-[10]  ${stickyNav ? 'transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200' : 'bg-darkNavy'}`}>
         <div className=" flex items-center justify-between">
           {/* brand logo */}
           <span className="">
@@ -196,9 +308,9 @@ const Header = () => {
                   EN
                 </span>
                 {/* shopping cart */}
-                <button className="text-sm text-gray-400">
+                <p className="text-sm text-gray-400 cursor-pointer">
                   <AiOutlineCaretDown />
-                </button>
+                </p>
               </button>
               <Popover
                 id={id3}
@@ -235,8 +347,12 @@ const Header = () => {
             </div> */}
             {/* shopping cart */}
             <span className="text-2xl text-white mr-2">
-              <CgShoppingCart />
+              <Link to={'/cart'}>
+                <CgShoppingCart />
+              </Link>
+
             </span>
+
             {/* user dropdown */}
             <div>
               <button aria-describedby={id} onClick={handleClickUser}>
@@ -295,9 +411,9 @@ const Header = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   ></path>
                 </svg>
@@ -306,7 +422,7 @@ const Header = () => {
             </div>
           </div>
         </form>
-      </div>
+      </nav>
 
 
     </header>
