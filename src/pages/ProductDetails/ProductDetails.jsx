@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import black from '../../images/product-gallery/black.jpg';
 import blue from '../../images/product-gallery/blue.jpg';
 import red from '../../images/product-gallery/red.jpg';
 import navy from '../../images/product-gallery/navy.jpg';
 import yellow from '../../images/product-gallery/yell.jpg';
-import { FiHeart } from 'react-icons/fi';
 import ProductInfoTabs from '../../components/ProductDetails/ProductInfoTabs';
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
 import { MdClose } from 'react-icons/md';
-import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from 'react-icons/io5';
+import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from 'react-icons/io';
 import { products } from '../../Data/Placeholder';
 
 
@@ -234,6 +233,7 @@ const ProductDetails = () => {
                                                 {
                                                     productGallary.map((col, indx) => (
                                                         <li
+                                                            key={indx}
                                                             onClick={() => handleColorClick(col, indx)}
                                                             className={`transition-all duration-300 ease-in-out  cursor-pointer ${indx === color ? "p-[3px] rounded-full border border-gray-600" : "p-[3px] border border-transparent"}`}
                                                         >
