@@ -8,8 +8,9 @@ import { FiHeart } from 'react-icons/fi';
 import ProductInfoTabs from '../../components/ProductDetails/ProductInfoTabs';
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
 import { MdClose } from 'react-icons/md';
-import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from 'react-icons/io5';
+import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from 'react-icons/io';
 import { products } from '../../Data/Placeholder';
+import Magnifier from "react-magnifier";
 
 
 
@@ -146,6 +147,17 @@ const ProductDetails = () => {
         // console.log(cart)
     }
 
+    //image slilder length
+    const len = productGallary.length;
+
+    //slide image on prev click
+    const handleClickPrev = () => {
+        setCurrent(current === 0 ? len - 1 : current - 1);
+    }
+    const handleClickNext = () => {
+        setCurrent(current === len - 1 ? 0 : current + 1);
+    }
+
     console.log(cart)
     return (
         <>
@@ -166,7 +178,12 @@ const ProductDetails = () => {
                                                     onClick={() => handleThumbClick(idx)}
 
                                                 >
+
+
                                                     <img src={thumb.galleryImg} className='w-[80px] h-[80px] border border-gray-400 rounded' />
+
+
+
                                                 </li>
                                             ))
                                         }
@@ -174,28 +191,37 @@ const ProductDetails = () => {
                                     </ul>
                                 </div>
                                 <div className="w-full lg:w-10/12">
-                                    <div className="mx-auto  overflow-hidden bg-white relative">
-                                        <div className="slideShow_slider "
+                                    <div className="mx-auto  overflow-hidden bg-white relative z-[999999]">
+                                        <div className="whitespace-nowrap transition-all w-full  ease duration-[800ms] z-10 "
                                             style={{
                                                 transform: `translate3d(${-current * 100}%, 0, 0)`
                                                 // transform: (current + 1) ? `translateX(${100 * (index - current)}%) ` : (current - 1) ? `translateX(${100 * (index - current)}%)` : 0
                                             }}
                                         >
-                                            {
-                                                productGallary.map((sl) => (
-                                                    <div className="slide_single flex items-center justify-center flex-nowrap border border-gray-300 p-6" key={sl.id}>
-                                                        <img src={sl.galleryImg} className='w-full lg:w-[450px] lg:h-[400px]  ' />
 
-                                                    </div>
-                                                ))
+                                            {
+                                                productGallary.map((sl) => {
+                                                    return (
+                                                        <div className=" inline-block rounded-md  z-10 border border-gray-300 p-6" key={sl.id}>
+                                                            <Magnifier src={sl.galleryImg} className='w-full lg:w-[450px] lg:h-[400px]' mgShape='square' mgWidth={180} mgHeight={180} />;
+
+                                                            {/* <img src={sl.galleryImg} className='w-full lg:w-[450px] lg:h-[400px]' /> */}
+
+                                                        </div>
+                                                    )
+                                                })
                                             }
                                         </div>
                                         {/* prev and next arrow */}
                                         <div className="">
-                                            <button className="text-textColor text-lg absolute top-[40%] left-1">
+                                            <button
+                                                onClick={handleClickPrev}
+                                                className="text-textColor text-3xl absolute top-[45%] left-1">
                                                 <IoIosArrowDropleftCircle />
                                             </button>
-                                            <button className="text-textColor text-lg absolute top-[40%] left-1">
+                                            <button
+                                                onClick={handleClickNext}
+                                                className="text-textColor text-3xl absolute top-[45%] right-1">
                                                 <IoIosArrowDroprightCircle />
                                             </button>
                                         </div>
@@ -206,7 +232,7 @@ const ProductDetails = () => {
                             </div>
                         </div>
                         <div className="w-full lg:w-6/12">
-                            <div className=" m-3">
+                            <div className=" m-3 -z-10">
 
                                 <h2 className="text-textPrimary font-semibold text-xl md:text-3xl mb-2">Gaming Headphone</h2>
 

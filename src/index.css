@@ -41,10 +41,7 @@ html {
 }
 
 /* ******slider design******* */
-.slideShow_slider {
-  white-space: nowrap;
-  transition: ease 800ms;
-}
+
 
 .slide {
   display: inline-block;
@@ -54,12 +51,6 @@ html {
   border-radius: 40px;
 }
 
-.slide_single {
-  display: inline-block;
-
-  width: 100%;
-  border-radius: 6px;
-}
 
 .point_r {
   cursor: pointer !important;
