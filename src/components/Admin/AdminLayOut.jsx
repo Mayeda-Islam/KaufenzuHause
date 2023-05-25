@@ -225,7 +225,7 @@ export default function AdminLayOut() {
                 margin: "0 auto",
               },
               "@media (max-width: 600px)": {
-                margin: "0 20%",
+                margin: "0 ",
               },
 
               "@media (min-width: 601px) and (max-width: 960px)": {
@@ -236,10 +236,17 @@ export default function AdminLayOut() {
           >
             <AccountCircleIcon style={{ fontSize: "4rem" }} />
             <div>
-              <Typography variant="h6" noWrap component="p">
+              <Typography
+                variant="h6"
+                noWrap
+                component="p"
+                sx={{ fontWeight: 600 }}
+              >
                 Mayeda Islam
               </Typography>
-              <Typography component="p">mayedakonika@gmail.com</Typography>
+              <Typography component="p" sx={{ fontWeight: 600 }}>
+                mayedakonika@gmail.com
+              </Typography>
             </div>
           </Typography>
         </Toolbar>
