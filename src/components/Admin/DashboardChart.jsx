@@ -45,9 +45,7 @@ const data = [
 
 const DashboardChart = () => {
   return (
-    <div
-    // className="overflow-x-scroll md:overflow-hidden w-full "
-    >
+    <div className="hidden md:block">
       <div
         style={{
           width: "100%",

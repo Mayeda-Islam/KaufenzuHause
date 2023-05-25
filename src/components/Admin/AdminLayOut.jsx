@@ -214,7 +214,7 @@ export default function AdminLayOut() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
+          {/* <Typography
             sx={{
               padding: 1,
               display: "flex",
@@ -248,13 +248,40 @@ export default function AdminLayOut() {
                 mayedakonika@gmail.com
               </Typography>
             </div>
-          </Typography>
+          </Typography> */}
+          <div className="ml-auto ">
+            <Typography
+              sx={{
+                padding: 1,
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                margin: "0 auto",
+              }}
+              component="div"
+            >
+              <AccountCircleIcon style={{ fontSize: "4rem" }} />
+              <div>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="p"
+                  sx={{ fontWeight: 600 }}
+                >
+                  Mayeda Islam
+                </Typography>
+                <Typography component="p" sx={{ fontWeight: 600 }}>
+                  mayedakonika@gmail.com
+                </Typography>
+              </div>
+            </Typography>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
         PaperProps={{
           sx: {
-            backgroundColor: "black",
+            backgroundColor: "#1A3C61",
             color: "gray",
           },
         }}
