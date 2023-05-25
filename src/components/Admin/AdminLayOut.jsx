@@ -23,7 +23,6 @@ import CategoryIcon from "@mui/icons-material/Category";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import SettingsSystemDaydreamIcon from "@mui/icons-material/SettingsSystemDaydream";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-
 const drawerWidth = 300;
 
 const openedMixin = (theme) => ({
@@ -201,7 +200,7 @@ export default function AdminLayOut() {
     <Box sx={{ display: "flex" }}>
       {/* <CssBaseline /> */}
       <AppBar className="shadow-none border-none" position="fixed" open={open}>
-        <Toolbar className="bg-white inline">
+        <Toolbar className="bg-white text-black inline">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -215,12 +214,74 @@ export default function AdminLayOut() {
           >
             <MenuIcon />
           </IconButton>
+          {/* <Typography
+            sx={{
+              padding: 1,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              margin: "0 75%",
+              "@media(min-width:280px) and (max-width: 599px)": {
+                margin: "0 auto",
+              },
+              "@media (max-width: 600px)": {
+                margin: "0 ",
+              },
+
+              "@media (min-width: 601px) and (max-width: 960px)": {
+                margin: "0 60%",
+              },
+            }}
+            component="div"
+          >
+            <AccountCircleIcon style={{ fontSize: "4rem" }} />
+            <div>
+              <Typography
+                variant="h6"
+                noWrap
+                component="p"
+                sx={{ fontWeight: 600 }}
+              >
+                Mayeda Islam
+              </Typography>
+              <Typography component="p" sx={{ fontWeight: 600 }}>
+                mayedakonika@gmail.com
+              </Typography>
+            </div>
+          </Typography> */}
+          <div className="ml-auto ">
+            <Typography
+              sx={{
+                padding: 1,
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                margin: "0 auto",
+              }}
+              component="div"
+            >
+              <AccountCircleIcon style={{ fontSize: "4rem" }} />
+              <div>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="p"
+                  sx={{ fontWeight: 600 }}
+                >
+                  Mayeda Islam
+                </Typography>
+                <Typography component="p" sx={{ fontWeight: 600 }}>
+                  mayedakonika@gmail.com
+                </Typography>
+              </div>
+            </Typography>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
         PaperProps={{
           sx: {
-            backgroundColor: "black",
+            backgroundColor: "#1A3C61",
             color: "gray",
           },
         }}

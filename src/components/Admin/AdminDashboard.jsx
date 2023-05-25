@@ -1,88 +1,70 @@
-import { Box, Chip, Typography } from "@mui/material";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
+import {
+  BsWalletFill,
+  BsCurrencyExchange,
+  BsCart4,
+  BsCalendar3,
+} from "react-icons/bs";
+import { GiTwoCoins } from "react-icons/gi";
+import { BiTask } from "react-icons/bi";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import DashboardChart from "./DashboardChart";
 
 const AdminDashboard = () => {
   const sellsIncome = [
     {
-      icon: <CreditCardIcon />,
+      icon: <BsWalletFill />,
       title: "Total income",
       amount: "998,778",
     },
     {
-      icon: <CreditCardIcon />,
+      icon: <GiTwoCoins />,
       title: "Month income",
       amount: "998,778",
     },
     {
-      icon: <CreditCardIcon />,
+      icon: <BsCurrencyExchange />,
       title: "Today's income",
       amount: "998,778",
     },
+    { icon: <BiTask />, title: "Total Orders", amount: 50 },
+    { icon: <FaRegCalendarAlt />, title: "Monthly Orders", amount: 50 },
+    { icon: <BsCart4 />, title: "Today's Orders", amount: 50 },
   ];
-  const ordersInfo = [
-    { title: "Total Orders" },
-    { title: "Orders Delivered" },
-    { title: "Order In Progress" },
-  ];
+
   return (
-    <Box>
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 4,
-        }}
-      >
+    <div className="w-11/12  mx-auto my-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-4 text-white ">
         {sellsIncome.map((sellIncome) => (
           <>
-            <Typography
-              className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7]"
-              sx={{
-                p: 2,
-                borderRadius: 2,
-                boxShadow: 3,
-              }}
-              variant="p"
-              component="h2"
-            >
-              {sellIncome.icon}
-              <Typography sx={{ color: "white", mt: 2 }}>
-                {" "}
-                {sellIncome.title}
-              </Typography>
-              <Typography
-                sx={{ fontSize: 30, fontWeight: 600, mb: 2, color: "white" }}
-              >
-                {" "}
-                $ {sellIncome.amount}
-              </Typography>
-            </Typography>
+            {" "}
+            <div className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7] pt-6 text-white text-center md:text-left py-10 lg:pl-8 rounded-lg shadow-lg">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 lg:gap-3">
+                <span className="lg:col-span-1 text-8xl place-self-center text-center text-white  font-medium mr-2  px-3 py-3  rounded ">
+                  {sellIncome.icon}
+                </span>
+                <div className=" lg:col-span-2 ">
+                  <div className="text-lg lg:text-xl font-semibold mt-6 mb-2">
+                    {" "}
+                    {sellIncome.title}
+                  </div>
+                  <div className="md:text-2xl lg:text-4xl mb-4">
+                    € {sellIncome.amount}
+                  </div>
+                </div>
+              </div>
+            </div>
           </>
         ))}
-        {ordersInfo.map((orderInfo) => (
+        {/* {ordersInfo.map((orderInfo) => (
           <>
-            <Typography
-              className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7]"
-              sx={{
-                p: 2,
-                borderRadius: 2,
-                boxShadow: 3,
-                color: "white",
-              }}
-              variant="p"
-              component="h2"
-            >
-              <Typography sx={{ my: 4, pl: 4, fontSize: 28, fontWeight: 600 }}>
-                {" "}
-                {orderInfo.title}
-              </Typography>
-            </Typography>
+            <div className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7] p-12 rounded-md ">
+              <div className="text-3xl"> {orderInfo.title}</div>
+            </div>
           </>
-        ))}
-      </Box>
+        ))} */}
+      </div>
       <DashboardChart></DashboardChart>
-    </Box>
+    </div>
   );
 };
 
