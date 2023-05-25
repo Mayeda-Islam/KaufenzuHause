@@ -1,4 +1,3 @@
-import { MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -20,7 +19,7 @@ const Register = () => {
     return (
         <div className='my-10 flex justify-center items-center'>
 
-            <form onSubmit={handleSubmit(handleRegistrationData)} className='w-11/12 md:w-3/4 lg:w-5/12  xl:w-1/3 mx-auto p-3 lg:p-10 bg-lightGray/10 rounded-xl shadow-lg'>
+            <form onSubmit={handleSubmit(handleRegistrationData)} className='w-11/12 md:w-3/4 lg:w-5/12  xl:w-1/3 mx-auto p-3 lg:p-10 bg-lightGray/10 rounded-xl shadow-xl shadow-gray-300 border border-gray-200'>
                 <h1 className='text-2xl font-semibold text-center my-5'>Register With Kaufenzu Hause</h1>
                 <label className="block my-3">
                     <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium ">

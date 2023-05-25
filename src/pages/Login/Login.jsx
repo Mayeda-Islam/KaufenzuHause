@@ -18,7 +18,7 @@ const Login = () => {
     return (
         <div className='my-10 flex justify-center items-center'>
 
-            <form onSubmit={handleSubmit(handleLoginData)} className='w-11/12 md:w-3/4 lg:w-5/12  xl:w-1/3 mx-auto p-3 lg:p-10 bg-lightGray/10 rounded-xl shadow-lg'>
+            <form onSubmit={handleSubmit(handleLoginData)} className='w-11/12 md:w-3/4 lg:w-5/12  xl:w-1/3 mx-auto p-3 lg:p-10 bg-lightGray/10 shadow-gray-300 border border-gray-200 rounded-xl shadow-xl'>
                 <h1 className='text-2xl font-semibold text-center my-5'>Login With Kaufenzu Hause</h1>
 
                 <label className="block my-3">
