@@ -23,7 +23,6 @@ import CategoryIcon from "@mui/icons-material/Category";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import SettingsSystemDaydreamIcon from "@mui/icons-material/SettingsSystemDaydream";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-
 const drawerWidth = 300;
 
 const openedMixin = (theme) => ({
@@ -218,7 +217,10 @@ export default function AdminLayOut() {
           <Typography
             sx={{
               padding: 1,
-              margin: "0 80%",
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              margin: "0 75%",
               "@media(min-width:280px) and (max-width: 599px)": {
                 margin: "0 auto",
               },
@@ -232,10 +234,13 @@ export default function AdminLayOut() {
             }}
             component="div"
           >
-            <Typography variant="h6" noWrap component="p">
-              Mayeda Islam
-            </Typography>
-            <Typography component="p">mayedakonika@gmail.com</Typography>
+            <AccountCircleIcon style={{ fontSize: "4rem" }} />
+            <div>
+              <Typography variant="h6" noWrap component="p">
+                Mayeda Islam
+              </Typography>
+              <Typography component="p">mayedakonika@gmail.com</Typography>
+            </div>
           </Typography>
         </Toolbar>
       </AppBar>
