@@ -2,7 +2,6 @@ import React from 'react'
 import slider1 from '../../../images/bannerSlider/banners/banner.png';
 import slider2 from '../../../images/bannerSlider/banners/banner2.png';
 import slider3 from '../../../images/bannerSlider/banners/banner3.png';
-import slider4 from '../../../images/bannerSlider/banner4.png';
 import sidBanner1 from '../../../images/bannerSlider/sidBanner1.png';
 import sidBanner2 from '../../../images/bannerSlider/sidBanner2.png';
 import { Pagination, Navigation, Autoplay } from 'swiper';
@@ -16,16 +15,16 @@ const BannerSlider = () => {
     const sliders = [
         {
             _id: 1,
-            bannerImg: sidBanner1
+            bannerImg: slider1
         },
         {
             _id: 2,
-            bannerImg: sidBanner1
+            bannerImg: slider2
         },
         {
             _id: 3,
-            bannerImg: sidBanner1
-        }
+            bannerImg: slider3
+        },
     ]
     return (
         <section className="px-4 lg:px-8 py-10 ">
