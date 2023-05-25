@@ -8,7 +8,7 @@ import { FiHeart } from 'react-icons/fi';
 import ProductInfoTabs from '../../components/ProductDetails/ProductInfoTabs';
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
 import { MdClose } from 'react-icons/md';
-
+import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from 'react-icons/io5';
 import { products } from '../../Data/Placeholder';
 
 
@@ -174,7 +174,7 @@ const ProductDetails = () => {
                                     </ul>
                                 </div>
                                 <div className="w-full lg:w-10/12">
-                                    <div className="mx-auto  overflow-hidden bg-white">
+                                    <div className="mx-auto  overflow-hidden bg-white relative">
                                         <div className="slideShow_slider "
                                             style={{
                                                 transform: `translate3d(${-current * 100}%, 0, 0)`
@@ -189,6 +189,15 @@ const ProductDetails = () => {
                                                     </div>
                                                 ))
                                             }
+                                        </div>
+                                        {/* prev and next arrow */}
+                                        <div className="">
+                                            <button className="text-textColor text-lg absolute top-[40%] left-1">
+                                                <IoIosArrowDropleftCircle />
+                                            </button>
+                                            <button className="text-textColor text-lg absolute top-[40%] left-1">
+                                                <IoIosArrowDroprightCircle />
+                                            </button>
                                         </div>
 
                                     </div>
