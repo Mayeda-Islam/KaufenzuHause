@@ -201,7 +201,7 @@ export default function AdminLayOut() {
     <Box sx={{ display: "flex" }}>
       {/* <CssBaseline /> */}
       <AppBar className="shadow-none border-none" position="fixed" open={open}>
-        <Toolbar className="bg-white inline">
+        <Toolbar className="bg-white text-black inline">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -215,6 +215,28 @@ export default function AdminLayOut() {
           >
             <MenuIcon />
           </IconButton>
+          <Typography
+            sx={{
+              padding: 1,
+              margin: "0 80%",
+              "@media(min-width:280px) and (max-width: 599px)": {
+                margin: "0 auto",
+              },
+              "@media (max-width: 600px)": {
+                margin: "0 20%",
+              },
+
+              "@media (min-width: 601px) and (max-width: 960px)": {
+                margin: "0 60%",
+              },
+            }}
+            component="div"
+          >
+            <Typography variant="h6" noWrap component="p">
+              Mayeda Islam
+            </Typography>
+            <Typography component="p">mayedakonika@gmail.com</Typography>
+          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
