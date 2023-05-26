@@ -193,7 +193,7 @@ export const categories = [
         _id: 6,
         categoryName: "headPhones",
         categoryImg: headPhones,
-
+        borderClass: "border-b-[0.5px] border-gray-500"
 
     }
 ]
