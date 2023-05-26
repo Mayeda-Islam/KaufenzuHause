@@ -20,8 +20,6 @@ html {
 }
 
 .swiper-nav-btns button {
-
-
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -42,7 +40,6 @@ html {
 
 /* ******slider design******* */
 
-
 .slide {
   display: inline-block;
 
@@ -50,7 +47,6 @@ html {
   width: 100%;
   border-radius: 40px;
 }
-
 
 .point_r {
   cursor: pointer !important;
