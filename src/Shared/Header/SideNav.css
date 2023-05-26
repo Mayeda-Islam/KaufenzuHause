@@ -1,0 +1,14 @@
+.category_nav {
+    background: #232f3e;
+    width: 60%;
+    height: 100%;
+    position: fixed;
+
+    z-index: 999999;
+    top: 0;
+    padding: 2rem 0;
+    overflow-x: hidden;
+    text-align: center;
+    transition: 0.7s;
+    left: -100%;
+}

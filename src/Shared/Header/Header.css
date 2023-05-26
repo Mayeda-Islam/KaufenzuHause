@@ -15,10 +15,14 @@
     transition: 0.7s;
 }
 
+
+
 .cart_nav.active {
     right: 0;
 }
 
+
+/* category sidenav */
 
 
 
@@ -45,19 +49,7 @@
 }
 
 
-button.close_btn2 {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    background: none;
-    outline: none;
-    border: none;
-    color: #444;
-    font-size: 2rem;
-    padding: 0.5rem;
-    cursor: pointer;
-    transition: 0.3s;
-}
+
 
 .close_btn:hover {
     color: #222;
