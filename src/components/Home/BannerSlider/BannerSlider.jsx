@@ -82,7 +82,7 @@ const BannerSlider = () => {
                                                 className='rounded-lg'
 
                                             >
-                                                <img src={bannerImg} className="w-full h-[300px] lg:h-[400px] xl:h-[500px] xxl:h-[500px] rounded-lg " alt="" />
+                                                <img src={bannerImg} className="w-full h-[300px] lg:h-[400px]  xl:min-h-[500px] rounded-lg " alt="" />
                                             </div>
 
                                         </SwiperSlide>
@@ -96,8 +96,8 @@ const BannerSlider = () => {
                     </div>
                     <div className="w-full lg:w-4/12 max-h-[600px]">
                         <div className="hidden  lg:flex lg:flex-col flex-row gap-3 ">
-                            <img src={sidBanner1} className=" w-full h-[150px] lg:h-[193px] xl:h-[243px] xxl:h-[243px] rounded-lg" alt="" />
-                            <img src={sidBanner2} className=" w-full h-[150px] lg:h-[193px] xl:h-[243px] xxl:h-[243px] rounded-lg" alt="" />
+                            <img src={sidBanner1} className=" w-full h-[150px] lg:h-[193px]  xl:min-h-[243px] rounded-lg" alt="" />
+                            <img src={sidBanner2} className=" w-full h-[150px] lg:h-[193px]  xl:min-h-[243px] rounded-lg" alt="" />
                         </div>
                         <div className=" flex flex-row lg:hidden gap-3">
                             <div className="w-6/12">

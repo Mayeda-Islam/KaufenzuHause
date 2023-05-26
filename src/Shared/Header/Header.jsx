@@ -14,6 +14,12 @@ import './Header.css';
 import { products } from "../../Data/Placeholder";
 
 
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+
+
+import Sidenav from "./Sidenav";
+
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -105,6 +111,15 @@ const Header = () => {
     //return wrapper.current;
 
   }, [display]);
+
+  // mui sidenav
+  const cateWrapper = useRef();
+  const [sidebar, setSidebar] = useState(false);
+
+  const toggleSidebar = () => {
+    sidebar === true ? setSidebar(false) : setSidebar(true);
+  };
+
 
 
   return (
@@ -224,7 +239,7 @@ const Header = () => {
 
       >
         <button
-          className="close_btn2 "
+          className="absolute right-[15px] top-[15px] bg-none outline-none border-none text-[#444] hover:text-[#111] text-[2rem] p-[0.5rem] cursor-pointer transition-all duration-[0.3s] "
           onClick={handleToggle}
         >
           <AiFillCloseCircle />
@@ -290,14 +305,29 @@ const Header = () => {
       </div>
 
       {/* mobile nav */}
-      <nav className={`md:block block lg:hidden pt-3 pb-4 px-[25px] md:px-[40px] top-0 right-0 left-0 z-[10]  ${stickyNav ? 'transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200' : 'bg-darkNavy'}`}>
+      <nav className={`md:block block lg:hidden pt-3 pb-4 px-[25px] md:px-[35px] top-0 right-0 left-0 z-[10]  ${stickyNav ? 'transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200' : 'bg-darkNavy'}`}>
         <div className=" flex items-center justify-between">
-          {/* brand logo */}
-          <span className="">
-            <Link>
-              <img src={logo} className="w-20" alt="" />
-            </Link>
-          </span>
+          <div className="flex items-center gap-3">
+            {/* hamburger icon */}
+            <button onClick={toggleSidebar} className="border-none outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#fff" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+
+            </button>
+            {/* brand logo */}
+            <span className="">
+              <Link>
+                <img src={logo} className="w-20" alt="" />
+              </Link>
+            </span>
+          </div>
+
+
+          {/* category sidebar */}
+          <Sidenav cateWrapper={cateWrapper} sidebar={sidebar} setSidebar={setSidebar} toggleSidebar={toggleSidebar} />
+
+
           <div className="flex items-center gap-3">
             {/* language dropdown */}
             <div>
