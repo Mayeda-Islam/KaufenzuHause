@@ -3,7 +3,7 @@ import laptop from '../../../images/categoryIcons/laptop.png';
 import mobile from '../../../images/categoryIcons/mobile.png';
 import tv from '../../../images/categoryIcons/tv.png';
 import camera from '../../../images/categoryIcons/camera.png';
-import headPhones from '../../../images/categoryIcons/headPhones.png';
+import headPhones from '../../../images/categoryIcons/headphones.png';
 import smartwatch from '../../../images/categoryIcons/smartwatch.png';
 import { Link } from 'react-router-dom';
 

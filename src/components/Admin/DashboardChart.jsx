@@ -41,45 +41,41 @@ const data = [
     pv: 4800,
     amt: 2181,
   },
-  {
-    name: "Jun",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "July",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
 ];
 
 const DashboardChart = () => {
   return (
-    <div className="w-full h-[400px] mt-24 -p-4 ">
-      <ResponsiveContainer>
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis yAxisId="left" orientation="left" stroke="#031f4bee" />
-          <YAxis yAxisId="right" orientation="right" stroke="#55c3c1f7" />
-          <Tooltip />
-          <Legend />
-          <Bar yAxisId="left" dataKey="pv" fill="#031f4bee" />
-          <Bar yAxisId="right" dataKey="uv" fill="#55c3c1f7" />
-        </BarChart>
-      </ResponsiveContainer>
+    <div className="hidden md:block">
+      <div
+        style={{
+          width: "100%",
+          height: "300px",
+          marginTop: "100px",
+        }}
+      >
+        <ResponsiveContainer>
+          <BarChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis yAxisId="left" orientation="left" stroke="#031f4bee" />
+            <YAxis yAxisId="right" orientation="right" stroke="#55c3c1f7" />
+            <Tooltip />
+            <Legend />
+            <Bar yAxisId="left" dataKey="pv" fill="#031f4bee" />
+            <Bar yAxisId="right" dataKey="uv" fill="#55c3c1f7" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
