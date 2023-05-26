@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { RxCaretRight } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
-import './SideNav.css';
+import './Sidenav.css';
 import { categories } from '../../Data/Placeholder';
 
 const Sidenav = ({ toggleSidebar, cateWrapper, sidebar, setSidebar }) => {
@@ -32,7 +32,7 @@ const Sidenav = ({ toggleSidebar, cateWrapper, sidebar, setSidebar }) => {
     return (
         <div
             ref={cateWrapper}
-            className={`category_nav  shadow-lg shadow-gray-500 ${sidebar == true ? 'left-0' : ''}`}
+            className={`category_nav w-[50%] lg:w-[20%] shadow-lg shadow-gray-500 ${sidebar == true ? 'left-0' : ''}`}
 
         >
 
