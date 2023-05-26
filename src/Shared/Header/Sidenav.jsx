@@ -42,18 +42,18 @@ const Sidenav = ({ toggleSidebar, cateWrapper, sidebar, setSidebar }) => {
             >
                 <AiFillCloseCircle />
             </button>
-            <div className=" px-5 text-center">
+            <div className="pt-5  ">
 
                 <h2 className="text-xl font-medium text-white capitalize my-4">Category Items</h2>
-                <div className="text-center pt-4">
-                    <ul className='p-0 m-0 text-gray-200 text-base font-normal '>
+                <div className="text-left pt-3">
+                    <ul className='p-0 m-0 text-gray-300  text-[15px] font-normal  '>
                         {
                             categories.map((cat) => (
-                                <li key={cat._id} className={`${cat.borderClass}`}>
-                                    <Link className={`  px-5 py-4 capitalize flex items-center justify-center flex-col`}>
-                                        <div className="flex">
-                                            <img src={cat.categoryImg} className='w-[25px] h-[25px] ' />
-                                            <span className='ml-[20px] '>{cat.categoryName}</span>
+                                <li key={cat._id} className={`py-4 px-4 m-0 ${cat.borderClass} `}>
+                                    <Link className={`  px-5  capitalize block m-0`}>
+                                        <div className="flex  items-center gap-5">
+                                            <img src={cat.categoryImg} className='w-[22px] h-[22px] ' />
+                                            <span className='hover:text-white transition-all duration-300 focus:text-white'>{cat.categoryName}</span>
                                         </div>
 
                                     </Link>
