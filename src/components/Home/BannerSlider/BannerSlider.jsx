@@ -27,94 +27,97 @@ const BannerSlider = () => {
         },
     ]
     return (
-        <section className="px-4 lg:px-8 py-10 ">
+        <section className=" py-10 ">
+            <div className="w-[95%] mx-auto">
+                <div className="flex gap-3 flex-wrap lg:flex-nowrap">
+                    <div className="w-full lg:w-8/12 h-[300px] lg:h-[400px] xxl:h-[500px]">
 
-            <div className="flex gap-3 flex-wrap lg:flex-nowrap">
-                <div className="w-full lg:w-8/12 h-[300px] lg:h-[400px] xxl:h-500px]">
 
 
+                        <Swiper
 
-                    <Swiper
+                            // breakpoints={{
+                            //     // when window width is >= 320px
+                            //     320: {
 
-                        // breakpoints={{
-                        //     // when window width is >= 320px
-                        //     320: {
+                            //         slidesPerView: 1,
+                            //     },
 
-                        //         slidesPerView: 1,
-                        //     },
+                            //     // when window width is >= 640px
+                            //     640: {
 
-                        //     // when window width is >= 640px
-                        //     640: {
+                            //         slidesPerView: 1,
+                            //     },
+                            //     // when window width is >= 768px
+                            //     768: {
 
-                        //         slidesPerView: 1,
-                        //     },
-                        //     // when window width is >= 768px
-                        //     768: {
+                            //         slidesPerView: 1,
+                            //     },
+                            //     // when window width is >= 1024px
+                            //     1024: {
 
-                        //         slidesPerView: 1,
-                        //     },
-                        //     // when window width is >= 1024px
-                        //     1024: {
-
-                        //         slidesPerView: 1,
-                        //     },
+                            //         slidesPerView: 1,
+                            //     },
+                            // }}
+                            slidesPerView={1}
+                            spaceBetween={30}
+                            loop={true}
+                            pagination={{
+                                clickable: true,
+                            }}
+                            // navigation={true}
+                            modules={[Pagination, Navigation, Autoplay]}
+                        // className="mySwiper "
+                        // autoplay={{
+                        //     delay: 2500,
+                        //     disableOnInteraction: false,
                         // }}
-                        slidesPerView={1}
-                        spaceBetween={30}
-                        loop={true}
-                        pagination={{
-                            clickable: true,
-                        }}
-                        // navigation={true}
-                        modules={[Pagination, Navigation, Autoplay]}
-                    // className="mySwiper "
-                    // autoplay={{
-                    //     delay: 2500,
-                    //     disableOnInteraction: false,
-                    // }}
-                    >
-                        {
-                            sliders?.map((slider) => {
-                                const { _id, bannerImg } = slider;
-                                return (
-                                    <SwiperSlide key={_id}>
-                                        <div
-                                            className='rounded-lg'
+                        >
+                            {
+                                sliders?.map((slider) => {
+                                    const { _id, bannerImg } = slider;
+                                    return (
+                                        <SwiperSlide key={_id}>
+                                            <div
+                                                className='rounded-lg'
 
-                                        >
-                                            <img src={bannerImg} className="w-full h-[300px] lg:h-[400px] xxl:h-[500px] rounded-lg " alt="" />
-                                        </div>
+                                            >
+                                                <img src={bannerImg} className="w-full h-[300px] lg:h-[400px]  xl:min-h-[500px] rounded-lg " alt="" />
+                                            </div>
 
-                                    </SwiperSlide>
-                                )
-                            })
-                        }
+                                        </SwiperSlide>
+                                    )
+                                })
+                            }
 
-                    </Swiper>
+                        </Swiper>
+
+
+                    </div>
+                    <div className="w-full lg:w-4/12 max-h-[600px]">
+                        <div className="hidden  lg:flex lg:flex-col flex-row gap-3 ">
+                            <img src={sidBanner1} className=" w-full h-[150px] lg:h-[193px]  xl:min-h-[243px] rounded-lg" alt="" />
+                            <img src={sidBanner2} className=" w-full h-[150px] lg:h-[193px]  xl:min-h-[243px] rounded-lg" alt="" />
+                        </div>
+                        <div className=" flex flex-row lg:hidden gap-3">
+                            <div className="w-6/12">
+
+                                <img src={sidBanner1} className=" w-full h-[150px] lg:h-auto rounded-lg" alt="" />
+                            </div>
+                            <div className="w-6/12">
+
+                                <img src={sidBanner2} className=" w-full h-[150px] lg:h-auto rounded-lg" alt="" />
+                            </div>
+
+                        </div>
+                    </div>
+
 
 
                 </div>
-                <div className="w-full lg:w-4/12 max-h-[600px]">
-                    <div className="hidden  lg:flex lg:flex-col flex-row gap-3 ">
-                        <img src={sidBanner1} className=" w-full h-[150px] lg:h-[193px] xxl:h-[243px] rounded-lg" alt="" />
-                        <img src={sidBanner2} className=" w-full h-[150px] lg:h-[193px] xxl:h-[243px] rounded-lg" alt="" />
-                    </div>
-                    <div className=" flex flex-row lg:hidden gap-3">
-                        <div className="w-6/12">
-
-                            <img src={sidBanner1} className=" w-full h-[150px] lg:h-auto rounded-lg" alt="" />
-                        </div>
-                        <div className="w-6/12">
-
-                            <img src={sidBanner2} className=" w-full h-[150px] lg:h-auto rounded-lg" alt="" />
-                        </div>
-
-                    </div>
-                </div>
-
-
-
             </div>
+
+
             {/* <div className="grid lg:grid-cols-12 gap-2 ">
                 <div className="lg:col-span-7">
 

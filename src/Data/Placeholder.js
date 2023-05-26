@@ -7,6 +7,14 @@ import productImg7 from '../images/products/pr7.jpg';
 import productImg8 from '../images/products/pr8.jpg';
 import productImg9 from '../images/products/pr9.jpg';
 
+// category images
+import laptop from '../images/categoryIcons/laptop.png';
+import mobile from '../images/categoryIcons/mobile.png';
+import tv from '../images/categoryIcons/tv.png';
+import camera from '../images/categoryIcons/camera.png';
+import headPhones from '../images/categoryIcons/headPhones.png';
+import smartwatch from '../images/categoryIcons/smartwatch.png';
+
 export const products = [
     {
         _id: 1,
@@ -141,3 +149,51 @@ export const products = [
         productStatus: "Sold Out"
     },
 ];
+
+
+//category product
+
+export const categories = [
+    {
+        _id: 1,
+        categoryName: "Laptop",
+        categoryImg: laptop,
+        borderClass: "border-b-[0.5px] border-gray-500"
+
+    },
+    {
+        _id: 2,
+        categoryName: "mobile",
+        categoryImg: mobile,
+        borderClass: "border-b-[0.5px] border-gray-500"
+
+    },
+    {
+        _id: 3,
+        categoryName: "tv",
+        categoryImg: tv,
+        borderClass: "border-b-[0.5px] border-gray-500"
+
+    },
+    {
+        _id: 4,
+        categoryName: "camera",
+        categoryImg: camera,
+        borderClass: "border-b-[0.5px] border-gray-500"
+
+    },
+    {
+        _id: 5,
+        categoryName: "smartwatch",
+        categoryImg: smartwatch,
+        borderClass: "border-b-[0.5px] border-gray-500"
+
+    },
+    {
+        _id: 6,
+        categoryName: "headPhones",
+        categoryImg: headPhones,
+
+
+    }
+]
