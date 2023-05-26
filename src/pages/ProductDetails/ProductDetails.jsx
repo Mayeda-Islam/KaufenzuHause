@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import black from '../../images/product-gallery/black.jpg';
 import blue from '../../images/product-gallery/blue.jpg';
 import red from '../../images/product-gallery/red.jpg';
 import navy from '../../images/product-gallery/navy.jpg';
 import yellow from '../../images/product-gallery/yell.jpg';
+import { FiHeart } from 'react-icons/fi';
 import ProductInfoTabs from '../../components/ProductDetails/ProductInfoTabs';
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
 import { MdClose } from 'react-icons/md';
@@ -126,13 +127,6 @@ const ProductDetails = () => {
         setSelectedSize(null);
     }
 
-    //new cart item
-    // const product = {
-    //     _id: 1,
-    //     title: "Black Headphone",
-    //     price: 25,
-    //     img: productImg1
-    // }
 
     //add the item to the cart
     const handleAddToCart = (productItem) => {
@@ -194,7 +188,7 @@ const ProductDetails = () => {
                                         <div className="whitespace-nowrap transition-all w-full  ease duration-[800ms] z-10 "
                                             style={{
                                                 transform: `translate3d(${-current * 100}%, 0, 0)`
-                                                // transform: (current + 1) ? `translateX(${100 * (index - current)}%) ` : (current - 1) ? `translateX(${100 * (index - current)}%)` : 0
+
                                             }}
                                         >
 
@@ -246,10 +240,7 @@ const ProductDetails = () => {
                                 {/* dot and size slider */}
                                 <div className=" my-4">
                                     {/* price tag */}
-                                    {/* <div>
-                                    <span className='block text-sm text-gray-500 mb-2 '>price : </span>
-                                    <span className="block text-lg font-medium text-textprimay">$57</span>
-                                </div> */}
+
                                     {/* color dot  slide */}
                                     <div>
                                         <span className='block text-sm font-normal text-textColor'>Color : {selectedColor ? selectedColor : "No Color Selected"} </span>
@@ -259,7 +250,6 @@ const ProductDetails = () => {
                                                 {
                                                     productGallary.map((col, indx) => (
                                                         <li
-                                                            key={indx}
                                                             onClick={() => handleColorClick(col, indx)}
                                                             className={`transition-all duration-300 ease-in-out  cursor-pointer ${indx === color ? "p-[3px] rounded-full border border-gray-600" : "p-[3px] border border-transparent"}`}
                                                         >
@@ -326,7 +316,7 @@ const ProductDetails = () => {
                                 {/* cart button and increment */}
                                 <div className="flex items-center my-4 gap-5">
                                     {/* increment and decrement btn */}
-                                    <div className="flex itemc-center justify-centr gap-1">
+                                    <div className="flex gap-1">
                                         <button className="w-9 h-9 rounded  bg-gray-100 border border-gray-300">+</button>
                                         <span className='w-9 h-9 rounded border border-gray-300 bg-bgOne flex items-center justify-center'>5</span>
                                         <button className="w-9 h-9 rounded  bg-gray-100 border border-gray-300">-</button>
@@ -339,9 +329,7 @@ const ProductDetails = () => {
                                         Add to Cart
                                     </button>
                                     {/* add to wishlist */}
-                                    {/* <span className="text-2xl cursor-pointer text-gray-600">
-                                    <FiHeart />
-                                </span> */}
+
                                 </div>
                                 <hr className='my-3 border-0.5 border-gray-200' />
                                 {/* product others info */}

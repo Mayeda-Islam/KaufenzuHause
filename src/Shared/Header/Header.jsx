@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import logo from "../../images/logo/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { CgShoppingCart } from "react-icons/cg";
 import engFlag from "../../images/header/eng.png";
@@ -120,26 +120,58 @@ const Header = () => {
     sidebar === true ? setSidebar(false) : setSidebar(true);
   };
 
+  //search text state 
 
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+
+  }
+
+  const handleSearchSubmit = (e) => {
+
+    e.preventDefault();
+    navigate('/categoryProducts', { state: { searchState: search } });
+    setSearch('');
+
+  }
 
   return (
     <header className="bg-darkNavy ">
       {/* web nav */}
 
       <nav className={`py-4 px-[25px] md:px-[40px] w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${stickyNav ? 'transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200' : 'bg-darkNavy'}`} >
-        {/* brand logo */}
-        <span className="">
-          <Link>
-            <img src={logo} className="w-36" alt="" />
-          </Link>
-        </span>
+        <div className="flex items-center gap-3">
+          {/* hamburger icon */}
+          <button onClick={toggleSidebar} className="border-none outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#fff" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+
+          </button>
+
+          {/* brand logo */}
+          <span className="">
+            <Link>
+              <img src={logo} className="w-36" alt="" />
+            </Link>
+          </span>
+        </div>
+        {/* category sidebar */}
+        <Sidenav cateWrapper={cateWrapper} sidebar={sidebar} setSidebar={setSidebar} toggleSidebar={toggleSidebar} />
+
         {/* search bar */}
-        <form>
+        <form
+          onSubmit={handleSearchSubmit}
+        >
           <div className="flex ">
             <div className="relative w-full rounded-lg">
               <input
-                type="search"
-                id="search-dropdown"
+                type="text"
+                value={search}
+                onChange={handleSearchChange}
                 className="block p-2.5 w-[600px] rounded-lg z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg outline-none"
                 placeholder="Search for products, brands and more..."
                 required
