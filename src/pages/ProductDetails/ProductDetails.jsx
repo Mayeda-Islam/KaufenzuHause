@@ -119,14 +119,6 @@ const ProductDetails = () => {
     setSelectedSize(null);
   };
 
-  //new cart item
-  // const product = {
-  //     _id: 1,
-  //     title: "Black Headphone",
-  //     price: 25,
-  //     img: productImg1
-  // }
-
   //add the item to the cart
   const handleAddToCart = (productItem) => {
     // const newCartitem = {
@@ -182,7 +174,6 @@ const ProductDetails = () => {
                       className="whitespace-nowrap transition-all w-full  ease duration-[800ms] z-10 "
                       style={{
                         transform: `translate3d(${-current * 100}%, 0, 0)`,
-                        // transform: (current + 1) ? `translateX(${100 * (index - current)}%) ` : (current - 1) ? `translateX(${100 * (index - current)}%)` : 0
                       }}
                     >
                       {productGallary.map((sl) => {
@@ -194,10 +185,9 @@ const ProductDetails = () => {
                             <Magnifier
                               src={sl.galleryImg}
                               className="w-full lg:w-[450px] lg:h-[400px]"
-                              mgShape="circle"
-                              mgWidth={400}
-                              mgHeight={400}
-                              zoomFactor={1}
+                              mgShape="square"
+                              mgWidth={180}
+                              mgHeight={180}
                             />
                             ;
                             {/* <img src={sl.galleryImg} className='w-full lg:w-[450px] lg:h-[400px]' /> */}
@@ -243,10 +233,7 @@ const ProductDetails = () => {
                 {/* dot and size slider */}
                 <div className=" my-4">
                   {/* price tag */}
-                  {/* <div>
-                                    <span className='block text-sm text-gray-500 mb-2 '>price : </span>
-                                    <span className="block text-lg font-medium text-textprimay">$57</span>
-                                </div> */}
+
                   {/* color dot  slide */}
                   <div>
                     <span className="block text-sm font-normal text-textColor">
@@ -323,7 +310,7 @@ const ProductDetails = () => {
                 {/* cart button and increment */}
                 <div className="flex items-center my-4 gap-5">
                   {/* increment and decrement btn */}
-                  <div className="flex itemc-center justify-centr gap-1">
+                  <div className="flex gap-1">
                     <button className="w-9 h-9 rounded  bg-gray-100 border border-gray-300">
                       +
                     </button>
@@ -343,9 +330,6 @@ const ProductDetails = () => {
                     Add to Cart
                   </button>
                   {/* add to wishlist */}
-                  {/* <span className="text-2xl cursor-pointer text-gray-600">
-                                    <FiHeart />
-                                </span> */}
                 </div>
                 <hr className="my-3 border-0.5 border-gray-200" />
                 {/* product others info */}

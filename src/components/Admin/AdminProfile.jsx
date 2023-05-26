@@ -135,7 +135,7 @@ const AdminProfile = () => {
             )}
           </label>
 
-          <div className="grid grid-cols-2 gap-x-4 mt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mt-4">
             <div>
               <label className="block ">
                 <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
@@ -213,7 +213,7 @@ const AdminProfile = () => {
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-x-4 mt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4 mt-4">
             {/*********************  city input ****************/}
             <div>
               <label
@@ -251,9 +251,7 @@ const AdminProfile = () => {
             </label>
           </div>
           {/**************************  country  ***********************/}
-          {countries.map((country) => (
-            <></>
-          ))}
+
           <div className="mt-4 block">
             <label
               // for="default"

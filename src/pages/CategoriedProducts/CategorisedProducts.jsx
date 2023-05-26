@@ -8,6 +8,7 @@ import { TbFilter } from 'react-icons/tb';
 import Sidenav from '../../Shared/Sidenav/Sidenav';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import './CategorisedProducts.css';
+import { useLocation } from 'react-router-dom';
 
 const CategorisedProducts = () => {
     const navWrapper = useRef();
@@ -47,6 +48,25 @@ const CategorisedProducts = () => {
         //return wrapper.current;
 
     }, [isOpen]);
+
+
+    const [productData, setProductData] = useState(products);
+    console.log(productData)
+
+    const location = useLocation();
+
+
+    useEffect(() => {
+        const text = location.state?.searchState;
+        if (text) {
+            const filteredProducts = productData.filter((prod) => prod.categoryName?.toLowerCase().includes(text?.toLowerCase()));
+            setProductData(filteredProducts);
+        } else {
+            setProductData(products);
+        }
+
+
+    }, [productData]);
 
     return (
         <section className="pt-6 lg:pt-10 pb-14 bg-[#f7f7f7] relative">
@@ -136,11 +156,11 @@ const CategorisedProducts = () => {
                         </div>
 
                         {/* product cards */}
-                        <div className="flex justify-center flex-wrap lg:ml-2.5">
+                        <div className="flex flex-wrap lg:ml-2.5">
 
 
                             {
-                                products.map((product) => (
+                                productData.map((product) => (
                                     <div className="w-full sm:w-6/12 md:w-4/12 lg:w-4/12 xl:w-3/12 xxl:w-3/12">
                                         <SingleProduct product={product} />
                                     </div>
