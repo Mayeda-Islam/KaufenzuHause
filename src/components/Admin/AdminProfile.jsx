@@ -1,10 +1,18 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const AdminProfile = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
   return (
     <div>
       <div className="grid grid-cols-12 w-fit mx-auto md:gap-10">
-        <div className="col-span-12 lg:col-span-3 flex justify-center">
+        <div className="col-span-12 lg:col-span-4 flex justify-center">
           <div className="mt-12">
             {/* {imageUrl ? (
                 <img
@@ -14,7 +22,7 @@ const AdminProfile = () => {
                 />
               ) : ( */}
             <img
-              className="rounded-full w-36 border-4 border-[#f5f8ff] mx-auto"
+              className="rounded-full w-72 border-4 border-[#f5f8ff] mx-auto"
               src={
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXnHCfhPKKAy1zSl8__FmI1hsMmSR-MVgh5IcfD_-43Q&s"
               }
@@ -25,41 +33,97 @@ const AdminProfile = () => {
           </div>
         </div>
 
-        <div className="col-span-12 mt-20 lg:col-span-9 w-fit lg:w-full mx-auto mb-8">
-          <h2 className="text-2xl font-semibold pt-5">Profile </h2>
-          <div className="h-[3px] w-16 bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7]"></div>
+        <div className="col-span-12 mt-12  lg:col-span-8 w-fit lg:w-full mx-auto ">
+          <h2 className="text-4xl font-medium pt-5">Mayeda Islam </h2>
+          <p className="text-xl text-blue-400 my-2">
+            rayn@gmail.com{" "}
+            <span className="text-xl text-gray-500">- Admin</span>
+          </p>
+          <p className="text-md text-gray-400">Upload your own image ...</p>
 
-          <form
-            // onSubmit={handleSubmit(handleUpdateProfile)}
-            className="mt-10 max-w-lg"
-          >
-            <label className="block mt-4">
-              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
-                Full Name
-              </span>
-              <input
-                type="fullName"
-                // {...register("email", { required: false })}
-                // defaultValue={user?.email}
-                disabled
-                className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-                placeholder="Mayeda Islam"
-              />
+          <div className="  my-2">
+            <label
+              for="dropzone-file"
+              className="flex flex-col items-center justify-center   border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+            >
+              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg
+                  aria-hidden="true"
+                  className="w-10 h-10 mb-3 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                  ></path>
+                </svg>
+                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                  <span className="font-semibold">Click to upload</span> or drag
+                  and drop
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  SVG, PNG, JPG or GIF (MAX. 800x400px)
+                </p>
+              </div>
+              <input id="dropzone-file" type="file" className="hidden" />
             </label>
-            <label className="block mt-4">
-              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
-                Email address
-              </span>
-              <input
-                type="email"
-                // {...register("email", { required: false })}
-                // defaultValue={user?.email}
-                disabled
-                className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-                placeholder="you@example.com"
-              />
-            </label>
-            <div className="block mt-4">
+          </div>
+        </div>
+        {/* from starts here */}
+        <form
+          onSubmit={handleSubmit(handleUpdateProfile)}
+          className=" col-span-12"
+        >
+          <label className="block ">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+              Full Name
+            </span>
+            <input
+              type="fullName"
+              {...register("email", { required: false })}
+              // defaultValue={user?.email}
+              disabled
+              className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
+              placeholder="Mayeda Islam"
+            />
+          </label>
+          <label className="block mt-4">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+              Email address
+            </span>
+            <input
+              type="email"
+              {...register("email", { required: false })}
+              // defaultValue={user?.email}
+              disabled
+              className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
+              placeholder="you@example.com"
+            />
+          </label>
+
+          <div className="grid grid-cols-2 gap-x-4 mt-4">
+            <div>
+              <label className="block">
+                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+                  Phone Number
+                </span>
+                <input
+                  type="tel"
+                  {...register("number", { required: false })}
+                  pattern="^(?:(?:\+|00)88|01)?\d{11}$"
+                  // defaultValue={user?.number}
+                  className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
+                  placeholder="01934****39"
+                />
+              </label>
+            </div>
+
+            <div>
               <label
                 // for="default"
                 className="block mb-2 text-sm font-medium text-gray-900"
@@ -67,9 +131,9 @@ const AdminProfile = () => {
                 Gender
               </label>
               <select
-                // {...register("gender", { required: false })}
+                {...register("gender", { required: false })}
                 // defaultValue={user?.gender}
-                className="border-2 text-gray-900 mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
+                className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
               >
                 <option selected disabled hidden>
                   Choose One
@@ -94,431 +158,87 @@ const AdminProfile = () => {
                 </option>
               </select>
             </div>
-            <div className="grid grid-cols-2 gap-x-4 mt-4">
-              <div>
-                <label className="block">
-                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
-                    Phone Number
-                  </span>
-                  <input
-                    type="tel"
-                    // {...register("number", { required: false })}
-                    pattern="^(?:(?:\+|00)88|01)?\d{11}$"
-                    // defaultValue={user?.number}
-                    className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-                    placeholder="01934****39"
-                  />
-                </label>
-              </div>
+          </div>
+          <div className="block ">
+            <label
+              // for="default"
+              className="block mb-2 text-sm font-medium text-gray-900"
+            >
+              Address
+            </label>
+            <input
+              type="address"
+              {...register("email", { required: false })}
+              // defaultValue={user?.email}
+              disabled
+              className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
+              placeholder="house:a,road:b,block:x"
+            />
+          </div>
 
-              <div>
-                <label
-                  // for="default"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Gender
-                </label>
-                <select
-                  // {...register("gender", { required: false })}
-                  // defaultValue={user?.gender}
-                  className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
-                >
-                  <option selected disabled hidden>
-                    Choose One
-                  </option>
-                  <option
-                    value="male"
-                    //  selected={user?.gender === "male"}
-                  >
-                    Male
-                  </option>
-                  <option
-                    value="female"
-                    //  selected={user?.gender === "female"}
-                  >
-                    Female
-                  </option>
-                  <option
-                    value="other"
-                    // selected={user?.gender === "other"}
-                  >
-                    Other
-                  </option>
-                </select>
-              </div>
-            </div>
-            <div className="block ">
+          <div className="grid grid-cols-2 gap-x-4 mt-4">
+            <div>
               <label
                 // for="default"
                 className="block mb-2 text-sm font-medium text-gray-900"
               >
-                Address
+                City
               </label>
-              <input
-                type="address"
-                // {...register("email", { required: false })}
-                // defaultValue={user?.email}
-                disabled
-                className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-                placeholder="house:a,road:b,block:x"
-              />
+              <select
+                {...register("city", { required: false })}
+                // defaultValue={user?.city}
+                className="border-2 text-gray-900 mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
+              >
+                <option selected hidden>
+                  Choose One
+                </option>
+                ;
+              </select>
             </div>
-
-            <div className="grid grid-cols-2 gap-x-4 mt-4">
-              <div>
-                <label
-                  // for="default"
-                  className="block mb-2 text-sm font-medium text-gray-900"
+            <div>
+              <label
+                // for="default"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Country
+              </label>
+              <select
+                {...register("country", { required: false })}
+                // defaultValue={user?.country}
+                className="border-2 text-gray-900 mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
+              >
+                <option selected hidden>
+                  Choose One
+                </option>
+                <option
+                  value="bangladesh"
+                  // selected={user?.country === "bangladesh"}
                 >
-                  City
-                </label>
-                <select
-                  // {...register("city", { required: false })}
-                  // defaultValue={user?.city}
-                  className="border-2 text-gray-900 mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
-                >
-                  <option selected hidden>
-                    Choose One
-                  </option>
-                  ;
-                  {/* {disctricData?.map((disName) => {
-          return (
-            <option
-              value={disName}
-              selected={user?.city === disName}
-            >
-              {disName}
-            </option>
-          );
-        })} */}
-                </select>
-              </div>
-              <div>
-                <label
-                  // for="default"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Country
-                </label>
-                <select
-                  // {...register("country", { required: false })}
-                  // defaultValue={user?.country}
-                  className="border-2 text-gray-900 mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
-                >
-                  <option selected hidden>
-                    Choose One
-                  </option>
-                  <option
-                    value="bangladesh"
-                    // selected={user?.country === "bangladesh"}
-                  >
-                    Bangladesh
-                  </option>
-                </select>
-              </div>
+                  Bangladesh
+                </option>
+              </select>
             </div>
-            <label className="block">
-              <span className=" block text-sm font-medium">Zip Code</span>
-              <input
-                type="number"
-                // {...register("zipCode", { required: false })}
-                // defaultValue={user?.zipCode}
-                className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-                placeholder="Enter your zip code"
-              />
-            </label>
-            <button
-              type="submit"
-              className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7] py-2 px-7  text-white font-medium rounded-md mt-4 ml-auto block"
-            >
-              Save changes
-            </button>
-          </form>
-        </div>
+          </div>
+          <label className="block">
+            <span className=" block text-sm font-medium">Zip Code</span>
+            <input
+              type="number"
+              {...register("zipCode", { required: false })}
+              // defaultValue={user?.zipCode}
+              className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
+              placeholder="Enter your zip code"
+            />
+          </label>
+          <button
+            type="submit"
+            className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7] py-2 px-7  text-white font-medium rounded-md mt-4 ml-auto block"
+          >
+            Save changes
+          </button>
+        </form>
       </div>
     </div>
   );
 };
 
 export default AdminProfile;
-
-{
-  /* <div className="col-span-12 lg:col-span-9 w-fit lg:w-full mx-auto mb-8">
-<h2 className="text-2xl font-semibold pt-5">Profile </h2>
-
-<div className="h-[3px] w-10 bg-gradient-to-r from-[#6069d3ef] to-[#67f6f3c9]"></div>
-<input
-  onChange={handleChangeUploadImage}
-  type={"file"}
-  // accept="image/png"
-  accept="image/*"
-  className="bg-gradient-to-r from-[#6069d3ef] to-[#67f6f3c9] py-2 px-7 text-white font-medium rounded-md mt-3"
-
-/>
-
-<div className='w-full mt-2 md:mx-auto border-2 border-blue-400 focus:border-blue-400 flex justify-between items-center '>
-  <input
-
-    type="text"
-    className='text-sm font-medium py-2 px-1 md:px-2 border-none outline-none focus:outline-none w-full' value={`http://localhost:5000/api/v1/user/signup/${userInfo?.referralCode}`} placeholder={userInfo?.referralCode} readOnly>
-
-  </input>
-  <button
-    className="bg-transparent hover:bg-gradient-to-r from-[#6069d3ef] to-[#67f6f3c9] hover:duration-300 md:px-7 lg:px-7 px-3 py-3 hover:text-white font-medium border-l-2 border-blue-400  text-black flex items-center"
-    onClick={copyToClipboard}
-  >
-    Copy
-  </button>
-</div>
-{/* alert  */
-}
-{
-  /* <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-  <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-    Copied To Clipboard
-  </Alert>
-</Snackbar> */
-}
-
-{
-  /* Account settings changing password input form */
-}
-{
-  /* <form
-  onSubmit={handleSubmit(handleUpdateProfile)}
-  className="mt-10 max-w-lg"
->
-
-  <label className="block">
-    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
-      Email address
-    </span>
-    <input
-      type="email"
-      {...register("email", { required: false })}
-      defaultValue={user?.email}
-      disabled
-      className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-blue-300 bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-      placeholder="you@example.com"
-    />
-  </label>
-
-  <div className="grid grid-cols-2 gap-x-4 mt-4">
-    <div>
-      <label className="block">
-        <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
-          Phone Number
-        </span>
-        <input
-          type="tel"
-          {...register("number", { required: false })}
-          pattern="^(?:(?:\+|00)88|01)?\d{11}$"
-          defaultValue={user?.number}
-          className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-blue-300 bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-          placeholder="01934****39"
-        />
-      </label>
-    </div>
-    <div>
-      <label
-        for="default"
-        className="block mb-2 text-sm font-medium text-gray-900"
-      >
-        Language
-      </label>
-      <select
-        {...register("language", { required: false })}
-        defaultValue={user?.language}
-        className="border-2 text-gray-900 mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-blue-300 bg-transparent"
-      >
-        <option selected disabled hidden>
-          Choose One
-        </option>
-        <option
-          value="English"
-          selected={user?.language === "English"}
-        >
-          English
-        </option>
-        <option
-          value="Bangla"
-          selected={user?.language === "Bangla"}
-        >
-          Bangla
-        </option>
-        <option value="Hindi" selected={user?.language === "Hindi"}>
-          Hindi
-        </option>
-      </select>
-    </div>
-    <div>
-      <label
-        for="default"
-        className="block mb-2 text-sm font-medium text-gray-900"
-      >
-        Student Type
-      </label>
-      <select
-        {...register("studentType", { required: false })}
-        defaultValue={user?.studentType}
-        className="border-2 text-gray-900 mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-blue-300 bg-transparent"
-      >
-        <option selected disabled hidden>
-          Choose One
-        </option>
-        <option value="One" selected={user?.studentType === "One"}>
-          Beginner
-        </option>
-        <option value="Two" selected={user?.studentType === "Two"}>
-          Intermediate
-        </option>
-        <option
-          value="Three"
-          selected={user?.studentType === "Three"}
-        >
-          Pro
-        </option>
-      </select>
-    </div>
-    <div>
-      <label
-        for="default"
-        className="block mb-2 text-sm font-medium text-gray-900"
-      >
-        Gender
-      </label>
-      <select
-        {...register("gender", { required: false })}
-        defaultValue={user?.gender}
-        className="border-2 text-gray-900 mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-blue-300 bg-transparent"
-      >
-        <option selected disabled hidden>
-          Choose One
-        </option>
-        <option value="male" selected={user?.gender === "male"}>
-          Male
-        </option>
-        <option value="female" selected={user?.gender === "female"}>
-          Female
-        </option>
-        <option value="other" selected={user?.gender === "other"}>
-          Other
-        </option>
-      </select>
-    </div>
-    <div>
-      <label
-        for="default"
-        className="block mb-2 text-sm font-medium text-gray-900"
-      >
-        City
-      </label>
-      <select
-        {...register("city", { required: false })}
-        defaultValue={user?.city}
-        className="border-2 text-gray-900 mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-blue-300 bg-transparent"
-      >
-        <option selected hidden>
-          Choose One
-        </option>
-        ;
-        {disctricData?.map((disName) => {
-          return (
-            <option
-              value={disName}
-              selected={user?.city === disName}
-            >
-              {disName}
-            </option>
-          );
-        })}
-      </select>
-    </div>
-    <div>
-      <label
-        for="default"
-        className="block mb-2 text-sm font-medium text-gray-900"
-      >
-        Country
-      </label>
-      <select
-        {...register("country", { required: false })}
-        defaultValue={user?.country}
-        className="border-2 text-gray-900 mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-blue-300 bg-transparent"
-      >
-        <option selected hidden>
-          Choose One
-        </option>
-        <option
-          value="bangladesh"
-          selected={user?.country === "bangladesh"}
-        >
-          Bangladesh
-        </option>
-      </select>
-    </div>
-    <label className="block">
-      <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
-        Date of Birth
-      </span>
-      <input
-        type="date"
-        {...register("birth", { required: false })}
-        className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-blue-300 bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-        placeholder="Enter date"
-      />
-    </label>
-    <label className="block">
-      <span className="block text-sm font-medium">
-        Facebook Url
-      </span>
-      <input
-        type="url"
-        {...register("facebookURL", { required: false })}
-        defaultValue={user?.facebookURL}
-        className="mt-2 p-3 border shadow-sm focus:outline-none border-blue-300 bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-        placeholder="Enter your facebook url"
-      />
-    </label>
-
-    <label className="block">
-      <span className="block text-sm font-medium">
-        Linkedin Url
-      </span>
-      <input
-        type="url"
-        {...register("linkedinURL", { required: false })}
-        defaultValue={user?.linkedinURL}
-        className="mt-2 p-3 border shadow-sm focus:outline-none border-blue-300 bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-        placeholder="Enter your linkedin url"
-      />
-    </label>
-    <label className="block">
-      <span className=" block text-sm font-medium">Address</span>
-      <input
-        type="text"
-        {...register("address", { required: false })}
-        defaultValue={user?.address}
-        className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-blue-300 bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-        placeholder="Enter your address"
-      />
-    </label>
-    <label className="block">
-      <span className=" block text-sm font-medium">Zip Code</span>
-      <input
-        type="number"
-        {...register("zipCode", { required: false })}
-        defaultValue={user?.zipCode}
-        className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-blue-300 bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-        placeholder="Enter your zip code"
-      />
-    </label>
-  </div>
-  <button
-    type="submit"
-    className="bg-gradient-to-r from-[#6069d3ef] to-[#67f6f3c9] py-2 px-7 text-white font-medium rounded-md mt-3 ml-auto block"
-  >
-    Save changes
-  </button>
-</form> */
-}
