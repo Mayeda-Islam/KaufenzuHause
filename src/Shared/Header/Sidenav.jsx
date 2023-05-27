@@ -32,7 +32,7 @@ const Sidenav = ({ toggleSidebar, cateWrapper, sidebar, setSidebar }) => {
     return (
         <div
             ref={cateWrapper}
-            className={`category_nav w-[50%] lg:w-[20%] shadow-lg shadow-gray-500 ${sidebar == true ? 'left-0' : ''}`}
+            className={`category_nav w-[80%] lg:w-[23%] shadow-lg shadow-gray-500 ${sidebar == true ? 'left-0' : ''}`}
 
         >
 
