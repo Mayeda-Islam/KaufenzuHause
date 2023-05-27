@@ -5,7 +5,7 @@ import CategoryFilter from '../../Shared/CategoryFilter/CategoryFilter';
 import { products } from '../../Data/Placeholder';
 import BrandFilter from '../../Shared/BrandFilter/BrandFilter';
 import { TbFilter } from 'react-icons/tb';
-import Sidenav from '../../Shared/Sidenav/Sidenav';
+
 import { AiFillCloseCircle } from 'react-icons/ai';
 import './CategorisedProducts.css';
 import { useLocation } from 'react-router-dom';

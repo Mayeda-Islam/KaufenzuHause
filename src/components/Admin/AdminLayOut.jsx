@@ -184,30 +184,26 @@ export default function AdminLayOut() {
           linkPath: "systemSetting/headerLogo",
         },
         {
-          title: "Header Slider",
+          title: "Hero Section",
 
           linkPath: "systemSetting/heroSlider",
         },
-        {
-          title: "Header Banner",
+        // {
+        //   title: "Hero Banner",
 
-          linkPath: "systemSetting/headerBanner",
-        },
+        //   linkPath: "systemSetting/headerBanner",
+        // },
         {
           title: "Footer Logo",
 
           linkPath: "systemSetting/footerLogo",
         },
         {
-          title: "Footer Description",
+          title: "Footer Section",
 
-          linkPath: "systemSetting/footerDescription",
+          linkPath: "systemSetting/footerSection",
         },
-        {
-          title: "Footer Information",
 
-          linkPath: "systemSetting/footerInfo",
-        },
       ],
     },
   ];
