@@ -11,7 +11,7 @@ import AdminLayOut from "../components/Admin/AdminLayOut";
 import AdminProfile from "../components/Admin/AdminProfile";
 import AdminCategory from "../components/Admin/AdminCategory";
 import AdminProduct from "../components/Admin/AdminProduct";
-import AdminSystemSetting from "../components/Admin/AdminSystemSetting";
+
 import AdminOrders from "../components/Admin/AdminOrders";
 import AdminDashboard from "../components/Admin/AdminDashboard";
 
@@ -19,6 +19,14 @@ import ProductDetails from '../pages/ProductDetails/ProductDetails';
 import CategorisedProducts from '../pages/CategoriedProducts/CategorisedProducts';
 import Checkout from "../pages/Checkout/Checkout";
 import AboutUs from "../pages/AboutUS/AboutUs";
+
+import HeaderLogo from "../components/Admin/SyestemSetting/HeaderLogo/HeaderLogo";
+import HeroSlider from "../components/Admin/SyestemSetting/HeroSlider/HeroSlider";
+import HeroBanner from "../components/Admin/SyestemSetting/HeroBanner/HeroBanner";
+import FooterLogo from "../components/Admin/SyestemSetting/FooterLogo/FooterLogo";
+import FooterDescription from "../components/Admin/SyestemSetting/FooterDescription/FooterDescription";
+import FooterInfo from "../components/Admin/SyestemSetting/FooterInfo/FooterInfo";
+//import SyestemSettings from "../components/Admin/SyestemSetting/SyestemSettings";
 
 
 export const router = createBrowserRouter([
@@ -98,8 +106,28 @@ export const router = createBrowserRouter([
                 element: <AdminOrders></AdminOrders>,
             },
             {
-                path: "system-setting",
-                element: <AdminSystemSetting></AdminSystemSetting>,
+                path: "systemSetting/headerLogo",
+                element: <HeaderLogo></HeaderLogo>,
+            },
+            {
+                path: "systemSetting/heroSlider",
+                element: <HeroSlider></HeroSlider>,
+            },
+            {
+                path: "systemSetting/headerBanner",
+                element: <HeroBanner></HeroBanner>,
+            },
+            {
+                path: "systemSetting/footerLogo",
+                element: <FooterLogo></FooterLogo>,
+            },
+            {
+                path: "systemSetting/footerDescription",
+                element: <FooterDescription></FooterDescription>,
+            },
+            {
+                path: "systemSetting/footerInfo",
+                element: <FooterInfo></FooterInfo>,
             },
         ],
     },
