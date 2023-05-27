@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { SingleImageUploader } from "../../APIHooks/SingleImageUploader";
+import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
 
 const AdminProfile = () => {
   const [image, setImage] = useState(null);

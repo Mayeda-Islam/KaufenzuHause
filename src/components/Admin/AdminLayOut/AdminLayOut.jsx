@@ -214,41 +214,7 @@ export default function AdminLayOut() {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography
-            sx={{
-              padding: 1,
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              margin: "0 75%",
-              "@media(min-width:280px) and (max-width: 599px)": {
-                margin: "0 auto",
-              },
-              "@media (max-width: 600px)": {
-                margin: "0 ",
-              },
 
-              "@media (min-width: 601px) and (max-width: 960px)": {
-                margin: "0 60%",
-              },
-            }}
-            component="div"
-          >
-            <AccountCircleIcon style={{ fontSize: "4rem" }} />
-            <div>
-              <Typography
-                variant="h6"
-                noWrap
-                component="p"
-                sx={{ fontWeight: 600 }}
-              >
-                Mayeda Islam
-              </Typography>
-              <Typography component="p" sx={{ fontWeight: 600 }}>
-                mayedakonika@gmail.com
-              </Typography>
-            </div>
-          </Typography> */}
           <div className="ml-auto ">
             <Typography
               sx={{
@@ -306,7 +272,7 @@ export default function AdminLayOut() {
                 activeClassName="active-link"
                 className={({ isActive }) => (isActive ? "text-red" : "")}
                 key={index}
-                to={text.linkPath}
+                to={text.linkPath ? text.linkPath : location.pathname}
                 isActive={() => location.pathname === text.linkPath}
               >
                 <ListItem
