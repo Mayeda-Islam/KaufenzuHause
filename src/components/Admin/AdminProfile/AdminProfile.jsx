@@ -5,6 +5,7 @@ import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
 const AdminProfile = () => {
   const [image, setImage] = useState(null);
   const [countries, setCountries] = useState([]);
+
   const {
     register,
     handleSubmit,
@@ -15,7 +16,7 @@ const AdminProfile = () => {
   const handleImageUpload = async (event) => {
     const imageData = event.target.files[0];
     const formData = new FormData();
-    formData.append("image", imageData);
+    const test = formData.append("image", imageData);
 
     SingleImageUploader(formData, setImage);
   };

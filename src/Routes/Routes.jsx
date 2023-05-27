@@ -89,7 +89,7 @@ export const router = createBrowserRouter([
         element: <AdminProfile></AdminProfile>,
       },
       {
-        path: "/orders/orderedProducts",
+        path: "orders/orderedProducts",
         element: <OrderedProduct></OrderedProduct>,
       },
       {
