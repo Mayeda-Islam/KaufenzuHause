@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
 import serverUrl from "../../../config/Config";
 import GetAPI from "../../../APIHooks/GetAPI";
+import CategoryList from "./CategoryList";
 
 const AddCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -46,13 +47,14 @@ const AddCategory = () => {
   console.log(categories);
 
   return (
-    <div className=" lg:mt-36 ">
-      {categories?.length}
-      <form onSubmit={handleSubmit(onSubmit)} className="lg:w-1/2 mx-auto">
+    <div className="w-5/6 mx-auto lg:mt-36 ">
+      <h1 className="text-2xl my-4 font-semibold">Add Category</h1>
+      <hr className="mb-12 " />
+      <form onSubmit={handleSubmit(onSubmit)} className=" mx-auto">
         {/* register your input into the hook by invoking the "register" function */}
-        <div className="lg:flex Lg:justify-center lg:items-center">
+        <div className="lg:flex Lg:justify-center lg:items-center lg:gap-4">
           {" "}
-          <label className="text-lg lg:w-1/3 font-semibold lg:text-xl">
+          <label className="text-lg lg:w-1/6  font-semibold lg:text-xl">
             Image/SVG/Icons:
           </label>
           <div className="flex flex-col w-full">
@@ -74,9 +76,9 @@ const AddCategory = () => {
           </div>
         </div>
 
-        <div className="lg:flex lg:justify-center lg:items-center my-4">
+        <div className="lg:flex lg:justify-center lg:items-center lg:gap-4 my-4">
           {" "}
-          <label className=" lg:w-1/3 font-semibold text-lg lg:text-xl">
+          <label className=" lg:w-1/6 font-semibold text-lg lg:text-xl">
             Category Title:
           </label>
           <div className="flex flex-col w-full">
@@ -102,6 +104,11 @@ const AddCategory = () => {
           Save
         </button>
       </form>
+      <div className="  mt-16">
+        <h1 className="text-2xl my-4 font-semibold">Category List</h1>
+        <hr className="mb-12 " />
+        <CategoryList categories={categories}></CategoryList>
+      </div>
     </div>
   );
 };
