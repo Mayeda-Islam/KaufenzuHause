@@ -11,7 +11,7 @@ const HeroSlider = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2">
 
                         <div className="m-4">
-                            <h2 className="text-xl font-medium text-textColor my-5 border-l-2 border-primary pl-4">
+                            <h2 className="text-xl lg:text-2xl  font-medium text-textColor my-5 border-l-2 border-primary pl-4">
                                 Add Hero Slider image Here
                             </h2>
                             {/* slider image form */}
@@ -39,7 +39,7 @@ const HeroSlider = () => {
 
                             <hr className="my-8 border-0.5 border-gray-300" />
                             {/* slider image table */}
-                            <h2 className="mb-6 text-xl  font-medium text-textColor  border-l-2 border-primary pl-4">
+                            <h2 className="mb-6 text-xl lg:text-2xl  font-medium text-textColor  border-l-2 border-primary pl-4">
                                 All Hero Slider Images
                             </h2>
 
@@ -48,7 +48,7 @@ const HeroSlider = () => {
                         </div>
 
                         <div className="m-4">
-                            <h2 className="text-xl font-medium text-textColor my-5 border-l-2 border-primary pl-4">
+                            <h2 className="text-xl lg:text-2xl  font-medium text-textColor my-5 border-l-2 border-primary pl-4">
                                 Add Hero Banner image Here
                             </h2>
                             {/* banner image form */}
@@ -76,7 +76,7 @@ const HeroSlider = () => {
 
                             <hr className="my-8 border-0.5 border-gray-300" />
                             {/* slider image table */}
-                            <h2 className="mb-6 text-xl  font-medium text-textColor  border-l-2 border-primary pl-4">
+                            <h2 className="mb-6 text-xl lg:text-2xl  font-medium text-textColor  border-l-2 border-primary pl-4">
                                 All Hero Banner Images
                             </h2>
 
