@@ -47,7 +47,7 @@ const AddCategory = () => {
   console.log(categories);
 
   return (
-    <div className="w-5/6 mx-auto lg:mt-36 ">
+    <div className="w-5/6 mx-auto lg:mt-12 ">
       <h1 className="text-2xl my-4 font-semibold">Add Category</h1>
       <hr className="mb-12 " />
       <form onSubmit={handleSubmit(onSubmit)} className=" mx-auto">
