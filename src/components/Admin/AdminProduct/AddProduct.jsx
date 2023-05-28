@@ -1,31 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Chip from "@mui/material/Chip";
+
 import Jodit from "../../../Shared/JodIt/Jodit";
-import { Autocomplete, Stack, TextField } from "@mui/material";
+import ColorAndSizeOptions from "../../../Shared/ColorAndSizeOptions/ColorAndSizeOptions";
+// import { color } from "jodit/types/plugins/color/color";
 
 const AddProduct = () => {
+  const [description, setDescription] = useState("");
+  const [delivery, setDelivery] = useState("");
+  const [shipping, setShipping] = useState("");
+  const [sizes, setSizes] = useState([]);
+  const [colors, setColors] = useState([]);
   const {
     register,
     handleSubmit,
     // watch,
     formState: { errors },
   } = useForm();
-  const top100Films = [
-    { title: "The Shawshank Redemption", year: 1994 },
-    { title: "The Godfather", year: 1972 },
-    { title: "The Godfather: Part II", year: 1974 },
-    { title: "The Dark Knight", year: 2008 },
-    { title: "12 Angry Men", year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: "Pulp Fiction", year: 1994 },
-    {
-      title: "The Lord of the Rings: The Return of the King",
-      year: 2003,
-    },
+  const availableColors = [
+    { title: "red" },
+    { title: "black" },
+    { title: "yellow" },
+    { title: "purple" },
+    { title: "violet" },
+    { title: "white" },
   ];
   const handleAddProduct = (data) => {
-    console.log(data);
+    console.log(data, description, shipping, delivery, sizes, colors);
   };
   return (
     <div>
@@ -55,7 +56,7 @@ const AddProduct = () => {
             Product Price
           </span>
           <input
-            type="email"
+            type="number"
             {...register("productPrice", { required: true })}
             // defaultValue={user?.email}
 
@@ -84,65 +85,20 @@ const AddProduct = () => {
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
             Product Description
           </span>
-          <Jodit></Jodit>
+          <Jodit setContent={setDescription} content={description}></Jodit>
         </div>
         <div>
-          <Stack spacing={3} className="w-full my-4">
-            <Autocomplete
-              multiple
-              id="tags-filled"
-              options={top100Films.map((option) => option?.title)}
-              // defaultValue={[top100Films[13]?.title]}
-              freeSolo
-              renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                  <Chip
-                    key={index}
-                    variant="outlined"
-                    label={option}
-                    {...getTagProps({ index })}
-                  />
-                ))
-              }
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant="filled"
-                  label="Add colors"
-                  placeholder="Favorites"
-                />
-              )}
-            />
-          </Stack>
+          <ColorAndSizeOptions
+            productsOptions={availableColors}
+            setState={setSizes}
+          ></ColorAndSizeOptions>
         </div>
         <div>
-          <Stack spacing={3} className="w-full">
-            <Autocomplete
-              multiple
-              id="tags-filled"
-              options={top100Films.map((option) => option?.title)}
-              // defaultValue={[top100Films[13]?.title]}
-              freeSolo
-              renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                  <Chip
-                    key={index}
-                    variant="outlined"
-                    label={option}
-                    {...getTagProps({ index })}
-                  />
-                ))
-              }
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant="filled"
-                  label="Add size"
-                  placeholder="Favorites"
-                />
-              )}
-            />
-          </Stack>
+          {/* <ColorAndSizeOptions
+            productsOptions={availableColors}
+            setState={setColors}
+            state={colors}
+          ></ColorAndSizeOptions> */}
         </div>
         <div className=" mt-4">
           <label className="block ">
@@ -200,6 +156,18 @@ const AddProduct = () => {
               placeholder="brand"
             />
           </label>
+        </div>
+        <div className="my-4">
+          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+            Shipping
+          </span>
+          <Jodit setContent={setShipping} content={shipping}></Jodit>
+        </div>
+        <div className="my-4">
+          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+            Delivery
+          </span>
+          <Jodit setContent={setDelivery} content={delivery}></Jodit>
         </div>
         <button
           type="submit"
