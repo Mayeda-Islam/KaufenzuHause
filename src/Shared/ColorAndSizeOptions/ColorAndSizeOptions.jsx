@@ -20,14 +20,7 @@ const ColorAndSizeOptions = ({ setState, productsOptions }) => {
             />
           ))
         }
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="filled"
-            label="Add size"
-            placeholder="Favorites"
-          />
-        )}
+        renderInput={(params) => <TextField {...params} variant="filled" />}
       />
     </Stack>
   );

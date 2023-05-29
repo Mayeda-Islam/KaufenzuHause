@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 
 import Jodit from "../../../Shared/JodIt/Jodit";
 import ColorAndSizeOptions from "../../../Shared/ColorAndSizeOptions/ColorAndSizeOptions";
-import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
-import { MultipleImageUploader } from "../../../APIHooks/MultipleImageUploader";
+
 import serverUrl from "../../../config/Config";
+import { MultipleImageUploader } from "../../../APIHooks/MultipleImageUploader";
 // import { color } from "jodit/types/plugins/color/color";
 
 const AddProduct = () => {
   const [images, setImages] = useState([]);
+  const [uploadedImage, setUploadedImage] = useState([]);
   const [description, setDescription] = useState("");
   const [delivery, setDelivery] = useState("");
   const [shipping, setShipping] = useState("");
@@ -46,16 +47,34 @@ const AddProduct = () => {
     { title: "HeadPhones" },
   ];
 
-  const handleImage = async (event) => {
-    const imageData = event.target.files;
-    const formData = new FormData();
-    for (let i = 0; i < imageData.length; i++) {
-      formData.append("image[]", imageData[i]);
-    }
+  // const handleImage = async (event) => {
+  //   const imageData = event.target.files;
+  //   const formData = new FormData();
 
-    console.log(formData, "from formData");
-    // MultipleImageUploader(formData, setImages);
+  //   // for (let i = 0; i < imageData.length; i++) {
+  //   //   formData.append("image[]", imageData[i]);
+  //   // }
+  //   // console.log(formData, "from formData");
+
+  //   // MultipleImageUploader(formData, setImages);
+  // };
+  const handleImage = async (event) => {
+    const selectedImages = Array.from(event.target.files);
+    setUploadedImage(selectedImages);
+    MultipleImageUploader(uploadedImage, setImages);
   };
+
+  const handleUpload = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    images.forEach((image) => {
+      formData.append("images", image);
+    });
+
+    console.log(formData);
+  };
+  console.log(images);
   const handleAddProduct = (data) => {
     // console.log(data, description, shipping, delivery, sizes, colors);
     const productData = {
@@ -215,12 +234,12 @@ const AddProduct = () => {
         </div>
         <div>
           <div>
-            {/* <h1>Image preview</h1>
+            <h1>Image preview</h1>
             {images?.map((image) => (
               <>
                 <img src={image} alt="" />
               </>
-            ))} */}
+            ))}
           </div>
 
           <label className="text-lg lg:w-1/6  font-semibold lg:text-xl">
@@ -244,6 +263,7 @@ const AddProduct = () => {
             )}
           </div>
         </div>
+        <button onClick={handleUpload}>upload</button>
         <button
           type="submit"
           className="bg-[#55c3c1f7] py-2 px-7  text-white font-medium rounded-md mt-4 ml-auto block"

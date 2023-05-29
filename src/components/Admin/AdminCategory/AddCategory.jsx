@@ -36,15 +36,11 @@ const AddCategory = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        // if (data?.status === "success") {
-        //   setCategories(data.data);
-        // }
       });
   };
   useEffect(() => {
     GetAPI("categories", setCategories);
   }, []);
-  console.log(categories);
 
   return (
     <div className="w-5/6 mx-auto lg:mt-12 ">
