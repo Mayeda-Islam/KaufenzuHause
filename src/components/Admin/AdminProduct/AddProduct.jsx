@@ -31,20 +31,20 @@ const AddProduct = () => {
     { title: "white" },
   ];
   const availableSizes = [
-    { title: "xs" },
-    { title: "sm" },
-    { title: "md" },
-    { title: "lg" },
-    { title: "xl" },
-    { title: "xxl" },
+    // { title: "xs" },
+    // { title: "sm" },
+    // { title: "md" },
+    // { title: "lg" },
+    // { title: "xl" },
+    // { title: "xxl" },
   ];
   const categoryProducts = [
-    { title: "Phone" },
-    { title: "Mobile" },
-    { title: "Tv" },
-    { title: "Camera" },
-    { title: "Smartwatch" },
-    { title: "HeadPhones" },
+    // { title: "Phone" },
+    // { title: "Mobile" },
+    // { title: "Tv" },
+    // { title: "Camera" },
+    // { title: "Smartwatch" },
+    // { title: "HeadPhones" },
   ];
 
   // const handleImage = async (event) => {
