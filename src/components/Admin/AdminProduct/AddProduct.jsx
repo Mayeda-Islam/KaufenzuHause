@@ -3,9 +3,13 @@ import { useForm } from "react-hook-form";
 
 import Jodit from "../../../Shared/JodIt/Jodit";
 import ColorAndSizeOptions from "../../../Shared/ColorAndSizeOptions/ColorAndSizeOptions";
+import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
+import { MultipleImageUploader } from "../../../APIHooks/MultipleImageUploader";
+import serverUrl from "../../../config/Config";
 // import { color } from "jodit/types/plugins/color/color";
 
 const AddProduct = () => {
+  const [images, setImages] = useState([]);
   const [description, setDescription] = useState("");
   const [delivery, setDelivery] = useState("");
   const [shipping, setShipping] = useState("");
@@ -25,8 +29,57 @@ const AddProduct = () => {
     { title: "violet" },
     { title: "white" },
   ];
+  const availableSizes = [
+    { title: "xs" },
+    { title: "sm" },
+    { title: "md" },
+    { title: "lg" },
+    { title: "xl" },
+    { title: "xxl" },
+  ];
+  const categoryProducts = [
+    { title: "Phone" },
+    { title: "Mobile" },
+    { title: "Tv" },
+    { title: "Camera" },
+    { title: "Smartwatch" },
+    { title: "HeadPhones" },
+  ];
+
+  const handleImage = async (event) => {
+    const imageData = event.target.files;
+    const formData = new FormData();
+    for (let i = 0; i < imageData.length; i++) {
+      formData.append("image[]", imageData[i]);
+    }
+
+    console.log(formData, "from formData");
+    // MultipleImageUploader(formData, setImages);
+  };
   const handleAddProduct = (data) => {
-    console.log(data, description, shipping, delivery, sizes, colors);
+    // console.log(data, description, shipping, delivery, sizes, colors);
+    const productData = {
+      ...data,
+      description,
+      shipping,
+      delivery,
+      colors,
+      sizes,
+    };
+    fetch(`${serverUrl}/product`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "post method");
+        // if (data?.status === "success") {
+        //   setCategories(data.data);
+        // }
+      });
   };
   return (
     <div>
@@ -87,18 +140,20 @@ const AddProduct = () => {
           </span>
           <Jodit setContent={setDescription} content={description}></Jodit>
         </div>
-        <div>
+        <div className="my-4">
+          <span className="my-2 block text-sm font-medium">Sizes</span>
           <ColorAndSizeOptions
-            productsOptions={availableColors}
+            productsOptions={availableSizes}
             setState={setSizes}
           ></ColorAndSizeOptions>
         </div>
-        <div>
-          {/* <ColorAndSizeOptions
+        <div className="my-4">
+          <span className="my-2 block text-sm font-medium">Colors</span>
+          <ColorAndSizeOptions
             productsOptions={availableColors}
             setState={setColors}
             state={colors}
-          ></ColorAndSizeOptions> */}
+          ></ColorAndSizeOptions>
         </div>
         <div className=" mt-4">
           <label className="block ">
@@ -126,24 +181,13 @@ const AddProduct = () => {
             <option selected disabled hidden>
               Choose One
             </option>
-            <option
-              value="male"
-              //  selected={user?.gender === "male"}
-            >
-              Male
-            </option>
-            <option
-              value="female"
-              //  selected={user?.gender === "female"}
-            >
-              Female
-            </option>
-            <option
-              value="other"
-              // selected={user?.gender === "other"}
-            >
-              Other
-            </option>
+            {categoryProducts?.map((categoryProduct) => (
+              <>
+                <option value={categoryProduct.title}>
+                  {categoryProduct.title}
+                </option>
+              </>
+            ))}
           </select>
         </div>
         <div className=" mt-4">
@@ -168,6 +212,37 @@ const AddProduct = () => {
             Delivery
           </span>
           <Jodit setContent={setDelivery} content={delivery}></Jodit>
+        </div>
+        <div>
+          <div>
+            {/* <h1>Image preview</h1>
+            {images?.map((image) => (
+              <>
+                <img src={image} alt="" />
+              </>
+            ))} */}
+          </div>
+
+          <label className="text-lg lg:w-1/6  font-semibold lg:text-xl">
+            Image:
+          </label>
+          <div className="flex flex-col w-full">
+            <input
+              type="file"
+              onChange={handleImage}
+              accept="image/*"
+              multiple
+              // defaultValue={user?.email}
+
+              className="mt-2 w-full px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block  rounded-md sm:text-sm "
+              placeholder="category title"
+            />
+            {errors?.categoryImage && (
+              <p className="text-red-500 text-sm ">
+                Category image/svg/icon is required
+              </p>
+            )}
+          </div>
         </div>
         <button
           type="submit"

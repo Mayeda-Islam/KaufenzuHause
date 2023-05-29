@@ -63,6 +63,7 @@ const AddCategory = () => {
               onChange={handleImage}
               accept="image/*"
               required
+              multiple
               // defaultValue={user?.email}
 
               className="mt-2 w-full px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block  rounded-md sm:text-sm "

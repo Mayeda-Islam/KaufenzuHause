@@ -2,7 +2,6 @@ import React from "react";
 import Chip from "@mui/material/Chip";
 import { Autocomplete, Stack, TextField } from "@mui/material";
 const ColorAndSizeOptions = ({ setState, productsOptions }) => {
-  console.log(productsOptions);
   return (
     <Stack spacing={3} className="w-full">
       <Autocomplete
@@ -10,7 +9,6 @@ const ColorAndSizeOptions = ({ setState, productsOptions }) => {
         multiple
         id="tags-filled"
         options={productsOptions?.map((option) => option?.title)}
-        defaultValue={[productsOptions[1]?.title]}
         freeSolo
         renderTags={(value, getTagProps) =>
           value?.map((option, index) => (
