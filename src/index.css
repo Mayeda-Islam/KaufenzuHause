@@ -10,14 +10,10 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
-body,
+/* body,
 html {
   overflow-x: hidden !important;
-}
-
- {
-  overflow-y: hidden !important;
-}
+} */
 
 .swiper-nav-btns button {
   width: 50px;
