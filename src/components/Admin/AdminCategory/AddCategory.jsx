@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
 import serverUrl from "../../../config/Config";
-import GetAPI from "../../../APIHooks/GetAPI";
-import CategoryList from "./CategoryList";
 
 const AddCategory = () => {
   const [image, setImage] = useState(null);

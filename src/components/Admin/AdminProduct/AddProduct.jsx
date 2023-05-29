@@ -193,7 +193,7 @@ const AddProduct = () => {
             Add Category
           </label>
           <select
-            {...register("gender", { required: false })}
+            {...register("category", { required: false })}
             // defaultValue={user?.gender}
             className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
           >
