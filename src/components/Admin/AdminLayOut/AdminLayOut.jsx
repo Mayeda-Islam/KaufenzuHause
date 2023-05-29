@@ -142,19 +142,19 @@ export default function AdminLayOut() {
     {
       title: "Category",
       icon: <CategoryIcon />,
+      linkPath: "category",
+      // items: [
+      //   {
+      //     title: "Add Category",
 
-      items: [
-        {
-          title: "Add Category",
+      //     linkPath: "category/addCategory",
+      //   },
+      //   {
+      //     title: "Category List",
 
-          linkPath: "category/addCategory",
-        },
-        {
-          title: "Category List",
-
-          linkPath: "category/categoryList",
-        },
-      ],
+      //     linkPath: "category/categoryList",
+      //   },
+      // ],
     },
     {
       title: "Product",

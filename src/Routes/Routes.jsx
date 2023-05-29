@@ -25,6 +25,7 @@ import AddProduct from "../components/Admin/AdminProduct/AddProduct";
 import AllProduct from "../components/Admin/AdminProduct/AllProduct";
 import OrderedProduct from "../components/Admin/AdminOrders/OrderedProduct";
 import DeliveredProduct from "../components/Admin/AdminOrders/DeliveredProduct";
+import Category from "../components/Admin/AdminCategory/Category";
 
 export const router = createBrowserRouter([
   {
@@ -97,8 +98,8 @@ export const router = createBrowserRouter([
         element: <DeliveredProduct></DeliveredProduct>,
       },
       {
-        path: "category/addCategory",
-        element: <AddCategory></AddCategory>,
+        path: "category",
+        element: <Category></Category>,
       },
       {
         path: "category/categoryList",

@@ -47,58 +47,6 @@ const CategoryList = ({ categories }) => {
         </tbody>
       </table>
     </div>
-
-    // <div className="border-b border-gray-200 shadow  sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto ">
-    //   <table className="w-full table-auto min-w-full divide-y divide-gray-200 bg-[#F3F7FB] divide-y divide-gray-300">
-    //     <thead className=" bg-gradient-to-r from-[#6069d3ef] to-[#67f6f3c9] text-white font-bold text-lg">
-    //       <tr>
-    //         <th className="px-6 py-4 text-start text-white">SL</th>
-
-    //         <th className="px-6 py-4 text-start text-white">Title</th>
-
-    //         <th className="px-6 py-4 text-start text-white">Category</th>
-
-    //         <th className="px-6 py-4 text-start text-white">Action</th>
-    //       </tr>
-    //     </thead>
-    //     {/* <tbody className="bg-white divide-y divide-secondary">
-    //             {quizTotalData.map((group, i) => (
-    //               <AddQuizTable
-    //                 key={i}
-    //                 group={group}
-    //                 i={i}
-    //                 handleEditQuiz={handleEditQuiz}
-    //                 setQuizTotalData={setQuizTotalData}
-    //                 setAllQuiz={setAllQuiz}
-    //                 setShowEdit={setShowEdit}
-    //               ></AddQuizTable>
-    //             ))}
-    //           </tbody> */}
-    //   </table>
-    // </div>
-
-    // <div className="overflow-x-auto">
-    //   <table className="min-w-full divide-y divide-gray-200">
-    //     <thead className="bg-gray-50">
-    //       <tr>
-    //         <th className="px-4 py-2">ID</th>
-    //         <th className="px-4 py-2">Name</th>
-    //         <th className="px-4 py-2">Age</th>
-    //         <th className="px-4 py-2">Email</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody className="bg-white divide-y divide-gray-200">
-    //       {data.map((item) => (
-    //         <tr key={item.id}>
-    //           <td className="px-4 py-2">{item.id}</td>
-    //           <td className="px-4 py-2">{item.name}</td>
-    //           <td className="px-4 py-2">{item.age}</td>
-    //           <td className="px-4 py-2">{item.email}</td>
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-    // </div>
   );
 };
 

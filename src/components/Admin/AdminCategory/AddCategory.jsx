@@ -6,7 +6,6 @@ import GetAPI from "../../../APIHooks/GetAPI";
 import CategoryList from "./CategoryList";
 
 const AddCategory = () => {
-  const [categories, setCategories] = useState([]);
   const [image, setImage] = useState(null);
   const {
     register,
@@ -38,14 +37,12 @@ const AddCategory = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        alert("Data upload successfully");
       });
   };
-  useEffect(() => {
-    GetAPI("categories", setCategories);
-  }, []);
 
   return (
-    <div className="w-full lg:w-5/6 mx-auto lg:mt-12">
+    <div>
       <h1 className="text-2xl my-4 font-semibold">Add Category</h1>
       <hr className="mb-12" />
       <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
@@ -53,13 +50,12 @@ const AddCategory = () => {
           <label className="text-lg font-semibold md:text-xl">
             Image/SVG/Icons:
           </label>
-          <div className="flex flex-col w-full bprder">
+          <div className="flex flex-col w-full ">
             <input
               type="file"
               onChange={handleImage}
               accept="image/*"
               required
-              multiple
               className="mt-2 w-full px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400 rounded-md sm:text-sm"
               placeholder="category title"
             />
@@ -94,11 +90,6 @@ const AddCategory = () => {
           Save
         </button>
       </form>
-      <div className="mt-16 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
-        <h1 className="text-2xl my-4 font-semibold">Category List</h1>
-        <hr className="mb-12" />
-        <CategoryList categories={categories}></CategoryList>
-      </div>
     </div>
   );
 };
