@@ -83,11 +83,9 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "post method");
-        // if (data?.status === "success") {
-        //   setCategories(data.data);
-        // }
+
         reset();
-        // alert("Product added successfully");
+
         SuccessSweetAlert();
       });
   };

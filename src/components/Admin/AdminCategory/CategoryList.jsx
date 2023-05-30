@@ -1,12 +1,10 @@
 import React from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import DeleteItems from "../../../APIHooks/DeleteItems";
-import serverUrl from "../../../config/Config";
 
 const CategoryList = ({ categories }) => {
   const handleDeleteCategory = (id) => {
-    console.log(id);
-    DeleteItems(`${id}`);
+    DeleteItems(`category/${id}`);
   };
   return (
     <div className="overflow-x-auto">

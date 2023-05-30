@@ -1,7 +1,15 @@
 import parse from "html-react-parser";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import DeleteItems from "../../../APIHooks/DeleteItems";
 const ProductList = ({ products }) => {
+  const handleDeleteProduct = (id) => {
+    DeleteItems(`product/${id}`);
+  };
+  const handleUpdateProduct = (id) => {
+    // DeleteItems(`product/${id}`);
+    console.log(id);
+  };
   return (
     <div className="overflow-x-auto">
       <table className="border-collapse border border-gray-400 w-full">
@@ -69,10 +77,14 @@ const ProductList = ({ products }) => {
                 {parse(product.delivery)}
               </td>
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-red-400">
-                <DeleteForeverIcon />
+                <button onClick={() => handleDeleteProduct(product._id)}>
+                  <DeleteForeverIcon />
+                </button>
               </td>
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-[#55c3c1f7]">
-                <BorderColorIcon />
+                <button onClick={() => handleUpdateProduct(product._id)}>
+                  <BorderColorIcon />
+                </button>
               </td>
             </tr>
           ))}
