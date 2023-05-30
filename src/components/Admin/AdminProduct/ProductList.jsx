@@ -1,7 +1,12 @@
 import parse from "html-react-parser";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-const ProductList = ({ products }) => {
+import DeleteItems from "../../../APIHooks/DeleteItems";
+const ProductList = ({ products, setProducts }) => {
+
+  const handleDelete = (_id) => {
+    DeleteItems(`product/${_id}`, setProducts)
+  }
   return (
     <div className="overflow-x-auto">
       <table className="border-collapse border border-gray-400 w-full">
@@ -44,7 +49,7 @@ const ProductList = ({ products }) => {
                 {product.previousPrice}
               </td>
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
-                {parse(product.description)}
+                {parse(product.description.length > 100 ? product.description.slice(0, 100) + '...' : product.description)}
               </td>
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
                 {product?.sizes.map((size) => `${size + " "}`)}
@@ -62,13 +67,13 @@ const ProductList = ({ products }) => {
                 {product.brand}
               </td>
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
-                {parse(product.shipping)}
+                {parse(product.shipping.length > 100 ? product.shipping.slice(0, 100) + '...' : product.shipping)}
               </td>
 
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
-                {parse(product.delivery)}
+                {parse(product.delivery.length > 100 ? product.delivery.slice(0, 100) + '...' : product.delivery)}
               </td>
-              <td className="border border-gray-400 py-2 px-4 sm:px-6 text-red-400">
+              <td className="border border-gray-400 py-2 px-4 sm:px-6 text-red-400" onClick={() => handleDelete(product._id)}>
                 <DeleteForeverIcon />
               </td>
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-[#55c3c1f7]">
