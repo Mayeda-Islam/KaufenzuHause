@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import HeroSliderTable from '../../../../Shared/DataTable/HeroSliderTable/HeroSliderTable'
 import HeroBannerTable from '../../../../Shared/DataTable/HeroBannerTable/HeroBannerTable'
-
+import { useForm } from 'react-hook-form';
 const HeroSlider = () => {
+    const { register, formState: { errors }, handleSubmit } = useForm();
+
+    const [sliderImage, setSliderImage] = useState('');
+
+
+    const handleImageChange = (e) => {
+
+    }
+    console.log(sliderImage)
+    const handleSliderImageSubmit = (data) => {
+        // const image = data.sliderImage[0];
+        // console.log(image)
+
+        // const formData = new FormData();
+        // formData.append('sliderImage', image);
+
+
+    }
     return (
         <>
             {/* hero slider image form */}
@@ -15,18 +33,22 @@ const HeroSlider = () => {
                                 Add Hero Slider image Here
                             </h2>
                             {/* slider image form */}
-                            <form className="">
+                            <form
+                                // onSubmit={handleSubmit(handleSliderImageSubmit)}
+                                className="">
 
                                 <div className="flex items-center   ">
                                     <div className=" w-full">
 
                                         <input
                                             type="file"
-
+                                            // value={sliderImage}
+                                            onChange={handleImageChange}
                                             className="w-full p-2 border-[1px] border-gray-300  rounded-lg z-20 text-sm text-gray-900 bg-gray-50  "
                                             placeholder="Add Hero Slider image..."
                                             required
                                         />
+                                        {errors.sliderImage && <p className='text-red-500 mt-1'>{errors.sliderImage.message}</p>}
                                     </div>
                                     <button type="submit" className="py-2 px-3 ml-2 text-sm font-medium text-white bg-primary rounded-lg border-[3px] border-primary hover:bg-secondary hover:border-secondary ">
                                         Add
