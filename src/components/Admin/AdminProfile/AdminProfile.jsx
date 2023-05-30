@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { SingleImageUploader } from "../../APIHooks/SingleImageUploader";
+import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
 
 const AdminProfile = () => {
   const [image, setImage] = useState(null);
   const [countries, setCountries] = useState([]);
+
   const {
     register,
     handleSubmit,
@@ -15,7 +16,7 @@ const AdminProfile = () => {
   const handleImageUpload = async (event) => {
     const imageData = event.target.files[0];
     const formData = new FormData();
-    formData.append("image", imageData);
+    const test = formData.append("image", imageData);
 
     SingleImageUploader(formData, setImage);
   };
@@ -174,19 +175,19 @@ const AdminProfile = () => {
                 </option>
                 <option
                   value="male"
-                  //  selected={user?.gender === "male"}
+                //  selected={user?.gender === "male"}
                 >
                   Male
                 </option>
                 <option
                   value="female"
-                  //  selected={user?.gender === "female"}
+                //  selected={user?.gender === "female"}
                 >
                   Female
                 </option>
                 <option
                   value="other"
-                  // selected={user?.gender === "other"}
+                // selected={user?.gender === "other"}
                 >
                   Other
                 </option>
