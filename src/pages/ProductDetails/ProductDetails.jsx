@@ -250,6 +250,7 @@ const ProductDetails = () => {
                                                 {
                                                     productGallary.map((col, indx) => (
                                                         <li
+                                                            key={indx}
                                                             onClick={() => handleColorClick(col, indx)}
                                                             className={`transition-all duration-300 ease-in-out  cursor-pointer ${indx === color ? "p-[3px] rounded-full border border-gray-600" : "p-[3px] border border-transparent"}`}
                                                         >
