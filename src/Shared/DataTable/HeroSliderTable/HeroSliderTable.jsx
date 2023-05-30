@@ -28,14 +28,14 @@ const HeroSliderTable = ({ sliderImage, setSliderImage }) => {
           </tr>
         </thead>
         <tbody>
-          {sliderImage?.map((image) => (
+          {sliderImage?.map((image, index) => (
             <>
               <tr className="bg-white border-b  border-[#D0D2DA]">
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  01
+                  {index + 1}
                 </th>
 
                 <td className="px-6 py-4">
@@ -50,9 +50,9 @@ const HeroSliderTable = ({ sliderImage, setSliderImage }) => {
                   <div>
                     <button
                       onClick={() => handleClick(image?._id)}
-                      className="py-2 px-3 text-sm font-medium text-white bg-primary rounded-lg  hover:bg-secondary flex items-center"
+                      className="py-2 px-3 text-sm font-medium  flex items-center"
                     >
-                      <span> Action</span>
+                      <span>Delete</span>
                     </button>
                   </div>
                 </td>

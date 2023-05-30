@@ -16,13 +16,24 @@ const HeroSlider = () => {
   const [sliderImageBE, setSliderImageBE] = useState(null);
   const [sliderImageMDB, setSliderImageMDB] = useState(null);
   const [sliderImage, setSliderImage] = useState(null);
+  const [bannerImageBE, setBannerImageBE] = useState(null);
+  const [BannerImageMDB, setBannerImageMDB] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
   const handleBannerImage = (event) => {
     const imageData = event.target.files[0];
     const formData = new FormData();
     formData.append("image", imageData);
-    SingleImageUploader(formData, setBannerImage);
+    SingleImageUploader(formData, setBannerImageBE);
   };
+  const handleBannerImageSubmit = (data) => {
+    const image = { bannerImageBE };
+    PostAPI(`banner-slider`, image, reset, setSliderImageMDB);
+  };
+  useEffect(() => {
+    GetAPI("banner-slider", setBannerImage);
+  }, []);
+  console.log(bannerImage, "line 35");
+
   const handleImageChange = (event) => {
     const imageData = event.target.files[0];
     const formData = new FormData();
@@ -112,7 +123,7 @@ const HeroSlider = () => {
                 />
               </div>
               {/* banner image form */}
-              <form className="">
+              <form onSubmit={handleSubmit(handleBannerImageSubmit)}>
                 <div className="flex items-center   ">
                   <div className=" w-full">
                     <input
@@ -141,7 +152,10 @@ const HeroSlider = () => {
               </h2>
 
               {/* banner data table */}
-              <HeroBannerTable bannerImage={bannerImage} />
+              <HeroBannerTable
+                setBannerImage={setBannerImage}
+                bannerImage={bannerImage}
+              />
             </div>
           </div>
         </div>

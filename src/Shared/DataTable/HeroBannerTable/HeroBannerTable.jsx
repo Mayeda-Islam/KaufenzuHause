@@ -2,17 +2,14 @@ import React from "react";
 import { useState } from "react";
 import Menu from "@mui/material/Menu";
 import { IoIosArrowDown } from "react-icons/io";
+import DeleteItems from "../../../APIHooks/DeleteItems";
 
-const HeroBannerTable = () => {
+const HeroBannerTable = ({ bannerImage, setBannerImage }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleClick = (id) => {
+    DeleteItems(`banner-slider/${id}`, setBannerImage);
   };
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -32,70 +29,40 @@ const HeroBannerTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b border-[#D0D2DA]">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              01
-            </th>
-
-            <td className="px-6 py-4">
-              <img src={""} className="w-26  rounded" alt="doctor image" />
-            </td>
-
-            <td className="px-6 py-4">
-              <div>
-                <button
-                  onClick={handleClick}
-                  className="py-2 px-3 text-sm font-medium text-white bg-primary rounded-lg  hover:bg-secondary flex items-center"
+          {bannerImage?.map((image, index) => (
+            <>
+              <tr
+                key={image._id}
+                className="bg-white border-b  border-[#D0D2DA]"
+              >
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  <span> Action</span>
-                  <span className={`ml-2 hidden md:block`}>
-                    <IoIosArrowDown />
-                  </span>
-                </button>
+                  {index + 1}
+                </th>
 
-                <Menu
-                  sx={{ width: 150, maxWidth: "100%" }}
-                  id="tableDropdown"
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                  MenuListProps={{
-                    "aria-labelledby": "basic-button",
-                  }}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "right",
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                >
-                  <div className="w-40 p-3 ">
-                    {["Edit", "Delete"]?.map((data, index) => {
-                      return (
-                        <div key={index}>
-                          <button
-                            onClick={(e) => {
-                              handleActionButton(e.target.value);
-                              setAnchorEl(null);
-                            }}
-                            value={data}
-                            className="text-center"
-                          >
-                            {data}
-                          </button>
-                        </div>
-                      );
-                    })}
+                <td className="px-6 py-4">
+                  <img
+                    src={image?.bannerImageBE}
+                    alt="Slider Image"
+                    className="w-14  rounded"
+                  />
+                </td>
+
+                <td className="px-6 py-4">
+                  <div>
+                    <button
+                      onClick={() => handleClick(image?._id)}
+                      className="py-2 px-3 text-sm font-medium  flex items-center"
+                    >
+                      <button>Delete</button>
+                    </button>
                   </div>
-                </Menu>
-              </div>
-            </td>
-          </tr>
+                </td>
+              </tr>
+            </>
+          ))}
         </tbody>
       </table>
     </div>
