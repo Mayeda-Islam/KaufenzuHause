@@ -6,6 +6,7 @@ import ColorAndSizeOptions from "../../../Shared/ColorAndSizeOptions/ColorAndSiz
 
 import serverUrl from "../../../config/Config";
 import { MultipleImageUploader } from "../../../APIHooks/MultipleImageUploader";
+import SuccessSweetAlert from "../../../Shared/SuccessSweetAlert/SuccessSweetAlert";
 // import { color } from "jodit/types/plugins/color/color";
 
 const AddProduct = () => {
@@ -19,32 +20,19 @@ const AddProduct = () => {
   const {
     register,
     handleSubmit,
+    reset,
     // watch,
     formState: { errors },
   } = useForm();
-  const availableColors = [
-    { title: "red" },
-    { title: "black" },
-    { title: "yellow" },
-    { title: "purple" },
-    { title: "violet" },
-    { title: "white" },
-  ];
-  const availableSizes = [
-    // { title: "xs" },
-    // { title: "sm" },
-    // { title: "md" },
-    // { title: "lg" },
-    // { title: "xl" },
-    // { title: "xxl" },
-  ];
+  const availableColors = [];
+  const availableSizes = [];
   const categoryProducts = [
-    // { title: "Phone" },
-    // { title: "Mobile" },
-    // { title: "Tv" },
-    // { title: "Camera" },
-    // { title: "Smartwatch" },
-    // { title: "HeadPhones" },
+    { title: "Phone" },
+    { title: "Mobile" },
+    { title: "Tv" },
+    { title: "Camera" },
+    { title: "Smartwatch" },
+    { title: "HeadPhones" },
   ];
 
   // const handleImage = async (event) => {
@@ -98,6 +86,9 @@ const AddProduct = () => {
         // if (data?.status === "success") {
         //   setCategories(data.data);
         // }
+        reset();
+        // alert("Product added successfully");
+        SuccessSweetAlert();
       });
   };
   return (
