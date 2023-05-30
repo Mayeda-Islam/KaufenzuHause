@@ -174,25 +174,36 @@ export default function AdminLayOut() {
       ],
     },
     {
-      title: "System Setting",
+      title: "System Settings",
       icon: <SettingsSystemDaydreamIcon />,
 
       items: [
         {
-          title: "Hero slider",
+          title: "Header Logo",
+
+          linkPath: "systemSetting/headerLogo",
+        },
+        {
+          title: "Hero Section",
 
           linkPath: "systemSetting/heroSlider",
         },
-        {
-          title: "Side Banner",
+        // {
+        //   title: "Hero Banner",
 
-          linkPath: "systemSetting/sideBanner",
+        //   linkPath: "systemSetting/headerBanner",
+        // },
+        {
+          title: "Footer Logo",
+
+          linkPath: "systemSetting/footerLogo",
         },
         {
-          title: "Nav Logo",
+          title: "Footer Section",
 
-          linkPath: "systemSetting/navLogo",
+          linkPath: "systemSetting/footerSection",
         },
+
       ],
     },
   ];
