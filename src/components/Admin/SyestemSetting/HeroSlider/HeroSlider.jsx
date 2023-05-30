@@ -2,22 +2,21 @@ import React, { useState } from 'react'
 import HeroSliderTable from '../../../../Shared/DataTable/HeroSliderTable/HeroSliderTable'
 import HeroBannerTable from '../../../../Shared/DataTable/HeroBannerTable/HeroBannerTable'
 import { useForm } from 'react-hook-form';
+import { SingleImageUploader } from '../../../../APIHooks/SingleImageUploader';
 const HeroSlider = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const [sliderImage, setSliderImage] = useState('');
+    const [sliderImage, setSliderImage] = useState(null);
 
 
-    const handleImageChange = (e) => {
-
+    const handleImageChange = (event) => {
+        const imageData = event.target.files[0];
+        const formData = new FormData();
+        formData.append("image", imageData);
+        SingleImageUploader(formData, setSliderImage)
     }
     console.log(sliderImage)
     const handleSliderImageSubmit = (data) => {
-        // const image = data.sliderImage[0];
-        // console.log(image)
-
-        // const formData = new FormData();
-        // formData.append('sliderImage', image);
 
 
     }
@@ -34,12 +33,13 @@ const HeroSlider = () => {
                             </h2>
                             {/* slider image form */}
                             <form
-                                // onSubmit={handleSubmit(handleSliderImageSubmit)}
+                                onSubmit={handleSubmit(handleSliderImageSubmit)}
                                 className="">
-
+                                <div>
+                                    <img src={sliderImage} alt="slider image" className='w-24 h-24' />
+                                </div>
                                 <div className="flex items-center   ">
                                     <div className=" w-full">
-
                                         <input
                                             type="file"
                                             // value={sliderImage}

@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
 import serverUrl from "../../../config/Config";
 import SuccessSweetAlert from "../../../Shared/SuccessSweetAlert/SuccessSweetAlert";
+import PostAPI from "../../../APIHooks/POSTAPI";
 
-const AddCategory = () => {
+const AddCategory = ({ setCategories }) => {
   const [image, setImage] = useState(null);
   const {
     register,
@@ -25,19 +26,22 @@ const AddCategory = () => {
       categoryTitle: data.categoryTitle,
       image: image,
     };
-    reset();
-    fetch(`${serverUrl}/category`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        SuccessSweetAlert();
-      });
+    console.log(formData)
+    // reset();
+    PostAPI(`category`, formData, reset, setCategories)
+    // fetch(`${serverUrl}/category`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(formData),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.status === 'success')
+    //       console.log(data);
+    //     SuccessSweetAlert();
+    //   });
   };
 
   return (

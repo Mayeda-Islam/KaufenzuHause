@@ -14,7 +14,7 @@ const Category = () => {
       <div className="mt-16 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
         <h1 className="text-2xl my-4 font-semibold">Category List</h1>
         <hr className="mb-12" />
-        <CategoryList categories={categories}></CategoryList>
+        <CategoryList categories={categories} setCategories={setCategories}></CategoryList>
       </div>
     </div>
   );
