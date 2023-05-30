@@ -1,13 +1,13 @@
 import React from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import DeleteItems from "../../../APIHooks/DeleteItems";
+import serverUrl from "../../../config/Config";
 
 const CategoryList = ({ categories }) => {
-  const data = [
-    { id: 1, name: "John Doe", age: 25, email: "john@example.com" },
-    { id: 2, name: "Jane Smith", age: 30, email: "jane@example.com" },
-    // Add more data rows as needed
-  ];
-
+  const handleDeleteCategory = (id) => {
+    console.log(id);
+    DeleteItems(`${id}`);
+  };
   return (
     <div className="overflow-x-auto">
       <table className="border-collapse border border-gray-400 w-full">
@@ -40,7 +40,10 @@ const CategoryList = ({ categories }) => {
               </td>
 
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-red-400">
-                <DeleteForeverIcon />
+                <button onClick={() => handleDeleteCategory(category._id)}>
+                  {" "}
+                  <DeleteForeverIcon />
+                </button>
               </td>
             </tr>
           ))}
