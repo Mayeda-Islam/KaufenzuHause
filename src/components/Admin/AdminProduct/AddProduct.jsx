@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import Jodit from "../../../Shared/JodIt/Jodit";
 import ColorAndSizeOptions from "../../../Shared/ColorAndSizeOptions/ColorAndSizeOptions";
 
 import serverUrl from "../../../config/Config";
-import SuccessSweetAlert from "../../../Shared/SuccessSweetAlert/SuccessSweetAlert";
-import axios from "axios";
 import Swal from "sweetalert2";
 import MultiImagesUpload from "../../../APIHooks/MultipleImagesUpload";
-import PostAPI from "../../../APIHooks/POSTAPI";
+import { useNavigate } from "react-router";
+import GetAPI from "../../../APIHooks/GetAPI";
 // import { color } from "jodit/types/plugins/color/color";
 
 const AddProduct = () => {
+  const naviagte = useNavigate()
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState("");
   const [delivery, setDelivery] = useState("");
@@ -28,6 +28,7 @@ const AddProduct = () => {
   } = useForm();
   const availableColors = [];
   const availableSizes = [];
+  const [categories, setCategories] = useState([])
   const categoryProducts = [
     { title: "Phone" },
     { title: "Mobile" },
@@ -36,6 +37,9 @@ const AddProduct = () => {
     { title: "Smartwatch" },
     { title: "HeadPhones" },
   ];
+  useEffect(() => {
+    GetAPI('categories', setCategories)
+  }, [])
 
   const handleImage = async (event) => {
     const images = event.target.files;
@@ -49,6 +53,27 @@ const AddProduct = () => {
   };
 
   const handleAddProduct = (data) => {
+
+    if (description.length < 15) {
+      return (
+        Swal.fire("Oops!", "Description must need at least 10 characters", "error")
+      )
+    }
+    if (delivery.length < 15) {
+      return (
+        Swal.fire("Oops!", "Delivery must need at least 10 characters", "error")
+      )
+    }
+    if (shipping.length < 15) {
+      return (
+        Swal.fire("Oops!", "Shipping must need at least 10 characters", "error")
+      )
+    }
+    if (!images.length) {
+      return (
+        Swal.fire("Oops!", "Images must need", "error")
+      )
+    }
     // console.log(data, description, shipping, delivery, sizes, colors);
     const productData = {
       ...data,
@@ -75,8 +100,11 @@ const AddProduct = () => {
           setSizes([])
           setColors([])
           setImages([])
+
           reset();
+          naviagte('/admin/product/allProduct')
           Swal.fire("Congrats!", "Product Added Successfully!", "success");
+
         }
       });
 
@@ -176,17 +204,15 @@ const AddProduct = () => {
             Add Category
           </label>
           <select
-            {...register("category", { required: false })}
+            {...register("category", { required: true })}
             // defaultValue={user?.gender}
             className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
           >
-            <option selected disabled hidden>
-              Choose One
-            </option>
-            {categoryProducts?.map((categoryProduct) => (
+
+            {categories?.map((categoryProduct) => (
               <>
-                <option value={categoryProduct.title}>
-                  {categoryProduct.title}
+                <option value={categoryProduct.categoryTitle}>
+                  {categoryProduct.categoryTitle}
                 </option>
               </>
             ))}
