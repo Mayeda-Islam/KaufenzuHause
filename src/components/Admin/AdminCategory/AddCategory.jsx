@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
 import serverUrl from "../../../config/Config";
+import SuccessSweetAlert from "../../../Shared/SuccessSweetAlert/SuccessSweetAlert";
 
 const AddCategory = () => {
   const [image, setImage] = useState(null);
@@ -35,7 +36,7 @@ const AddCategory = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        alert("Data upload successfully");
+        SuccessSweetAlert();
       });
   };
 
