@@ -175,19 +175,19 @@ const AdminProfile = () => {
                 </option>
                 <option
                   value="male"
-                  //  selected={user?.gender === "male"}
+                //  selected={user?.gender === "male"}
                 >
                   Male
                 </option>
                 <option
                   value="female"
-                  //  selected={user?.gender === "female"}
+                //  selected={user?.gender === "female"}
                 >
                   Female
                 </option>
                 <option
                   value="other"
-                  // selected={user?.gender === "other"}
+                // selected={user?.gender === "other"}
                 >
                   Other
                 </option>

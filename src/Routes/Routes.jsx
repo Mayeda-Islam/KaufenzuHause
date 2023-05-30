@@ -11,21 +11,30 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import CategorisedProducts from "../pages/CategoriedProducts/CategorisedProducts";
 import Checkout from "../pages/Checkout/Checkout";
 import AboutUs from "../pages/AboutUS/AboutUs";
+// import HeaderLogo from "../components/Admin/SyestemSetting/HeaderLogo/HeaderLogo";
+// import HeroSlider from "../components/Admin/SyestemSetting/HeroSlider/HeroSlider";
+// import FooterSection from "../components/Admin/SyestemSetting/FooterSection/FooterSection";
+// import FooterLogo from "../components/Admin/SyestemSetting/FooterLogo/FooterLogo";
+//import SyestemSettings from "../components/Admin/SyestemSetting/SyestemSettings";
 
 import AdminLayOut from "../components/Admin/AdminLayOut/AdminLayOut";
 import AdminDashboard from "../components/Admin/AdminDashboard/AdminDashboard";
 import AdminProfile from "../components/Admin/AdminProfile/AdminProfile";
-import AdminProduct from "../components/Admin/AdminProduct/AddProduct";
+// import AdminProduct from "../components/Admin/AdminProduct/AddProduct";
 
 import AdminSystemSetting from "../components/Admin/AdminSystemSetting/AdminSystemSetting";
 
-import AddCategory from "../components/Admin/AdminCategory/AddCategory";
+// import AddCategory from "../components/Admin/AdminCategory/AddCategory";
 import CategoryList from "../components/Admin/AdminCategory/CategoryList";
 import AddProduct from "../components/Admin/AdminProduct/AddProduct";
 import AllProduct from "../components/Admin/AdminProduct/AllProduct";
 import OrderedProduct from "../components/Admin/AdminOrders/OrderedProduct";
 import DeliveredProduct from "../components/Admin/AdminOrders/DeliveredProduct";
 import Category from "../components/Admin/AdminCategory/Category";
+import HeaderLogo from "../components/Admin/SyestemSetting/HeaderLogo/HeaderLogo";
+import HeroSlider from "../components/Admin/SyestemSetting/HeroSlider/HeroSlider";
+import FooterLogo from "../components/Admin/SyestemSetting/FooterLogo/FooterLogo";
+import FooterSection from "../components/Admin/SyestemSetting/FooterSection/FooterSection";
 
 export const router = createBrowserRouter([
   {
@@ -118,6 +127,26 @@ export const router = createBrowserRouter([
       {
         path: "system-setting",
         element: <AdminSystemSetting></AdminSystemSetting>,
+      },
+      {
+        path: "systemSetting/headerLogo",
+        element: <HeaderLogo></HeaderLogo>,
+      },
+      {
+        path: "systemSetting/heroSlider",
+        element: <HeroSlider></HeroSlider>,
+      },
+      // {
+      //     path: "systemSetting/headerBanner",
+      //     element: <HeroBanner></HeroBanner>,
+      // },
+      {
+        path: "systemSetting/footerLogo",
+        element: <FooterLogo></FooterLogo>,
+      },
+      {
+        path: "systemSetting/footerSection",
+        element: <FooterSection></FooterSection>,
       },
     ],
   },

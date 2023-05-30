@@ -9,6 +9,6 @@
     padding: 2rem 0;
     overflow-x: hidden;
     text-align: center;
-    transition: 0.7s;
+    transition: linear 0.55s;
     left: -100%;
 }

@@ -5,13 +5,14 @@ import Jodit from "../../../Shared/JodIt/Jodit";
 import ColorAndSizeOptions from "../../../Shared/ColorAndSizeOptions/ColorAndSizeOptions";
 
 import serverUrl from "../../../config/Config";
-import { MultipleImageUploader } from "../../../APIHooks/MultipleImageUploader";
-import SuccessSweetAlert from "../../../Shared/SuccessSweetAlert/SuccessSweetAlert";
+
+import Swal from "sweetalert2";
+import MultiImagesUpload from "../../../APIHooks/MultipleImagesUpload";
+
 // import { color } from "jodit/types/plugins/color/color";
 
 const AddProduct = () => {
   const [images, setImages] = useState([]);
-  const [uploadedImage, setUploadedImage] = useState([]);
   const [description, setDescription] = useState("");
   const [delivery, setDelivery] = useState("");
   const [shipping, setShipping] = useState("");
@@ -35,34 +36,17 @@ const AddProduct = () => {
     { title: "HeadPhones" },
   ];
 
-  // const handleImage = async (event) => {
-  //   const imageData = event.target.files;
-  //   const formData = new FormData();
-
-  //   // for (let i = 0; i < imageData.length; i++) {
-  //   //   formData.append("image[]", imageData[i]);
-  //   // }
-  //   // console.log(formData, "from formData");
-
-  //   // MultipleImageUploader(formData, setImages);
-  // };
   const handleImage = async (event) => {
-    const selectedImages = Array.from(event.target.files);
-    setUploadedImage(selectedImages);
-    MultipleImageUploader(uploadedImage, setImages);
-  };
-
-  const handleUpload = (event) => {
-    event.preventDefault();
-
+    const images = event.target.files;
     const formData = new FormData();
-    images.forEach((image) => {
-      formData.append("images", image);
-    });
 
-    console.log(formData);
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+
+    MultiImagesUpload(`multipleImageUpload`, formData, setImages);
   };
-  console.log(images);
+
   const handleAddProduct = (data) => {
     // console.log(data, description, shipping, delivery, sizes, colors);
     const productData = {
@@ -72,6 +56,7 @@ const AddProduct = () => {
       delivery,
       colors,
       sizes,
+      images: images,
     };
     fetch(`${serverUrl}/product`, {
       method: "POST",
@@ -82,12 +67,19 @@ const AddProduct = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, "post method");
-
-        reset();
-
-        SuccessSweetAlert();
+        if (data?.status === "success") {
+          setDescription("");
+          setDelivery("");
+          setShipping("");
+          setSizes([]);
+          setColors([]);
+          setImages([]);
+          reset();
+          Swal.fire("Congrats!", "Product Added Successfully!", "success");
+        }
       });
+
+    console.log(productData);
   };
   return (
     <div>
@@ -222,13 +214,15 @@ const AddProduct = () => {
           <Jodit setContent={setDelivery} content={delivery}></Jodit>
         </div>
         <div>
-          <div>
-            <h1>Image preview</h1>
-            {images?.map((image) => (
-              <>
-                <img src={image} alt="" />
-              </>
-            ))}
+          <div className="my-4">
+            <h1 className="text-lg font-medium">Image preview : </h1>
+            <div className="flex gap-2">
+              {images?.map((image, index) => (
+                <div key={index}>
+                  <img src={image} alt="" className="w-24 h-24" />
+                </div>
+              ))}
+            </div>
           </div>
 
           <label className="text-lg lg:w-1/6  font-semibold lg:text-xl">
@@ -252,7 +246,7 @@ const AddProduct = () => {
             )}
           </div>
         </div>
-        <button onClick={handleUpload}>upload</button>
+
         <button
           type="submit"
           className="bg-[#55c3c1f7] py-2 px-7  text-white font-medium rounded-md mt-4 ml-auto block"

@@ -25,7 +25,7 @@ const Footer = () => {
 
                             <div className="py-3">
                                 <div className="flex items-center gap-3 mb-2">
-                                    <span className="text-2xl text-primary ">
+                                    <span className="text-2xl text-secondary ">
                                         <IoLocationOutline />
 
                                     </span>
@@ -34,7 +34,7 @@ const Footer = () => {
                                     </h3>
                                 </div>
                                 <div className="flex items-center gap-3 mb-2">
-                                    <span className="text-2xl text-primary ">
+                                    <span className="text-2xl text-secondary ">
                                         <AiOutlineMobile />
 
                                     </span>
@@ -43,7 +43,7 @@ const Footer = () => {
                                     </h3>
                                 </div>
                                 <div className="flex items-center gap-3 mb-2">
-                                    <span className="text-2xl text-primary ">
+                                    <span className="text-2xl text-secondary ">
                                         <AiOutlineMail />
 
                                     </span>
