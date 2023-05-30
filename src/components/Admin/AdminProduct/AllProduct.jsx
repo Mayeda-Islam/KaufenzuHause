@@ -9,7 +9,7 @@ const AllProduct = () => {
   }, []);
   return (
     <div>
-      <div className="mt-10 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
+      <div className=" w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
         <h1 className="text-2xl my-4 font-semibold">All Products</h1>
 
         <ProductList products={products} setProducts={setProducts}></ProductList>

@@ -2,13 +2,14 @@ import React from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import DeleteItems from "../../../APIHooks/DeleteItems";
 
-const CategoryList = ({ categories }) => {
+const CategoryList = ({ categories, setCategories }) => {
   const handleDeleteCategory = (id) => {
-    DeleteItems(`category/${id}`);
+    console.log(id);
+    DeleteItems(`category/${id}`, setCategories);
   };
   return (
-    <div className="overflow-x-auto">
-      <table className="border-collapse border border-gray-400 w-full">
+    <div className=" mb-10">
+      <table className="border-collapse border border-gray-400 w-full overflow-x-auto">
         <thead className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7] text-white font-bold text-lg">
           <tr className="text-center text-white">
             <th className="px-6 py-4  ">SL</th>
@@ -38,7 +39,7 @@ const CategoryList = ({ categories }) => {
               </td>
 
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-red-400">
-                <button onClick={() => handleDeleteCategory(category._id)}>
+                <button onClick={() => handleDeleteCategory(category?._id)}>
                   {" "}
                   <DeleteForeverIcon />
                 </button>
