@@ -26,22 +26,9 @@ const AddCategory = ({ setCategories }) => {
       categoryTitle: data.categoryTitle,
       image: image,
     };
-    console.log(formData)
+    console.log(formData);
     // reset();
-    PostAPI(`category`, formData, reset, setCategories)
-    // fetch(`${serverUrl}/category`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.status === 'success')
-    //       console.log(data);
-    //     SuccessSweetAlert();
-    //   });
+    PostAPI(`category`, formData, reset, setCategories);
   };
 
   return (

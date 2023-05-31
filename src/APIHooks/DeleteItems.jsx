@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import serverUrl from "../config/Config";
 import swal from "sweetalert";
 
@@ -16,7 +17,7 @@ const DeleteItems = (url, setState) => {
         .then((res) => res.json())
         .then((data) => {
           // console.log("data", data);
-          setState(data.data)
+          setState(data.data);
           swal("File has been deleted!", {
             icon: "success",
           });
@@ -25,15 +26,6 @@ const DeleteItems = (url, setState) => {
       swal("Your imaginary file is safe!");
     }
   });
-  // fetch(`${serverUrl}/${url}`, {
-  //   method: "DELETE",
-  // })
-  //   .then((response) => response.json())
-  //   .then((result) => {
-  //     console.log(result);
-  //     if (result.status === 'success')
-  //       Swal.fire("Congrats!", "Items Deleted Successfully!", "success");
-  //   });
 };
 
 export default DeleteItems;

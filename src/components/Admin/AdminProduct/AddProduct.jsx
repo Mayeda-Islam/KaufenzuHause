@@ -12,7 +12,7 @@ import GetAPI from "../../../APIHooks/GetAPI";
 // import { color } from "jodit/types/plugins/color/color";
 
 const AddProduct = () => {
-  const naviagte = useNavigate()
+  const naviagte = useNavigate();
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState("");
   const [delivery, setDelivery] = useState("");
@@ -28,51 +28,54 @@ const AddProduct = () => {
   } = useForm();
   const availableColors = [];
   const availableSizes = [];
-  const [categories, setCategories] = useState([])
-  const categoryProducts = [
-    { title: "Phone" },
-    { title: "Mobile" },
-    { title: "Tv" },
-    { title: "Camera" },
-    { title: "Smartwatch" },
-    { title: "HeadPhones" },
-  ];
+  const [categories, setCategories] = useState([]);
+  // const categoryProducts = [
+  //   { title: "Phone" },
+  //   { title: "Mobile" },
+  //   { title: "Tv" },
+  //   { title: "Camera" },
+  //   { title: "Smartwatch" },
+  //   { title: "HeadPhones" },
+  // ];
   useEffect(() => {
-    GetAPI('categories', setCategories)
-  }, [])
+    GetAPI("categories", setCategories);
+  }, []);
 
   const handleImage = async (event) => {
     const images = event.target.files;
     const formData = new FormData();
 
     for (let i = 0; i < images.length; i++) {
-      formData.append('images', images[i]);
+      formData.append("images", images[i]);
     }
 
-    MultiImagesUpload(`multipleImageUpload`, formData, setImages)
+    MultiImagesUpload(`multipleImageUpload`, formData, setImages);
   };
 
   const handleAddProduct = (data) => {
-
     if (description.length < 15) {
-      return (
-        Swal.fire("Oops!", "Description must need at least 10 characters", "error")
-      )
+      return Swal.fire(
+        "Oops!",
+        "Description must need at least 10 characters",
+        "error"
+      );
     }
     if (delivery.length < 15) {
-      return (
-        Swal.fire("Oops!", "Delivery must need at least 10 characters", "error")
-      )
+      return Swal.fire(
+        "Oops!",
+        "Delivery must need at least 10 characters",
+        "error"
+      );
     }
     if (shipping.length < 15) {
-      return (
-        Swal.fire("Oops!", "Shipping must need at least 10 characters", "error")
-      )
+      return Swal.fire(
+        "Oops!",
+        "Shipping must need at least 10 characters",
+        "error"
+      );
     }
     if (!images.length) {
-      return (
-        Swal.fire("Oops!", "Images must need", "error")
-      )
+      return Swal.fire("Oops!", "Images must need", "error");
     }
     // console.log(data, description, shipping, delivery, sizes, colors);
     const productData = {
@@ -82,7 +85,7 @@ const AddProduct = () => {
       delivery,
       colors,
       sizes,
-      images: images
+      images: images,
     };
     fetch(`${serverUrl}/product`, {
       method: "POST",
@@ -93,23 +96,21 @@ const AddProduct = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data?.status === 'success') {
-          setDescription('')
-          setDelivery('')
-          setShipping('')
-          setSizes([])
-          setColors([])
-          setImages([])
+        if (data?.status === "success") {
+          setDescription("");
+          setDelivery("");
+          setShipping("");
+          setSizes([]);
+          setColors([]);
+          setImages([]);
 
           reset();
-          naviagte('/admin/product/allProduct')
+          naviagte("/admin/product/allProduct");
           Swal.fire("Congrats!", "Product Added Successfully!", "success");
-
         }
       });
 
-    console.log(productData)
-
+    console.log(productData);
   };
   return (
     <div>
@@ -208,7 +209,6 @@ const AddProduct = () => {
             // defaultValue={user?.gender}
             className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
           >
-
             {categories?.map((categoryProduct) => (
               <>
                 <option value={categoryProduct.categoryTitle}>
@@ -245,9 +245,8 @@ const AddProduct = () => {
           <div className="my-4">
             <h1 className="text-lg font-medium">Image preview : </h1>
             <div className="flex gap-2">
-
               {images?.map((image, index) => (
-                <div key={index} >
+                <div key={index}>
                   <img src={image} alt="" className="w-24 h-24" />
                 </div>
               ))}
