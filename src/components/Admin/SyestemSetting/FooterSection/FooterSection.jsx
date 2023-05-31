@@ -82,7 +82,7 @@ const FooterSection = () => {
             </button>
           </div>
           <FooterDescriptionModal
-            handleUpdated={handleDescriptionUpdated}
+            handleDescriptionUpdated={handleDescriptionUpdated}
             style={style}
             setOpenDescription={setOpenDescription}
             openDescription={openDescription}

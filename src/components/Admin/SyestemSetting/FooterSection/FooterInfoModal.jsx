@@ -12,7 +12,7 @@ const FooterInfoModal = ({
 }) => {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
   } = useForm();
   return (
@@ -93,6 +93,10 @@ const FooterInfoModal = ({
                           placeholder="Email"
                           {...register("email", {
                             required: "Email is required",
+                            pattern: {
+                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                              message: "invalid email address",
+                            },
                           })}
                         />
                         {errors.email && (
@@ -103,7 +107,8 @@ const FooterInfoModal = ({
                       </div>
                       <button
                         type="submit"
-                        className=" mt-3 py-2 px-7  text-sm font-medium text-white bg-primary rounded-sm border-[3px] border-primary hover:bg-secondary hover:border-secondary "
+                        disabled={!isValid}
+                        className="disabled:opacity-25 mt-3 py-2 px-7  text-sm font-medium text-white bg-primary rounded-sm border-[3px] border-primary hover:bg-secondary hover:border-secondary "
                         onClick={() => setOpenInfo(false)}
                       >
                         Submit
