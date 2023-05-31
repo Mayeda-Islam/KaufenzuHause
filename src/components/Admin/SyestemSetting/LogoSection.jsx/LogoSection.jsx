@@ -31,7 +31,6 @@ const LogoSection = () => {
   };
   useEffect(() => {
     GetAPI("footer-logo", setFooterLogo);
-    console.log("ok line 34");
   }, [footerLogoMDB]);
   console.log(footerLogo, "line 35");
 
@@ -53,7 +52,6 @@ const LogoSection = () => {
   };
   useEffect(() => {
     GetAPI("header-logo", setHeaderLogo);
-    console.log("ok from line 56");
   }, [headerLogoMDB]);
 
   return (
