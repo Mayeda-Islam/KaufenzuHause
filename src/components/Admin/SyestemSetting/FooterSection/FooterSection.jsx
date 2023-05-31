@@ -5,6 +5,7 @@ import { IoClose } from "react-icons/io5";
 import GetAPI from "../../../../APIHooks/GetAPI";
 import FooterDescriptionModal from "./FooterDescriptionModal";
 import UpdatedApi from "../../../../APIHooks/UpdatedItem";
+import FooterInfoModal from "./FooterInfoModal";
 
 const style = {
   position: "absolute",
@@ -17,12 +18,18 @@ const style = {
 };
 const FooterSection = () => {
   const [footerDescription, setFooterDescription] = useState([]);
+  const [footerInfo, setFooterInfo] = useState([]);
   const [openInfo, setOpenInfo] = useState(false);
 
   //open description form
   const [openDescription, setOpenDescription] = useState(false);
+  //description
   useEffect(() => {
     GetAPI(`footer-description`, setFooterDescription);
+  }, []);
+  //info
+  useEffect(() => {
+    GetAPI(`footer-info`, setFooterInfo);
   }, []);
   const handleOPenInfo = () => {
     openInfo === true ? setOpenInfo(false) : setOpenInfo(true);
@@ -33,7 +40,8 @@ const FooterSection = () => {
       ? setOpenDescription(false)
       : setOpenDescription(true);
   };
-  const handleUpdated = (data) => {
+  //description
+  const handleDescriptionUpdated = (data) => {
     const updatedData = {
       ...data,
     };
@@ -43,6 +51,15 @@ const FooterSection = () => {
       setFooterDescription,
       updatedData
     );
+  };
+  //info
+  const handleInfoUpdated = (data) => {
+    console.log(data);
+    const updatedData = {
+      ...data,
+    };
+
+    UpdatedApi(`footer-info/${footerInfo[0]?._id}`, setFooterInfo, updatedData);
   };
   return (
     <section className="py-6">
@@ -65,7 +82,7 @@ const FooterSection = () => {
             </button>
           </div>
           <FooterDescriptionModal
-            handleUpdated={handleUpdated}
+            handleUpdated={handleDescriptionUpdated}
             style={style}
             setOpenDescription={setOpenDescription}
             openDescription={openDescription}
@@ -82,15 +99,15 @@ const FooterSection = () => {
 
           <h3 className="text-sm text-textColor my-3">
             <span className="font-semibold">Address : </span>
-            Berliner strasse, 60311, Frankfurt am main, Germany
+            {footerInfo[0]?.address}
           </h3>
           <h3 className="text-sm text-textColor my-3">
             <span className="font-semibold">Phone : </span>
-            (049) 1766-2058329
+            {footerInfo[0]?.phone}
           </h3>
           <h3 className="text-sm text-textColor my-3">
             <span className="font-semibold">Email : </span>
-            KaufenzuHause@info.com
+            {footerInfo[0]?.email}
           </h3>
 
           {/* edit info button */}
@@ -102,34 +119,13 @@ const FooterSection = () => {
               Edit Information
             </button>
           </div>
-          <Modal
-            keepMounted
-            open={openInfo}
-            onClose={() => setOpenInfo(false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <>
-                <div className="outline-none focus:outline-none ">
-                  <div className=" w-full ">
-                    <div className="border-0 rounded-lg shadow-lg  flex flex-col w-full bg-white outline-none focus:outline-none">
-                      <div className="flex items-start justify-between p-5 border-b-0.5 border-gray-300">
-                        <button
-                          className="text-center flex items-center justify-center w-[40px] h-[40px] rounded-lg ml-auto bg-gray-800 text-white text-xl font-medium hover:bg-gray-900"
-                          onClick={() => setOpenInfo(false)}
-                        >
-                          <IoClose />
-                        </button>
-                      </div>
-                      {/*body*/}
-                      <div className="  p-6 flex-auto w-full border-2 border-gray-200 rounded ="></div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            </Box>
-          </Modal>
+          <FooterInfoModal
+            handleInfoUpdated={handleInfoUpdated}
+            style={style}
+            openInfo={openInfo}
+            setOpenInfo={setOpenInfo}
+            footerInfo={footerInfo}
+          ></FooterInfoModal>
         </div>
       </div>
     </section>

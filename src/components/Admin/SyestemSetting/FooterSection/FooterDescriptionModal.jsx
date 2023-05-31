@@ -10,7 +10,7 @@ const FooterDescriptionModal = ({
   openDescription,
   footerDescription,
   setOpenDescription,
-  handleUpdated,
+  handleDescriptionUpdated,
 }) => {
   const {
     register,
@@ -43,7 +43,7 @@ const FooterDescriptionModal = ({
                   </div>
                   {/*body*/}
                   <div className=" p-6 flex-auto w-full border-2 border-gray-200 rounded mt-[1rem]">
-                    <form onSubmit={handleSubmit(handleUpdated)}>
+                    <form onSubmit={handleSubmit(handleDescriptionUpdated)}>
                       <label className="block mb-3 text-sm font-medium text-gray-900 ">
                         Footer Description
                       </label>
