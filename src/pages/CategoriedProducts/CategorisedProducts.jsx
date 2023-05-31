@@ -2,15 +2,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
 import RangeSlider from '../../Shared/RangeSlider/RangeSlider';
 import CategoryFilter from '../../Shared/CategoryFilter/CategoryFilter';
-import { products } from '../../Data/Placeholder';
 import BrandFilter from '../../Shared/BrandFilter/BrandFilter';
 import { TbFilter } from 'react-icons/tb';
 
 import { AiFillCloseCircle } from 'react-icons/ai';
 import './CategorisedProducts.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import GetAPI from '../../APIHooks/GetAPI';
 
 const CategorisedProducts = () => {
+    const { id } = useParams()
     const navWrapper = useRef();
     //state for filter nav
     const [isOpen, setIsopen] = useState(false);
@@ -49,24 +50,30 @@ const CategorisedProducts = () => {
 
     }, [isOpen]);
 
-
-    const [productData, setProductData] = useState(products);
+    const [category, setCategory] = useState({})
+    const [productData, setProductData] = useState([]);
     console.log(productData)
 
+    useEffect(() => {
+        GetAPI(`categories/${id}`, setCategory)
+    }, [id])
+
+    useEffect(() => {
+        GetAPI(`product/${category?.categoryTitle}`, setProductData)
+    }, [category?.categoryTitle])
+
     const location = useLocation();
-
-
     useEffect(() => {
         const text = location.state?.searchState;
         if (text) {
             const filteredProducts = productData.filter((prod) => prod.categoryName?.toLowerCase().includes(text?.toLowerCase()));
             setProductData(filteredProducts);
         } else {
-            setProductData(products);
+            setProductData(productData);
         }
 
 
-    }, [productData]);
+    }, [productData, location.state?.searchState]);
 
     return (
         <section className="pt-6 lg:pt-10 pb-14 bg-[#f7f7f7] relative">
@@ -156,14 +163,14 @@ const CategorisedProducts = () => {
                         </div>
 
                         {/* product cards */}
-                        <div className="flex flex-wrap lg:ml-2.5">
+                        <div className="grid md:grid-cols-3 lg:grid-cols-4">
 
 
                             {
                                 productData.map((product) => (
-                                    <div className="w-full sm:w-6/12 md:w-4/12 lg:w-4/12 xl:w-3/12 xxl:w-3/12">
-                                        <SingleProduct product={product} />
-                                    </div>
+
+                                    <SingleProduct product={product} key={product?._id} />
+
                                 ))
                             }
                         </div>

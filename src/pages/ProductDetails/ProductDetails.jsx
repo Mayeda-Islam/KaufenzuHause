@@ -369,7 +369,7 @@ const ProductDetails = () => {
                         Related Products
                     </h2>
                     {/* section title */}
-                    <div className="flex items-center justify-between">
+                    {/* <div className="flex items-center justify-between">
 
                         <div className="flex items-center  flex-wrap">
                             {
@@ -383,7 +383,7 @@ const ProductDetails = () => {
                             }
 
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section>
 
