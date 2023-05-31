@@ -14,10 +14,6 @@ import './Header.css';
 import { products } from "../../Data/Placeholder";
 
 
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-
-
 import Sidenav from "./Sidenav";
 
 
@@ -66,7 +62,6 @@ const Header = () => {
   // user dropdown
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-  const id4 = open ? 'simple-popover' : undefined;
 
   // language dropdown
   const open2 = Boolean(anchorE2);
@@ -89,8 +84,6 @@ const Header = () => {
 
   //close sidenav when clicking outside
   useEffect(() => {
-
-
     const handleClickOutside = (event) => {
       if (display &&
         wrapper.current &&
@@ -160,7 +153,11 @@ const Header = () => {
           </span>
         </div>
         {/* category sidebar */}
-        <Sidenav cateWrapper={cateWrapper} sidebar={sidebar} setSidebar={setSidebar} toggleSidebar={toggleSidebar} />
+        <Sidenav
+          cateWrapper={cateWrapper}
+          sidebar={sidebar}
+          setSidebar={setSidebar}
+          toggleSidebar={toggleSidebar} />
 
         {/* search bar */}
         <form
@@ -357,7 +354,11 @@ const Header = () => {
 
 
           {/* category sidebar */}
-          <Sidenav cateWrapper={cateWrapper} sidebar={sidebar} setSidebar={setSidebar} toggleSidebar={toggleSidebar} />
+          <Sidenav
+            cateWrapper={cateWrapper}
+            sidebar={sidebar}
+            setSidebar={setSidebar}
+            toggleSidebar={toggleSidebar} />
 
 
           <div className="flex items-center gap-3">
