@@ -33,8 +33,9 @@ import DeliveredProduct from "../components/Admin/AdminOrders/DeliveredProduct";
 import Category from "../components/Admin/AdminCategory/Category";
 import HeaderLogo from "../components/Admin/SyestemSetting/HeaderLogo/HeaderLogo";
 import HeroSlider from "../components/Admin/SyestemSetting/HeroSlider/HeroSlider";
-import FooterLogo from "../components/Admin/SyestemSetting/FooterLogo/FooterLogo";
+
 import FooterSection from "../components/Admin/SyestemSetting/FooterSection/FooterSection";
+import LogoSection from "../components/Admin/SyestemSetting/LogoSection.jsx/LogoSection";
 
 export const router = createBrowserRouter([
   {
@@ -141,8 +142,8 @@ export const router = createBrowserRouter([
       //     element: <HeroBanner></HeroBanner>,
       // },
       {
-        path: "systemSetting/footerLogo",
-        element: <FooterLogo></FooterLogo>,
+        path: "systemSetting/logoSection",
+        element: <LogoSection></LogoSection>,
       },
       {
         path: "systemSetting/footerSection",

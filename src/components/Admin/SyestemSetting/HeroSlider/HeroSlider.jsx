@@ -89,7 +89,7 @@ const HeroSlider = () => {
                   </div>
                   <button
                     type="submit"
-                    className="py-2 px-3 ml-2 text-sm font-medium text-white bg-[#55c3c1f7] rounded-lg border-[3px] border-[#55c3c1f7] hover:bg-secondary hover:border-secondary "
+                    className="py-2 px-3 ml-2 text-sm font-medium text-white bg-[#55c3c1f7] rounded-lg border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee]"
                   >
                     Add
                   </button>

@@ -93,7 +93,6 @@ const Drawer = styled(MuiDrawer, {
     color: "red",
     backgroundColor: "yellow",
   },
-
 }));
 
 export default function AdminLayOut() {
@@ -144,18 +143,6 @@ export default function AdminLayOut() {
       title: "Category",
       icon: <CategoryIcon />,
       linkPath: "category",
-      // items: [
-      //   {
-      //     title: "Add Category",
-
-      //     linkPath: "category/addCategory",
-      //   },
-      //   {
-      //     title: "Category List",
-
-      //     linkPath: "category/categoryList",
-      //   },
-      // ],
     },
     {
       title: "Product",
@@ -195,16 +182,15 @@ export default function AdminLayOut() {
         //   linkPath: "systemSetting/headerBanner",
         // },
         {
-          title: "Footer Logo",
+          title: "Logo Section",
 
-          linkPath: "systemSetting/footerLogo",
+          linkPath: "systemSetting/logoSection",
         },
         {
           title: "Footer Section",
 
           linkPath: "systemSetting/footerSection",
         },
-
       ],
     },
   ];
