@@ -12,11 +12,11 @@ const Home = () => {
     <>
       <BannerSlider />
       <AllCategories />
-      <TopratedProducts />
-      <CategorySectionOne></CategorySectionOne>
-      <CategorySectionTwo></CategorySectionTwo>
-      <CategorySectionThree></CategorySectionThree>
-      <CategorySectionFour></CategorySectionFour>
+      {/* <TopratedProducts /> */}
+      {/* <CategorySectionOne></CategorySectionOne> */}
+      {/* <CategorySectionTwo></CategorySectionTwo> */}
+      {/* <CategorySectionThree></CategorySectionThree> */}
+      {/* <CategorySectionFour></CategorySectionFour> */}
     </>
   );
 };

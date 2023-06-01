@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { RxCaretRight } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import './Sidenav.css';
-import { categories } from '../../Data/Placeholder';
+import GetAPI from '../../APIHooks/GetAPI';
+// import { categories } from '../../Data/Placeholder';
 
 const Sidenav = ({ toggleSidebar, cateWrapper, sidebar, setSidebar }) => {
+
+    const [categories, setCategories] = useState([])
+
     useEffect(() => {
+        GetAPI('categories', setCategories)
+    }, [])
 
 
+    useEffect(() => {
         const handleClickOutsideCategory = (event) => {
             if (sidebar &&
                 cateWrapper.current &&
@@ -52,8 +58,8 @@ const Sidenav = ({ toggleSidebar, cateWrapper, sidebar, setSidebar }) => {
                                 <li key={cat._id} className={`py-4 px-4 m-0 ${cat.borderClass} `}>
                                     <Link className={`  px-5  capitalize block m-0`}>
                                         <div className="flex  items-center gap-5">
-                                            <img src={cat.categoryImg} className='w-[22px] h-[22px] ' />
-                                            <span className='hover:text-white transition-all duration-300 focus:text-white'>{cat.categoryName}</span>
+                                            <img src={cat.image} className='w-[22px] h-[22px] ' />
+                                            <span className='hover:text-white transition-all duration-300 focus:text-white'>{cat.categoryTitle}</span>
                                         </div>
 
                                     </Link>
