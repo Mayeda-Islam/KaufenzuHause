@@ -12,7 +12,7 @@ const FooterInfoModal = ({
 }) => {
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
   } = useForm();
   return (
@@ -51,7 +51,7 @@ const FooterInfoModal = ({
                           className={`bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none  block w-full p-2.5 border border-gray-300`}
                           placeholder="Your name"
                           {...register("address", {
-                            required: "Address is required",
+                            // required: "Address is required",
                           })}
                         />
                         {errors.address && (
@@ -72,7 +72,7 @@ const FooterInfoModal = ({
                           className={`bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none  block w-full p-2.5 border border-gray-300`}
                           placeholder="Phone Number"
                           {...register("phone", {
-                            required: "Phone Number is required",
+                            // required: "Phone Number is required",
                           })}
                         />
                         {errors.phone && (
@@ -92,7 +92,7 @@ const FooterInfoModal = ({
                           className={`bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none  block w-full p-2.5 border border-gray-300`}
                           placeholder="Email"
                           {...register("email", {
-                            required: "Email is required",
+                            // required: "Email is required",
                             pattern: {
                               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                               message: "invalid email address",
@@ -107,7 +107,6 @@ const FooterInfoModal = ({
                       </div>
                       <button
                         type="submit"
-                        disabled={!isValid}
                         className="disabled:opacity-25 mt-3 py-2 px-7  text-sm font-medium text-white bg-primary rounded-sm border-[3px] border-primary hover:bg-secondary hover:border-secondary "
                         onClick={() => setOpenInfo(false)}
                       >
