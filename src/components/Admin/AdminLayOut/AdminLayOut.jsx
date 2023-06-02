@@ -23,6 +23,8 @@ import CategoryIcon from "@mui/icons-material/Category";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import SettingsSystemDaydreamIcon from "@mui/icons-material/SettingsSystemDaydream";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import logo from '../../../images/logo/logo.png'
+
 const drawerWidth = 300;
 
 const openedMixin = (theme) => ({
@@ -199,6 +201,8 @@ export default function AdminLayOut() {
       {/* <CssBaseline /> */}
       <AppBar className="shadow-none border-none" position="fixed" open={open}>
         <Toolbar className="bg-white text-black inline">
+
+
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -212,6 +216,7 @@ export default function AdminLayOut() {
           >
             <MenuIcon />
           </IconButton>
+
 
           <div className="ml-auto ">
             <Typography
@@ -252,16 +257,24 @@ export default function AdminLayOut() {
         variant="permanent"
         open={open}
       >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon className="text-white" />
-            ) : (
-              <ChevronLeftIcon className="text-white" />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
+        <div className="flex justify-between items-center mb-3">
+          <Link to={'/'}>
+            <img src={`${logo}`} alt="logo" className="w-36 ml-4" />
+          </Link>
+          <DrawerHeader>
+            <div>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === "rtl" ? (
+                  <ChevronRightIcon className="text-white" />
+                ) : (
+                  <ChevronLeftIcon className="text-white" />
+                )}
+              </IconButton>
+            </div>
+
+          </DrawerHeader>
+        </div>
+        <Divider className=" bg-lightGray shadow-lg" />
 
         <List>
           {menu.map((text, index) => (
