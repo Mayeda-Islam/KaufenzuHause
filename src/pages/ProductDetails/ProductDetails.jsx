@@ -24,7 +24,7 @@ const ProductDetails = () => {
             {/* product thumbnail slider section */}
             <section className="pt-12 pb-6">
                 <div className="w-11/12 mx-auto">
-                    <div className="grid lg:grid-cols-2">
+                    <div className="grid lg:grid-cols-2 gap-5">
                         <div className='w-full'>
                             <div className='hidden lg:block'>
                                 <ProductSliderGallery product={product} />
@@ -44,7 +44,7 @@ const ProductDetails = () => {
 
 
             {/* product tabs section*/}
-            <hr className="my-9 border-0.5 border-gray-200" />
+            <hr className="my-5 border-0.5 border-gray-200" />
             <section>
                 <div className="w-[94%] lg:w-[90%] mx-auto ">
                     <ProductDetailsTabs />

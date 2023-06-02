@@ -8,12 +8,9 @@ import "swiper/css/pagination";
 import "./TopRatedProducts.css";
 import SwiperCustomArrow from '../../Shared/SwiperCustomArrow/SwiperCustomArrow';
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
-import { products } from '../../Data/Placeholder';
 
 
-const TopratedProducts = () => {
-
-
+const TopratedProducts = ({ products }) => {
     return (
         <section className="pt-10 pb-14 bg-[#f7f7f7] relative">
             <div className=" w-[95%] lg:w-[90%] mx-auto">
@@ -88,12 +85,11 @@ const TopratedProducts = () => {
                     className="mySwiper"
                 >
                     {
-                        products?.map((product) => {
+                        products?.slice(0, 20)?.map((product) => {
                             const { _id } = product;
                             return (
                                 <SwiperSlide key={_id}>
                                     <SingleProduct product={product} />
-
                                 </SwiperSlide>
                             )
                         })
