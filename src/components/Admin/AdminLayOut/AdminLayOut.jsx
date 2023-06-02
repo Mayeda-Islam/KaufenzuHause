@@ -169,7 +169,7 @@ export default function AdminLayOut() {
         {
           title: "Header Logo",
 
-          linkPath: "systemSetting/headerLogo",
+          linkPath: "systemSetting/productSection",
         },
         {
           title: "Hero Section",

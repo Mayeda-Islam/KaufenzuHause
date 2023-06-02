@@ -56,7 +56,9 @@ const FooterSection = () => {
   const handleInfoUpdated = (data) => {
     console.log(data);
     const updatedData = {
-      ...data,
+      address: data.address || footerInfo[0]?.address,
+      phone: data.phone || footerInfo[0]?.phone,
+      email: data.email || footerInfo[0]?.email,
     };
 
     UpdatedApi(`footer-info/${footerInfo[0]?._id}`, setFooterInfo, updatedData);

@@ -31,11 +31,12 @@ import AllProduct from "../components/Admin/AdminProduct/AllProduct";
 import OrderedProduct from "../components/Admin/AdminOrders/OrderedProduct";
 import DeliveredProduct from "../components/Admin/AdminOrders/DeliveredProduct";
 import Category from "../components/Admin/AdminCategory/Category";
-import HeaderLogo from "../components/Admin/SyestemSetting/HeaderLogo/HeaderLogo";
+import HeaderLogo from "../components/Admin/SyestemSetting/ProductSection/ProductSection";
 import HeroSlider from "../components/Admin/SyestemSetting/HeroSlider/HeroSlider";
 
 import FooterSection from "../components/Admin/SyestemSetting/FooterSection/FooterSection";
 import LogoSection from "../components/Admin/SyestemSetting/LogoSection.jsx/LogoSection";
+import ProductSection from "../components/Admin/SyestemSetting/ProductSection/ProductSection";
 
 export const router = createBrowserRouter([
   {
@@ -130,17 +131,13 @@ export const router = createBrowserRouter([
         element: <AdminSystemSetting></AdminSystemSetting>,
       },
       {
-        path: "systemSetting/headerLogo",
-        element: <HeaderLogo></HeaderLogo>,
+        path: "systemSetting/productSection",
+        element: <ProductSection></ProductSection>,
       },
       {
         path: "systemSetting/heroSlider",
         element: <HeroSlider></HeroSlider>,
       },
-      // {
-      //     path: "systemSetting/headerBanner",
-      //     element: <HeroBanner></HeroBanner>,
-      // },
       {
         path: "systemSetting/logoSection",
         element: <LogoSection></LogoSection>,
