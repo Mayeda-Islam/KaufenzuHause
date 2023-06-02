@@ -17,7 +17,6 @@ const BrandFilter = () => {
     }
 
 
-    console.log(removeDuplicates(products))
     const brands = removeDuplicates(products);
 
     return (
@@ -25,8 +24,8 @@ const BrandFilter = () => {
             <FormGroup>
                 {
 
-                    brands.map((elm) => (
-                        <FormControlLabel control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: '20px' } }} />} label={elm} />
+                    brands.map((elm, i) => (
+                        <FormControlLabel key={i} control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: '20px' } }} />} label={elm} />
                     ))
                 }
 

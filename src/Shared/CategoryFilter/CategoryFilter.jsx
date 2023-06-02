@@ -20,7 +20,6 @@ const CategoryFilter = () => {
     }
 
 
-    console.log(removeDuplicates(products))
     const categories = removeDuplicates(products);
     return (
 

@@ -43,7 +43,7 @@ function a11yProps(index) {
     };
 }
 
-const ProductInfoTabs = () => {
+const ProductDetailsTabs = () => {
     const [value, setValue] = React.useState(0);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -275,4 +275,4 @@ const ProductInfoTabs = () => {
     )
 }
 
-export default ProductInfoTabs
+export default ProductDetailsTabs

@@ -22,9 +22,6 @@ const CategorisedProducts = () => {
 
     }
 
-    console.log(isOpen)
-
-
     //close sidenav when clicking outside
     useEffect(() => {
 
@@ -52,7 +49,6 @@ const CategorisedProducts = () => {
 
     const [category, setCategory] = useState({})
     const [productData, setProductData] = useState([]);
-    console.log(productData)
 
     useEffect(() => {
         GetAPI(`categories/${id}`, setCategory)
@@ -167,7 +163,7 @@ const CategorisedProducts = () => {
 
 
                             {
-                                productData.map((product) => (
+                                productData?.map((product) => (
 
                                     <SingleProduct product={product} key={product?._id} />
 

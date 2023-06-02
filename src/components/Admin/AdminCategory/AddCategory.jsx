@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
-import serverUrl from "../../../config/Config";
-import SuccessSweetAlert from "../../../Shared/SuccessSweetAlert/SuccessSweetAlert";
 import PostAPI from "../../../APIHooks/POSTAPI";
 
 const AddCategory = ({ setCategories }) => {
