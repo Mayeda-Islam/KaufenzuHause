@@ -1,10 +1,23 @@
 import React from "react";
 import DeleteItems from "../../../APIHooks/DeleteItems";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+// import DeleteItems from "../../../APIHooks/DeleteItems";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import UpdatedApi from "../../../APIHooks/UpdatedItem";
 
-const LogoTable = ({ setLogos, logos, isHeader }) => {
+const LogoTable = ({
+  setSelectedCategory,
+  categorySliders,
+  setCategorySliders,
+  handleUpdateCategory,
+}) => {
   const handleClick = (id) => {
-    DeleteItems(`${isHeader ? "header-logo" : "footer-logo"}/${id}`, setLogos);
+    DeleteItems(`category-slider/${id}`, setCategorySliders);
   };
+
+  // const handleUpdateCategory=()=>{
+  //   UpdatedApi(`category-slider/${id}`)
+  // }
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -20,10 +33,13 @@ const LogoTable = ({ setLogos, logos, isHeader }) => {
             <th scope="col" className="px-6 py-3    capitalize">
               Delete
             </th>
+            <th scope="col" className="px-6 py-3    capitalize">
+              Update
+            </th>
           </tr>
         </thead>
         <tbody>
-          {logos?.map((logo, index) => (
+          {categorySliders?.map((category, index) => (
             <>
               <tr className="bg-white border-b  border-[#D0D2DA]">
                 <th
@@ -35,7 +51,7 @@ const LogoTable = ({ setLogos, logos, isHeader }) => {
 
                 <td className="px-6 py-4">
                   <img
-                    src={isHeader ? logo?.headerLogoBE : logo?.footerLogoBE}
+                    src={category.categorySliderImage}
                     alt="Slider Image"
                     className="w-14  rounded"
                   />
@@ -44,12 +60,21 @@ const LogoTable = ({ setLogos, logos, isHeader }) => {
                 <td className="px-6 py-4">
                   <div>
                     <button
-                      onClick={() => handleClick(logo?._id)}
+                      onClick={() => handleClick(category?._id)}
                       className="py-2 px-3 text-sm font-medium  flex items-center"
                     >
-                      <span>Delete</span>
+                      <span>
+                        <DeleteForeverIcon />
+                      </span>
                     </button>
                   </div>
+                </td>
+                <td className="px-6 py-4">
+                  <td className="text-[#55c3c1f7]">
+                    <button onClick={() => setSelectedCategory(category)}>
+                      <BorderColorIcon />
+                    </button>
+                  </td>
                 </td>
               </tr>
             </>

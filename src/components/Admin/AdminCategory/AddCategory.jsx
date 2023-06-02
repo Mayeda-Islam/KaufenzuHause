@@ -45,7 +45,7 @@ const AddCategory = ({ setCategories }) => {
               accept="image/*"
               required
               className="mt-2 w-full px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400 rounded-md sm:text-sm"
-              placeholder="category title"
+              placeholder="category image"
             />
             {errors?.categoryImage && (
               <p className="text-red-500 text-sm">
