@@ -11,7 +11,7 @@ const SingleProduct = ({ product }) => {
                 <div className="pb-2 shadow-md shadow-gray-100 m-2.5 border border-gray-200 rounded prod_card ">
                     <div className="relative overflow-hidden">
                         <div className="flex items-center justify-center">
-                            {/* <img src={`${images[0]}`} className='w-full sm:w-full md:w-full h-[300px]  object-cover  lg:h-[240px]' /> */}
+                            <img src={`${images[0]}`} className='w-full sm:w-full md:w-full h-[300px]  object-cover  lg:h-[240px]' />
                         </div>
                         {/* button group */}
                         <div className="absolute top-4 left-4 ">
