@@ -1,46 +1,30 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import AddProductSliderModal from "./AddProductSliderModal";
 import GetAPI from "../../../../APIHooks/GetAPI";
-
-import AddCategorySectionModal from "./AddCategorySectionModal";
-import LogoTable from "../../../../Shared/DataTable/LogoTable/LogoTable";
-
-import { useForm } from "react-hook-form";
-import { SingleImageUploader } from "../../../../APIHooks/SingleImageUploader";
+import DeleteItems from "../../../../APIHooks/DeleteItems";
+import UpdateCategoryModal from "./UpdateCategoryModal";
 
 const ProductSection = () => {
-  const {
-    register,
-    formState: { errors },
-    reset,
-    handleSubmit,
-  } = useForm();
-  const [image, setImage] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState({});
-  const [categories, setCategories] = useState([]);
-  const [categorySliders, setCategorySliders] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
-
-  const handleOPenModal = () => {
-    openModal === true ? setOpenModal(false) : setOpenModal(true);
-  };
-
-  const handleImage = async (event) => {
-    const imageData = event.target.files[0];
-    const formData = new FormData();
-    formData.append("image", imageData);
-    SingleImageUploader(formData, setImage);
-  };
+  const [open, setOpen] = React.useState(false);
+  const [editOpen, setEditOpen] = React.useState(false);
+  const [productSliders, setProductSliders] = useState([])
+  const [selectedId, setSelectedId] = useState('')
 
   useEffect(() => {
-    GetAPI(`category-slider`, setCategorySliders);
-  }, [setCategorySliders]);
+    GetAPI('category-slider', setProductSliders)
+  }, [])
 
-  useEffect(() => {
-    GetAPI("categories", setCategories);
-  }, []);
-  console.log(selectedCategory);
+  const handleDelete = (_id) => {
+    DeleteItems(`category-slider/${_id}`, setProductSliders)
+  }
+
+  const handleEditSlider = (_id) => {
+    setSelectedId(_id)
+    setEditOpen(true)
+  }
+  console.log(productSliders, 'productSliders')
   return (
     <div className="grid grid-cols-1 ">
       <div className="m-4">
@@ -49,7 +33,7 @@ const ProductSection = () => {
         </h2>
         <div>
           <button
-            onClick={handleOPenModal}
+            onClick={() => setOpen(true)}
             className="px-10 py-2 bg-[#55c3c1f7] text-white rounded-full"
           >
             Add category
@@ -57,104 +41,93 @@ const ProductSection = () => {
         </div>
       </div>
 
-      <LogoTable
-        setSelectedCategory={setSelectedCategory}
-        setCategorySliders={setCategorySliders}
-        categorySliders={categorySliders}
-      ></LogoTable>
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="bg-gradient-to-r from-[#031f4bee] to-[#55c3c1f7] w-full text-sm text-left text-textColor bg-gray-200/60">
+            <tr className="py-4 text-lg font-semibold text-white rounded-lg">
+              <th scope="col" className="px-6 py-3  text-center  capitalize">
+                SL
+              </th>
+              <th scope="col" className="px-6 py-3  text-center  capitalize">
+                Logo
+              </th>
+              <th scope="col" className="px-6 py-3  text-center  capitalize">
+                Category
+              </th>
 
-      <AddCategorySectionModal
-        reset={reset}
-        image={image}
-        errors={errors}
-        register={register}
-        handleSubmit={handleSubmit}
-        handleImage={handleImage}
-        setCategorySliders={setCategorySliders}
-        categories={categories}
-        setImage={setImage}
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-      ></AddCategorySectionModal>
+              <th scope="col" className="px-6 py-3  text-center  capitalize">
+                Delete
+              </th>
+              <th scope="col" className="px-6 py-3  text-center  capitalize">
+                Edit
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {productSliders?.map((product, index) => {
+              const { category, imageURL, _id } = product;
+              return (
+                <tr className="bg-white border-b text-black border-[#D0D2DA]" key={_id}>
+                  <th
+                    scope="row"
+                    className="border border-gray-400 py-2 px-4 text-center sm:px-6 text-md font-medium"
+                  >
+                    {index + 1}
+                  </th>
+
+                  <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium flex justify-center">
+                    <img
+                      src={imageURL}
+                      alt="Slider Image"
+                      className="w-14  rounded"
+                    />
+                  </td>
+                  <td className="border border-gray-400 py-2 px-4 text-center sm:px-6 text-md font-medium">
+                    {category}
+                  </td>
+
+                  <td className="border border-gray-400 py-2 px-4 text-center sm:px-6 text-md font-medium">
+                    <div>
+                      <DeleteForeverIcon
+                        className="text-red-500  cursor-pointer"
+                        onClick={() => handleDelete(_id)} />
 
 
-// const ProductSection = () => {
-//   const [categories, setCategories] = useState([]);
-//   useEffect(() => {
-//     GetAPI("categories", setCategories);
-//   }, []);
-//   return (
-//     <div>
-//       <div className="grid grid-cols-1 lg:grid-cols-2">
-//         <div className="m-4">
-//           <h2 className="text-xl lg:text-2xl  font-medium text-textColor my-5 border-l-2 border-[#55c3c1f7] pl-4">
-//             Add header logo Here
-//           </h2>
-//           {/* slider image form */}
-//           <form
-//             //    onSubmit={handleSubmit(handleHeaderLogoSubmit)}
-//             className=""
-//           >
-//             <div className="my-4">
-//               {/* {headerLogoBE && (
-//                 <img
-//                   src={headerLogoBE}
-//                   alt="slider image"
-//                   className="w-24 h-24"
-//                 />
-//               )} */}
-//             </div>
-//             <div className="flex items-center   ">
-//               <div className=" w-full">
-//                 <input
-//                   type="file"
-//                   //   value={footerLogo}
-//                   //   onChange={handleHeaderLogo}
-//                   className="w-full p-2 border-[1px] border-[#55c3c1f7]  rounded-lg z-20 text-sm text-gray-900 bg-gray-50  "
-//                   placeholder="Add Hero Slider image..."
-//                   required
-//                 />
-//                 {/* {errors.sliderImage && (
-//                   <p className="text-red-500 mt-1">
-//                     {errors.footerLogo.message}
-//                   </p>
-//                 )} */}
-//               </div>
-//               <button
-//                 type="submit"
-//                 className="py-2 px-3 ml-2 text-sm font-medium text-white bg-[#55c3c1f7] rounded-lg border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee]"
-//               >
-//                 Add
-//               </button>
-//             </div>
-//           </form>
+                    </div>
+                  </td>
+                  <td className="border border-gray-400 py-2 px-4 text-center sm:px-6 text-md font-medium ">
 
-//           {/* divider border */}
-//         </div>
-//         <div className="m-4">
-//           <label
-//             // for="default"
-//             className="block mb-2 text-sm font-medium text-gray-900"
-//           >
-//             All Category
-//           </label>
-//           <select
-//             // defaultValue={user?.gender}
-//             className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
-//           >
-//             {categories?.map((categoryProduct) => (
-//               <>
-//                 <option value={categoryProduct.categoryTitle}>
-//                   {categoryProduct.categoryTitle}
-//                 </option>
-//               </>
-//             ))}
-//           </select>
-//         </div>
-//       </div>
+                    <BorderColorIcon
+                      className="text-[#55c3c1f7] cursor-pointer "
+                      onClick={() => handleEditSlider(_id)}
+                    />
+                  </td>
+                </tr>
+              )
+            }
 
-    </div>
-  );
+            )}
+          </tbody>
+        </table>
+      </div>
+      <>
+        <AddProductSliderModal
+          open={open}
+          setOpen={setOpen}
+          setProductSliders={setProductSliders}
+        />
+      </>
+      <>
+        <UpdateCategoryModal
+          editOpen={editOpen}
+          setEditOpen={setEditOpen}
+          setProductSliders={setProductSliders}
+          selectedId={selectedId}
+        />
+      </>
+
+    </div >
+  )
 };
 
 export default ProductSection;

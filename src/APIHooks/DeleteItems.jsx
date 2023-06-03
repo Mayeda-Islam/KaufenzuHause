@@ -1,4 +1,3 @@
-import Swal from "sweetalert2";
 import serverUrl from "../config/Config";
 import swal from "sweetalert";
 

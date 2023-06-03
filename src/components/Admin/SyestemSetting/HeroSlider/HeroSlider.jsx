@@ -1,38 +1,24 @@
 import React, { useState } from "react";
 import HeroSliderTable from "../../../../Shared/DataTable/HeroSliderTable/HeroSliderTable";
 import HeroBannerTable from "../../../../Shared/DataTable/HeroBannerTable/HeroBannerTable";
-import { useForm } from "react-hook-form";
 import { SingleImageUploader } from "../../../../APIHooks/SingleImageUploader";
 import PostAPI from "../../../../APIHooks/POSTAPI";
 import { useEffect } from "react";
 import GetAPI from "../../../../APIHooks/GetAPI";
 const HeroSlider = () => {
-  const {
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm();
 
-  const [sliderImageBE, setSliderImageBE] = useState(null);
-  const [sliderImageMDB, setSliderImageMDB] = useState(null);
+
+  const [sliderImageBE, setSliderImageBE] = React.useState(null);
   const [sliderImage, setSliderImage] = useState(null);
+
+  // banner image from express 
   const [bannerImageBE, setBannerImageBE] = useState(null);
-  const [BannerImageMDB, setBannerImageMDB] = useState(null);
+  // banner image from DB 
   const [bannerImage, setBannerImage] = useState(null);
-  const handleBannerImage = (event) => {
-    const imageData = event.target.files[0];
-    const formData = new FormData();
-    formData.append("image", imageData);
-    SingleImageUploader(formData, setBannerImageBE);
-  };
-  const handleBannerImageSubmit = (data) => {
-    const image = { bannerImageBE };
-    PostAPI(`banner-slider`, image, reset, setSliderImageMDB);
-  };
+
   useEffect(() => {
-    GetAPI("banner-slider", setBannerImage);
+    GetAPI("hero-slider", setSliderImage);
   }, []);
-  console.log(bannerImage, "line 35");
 
   const handleImageChange = (event) => {
     const imageData = event.target.files[0];
@@ -40,14 +26,45 @@ const HeroSlider = () => {
     formData.append("image", imageData);
     SingleImageUploader(formData, setSliderImageBE);
   };
-  const handleSliderImageSubmit = (data) => {
-    const image = { sliderImageBE };
-    PostAPI(`hero-slider`, image, reset, setSliderImageMDB);
+
+  const handleSliderImageSubmit = (event) => {
+    event.preventDefault()
+    const image = {
+      imageURL: sliderImageBE
+    };
+    PostAPI(`hero-slider`, image, setSliderImage);
+    setSliderImageBE(null)
+    event.target.reset()
   };
+
+
+
+
   useEffect(() => {
-    GetAPI("hero-slider", setSliderImage);
+    GetAPI("banner-slider", setBannerImage);
   }, []);
-  console.log(sliderImage);
+
+
+  const handleBannerImage = (event) => {
+    const imageData = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", imageData);
+    SingleImageUploader(formData, setBannerImageBE);
+  };
+
+  const handleBannerImageSubmit = (event) => {
+    event.preventDefault()
+    const image = {
+      imageURL: bannerImageBE
+    };
+    PostAPI(`banner-slider`, image, setBannerImage);
+    setBannerImageBE(null)
+    event.target.reset()
+  };
+
+
+
+
 
   return (
     <>
@@ -61,15 +78,17 @@ const HeroSlider = () => {
               </h2>
               {/* slider image form */}
               <form
-                onSubmit={handleSubmit(handleSliderImageSubmit)}
-                className=""
+                onSubmit={handleSliderImageSubmit}
               >
                 <div className="my-4">
-                  <img
-                    src={sliderImage}
-                    alt="slider image"
-                    className="w-24 h-24"
-                  />
+                  {
+                    sliderImageBE &&
+                    <img
+                      src={sliderImageBE}
+                      alt="slider image"
+                      className="w-24 h-24"
+                    />
+                  }
                 </div>
                 <div className="flex items-center   ">
                   <div className=" w-full">
@@ -79,13 +98,9 @@ const HeroSlider = () => {
                       onChange={handleImageChange}
                       className="w-full p-2 border-[1px] border-[#55c3c1f7]  rounded-lg z-20 text-sm text-gray-900 bg-gray-50  "
                       placeholder="Add Hero Slider image..."
-                      required
+
                     />
-                    {errors.sliderImage && (
-                      <p className="text-red-500 mt-1">
-                        {errors.sliderImage.message}
-                      </p>
-                    )}
+
                   </div>
                   <button
                     type="submit"
@@ -106,8 +121,8 @@ const HeroSlider = () => {
 
               {/* slider data table */}
               <HeroSliderTable
-                setSliderImage={setSliderImage}
-                sliderImage={sliderImage}
+                image={sliderImage}
+                setImage={setSliderImage}
               />
             </div>
 
@@ -116,14 +131,17 @@ const HeroSlider = () => {
                 Add Hero Banner image Here
               </h2>
               <div className="my-4">
-                <img
-                  src={bannerImage}
-                  alt="slider image"
-                  className="w-24 h-24"
-                />
+                {
+                  bannerImageBE &&
+                  <img
+                    src={bannerImageBE}
+                    alt="slider image"
+                    className="w-24 h-24"
+                  />
+                }
               </div>
               {/* banner image form */}
-              <form onSubmit={handleSubmit(handleBannerImageSubmit)}>
+              <form onSubmit={handleBannerImageSubmit} >
                 <div className="flex items-center   ">
                   <div className=" w-full">
                     <input
@@ -153,15 +171,17 @@ const HeroSlider = () => {
 
               {/* banner data table */}
               <HeroBannerTable
-                setBannerImage={setBannerImage}
-                bannerImage={bannerImage}
+                image={bannerImage}
+                setImage={setBannerImage}
               />
+
+
             </div>
           </div>
         </div>
       </section>
 
-      {/* hero slider image table */}
+      {/* banner slider image table */}
       <section className="py-6">
         <div className="mx-auto w-[95%]"></div>
       </section>

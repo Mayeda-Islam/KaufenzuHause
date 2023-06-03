@@ -1,13 +1,9 @@
 import React from "react";
-import { useState } from "react";
-import Menu from "@mui/material/Menu";
-import { IoIosArrowDown } from "react-icons/io";
-import GetAPI from "../../../APIHooks/GetAPI";
 import DeleteItems from "../../../APIHooks/DeleteItems";
 
-const HeroSliderTable = ({ sliderImage, setSliderImage }) => {
+const HeroSliderTable = ({ image, setImage }) => {
   const handleClick = (id) => {
-    DeleteItems(`hero-slider/${id}`, setSliderImage);
+    DeleteItems(`hero-slider/${id}`, setImage);
   };
 
   return (
@@ -28,19 +24,19 @@ const HeroSliderTable = ({ sliderImage, setSliderImage }) => {
           </tr>
         </thead>
         <tbody>
-          {sliderImage?.map((image, index) => (
+          {image?.map((image, index) => (
             <>
               <tr className="bg-white border-b  border-[#D0D2DA]">
                 <th
                   scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                 >
                   {index + 1}
                 </th>
 
                 <td className="px-6 py-4">
                   <img
-                    src={image?.sliderImageBE}
+                    src={image?.imageURL}
                     alt="Slider Image"
                     className="w-14  rounded"
                   />

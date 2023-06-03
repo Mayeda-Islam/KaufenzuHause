@@ -1,7 +1,7 @@
-import Swal from "sweetalert2";
 import serverUrl from "../config/Config";
+import swal from "sweetalert";
 
-const PostAPI = (url, productData, reset, setState) => {
+const PostAPI = (url, productData, setState) => {
   fetch(`${serverUrl}/${url}`, {
     method: "POST",
     headers: {
@@ -11,13 +11,12 @@ const PostAPI = (url, productData, reset, setState) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.status === "success") {
+      console.log(data)
+      if (data?.status === "success") {
         setState(data?.data);
-        console.log(data?.data);
-        reset();
-        Swal.fire("Congrats!", "Product Added Successfully!", "success");
+        swal("Congrats!", "Product Added Successfully!", "success");
       } else {
-        Swal.fire("Oops!", "Something Went Wrong!", "error");
+        swal("Oops!", "Something Went Wrong!", "error");
       }
     });
 };

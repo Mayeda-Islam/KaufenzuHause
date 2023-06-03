@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import './Sidenav.css';
@@ -7,7 +7,7 @@ import GetAPI from '../../APIHooks/GetAPI';
 
 const Sidenav = ({ toggleSidebar, cateWrapper, sidebar, setSidebar }) => {
 
-    const [categories, setCategories] = useState([])
+    const [categories, setCategories] = React.useState([])
 
     useEffect(() => {
         GetAPI('categories', setCategories)

@@ -1,6 +1,6 @@
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 
 function SuccessSweetAlert() {
-  Swal.fire("Success!", "Added successfully!", "success");
+  swal("Success!", "Added successfully!", "success");
 }
 export default SuccessSweetAlert;

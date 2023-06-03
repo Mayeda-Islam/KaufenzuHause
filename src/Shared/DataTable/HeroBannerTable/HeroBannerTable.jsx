@@ -1,15 +1,10 @@
 import React from "react";
-import { useState } from "react";
-import Menu from "@mui/material/Menu";
-import { IoIosArrowDown } from "react-icons/io";
 import DeleteItems from "../../../APIHooks/DeleteItems";
 
-const HeroBannerTable = ({ bannerImage, setBannerImage }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+const HeroBannerTable = ({ image, setImage }) => {
 
   const handleClick = (id) => {
-    DeleteItems(`banner-slider/${id}`, setBannerImage);
+    DeleteItems(`banner-slider/${id}`, setImage);
   };
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -29,10 +24,10 @@ const HeroBannerTable = ({ bannerImage, setBannerImage }) => {
           </tr>
         </thead>
         <tbody>
-          {bannerImage?.map((image, index) => (
+          {image?.map((img, index) => (
             <>
               <tr
-                key={image._id}
+                key={img._id}
                 className="bg-white border-b  border-[#D0D2DA]"
               >
                 <th
@@ -44,7 +39,7 @@ const HeroBannerTable = ({ bannerImage, setBannerImage }) => {
 
                 <td className="px-6 py-4">
                   <img
-                    src={image?.bannerImageBE}
+                    src={img?.imageURL}
                     alt="Slider Image"
                     className="w-14  rounded"
                   />
@@ -53,7 +48,7 @@ const HeroBannerTable = ({ bannerImage, setBannerImage }) => {
                 <td className="px-6 py-4">
                   <div>
                     <button
-                      onClick={() => handleClick(image?._id)}
+                      onClick={() => handleClick(img?._id)}
                       className="py-2 px-3 text-sm font-medium  flex items-center"
                     >
                       <button>Delete</button>

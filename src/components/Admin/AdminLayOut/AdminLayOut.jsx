@@ -169,7 +169,7 @@ export default function AdminLayOut() {
 
       items: [
         {
-          title: "Product Section",
+          title: "Product Slider",
 
           linkPath: "systemSetting/productSection",
         },
