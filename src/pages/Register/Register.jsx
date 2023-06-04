@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -19,6 +19,10 @@ const Register = () => {
   const phoneNumberPattern =
     /^\+?[0-9]{1,4}[\s.-]?(\(\d{1,3}\)|\d{1,3})[\s.-]?\d{1,5}[\s.-]?\d{1,9}$/;
 
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div className="my-10 flex justify-center items-center">
       <form

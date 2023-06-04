@@ -22,7 +22,9 @@ const AboutUs = () => {
 
     console.log('image', image)
 
-
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <div className='w-11/12 lg:w-10/12 mx-auto my-10 bg-[bg-[#f7f7f7]'>

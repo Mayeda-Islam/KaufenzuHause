@@ -8,6 +8,10 @@ const Category = () => {
   useEffect(() => {
     GetAPI("categories", setCategories);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div className="w-full lg:w-5/6 mx-auto lg:mt-12">
       <AddCategory setCategories={setCategories}></AddCategory>

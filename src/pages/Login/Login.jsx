@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useEffect } from 'react';
 
 const Login = () => {
 
@@ -14,6 +15,9 @@ const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <div className='my-10 flex justify-center items-center'>

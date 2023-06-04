@@ -1,165 +1,118 @@
 import React from "react";
-import PostAPI from "../../../../APIHooks/POSTAPI";
 import { useEffect } from "react";
 import GetAPI from "../../../../APIHooks/GetAPI";
 import { SingleImageUploader } from "../../../../APIHooks/SingleImageUploader";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Logout, LogoutTwoTone } from "@mui/icons-material";
-import LogoTable from "../../../../Shared/DataTable/LogoTable/LogoTable";
+import UpdatedApi from "../../../../APIHooks/UpdatedItem";
 
 const LogoSection = () => {
-  const {
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm();
-  //footer logo
-  const [footerLogo, setFooterLogo] = useState(null);
-  const [footerLogoBE, setFooterLogoBE] = useState(null);
-  const [footerLogoMDB, setFooterLogoMDB] = useState(null);
+  const [logos, setLogos] = React.useState([]);
+  const [selectedFileHeader, setSelectedFileHeader] = useState(null);
+  const [selectedFileFooter, setSelectedFileFooter] = useState(null);
 
-  const handleFooterLogo = (event) => {
+  useEffect(() => {
+    GetAPI("logo", setLogos);
+  }, []);
+  console.log(logos);
+  const handleFileChangeHeader = (event) => {
     const imageData = event.target.files[0];
     const formData = new FormData();
     formData.append("image", imageData);
-    SingleImageUploader(formData, setFooterLogoBE);
+    SingleImageUploader(formData, setSelectedFileHeader);
   };
-  const handleFooterLogoSubmit = (data) => {
-    const logo = { footerLogoBE };
-    PostAPI(`footer-logo`, logo, reset, setFooterLogoMDB);
-  };
-  useEffect(() => {
-    GetAPI("footer-logo", setFooterLogo);
-  }, [footerLogoMDB]);
-  console.log(footerLogo, "line 35");
 
-  //header logo
-  const [headerLogo, setHeaderLogo] = useState(null);
-  const [headerLogoBE, setHeaderLogoBE] = useState(null);
-
-  const [headerLogoMDB, setHeaderLogoMDB] = useState(null);
-
-  const handleHeaderLogo = (event) => {
+  const handleFileChangeFooter = (event) => {
     const imageData = event.target.files[0];
     const formData = new FormData();
     formData.append("image", imageData);
-    SingleImageUploader(formData, setHeaderLogoBE);
+    SingleImageUploader(formData, setSelectedFileFooter);
   };
-  const handleHeaderLogoSubmit = (data) => {
-    const logo = { headerLogoBE };
-    PostAPI(`header-logo`, logo, reset, setHeaderLogoMDB);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const formData = {
+      headerLogoURL: selectedFileHeader || logos[0]?.headerLogoURL,
+      footerLogoURL: selectedFileFooter || logos[0]?.footerLogoURL,
+    };
+
+    UpdatedApi(`logo/${logos[0]?._id}`, setLogos, formData);
+    form.reset();
   };
+
   useEffect(() => {
-    GetAPI("header-logo", setHeaderLogo);
-  }, [headerLogoMDB]);
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
-    <div>
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="m-4">
-          <h2 className="text-xl lg:text-2xl  font-medium text-textColor my-5 border-l-2 border-[#55c3c1f7] pl-4">
-            Add header logo Here
-          </h2>
-          {/* slider image form */}
-          <form onSubmit={handleSubmit(handleHeaderLogoSubmit)} className="">
-            <div className="my-4">
-              {headerLogoBE && (
-                <img
-                  src={headerLogoBE}
-                  alt="slider image"
-                  className="w-24 h-24"
-                />
-              )}
-            </div>
-            <div className="flex items-center   ">
-              <div className=" w-full">
-                <input
-                  type="file"
-                  //   value={footerLogo}
-                  onChange={handleHeaderLogo}
-                  className="w-full p-2 border-[1px] border-[#55c3c1f7]  rounded-lg z-20 text-sm text-gray-900 bg-gray-50  "
-                  placeholder="Add Hero Slider image..."
-                  required
-                />
-                {errors.sliderImage && (
-                  <p className="text-red-500 mt-1">
-                    {errors.footerLogo.message}
-                  </p>
-                )}
-              </div>
-              <button
-                type="submit"
-                className="py-2 px-3 ml-2 text-sm font-medium text-white bg-[#55c3c1f7] rounded-lg border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee]"
-              >
-                Add
-              </button>
-            </div>
-          </form>
+    <div className="w-11/12 md:w-1/2 mx-auto border border-gray-300 p-10 my-10 rounded-lg bg-slate-100">
 
-          {/* divider border */}
-
-          <hr className="my-8 border-0.5 border-gray-300" />
-          {/* slider image table */}
-          <h2 className="mb-6 text-xl lg:text-2xl  font-medium text-textColor  border-l-2 border-[#55c3c1f7] pl-4">
-            All Header Logos Here
-          </h2>
-
-          {/* slider data table */}
-          <LogoTable setLogos={setHeaderLogo} isHeader logos={headerLogo} />
+      <form className=" py-5" onSubmit={handleSubmit}>
+        <div className="grid lg:grid-cols-4 gap-4 items-center  my-3 lg:my-5">
+          <div className="flex justify-center items-center">
+            {!selectedFileHeader ? (
+              <img
+                src={logos[0]?.headerLogoURL}
+                alt={"imageFile"}
+                className="w-52"
+              ></img>
+            ) : (
+              <img
+                src={selectedFileHeader}
+                alt={"imageFile"}
+                className="w-52"
+              ></img>
+            )}
+          </div>
+          <label className="block  lg:col-span-3">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium text-black">
+              Header Logo
+            </span>
+            <input
+              onChange={handleFileChangeHeader}
+              type="file"
+              className="mt-1 px-3 py-3 border-2 shadow-sm focus:outline-none border-lightGray bg-transparent placeholder-black  block w-full rounded-md sm:text-sm"
+              required
+            />
+          </label>
         </div>
-        <div className="m-4">
-          <h2 className="text-xl lg:text-2xl  font-medium text-textColor my-5 border-l-2 border-[#55c3c1f7] pl-4">
-            Add Footer Logo Here
-          </h2>
-          {/* slider image form */}
-          <form onSubmit={handleSubmit(handleFooterLogoSubmit)} className="">
-            <div className="my-4">
-              {setFooterLogoBE && (
-                <img
-                  src={footerLogoBE}
-                  alt="slider image"
-                  className="w-24 h-24"
-                />
-              )}
-            </div>
-            <div className="flex items-center   ">
-              <div className=" w-full">
-                <input
-                  type="file"
-                  //   value={footerLogo}
-                  onChange={handleFooterLogo}
-                  className="w-full p-2 border-[1px] border-[#55c3c1f7]  rounded-lg z-20 text-sm text-gray-900 bg-gray-50  "
-                  placeholder="Add Hero Slider image..."
-                  required
-                />
-                {errors.sliderImage && (
-                  <p className="text-red-500 mt-1">
-                    {errors.footerLogo.message}
-                  </p>
-                )}
-              </div>
-              <button
-                type="submit"
-                className="py-2 px-3 ml-2 text-sm font-medium text-white bg-[#55c3c1f7] rounded-lg border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee]"
-              >
-                Add
-              </button>
-            </div>
-          </form>
 
-          {/* divider border */}
-
-          <hr className="my-8 border-0.5 border-gray-300" />
-          {/* slider image table */}
-          <h2 className="mb-6 text-xl lg:text-2xl  font-medium text-textColor  border-l-2 border-[#55c3c1f7] pl-4">
-            All Footer Logos
-          </h2>
-
-          {/* slider data table */}
-          <LogoTable setLogos={setFooterLogo} logos={footerLogo} />
+        <div className="grid lg:grid-cols-4 gap-4 items-center  my-3 lg:my-5">
+          <div className="flex justify-center items-center ">
+            {selectedFileFooter ? (
+              <img
+                src={selectedFileFooter}
+                alt={"imageFile"}
+                className="w-52"
+              ></img>
+            ) : (
+              <img
+                src={logos[0]?.footerLogoURL}
+                alt={"imageFile"}
+                className="w-52"
+              ></img>
+            )}
+          </div>
+          <label className="block  lg:col-span-3">
+            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium text-black">
+              Footer Logo
+            </span>
+            <input
+              onChange={handleFileChangeFooter}
+              type="file"
+              className="mt-1 px-3 py-3 border-2 shadow-sm focus:outline-none border-lightGray bg-transparent placeholder-black  block w-full rounded-md sm:text-sm"
+              required
+            />
+          </label>
         </div>
-      </div>
+
+        <button
+          className="py-2 px-3 ml-2 text-sm font-medium text-white bg-[#55c3c1f7] rounded-lg border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee] w-full"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
     </div>
   );
 };

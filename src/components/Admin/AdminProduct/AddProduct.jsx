@@ -12,31 +12,25 @@ import GetAPI from "../../../APIHooks/GetAPI";
 // import { color } from "jodit/types/plugins/color/color";
 
 const AddProduct = () => {
-  const naviagte = useNavigate();
-  const [images, setImages] = useState([]);
+  const navigate = useNavigate();
+  const [images, setImages] = React.useState([]);
   const [description, setDescription] = useState("");
-  const [delivery, setDelivery] = useState("");
+  const [descriptionGerman, setDescriptionGerman] = useState("");
+
   const [shipping, setShipping] = useState("");
+  const [shippingGerman, setShippingGerman] = useState("");
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
   const {
     register,
     handleSubmit,
     reset,
-    // watch,
     formState: { errors },
   } = useForm();
   const availableColors = [];
   const availableSizes = [];
   const [categories, setCategories] = useState([]);
-  // const categoryProducts = [
-  //   { title: "Phone" },
-  //   { title: "Mobile" },
-  //   { title: "Tv" },
-  //   { title: "Camera" },
-  //   { title: "Smartwatch" },
-  //   { title: "HeadPhones" },
-  // ];
+
   useEffect(() => {
     GetAPI("categories", setCategories);
   }, []);
@@ -60,14 +54,23 @@ const AddProduct = () => {
         "error"
       );
     }
-    if (delivery.length < 15) {
+    if (descriptionGerman.length < 15) {
       return Swal.fire(
         "Oops!",
-        "Delivery must need at least 10 characters",
+        "Description must need at least 10 characters",
         "error"
       );
     }
+
+
     if (shipping.length < 15) {
+      return Swal.fire(
+        "Oops!",
+        "Shipping must need at least 10 characters",
+        "error"
+      );
+    }
+    if (shippingGerman.length < 15) {
       return Swal.fire(
         "Oops!",
         "Shipping must need at least 10 characters",
@@ -77,12 +80,12 @@ const AddProduct = () => {
     if (!images.length) {
       return Swal.fire("Oops!", "Images must need", "error");
     }
-    // console.log(data, description, shipping, delivery, sizes, colors);
     const productData = {
       ...data,
       description,
+      descriptionGerman,
       shipping,
-      delivery,
+      shippingGerman,
       colors,
       sizes,
       images: images,
@@ -98,20 +101,24 @@ const AddProduct = () => {
       .then((data) => {
         if (data?.status === "success") {
           setDescription("");
-          setDelivery("");
           setShipping("");
           setSizes([]);
           setColors([]);
           setImages([]);
-
+          setDescriptionGerman("")
+          setShippingGerman("")
           reset();
-          naviagte("/admin/product/allProduct");
+          navigate("/admin/product/allProduct");
           Swal.fire("Congrats!", "Product Added Successfully!", "success");
         }
       });
 
     console.log(productData);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div>
       <h1 className="text-3xl w-11/12 mx-auto font-medium">Add Product</h1>
@@ -135,6 +142,23 @@ const AddProduct = () => {
             <p className="text-red-500 text-sm ">Product title is required</p>
           )}
         </label>
+
+        <label className="block mt-4">
+          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium my-2">
+            Product title (In German)
+          </span>
+          <input
+            type="text"
+            {...register("productTitleGerman", { required: true })}
+            // defaultValue={user?.email}
+
+            className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
+            placeholder="Product title"
+          />
+          {errors?.productTitleGerman && (
+            <p className="text-red-500 text-sm ">Product title is required</p>
+          )}
+        </label>
         <label className="block mt-4">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
             Product Price
@@ -152,6 +176,7 @@ const AddProduct = () => {
           )}
         </label>
 
+
         <div className=" mt-4">
           <label className="block ">
             <span className="after:content-['(Optional)'] after:ml-0.5 after:text-green-400 block text-sm font-medium">
@@ -165,11 +190,35 @@ const AddProduct = () => {
             />
           </label>
         </div>
+
+        <label className="block mt-4">
+          <span className="after:content-['(Optional)'] after:ml-0.5 after:text-green-400  block text-sm font-medium">
+            Model
+          </span>
+          <input
+            type="text"
+            {...register("model")}
+            className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
+            placeholder="model name"
+          />
+
+        </label>
+
         <div className="my-4">
-          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium my-1">
             Product Description
           </span>
-          <Jodit setContent={setDescription} content={description}></Jodit>
+          <Jodit
+            setContent={setDescription}
+            content={description} />
+        </div>
+        <div className="my-4">
+          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium my-1">
+            Product Description (In German)
+          </span>
+          <Jodit
+            setContent={setDescriptionGerman}
+            content={descriptionGerman} />
         </div>
         <div className="my-4">
           <span className="my-2 block text-sm font-medium">Sizes</span>
@@ -230,17 +279,18 @@ const AddProduct = () => {
           </label>
         </div>
         <div className="my-4">
-          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
+          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium my-1">
             Shipping
           </span>
           <Jodit setContent={setShipping} content={shipping}></Jodit>
         </div>
         <div className="my-4">
-          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium">
-            Delivery
+          <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium my-1">
+            Shipping (In German)
           </span>
-          <Jodit setContent={setDelivery} content={delivery}></Jodit>
+          <Jodit setContent={setShippingGerman} content={shippingGerman}></Jodit>
         </div>
+
         <div>
           <div className="my-4">
             <h1 className="text-lg font-medium">Image preview : </h1>

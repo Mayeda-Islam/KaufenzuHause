@@ -28,7 +28,6 @@ const ProductList = ({ products, setProducts }) => {
 
             <th className="px-6 py-4  ">Brand</th>
             <th className="px-6 py-4  ">Shipping</th>
-            <th className="px-6 py-4  ">Delivery</th>
 
             <th className="px-6 py-4  ">Delete</th>
             <th className="px-6 py-4  ">Edit</th>
@@ -52,9 +51,9 @@ const ProductList = ({ products, setProducts }) => {
               </td>
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
                 {parse(
-                  product.description.length > 100
-                    ? product.description.slice(0, 100) + "..."
-                    : product.description
+                  product?.description.length > 100
+                    ? product?.description.slice(0, 100) + "..."
+                    : product?.description
                 )}
               </td>
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
@@ -77,14 +76,6 @@ const ProductList = ({ products, setProducts }) => {
                   product.shipping.length > 100
                     ? product.shipping.slice(0, 100) + "..."
                     : product.shipping
-                )}
-              </td>
-
-              <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
-                {parse(
-                  product.delivery.length > 100
-                    ? product.delivery.slice(0, 100) + "..."
-                    : product.delivery
                 )}
               </td>
               <td

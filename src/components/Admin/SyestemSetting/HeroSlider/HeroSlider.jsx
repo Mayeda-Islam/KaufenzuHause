@@ -9,16 +9,16 @@ const HeroSlider = () => {
 
 
   const [sliderImageBE, setSliderImageBE] = React.useState(null);
-  const [sliderImage, setSliderImage] = useState(null);
+  const [sliderImage, setSliderImage] = useState([]);
 
   // banner image from express 
   const [bannerImageBE, setBannerImageBE] = useState(null);
   // banner image from DB 
-  const [bannerImage, setBannerImage] = useState(null);
+  const [bannerImage, setBannerImage] = useState([]);
 
   useEffect(() => {
     GetAPI("hero-slider", setSliderImage);
-  }, []);
+  }, [sliderImage]);
 
   const handleImageChange = (event) => {
     const imageData = event.target.files[0];
@@ -42,7 +42,7 @@ const HeroSlider = () => {
 
   useEffect(() => {
     GetAPI("banner-slider", setBannerImage);
-  }, []);
+  }, [bannerImage]);
 
 
   const handleBannerImage = (event) => {
@@ -63,7 +63,9 @@ const HeroSlider = () => {
   };
 
 
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
 
   return (
@@ -98,7 +100,7 @@ const HeroSlider = () => {
                       onChange={handleImageChange}
                       className="w-full p-2 border-[1px] border-[#55c3c1f7]  rounded-lg z-20 text-sm text-gray-900 bg-gray-50  "
                       placeholder="Add Hero Slider image..."
-
+                      required
                     />
 
                   </div>

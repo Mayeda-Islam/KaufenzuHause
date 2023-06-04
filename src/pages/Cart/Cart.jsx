@@ -2,9 +2,12 @@ import React from 'react'
 import { products } from '../../Data/Placeholder'
 import { AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react';
 const Cart = () => {
 
-
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <section className="pt-10 pb-14 bg-[#fff] relative">
             <div className=" w-[95%] lg:w-[94%] mx-auto">
@@ -38,8 +41,8 @@ const Cart = () => {
                                         </thead>
                                         <tbody>
                                             {
-                                                products.slice(0, 5).map((cart) => (
-                                                    <tr className=" border-b mb-3">
+                                                products.slice(0, 5).map((cart, index) => (
+                                                    <tr key={index} className=" border-b mb-3">
                                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                             <div className="flex  items-center gap-3">
                                                                 <button className="text-xl text-gray-400"><AiOutlineClose /></button>

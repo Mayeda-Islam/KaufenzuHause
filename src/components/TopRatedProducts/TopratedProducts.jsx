@@ -68,7 +68,7 @@ const TopratedProducts = ({ products }) => {
                     slidesPerView={4}
                     // slidesPerView="auto"
                     // loop={true}
-                    loopFillGroupWithBlank={false}
+                    loopfillgroupwithblank="false"
 
                     // navigation={true}
                     autoplay={{

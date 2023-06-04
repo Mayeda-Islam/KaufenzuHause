@@ -38,10 +38,16 @@ const AddProductSliderModal = ({ open, setOpen, setProductSliders }) => {
             category: form.category.value,
             imageURL: image
         }
-        PostAPI('category-slider', formData, form.reset, setProductSliders)
+        PostAPI('category-slider', formData, setProductSliders)
+        form.reset()
         setOpen(false)
         setImage(null)
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
         <Modal
             keepMounted

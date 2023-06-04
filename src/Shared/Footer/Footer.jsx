@@ -7,8 +7,28 @@ import { AiOutlineMobile, AiOutlineMail } from 'react-icons/ai';
 import { IoLocationOutline } from 'react-icons/io5';
 
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import GetAPI from '../../APIHooks/GetAPI';
 
 const Footer = () => {
+    const [logo, setLogo] = React.useState([])
+    const [information, setInformation] = React.useState([])
+    const [description, setDescription] = React.useState([])
+
+    // footer logo 
+    useEffect(() => {
+        GetAPI('logo', setLogo)
+    }, [])
+
+
+    // footer information
+    useEffect(() => {
+        GetAPI('footer-Info', setInformation)
+    }, [])
+    // footer description
+    useEffect(() => {
+        GetAPI('footer-description', setDescription)
+    }, [])
     return (
 
         <footer className="bg-darkNavy ">
@@ -17,10 +37,10 @@ const Footer = () => {
                     <div className="w-full  lg:w-2/5 ">
                         <div className="">
                             <Link to={"/"} className="flex items-center mb-2">
-                                <img src={logo} className="w-[220px] mr-3" alt="KaufenzuHause Logo" />
+                                <img src={logo[0]?.footerLogoURL} className="w-[220px] mr-3" alt="KaufenzuHause Logo" />
                             </Link>
                             <p className="text-sm text-gray-300 w-full lg:w-3/4">
-                                Machen Sie das Einkaufen von zu Hause aus einfacher.
+                                {description[0]?.description}
                             </p>
 
                             <div className="py-3">
@@ -30,7 +50,7 @@ const Footer = () => {
 
                                     </span>
                                     <h3 className="text-sm text-white">
-                                        Berliner strasse,  60311,  Frankfurt am main,  Germany
+                                        {information[0]?.address}
                                     </h3>
                                 </div>
                                 <div className="flex items-center gap-3 mb-2">
@@ -39,7 +59,7 @@ const Footer = () => {
 
                                     </span>
                                     <h3 className="text-sm text-white">
-                                        (049) 1766-2058329
+                                        {information[0]?.phone}
                                     </h3>
                                 </div>
                                 <div className="flex items-center gap-3 mb-2">
@@ -48,7 +68,7 @@ const Footer = () => {
 
                                     </span>
                                     <h3 className="text-sm text-white">
-                                        Email: KaufenzuHause@info.com
+                                        Email:  {information[0]?.email}
                                     </h3>
                                 </div>
                             </div>

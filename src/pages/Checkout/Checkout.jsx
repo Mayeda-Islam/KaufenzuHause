@@ -1,7 +1,12 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Checkout = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <section className="py-8 lg:pt-10 lg:pb-14 bg-[#f7f7f7] relative">
             <div className=" w-[95%] lg:w-[94%] mx-auto">

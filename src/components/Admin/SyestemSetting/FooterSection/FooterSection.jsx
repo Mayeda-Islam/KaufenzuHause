@@ -1,7 +1,5 @@
-import { Box, Modal } from "@mui/material";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { IoClose } from "react-icons/io5";
 import GetAPI from "../../../../APIHooks/GetAPI";
 import FooterDescriptionModal from "./FooterDescriptionModal";
 import UpdatedApi from "../../../../APIHooks/UpdatedItem";
@@ -17,7 +15,7 @@ const style = {
   //padding: "20px "
 };
 const FooterSection = () => {
-  const [footerDescription, setFooterDescription] = useState([]);
+  const [footerDescription, setFooterDescription] = React.useState([]);
   const [footerInfo, setFooterInfo] = useState([]);
   const [openInfo, setOpenInfo] = useState(false);
 
@@ -63,6 +61,11 @@ const FooterSection = () => {
 
     UpdatedApi(`footer-info/${footerInfo[0]?._id}`, setFooterInfo, updatedData);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <section className="py-6">
       <div className="grid grid-cols-1 lg:grid-cols-2">

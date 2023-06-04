@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
+import { useEffect } from "react";
 
 const AdminProfile = () => {
   const [image, setImage] = useState(null);
@@ -27,6 +28,9 @@ const AdminProfile = () => {
     .then((res) => res.json())
     .then((data) => setCountries(data));
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div>
       <div className="grid grid-cols-12 w-fit mx-auto md:gap-10">

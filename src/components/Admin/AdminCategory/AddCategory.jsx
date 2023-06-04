@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
 import PostAPI from "../../../APIHooks/POSTAPI";
+import { useEffect } from "react";
 
 const AddCategory = ({ setCategories }) => {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = React.useState(null);
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -26,8 +26,12 @@ const AddCategory = ({ setCategories }) => {
     };
     console.log(formData);
     // reset();
-    PostAPI(`category`, formData, reset, setCategories);
+    PostAPI(`category`, formData, setCategories);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div>

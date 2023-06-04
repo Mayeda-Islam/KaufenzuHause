@@ -71,6 +71,10 @@ const CategorisedProducts = () => {
 
     }, [productData, location.state?.searchState]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
         <section className="pt-6 lg:pt-10 pb-14 bg-[#f7f7f7] relative">
             <div className=" w-[95%] mx-auto">

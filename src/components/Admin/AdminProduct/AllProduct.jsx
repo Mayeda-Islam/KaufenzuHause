@@ -7,6 +7,10 @@ const AllProduct = () => {
   useEffect(() => {
     GetAPI("products", setProducts);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div>
       <div className=" w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">

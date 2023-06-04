@@ -1,31 +1,36 @@
-import React from 'react'
-import slider1 from '../../../images/bannerSlider/banners/banner.png';
-import slider2 from '../../../images/bannerSlider/banners/banner2.png';
-import slider3 from '../../../images/bannerSlider/banners/banner3.png';
-import sidBanner1 from '../../../images/bannerSlider/sidBanner1.png';
-import sidBanner2 from '../../../images/bannerSlider/sidBanner2.png';
+import React, { useEffect } from 'react'
 import { Pagination, Navigation, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import GetAPI from '../../../APIHooks/GetAPI';
+import { useState } from 'react';
 
 const BannerSlider = () => {
+    const [sliders, setSliders] = React.useState([]);
+    const [bannerImage, setBannerImage] = useState([]);
+    useEffect(() => {
+        GetAPI("hero-slider", setSliders);
+    }, []);
 
-    const sliders = [
-        {
-            _id: 1,
-            bannerImg: slider1
-        },
-        {
-            _id: 2,
-            bannerImg: slider2
-        },
-        {
-            _id: 3,
-            bannerImg: slider3
-        },
-    ]
+    useEffect(() => {
+        GetAPI("banner-slider", setBannerImage);
+    }, []);
+    // const sliders = [
+    //     {
+    //         _id: 1,
+    //         bannerImg: slider1
+    //     },
+    //     {
+    //         _id: 2,
+    //         bannerImg: slider2
+    //     },
+    //     {
+    //         _id: 3,
+    //         bannerImg: slider3
+    //     },
+    // ]
     return (
         <section className=" py-10 ">
             <div className="w-[95%] mx-auto">
@@ -75,14 +80,14 @@ const BannerSlider = () => {
                         >
                             {
                                 sliders?.map((slider) => {
-                                    const { _id, bannerImg } = slider;
+                                    const { _id, imageURL } = slider;
                                     return (
                                         <SwiperSlide key={_id}>
                                             <div
                                                 className='rounded-lg'
 
                                             >
-                                                <img src={bannerImg} className="w-full h-[300px] lg:h-[400px]  xl:min-h-[500px] rounded-lg " alt="" />
+                                                <img src={imageURL} className="w-full h-[300px] lg:h-[400px]  xl:min-h-[500px] rounded-lg " alt="" />
                                             </div>
 
                                         </SwiperSlide>
@@ -96,17 +101,17 @@ const BannerSlider = () => {
                     </div>
                     <div className="w-full lg:w-4/12 max-h-[600px]">
                         <div className="hidden  lg:flex lg:flex-col flex-row gap-3 ">
-                            <img src={sidBanner1} className=" w-full h-[150px] lg:h-[193px]  xl:min-h-[243px] rounded-lg" alt="" />
-                            <img src={sidBanner2} className=" w-full h-[150px] lg:h-[193px]  xl:min-h-[243px] rounded-lg" alt="" />
+                            <img src={bannerImage[0]?.imageURL} className=" w-full h-[150px] lg:h-[193px]  xl:min-h-[243px] rounded-lg" alt="" />
+                            <img src={bannerImage[1]?.imageURL} className=" w-full h-[150px] lg:h-[193px]  xl:min-h-[243px] rounded-lg" alt="" />
                         </div>
                         <div className=" flex flex-row lg:hidden gap-3">
                             <div className="w-6/12">
 
-                                <img src={sidBanner1} className=" w-full h-[150px] lg:h-auto rounded-lg" alt="" />
+                                <img src={bannerImage[0]?.imageURL} className=" w-full h-[150px] lg:h-auto rounded-lg" alt="" />
                             </div>
                             <div className="w-6/12">
 
-                                <img src={sidBanner2} className=" w-full h-[150px] lg:h-auto rounded-lg" alt="" />
+                                <img src={bannerImage[1]?.imageURL} className=" w-full h-[150px] lg:h-auto rounded-lg" alt="" />
                             </div>
 
                         </div>

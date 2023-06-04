@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
 import { MdClose } from 'react-icons/md';
 import ProductDetailsTabs from '../../Shared/ProductDetailsShared/ProductDetailsTabs';
@@ -12,13 +12,17 @@ import { useParams } from 'react-router-dom';
 const ProductDetails = () => {
     const { id } = useParams()
     console.log(id)
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = React.useState({})
 
     useEffect(() => {
         GetAPI(`products/${id}`, setProduct)
     }, [id])
 
     console.log(product);
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <>
             {/* product thumbnail slider section */}
@@ -33,6 +37,7 @@ const ProductDetails = () => {
                         {/* product info */}
                         <div className=" m-3">
                             <ProductInfo
+                                product={product}
                             />
                         </div>
 
@@ -47,7 +52,7 @@ const ProductDetails = () => {
             <hr className="my-5 border-0.5 border-gray-200" />
             <section>
                 <div className="w-[94%] lg:w-[90%] mx-auto ">
-                    <ProductDetailsTabs />
+                    <ProductDetailsTabs product={product} />
                 </div>
             </section>
 

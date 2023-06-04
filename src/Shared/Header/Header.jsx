@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import logo from "../../images/logo/logo.png";
+// import logo from "../../images/logo/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { CgShoppingCart } from "react-icons/cg";
@@ -15,6 +15,7 @@ import { products } from "../../Data/Placeholder";
 
 
 import Sidenav from "./Sidenav";
+import GetAPI from "../../APIHooks/GetAPI";
 
 
 const Header = () => {
@@ -23,10 +24,13 @@ const Header = () => {
   const [anchorE3, setAnchorE3] = React.useState(null);
 
   //sticky nav on scroll
-
+  const [logo, setLogo] = useState([])
   //sticky nav
   const [stickyNav, setStickyNav] = useState(false);
 
+  useEffect(() => {
+    GetAPI('logo', setLogo)
+  }, [])
   useEffect(() => {
     window.onscroll = () => {
       setStickyNav(window.pageYOffset === 0 ? false : true);
@@ -148,7 +152,7 @@ const Header = () => {
           {/* brand logo */}
           <span className="">
             <Link>
-              <img src={logo} className="w-36" alt="" />
+              <img src={logo[0]?.headerLogoURL} className="w-36" alt="" />
             </Link>
           </span>
         </div>

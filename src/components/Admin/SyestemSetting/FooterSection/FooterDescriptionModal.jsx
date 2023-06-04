@@ -1,7 +1,7 @@
 import { Style } from "@mui/icons-material";
 import { Box, Modal } from "@mui/material";
 import React from "react";
-import { useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 
@@ -19,6 +19,9 @@ const FooterDescriptionModal = ({
   } = useForm();
   //open information form
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div>
       <Modal

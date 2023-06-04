@@ -23,7 +23,9 @@ import CategoryIcon from "@mui/icons-material/Category";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import SettingsSystemDaydreamIcon from "@mui/icons-material/SettingsSystemDaydream";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import logo from '../../../images/logo/logo.png'
+import { useEffect } from "react";
+import GetAPI from "../../../APIHooks/GetAPI";
+import { useState } from "react";
 
 const drawerWidth = 300;
 
@@ -109,6 +111,12 @@ export default function AdminLayOut() {
       return newState;
     });
   };
+  const [logo, setLogo] = useState([])
+
+  useEffect(() => {
+    GetAPI('logo', setLogo)
+  }, [])
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -259,7 +267,7 @@ export default function AdminLayOut() {
       >
         <div className="flex justify-between items-center mb-3">
           <Link to={'/'}>
-            <img src={`${logo}`} alt="logo" className="w-36 ml-4" />
+            <img src={`${logo[0]?.headerLogoURL}`} alt="logo" className="w-36 ml-4" />
           </Link>
           <DrawerHeader>
             <div>
@@ -309,14 +317,14 @@ export default function AdminLayOut() {
                       {text.icon}
                     </ListItemIcon>
                     <ListItemText
-                      className="text-lg "
+                      className="text-md "
                       sx={{
                         opacity: open ? 1 : 0,
-                        fontSize: "2rem",
+
                         color: "white",
                       }}
                     >
-                      <span className="text-xl">{text.title}</span>
+                      <span className="text-md">{text.title}</span>
                     </ListItemText>
                     {open &&
                       text.items &&
@@ -377,7 +385,7 @@ export default function AdminLayOut() {
                                     fontSize: "0.8em",
                                   }}
                                 >
-                                  <span className="text-xl">
+                                  <span className="text-md">
                                     {subText.title}
                                   </span>
                                 </ListItemText>

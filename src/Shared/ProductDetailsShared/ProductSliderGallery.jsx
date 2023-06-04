@@ -36,7 +36,7 @@ const ProductSliderGallery = ({ product }) => {
 
                     images?.map((image, index) =>
                         <SwiperSlide key={index}>
-                            <img src={image} alt="Images" className='w-full h-[400px]' />
+                            <img src={image} alt="Images" className='w-full lg:h-[500px]' />
                         </SwiperSlide>
                     )
 
@@ -59,7 +59,7 @@ const ProductSliderGallery = ({ product }) => {
                 {
                     images?.map((image, index) =>
                         <SwiperSlide key={index}>
-                            <img src={image} alt="Images" className='w-full h-[150px]' />
+                            <img src={image} alt="Images" className='w-full lg:h-[150px]' />
                         </SwiperSlide>
                     )
 

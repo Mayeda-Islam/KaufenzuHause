@@ -8,6 +8,7 @@ import { GiTwoCoins } from "react-icons/gi";
 import { BiTask } from "react-icons/bi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import DashboardChart from "./DashboardChart";
+import { useEffect } from "react";
 
 const AdminDashboard = () => {
   const sellsIncome = [
@@ -30,6 +31,10 @@ const AdminDashboard = () => {
     { icon: <FaRegCalendarAlt />, title: "Monthly Orders", amount: 50 },
     { icon: <BsCart4 />, title: "Today's Orders", amount: 50 },
   ];
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="w-11/12  mx-auto my-5">

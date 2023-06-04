@@ -25,6 +25,10 @@ const ProductSection = () => {
     setEditOpen(true)
   }
   console.log(productSliders, 'productSliders')
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div className="grid grid-cols-1 ">
       <div className="m-4">
