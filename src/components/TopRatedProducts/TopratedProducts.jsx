@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import "./TopRatedProducts.css";
 import SwiperCustomArrow from '../../Shared/SwiperCustomArrow/SwiperCustomArrow';
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
+import { Link } from 'react-router-dom';
 
 
 const TopratedProducts = ({ products }) => {
@@ -20,9 +21,9 @@ const TopratedProducts = ({ products }) => {
                         Top Rated Products
                     </h2>
                     {/* view all button  */}
-                    <button className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
+                    <Link to={'products'} className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
                         View All
-                    </button>
+                    </Link>
                 </div>
 
                 <hr className="border border-gray-300 mt-6 mb-6" />

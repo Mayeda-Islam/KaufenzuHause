@@ -245,18 +245,31 @@ const Header = () => {
             </Popover>
           </div>
           {/* button group */}
-          <Link to={'/register'}>
+
+          <Link to={'/admin/dashboard'}>
+            <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
+              Dashboard
+            </button>
+          </Link>
+
+          <Link>
+            <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
+              Logout
+            </button>
+          </Link>
+
+          {/* <Link to={'/register'}>
             <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
               Register
             </button>
-          </Link>
+          </Link> */}
 
 
-          <Link to={'/login'}>
+          {/* <Link to={'/login'}>
             <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
               Login
             </button>
-          </Link>
+          </Link> */}
           {/* shopping cart */}
           <span
             onClick={handleToggle}
@@ -438,6 +451,16 @@ const Header = () => {
                 <Typography >
                   <ul className="p-0 m-0">
                     <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                      <Link to={'/dashboard'}>
+                        Dashboard
+                      </Link>
+                    </li>
+                    <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                      <Link>
+                        Logout
+                      </Link>
+                    </li>
+                    {/* <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
                       <Link to={'/register'}>
                         Register
                       </Link>
@@ -446,7 +469,7 @@ const Header = () => {
                       <Link to={'/login'}>
                         Login
                       </Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </Typography>
               </Popover>

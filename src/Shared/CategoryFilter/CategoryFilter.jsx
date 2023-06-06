@@ -1,34 +1,69 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { products } from '../../Data/Placeholder';
+import GetAPI from '../../APIHooks/GetAPI';
 
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ setProductData, products }) => {
+    const [categories, setCategories] = React.useState([])
+    // const [checkValue, setCheckValue] = useState([])
+    const [filterInputs, setFilterInputs] = useState([]);
 
-
-    function removeDuplicates(products) {
-        let uniqueCategories = [];
-        products.forEach(element => {
-            if (!uniqueCategories.includes(element.categoryName)) {
-                uniqueCategories.push(element.categoryName);
-            }
-        });
-        return uniqueCategories;
+    console.log(products);
+    useEffect(() => {
+        GetAPI(`categories`, setCategories)
+    }, [])
+    const handleCheckboxChange = (_value) => {
+        // event.preventDefault()
+        // const { value, checked } = event.target;
+        // if (checked) {
+        //     setCheckValue((prevSelectedItems) => [...prevSelectedItems, value]);
+        // } else {
+        //     setCheckValue((prevSelectedItems) =>
+        //         prevSelectedItems.filter((item) => item !== value)
+        //     );
+        // }
+        if (filterInputs.includes(_value)) {
+            const filterResult = filterInputs?.filter((data) => data !== _value);
+            setFilterInputs(filterResult);
+        } else {
+            setFilterInputs([...filterInputs, _value]);
+        }
     }
 
+    useEffect(() => {
+        if (filterInputs?.length > 0) {
+            const filterResult = products?.filter((data) =>
+                filterInputs?.includes(data.category)
+            );
+            console.log(filterResult);
+            // setProductData(filterResult);
+        } else {
+            // setProductData(products);
+        }
+    }, [filterInputs]);
 
-    const categories = removeDuplicates(products);
+
+    console.log(filterInputs);
     return (
 
         <>
             <FormGroup>
                 {
 
-                    categories.map((elm) => (
-                        <FormControlLabel control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: "20px" } }} />} label={elm} />
+                    categories?.map((elm, index) => (
+                        <label key={index}>
+                            <Checkbox
+                                key={elm?.categoryTitle}
+                                value={elm?.categoryTitle}
+                                checked={filterInputs?.includes(elm?.categoryTitle)}
+                                onChange={(e) => handleCheckboxChange(e.target.value)}
+                            />
+
+                            {elm?.categoryTitle}
+                        </label>
+
                     ))
                 }
 
