@@ -284,7 +284,7 @@ const Header = () => {
               <CgShoppingCart className="text-4xl " />
 
               <div className="absolute right-[-10px] top-[-10px]  bg-red-500 rounded-full">
-                <span className="text-base text-white rounded-full p-1">
+                <span className="text-base text-center text-white rounded-full px-1.5">
                   12
                 </span>
               </div>
@@ -477,7 +477,7 @@ const Header = () => {
                   <CgShoppingCart className="text-4xl " />
 
                   <div className="absolute right-[-10px] top-[-10px]  bg-red-500 rounded-full">
-                    <span className="text-base text-white rounded-full p-1">
+                    <span className="text-base text-white rounded-full  px-1.5">
                       12
                     </span>
                   </div>
