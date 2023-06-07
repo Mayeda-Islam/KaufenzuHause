@@ -12,8 +12,8 @@ const ProductCard = ({ product }) => {
     discount,
   } = product;
   return (
-    <div className="w-6/12 md:w-6/12 lg:w-4/12">
-      <div className="m-4 border border-gray-200 rounded prod_card ">
+    <div className="w-full sm:w-6/12 md:w-4/12 lg:w-4/12">
+      <div className="m-2 border border-gray-200 rounded prod_card min-h-[363px]">
         <div className="relative flex items-center justify-center overflow-hidden">
           <img
             src={img}

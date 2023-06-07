@@ -8,27 +8,25 @@ import "swiper/css/pagination";
 import "./TopRatedProducts.css";
 import SwiperCustomArrow from '../../Shared/SwiperCustomArrow/SwiperCustomArrow';
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
-import { products } from '../../Data/Placeholder';
+import { Link } from 'react-router-dom';
 
 
-const TopratedProducts = () => {
-
-
+const TopratedProducts = ({ products }) => {
     return (
         <section className="pt-10 pb-14 bg-[#f7f7f7] relative">
             <div className=" w-[95%] lg:w-[90%] mx-auto">
-                {/*  section title  */}
+                {/* section title  */}
                 <div className="flex items-center justify-between">
-                    <h2 className="text-2xl text-textColor font-semibold text-left capitalize">
+                    <h2 className="text-xl md:text-2xl text-textColor font-semibold text-left capitalize">
                         Top Rated Products
                     </h2>
                     {/* view all button  */}
-                    <button className="text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
+                    <Link to={'products'} className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
                         View All
-                    </button>
+                    </Link>
                 </div>
 
-                <hr className="border border-gray-300 mt-6 mb-8" />
+                <hr className="border border-gray-300 mt-6 mb-6" />
 
                 <Swiper
 
@@ -71,7 +69,7 @@ const TopratedProducts = () => {
                     slidesPerView={4}
                     // slidesPerView="auto"
                     // loop={true}
-                    loopFillGroupWithBlank={false}
+                    loopfillgroupwithblank="false"
 
                     // navigation={true}
                     autoplay={{
@@ -88,12 +86,11 @@ const TopratedProducts = () => {
                     className="mySwiper"
                 >
                     {
-                        products?.map((product) => {
+                        products?.slice(0, 20)?.map((product) => {
                             const { _id } = product;
                             return (
                                 <SwiperSlide key={_id}>
                                     <SingleProduct product={product} />
-
                                 </SwiperSlide>
                             )
                         })
