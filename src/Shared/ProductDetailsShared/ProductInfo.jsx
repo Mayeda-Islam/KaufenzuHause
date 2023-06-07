@@ -3,7 +3,7 @@ import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Context } from "../../ContextProvider/ContextProvider";
 const ProductInfo = ({ product }) => {
-  const { cart, setCart, handleAddToCart } = useContext(Context);
+  const { handleAddToCart } = useContext(Context);
   const {
     productTitle,
     productPrice,
@@ -21,48 +21,17 @@ const ProductInfo = ({ product }) => {
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
 
-  //   console.log(product);
-
-  const incrementQuantity = (_id) => {
-    const itemIndex = cart.findIndex((item) => item._id === _id);
-
-    if (itemIndex >= 0) {
-      const updatedItem = { ...cart[itemIndex], quantity: cartQuantity + 1 };
-
-      const updatedCart = [...cart];
-      updatedCart[itemIndex] = updatedItem;
-      setCart(updatedCart);
-    }
-
+  const incrementQuantity = () => {
     if (cartQuantity < totalProduct) {
       setCartQuantity(cartQuantity + 1);
-    } else {
-      console.log("Maximum quantity reached!");
     }
   };
 
-  const decrementQuantity = (_id) => {
-    const itemIndex = cart.findIndex((item) => item._id === _id);
-
-    if (itemIndex >= 0) {
-      const updatedItem = { ...cart[itemIndex], quantity: cartQuantity - 1 };
-
-      const updatedCart = [...cart];
-      updatedCart[itemIndex] = updatedItem;
-      setCart(updatedCart);
-    }
-
+  const decrementQuantity = () => {
     if (cartQuantity > 0) {
       setCartQuantity(cartQuantity - 1);
-    } else {
-      console.log("Quantity cannot be reduced further!");
     }
   };
-
-  //add the item to the cart
-  //   const handleAddToCart = (_product) => {
-  //     setCart([...cart, { ..._product, quiatity: cartQuantity }]);
-  //   };
 
   return (
     <div>
