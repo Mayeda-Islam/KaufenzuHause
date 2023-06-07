@@ -7,7 +7,8 @@ import TopratedProducts from "../../components/TopRatedProducts/TopratedProducts
 import GetAPI from "../../APIHooks/GetAPI";
 
 const Home = () => {
-  const [products, setProducts] = useState([])
+
+  const [products, setProducts] = React.useState([])
   useEffect(() => {
     GetAPI('products', setProducts)
   }, [])
@@ -20,7 +21,7 @@ const Home = () => {
   const watches = products.filter((data) => data?.category === 'Watch');
   const watchesSlider = categoriesSlider?.filter((data) => data?.category == 'Watch');
 
-  console.log(headphonesSlider)
+
 
 
   useEffect(() => {

@@ -1,7 +1,3 @@
-import products from "../../../Shared/FakeDataProducts";
-import ProductCard from "../../../Shared/ProductCard/ProductCard";
-import categoryImage1 from "../../../images/category section/Home_appliances_1.jpg";
-import categoryImage2 from "../../../images/category section/Home_Appliances_2_1.jpg";
 import CategorySlider from "../../../Shared/CategorySlider/CategorySlider";
 import SingleProduct from "../../../Shared/SingleProduct/SingleProduct";
 

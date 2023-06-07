@@ -5,11 +5,12 @@ export const Context = createContext()
 
 
 const ContextProvider = ({ children }) => {
-    const authInfo = {
-        name: 'Miskatur Rahman'
+    const [cart, setCart] = React.useState([{}])
+    const context = {
+        cart
     }
     return (
-        <Context.Provider value={authInfo}>
+        <Context.Provider value={context}>
             {children}
         </Context.Provider>
     );
