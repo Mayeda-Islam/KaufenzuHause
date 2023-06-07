@@ -11,9 +11,12 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import { AiOutlineClose } from "react-icons/ai";
 import "./Header.css";
+
 import Sidenav from "./Sidenav";
 import GetAPI from "../../APIHooks/GetAPI";
 import { Context } from "../../ContextProvider/ContextProvider";
+
+
 
 const Header = () => {
   const { cart, removeFromCart, increment, decrement, calculateTotal } =
@@ -281,7 +284,9 @@ const Header = () => {
             onClick={handleToggle}
             className="text-2xl text-white cursor-pointer"
           >
+
             <CgShoppingCart />
+
           </span>
         </div>
       </nav>
@@ -302,6 +307,7 @@ const Header = () => {
           <h2 className="text-xl font-medium text-textColor capitalize my-4">
             Shopping cart
           </h2>
+
           {cart.length > 0 &&
             cart.map((item) => {
               const { _id, images, productTitle, quantity, productPrice } =
@@ -353,6 +359,7 @@ const Header = () => {
                 </div>
               );
             })}
+
 
           <hr className="my-4 border-0.5 border-gray-300" />
           {/* subtotal amount */}
@@ -445,7 +452,7 @@ const Header = () => {
                 </span>
                 {/* shopping cart */}
                 <p className="text-sm text-gray-400 cursor-pointer">
-                  <AiOutlineCaretDown />
+                  {/* <AiOutlineCaretDown /> */}
                 </p>
               </button>
               <Popover
@@ -484,7 +491,9 @@ const Header = () => {
             {/* shopping cart */}
             <span className="text-2xl text-white mr-2">
               <Link to={"/cart"}>
+
                 <CgShoppingCart />
+
               </Link>
             </span>
 
