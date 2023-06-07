@@ -1,51 +1,58 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import laptop from '../../../images/categoryIcons/laptop.png';
 import mobile from '../../../images/categoryIcons/mobile.png';
 import tv from '../../../images/categoryIcons/tv.png';
 import camera from '../../../images/categoryIcons/camera.png';
-import headPhones from '../../../images/categoryIcons/headPhones.png';
+import headPhones from '../../../images/categoryIcons/headphones.png';
 import smartwatch from '../../../images/categoryIcons/smartwatch.png';
 import { Link } from 'react-router-dom';
+import GetAPI from '../../../APIHooks/GetAPI';
 
 const AllCategories = () => {
-    const categories = [
-        {
-            _id: 1,
-            categoryName: "Laptop",
-            categoryImg: laptop
+    // const categories = [
+    //     {
+    //         _id: 1,
+    //         categoryName: "Laptop",
+    //         categoryImg: laptop
 
-        },
-        {
-            _id: 2,
-            categoryName: "mobile",
-            categoryImg: mobile
+    //     },
+    //     {
+    //         _id: 2,
+    //         categoryName: "mobile",
+    //         categoryImg: mobile
 
-        },
-        {
-            _id: 3,
-            categoryName: "tv",
-            categoryImg: tv
+    //     },
+    //     {
+    //         _id: 3,
+    //         categoryName: "tv",
+    //         categoryImg: tv
 
-        },
-        {
-            _id: 4,
-            categoryName: "camera",
-            categoryImg: camera
+    //     },
+    //     {
+    //         _id: 4,
+    //         categoryName: "camera",
+    //         categoryImg: camera
 
-        },
-        {
-            _id: 5,
-            categoryName: "smartwatch",
-            categoryImg: smartwatch
+    //     },
+    //     {
+    //         _id: 5,
+    //         categoryName: "smartwatch",
+    //         categoryImg: smartwatch
 
-        },
-        {
-            _id: 6,
-            categoryName: "headPhones",
-            categoryImg: headPhones
+    //     },
+    //     {
+    //         _id: 6,
+    //         categoryName: "headPhones",
+    //         categoryImg: headPhones
 
-        }
-    ]
+    //     }
+    // ]
+
+    const [categories, setCategories] = useState([])
+
+    useEffect(() => {
+        GetAPI('categories', setCategories)
+    }, [])
     return (
         <section className="pt-10 pb-14 bg-white">
             <div className=" w-[95%] lg:w-[90%] mx-auto">
@@ -58,13 +65,13 @@ const AllCategories = () => {
                     {
                         categories.map((category) => (
                             <div className="w-6/12 md:w-3/12 xl:w-2/12 " key={category._id}>
-                                <Link to={'/categoryProducts'}>
+                                <Link to={`/categoryProducts/${category?._id}`}>
                                     <div className="m-3 xxl:h-[160px] md:m-0 rounded shadow-lg bg-white shadow-gray-300 px-10 py-6 text-center">
                                         <div className="flex justify-center items-center">
-                                            <img src={category.categoryImg} className="w-[50px]" alt="" />
+                                            <img src={category.image} className="w-[50px]" alt="" />
                                         </div>
                                         <h3 className="text-textColor font-medium text-lg  capitalize py-3">
-                                            {category.categoryName}
+                                            {category.categoryTitle}
                                         </h3>
                                     </div>
                                 </Link>
