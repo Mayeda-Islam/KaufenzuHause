@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 // import logo from "../../images/logo/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";
@@ -11,12 +11,16 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import { AiOutlineClose } from "react-icons/ai";
 import "./Header.css";
-import { products } from "../../Data/Placeholder";
 
 import Sidenav from "./Sidenav";
 import GetAPI from "../../APIHooks/GetAPI";
+import { Context } from "../../ContextProvider/ContextProvider";
+
+
 
 const Header = () => {
+  const { cart, removeFromCart, increment, decrement, calculateTotal } =
+    useContext(Context);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
   const [anchorE3, setAnchorE3] = React.useState(null);
@@ -280,15 +284,9 @@ const Header = () => {
             onClick={handleToggle}
             className="text-2xl text-white cursor-pointer"
           >
-            <div className="relative">
-              <CgShoppingCart className="text-4xl " />
 
-              <div className="absolute right-[-10px] top-[-10px]  bg-red-500 rounded-full">
-                <span className="text-base text-center text-white rounded-full px-1.5">
-                  12
-                </span>
-              </div>
-            </div>
+            <CgShoppingCart />
+
           </span>
         </div>
       </nav>
@@ -309,47 +307,67 @@ const Header = () => {
           <h2 className="text-xl font-medium text-textColor capitalize my-4">
             Shopping cart
           </h2>
-          {products.slice(0, 4).map((cart, index) => (
-            <div className="flex  gap-6 justify-center my-2 " key={index}>
-              {/* product image */}
-              <img
-                src={cart.img}
-                className="w-[65px] h-[70px] rounded-md"
-                alt=""
-              />
-              {/* title and increment decrement button */}
-              <div className="">
-                <span className="text-sm text-textColor mb-3 block">
-                  {cart.title.slice(0, 15)}
-                </span>
-                <div className="flex items-center justify-center gap-1">
-                  <button className="w-8 h-8 rounded  bg-gray-100 border border-gray-300">
-                    +
-                  </button>
-                  <span className="w-8 h-8 rounded border border-gray-300 bg-bgOne flex items-center justify-center">
-                    5
-                  </span>
-                  <button className="w-8 h-8 rounded  bg-gray-100 border border-gray-300">
-                    -
-                  </button>
-                </div>
-                {/* subtotal price */}
-                {/* <span className="flex items-center gap-2">
+
+          {cart.length > 0 &&
+            cart.map((item) => {
+              const { _id, images, productTitle, quantity, productPrice } =
+                item;
+              return (
+                <div key={_id} className="flex  gap-6 justify-center my-2 ">
+                  {/* product image */}
+                  <img
+                    src={images[0]}
+                    className="w-[65px] h-[70px] rounded-md"
+                    alt=""
+                  />
+                  {/* title and increment decrement button */}
+                  <div className="">
+                    <span className="text-sm text-textColor mb-3 block">
+                      {productTitle.slice(0, 30)}
+                    </span>
+                    <div className="flex items-center justify-center gap-1">
+                      <button
+                        onClick={() => increment(_id)}
+                        className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
+                      >
+                        +
+                      </button>
+                      <span className="w-8 h-8 rounded border border-gray-300 bg-bgOne flex items-center justify-center">
+                        {quantity}
+                      </span>
+                      <button
+                        onClick={() => decrement(_id)}
+                        className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
+                      >
+                        -
+                      </button>
+                    </div>
+                    {/* subtotal price */}
+                    {/* <span className="flex items-center gap-2">
                   <span className="text-sm text-textColor">1</span>
                   <span className="text-sm text-textColor"></span>
                 </span> */}
-              </div>
+                  </div>
 
-              <span className="text-sm text-textColor mb-3">${cart.price}</span>
-              <AiOutlineClose className="text-xl text-gray-500 cursor-pointer" />
-            </div>
-          ))}
+                  <span className="text-sm text-textColor mb-3">
+                    $ {productPrice * quantity}
+                  </span>
+                  <AiOutlineClose
+                    onClick={() => removeFromCart(_id)}
+                    className="text-xl text-gray-500 cursor-pointer"
+                  />
+                </div>
+              );
+            })}
+
 
           <hr className="my-4 border-0.5 border-gray-300" />
           {/* subtotal amount */}
           <div className="flex items-center justify-between">
             <span className="text-lg font-medium text-textColor">Subtotal</span>
-            <span className="text-lg font-medium text-textColor">$3624</span>
+            <span className="text-lg font-medium text-textColor">
+              ${calculateTotal()}
+            </span>
           </div>
           {/* button group */}
           <hr className="my-4 border-0.5 border-gray-300" />
@@ -473,15 +491,9 @@ const Header = () => {
             {/* shopping cart */}
             <span className="text-2xl text-white mr-2">
               <Link to={"/cart"}>
-                <div className="relative">
-                  <CgShoppingCart className="text-4xl " />
 
-                  <div className="absolute right-[-10px] top-[-10px]  bg-red-500 rounded-full">
-                    <span className="text-base text-white rounded-full  px-1.5">
-                      12
-                    </span>
-                  </div>
-                </div>
+                <CgShoppingCart />
+
               </Link>
             </span>
 
