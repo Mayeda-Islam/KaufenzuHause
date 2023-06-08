@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 // import logo from "../../images/logo/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineCaretDown } from "react-icons/ai";
@@ -15,11 +15,14 @@ import { products } from "../../Data/Placeholder";
 
 import Sidenav from "./Sidenav";
 import GetAPI from "../../APIHooks/GetAPI";
+import { Badge, Chip } from "@mui/material";
+import { Context } from "../../ContextProvider/ContextProvider";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
   const [anchorE3, setAnchorE3] = React.useState(null);
+  const { cart } = useContext(Context);
 
   //sticky nav on scroll
   const [logo, setLogo] = useState([]);
@@ -281,13 +284,9 @@ const Header = () => {
             className="text-2xl text-white cursor-pointer"
           >
             <div className="relative">
-              <CgShoppingCart className="text-4xl " />
-
-              <div className="absolute right-[-10px] top-[-10px]  bg-red-500 rounded-full">
-                <span className="text-base text-center text-white rounded-full px-1.5">
-                  12
-                </span>
-              </div>
+              <Badge badgeContent={cart?.length} color="primary">
+                <CgShoppingCart color="action" />
+              </Badge>
             </div>
           </span>
         </div>
@@ -473,14 +472,19 @@ const Header = () => {
             {/* shopping cart */}
             <span className="text-2xl text-white mr-2">
               <Link to={"/cart"}>
-                <div className="relative">
-                  <CgShoppingCart className="text-4xl " />
+                <div className="absolute top-[-10px] right-[-10px] z-10">
+                  <Chip
+                    label="12"
+                    size="small"
+                    sx={{
+                      fontSize: "0.75rem",
 
-                  <div className="absolute right-[-10px] top-[-10px]  bg-red-500 rounded-full">
-                    <span className="text-base text-white rounded-full  px-1.5">
-                      12
-                    </span>
-                  </div>
+                      padding: "0px 0px",
+                      borderRadius: "50%",
+                      color: "white",
+                      backgroundColor: "red",
+                    }}
+                  />
                 </div>
               </Link>
             </span>
