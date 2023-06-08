@@ -302,86 +302,88 @@ const Header = () => {
           <h2 className="text-xl font-medium text-textColor capitalize my-4">
             Shopping cart
           </h2>
-          {cart.length > 0 &&
-            cart.map((item) => {
-              const { _id, images, productTitle, quantity, productPrice } =
-                item;
-              return (
-                <div key={_id} className="flex  gap-6 justify-center my-2 ">
-                  {/* product image */}
-                  <img
-                    src={images[0]}
-                    className="w-[65px] h-[70px] rounded-md"
-                    alt=""
-                  />
-                  {/* title and increment decrement button */}
-                  <div className="">
-                    <span className="text-sm text-textColor mb-3 block">
-                      {productTitle.slice(0, 30)}
-                    </span>
-                    <div className="flex items-center justify-center gap-1">
-                      <button
-                        onClick={() => increment(_id)}
-                        className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
-                      >
-                        +
-                      </button>
-                      <span className="w-8 h-8 rounded border border-gray-300 bg-bgOne flex items-center justify-center">
-                        {quantity}
+          {cart.length > 0
+            ? cart?.map((item) => {
+                const { _id, images, productTitle, quantity, productPrice } =
+                  item;
+                return (
+                  <>
+                    <div key={_id} className="flex  gap-6 justify-center my-2 ">
+                      <img
+                        src={images[0]}
+                        className="w-[65px] h-[70px] rounded-md"
+                        alt=""
+                      />
+                      <div className="">
+                        <span className="text-sm text-textColor mb-3 block">
+                          {productTitle.slice(0, 30)}
+                        </span>
+                        <div className="flex items-center justify-center gap-1">
+                          <button
+                            onClick={() => increment(_id)}
+                            className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
+                          >
+                            +
+                          </button>
+                          <span className="w-8 h-8 rounded border border-gray-300 bg-bgOne flex items-center justify-center">
+                            {quantity}
+                          </span>
+                          <button
+                            onClick={() => decrement(_id)}
+                            className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
+                          >
+                            -
+                          </button>
+                        </div>
+                      </div>
+
+                      <span className="text-sm text-textColor mb-3">
+                        $ {productPrice * quantity}
                       </span>
-                      <button
-                        onClick={() => decrement(_id)}
-                        className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
-                      >
-                        -
-                      </button>
+                      <AiOutlineClose
+                        onClick={() => removeFromCart(_id)}
+                        className="text-xl text-gray-500 cursor-pointer"
+                      />
                     </div>
-                    {/* subtotal price */}
-                    {/* <span className="flex items-center gap-2">
-                  <span className="text-sm text-textColor">1</span>
-                  <span className="text-sm text-textColor"></span>
-                </span> */}
-                  </div>
+                  </>
+                );
+              })
+            : "Cart is empty"}
 
-                  <span className="text-sm text-textColor mb-3">
-                    $ {productPrice * quantity}
-                  </span>
-                  <AiOutlineClose
-                    onClick={() => removeFromCart(_id)}
-                    className="text-xl text-gray-500 cursor-pointer"
-                  />
-                </div>
-              );
-            })}
+          {cart.length > 0 && (
+            <>
+              <hr className="my-4 border-0.5 border-gray-300" />
+              <div className="flex items-center justify-between">
+                <span className="text-lg font-medium text-textColor">
+                  Subtotal
+                </span>
+                <span className="text-lg font-medium text-textColor">
+                  ${calculateTotal()}
+                </span>
+              </div>
 
-          <hr className="my-4 border-0.5 border-gray-300" />
-          {/* subtotal amount */}
-          <div className="flex items-center justify-between">
-            <span className="text-lg font-medium text-textColor">Subtotal</span>
-            <span className="text-lg font-medium text-textColor">
-              ${calculateTotal()}
-            </span>
-          </div>
-          {/* button group */}
-          <hr className="my-4 border-0.5 border-gray-300" />
-          <div className="flex items-center justify-center flex-col">
-            <Link to={"/cart"}>
-              <button
-                onClick={() => setDisplay(false)}
-                className="mb-3 block text-white py-2.5 w-[270px] bg-primary hover:bg-secondary  text-base  rounded hover:text-textPrimary  capilatize "
-              >
-                Go To Cart
-              </button>
-            </Link>
-            <Link to={"/checkout"}>
-              <button
-                onClick={() => setDisplay(false)}
-                className="block text-white py-2.5 w-[270px] bg-secondary hover:bg-primary  text-base  rounded hover:text-textPrimary  capilatize "
-              >
-                Proceed To checkout
-              </button>
-            </Link>
-          </div>
+              {/* button group */}
+              <hr className="my-4 border-0.5 border-gray-300" />
+              <div className="flex items-center justify-center flex-col">
+                <Link to={"/cart"}>
+                  <button
+                    onClick={() => setDisplay(false)}
+                    className="mb-3 block text-white py-2.5 w-[270px] bg-primary hover:bg-secondary  text-base  rounded hover:text-textPrimary  capilatize "
+                  >
+                    Go To Cart
+                  </button>
+                </Link>
+                <Link to={"/checkout"}>
+                  <button
+                    onClick={() => setDisplay(false)}
+                    className="block text-white py-2.5 w-[270px] bg-secondary hover:bg-primary  text-base  rounded hover:text-textPrimary  capilatize "
+                  >
+                    Proceed To checkout
+                  </button>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
 

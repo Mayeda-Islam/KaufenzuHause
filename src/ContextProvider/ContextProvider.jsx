@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createContext } from "react";
 import swal from "sweetalert";
 
@@ -7,6 +7,8 @@ export const Context = createContext();
 const ContextProvider = ({ children }) => {
   const [cart, setCart] = React.useState([]);
   console.log("CART: ", cart);
+
+  useEffect(() => {}, []);
 
   const handleAddToCart = (_product, _cartQuantity) => {
     if (_cartQuantity === 0) {
