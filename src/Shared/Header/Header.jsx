@@ -16,7 +16,7 @@ import GetAPI from "../../APIHooks/GetAPI";
 import { Context } from "../../ContextProvider/ContextProvider";
 
 const Header = () => {
-  const { cart, removeFromCart, increment, decrement, calculateTotal } =
+  const { cart, removeFromCart, increment, decrement, calculateSubTotal } =
     useContext(Context);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
@@ -346,7 +346,7 @@ const Header = () => {
                       </div>
 
                       <span className="text-sm text-textColor mb-3">
-                        $ {productPrice * quantity}
+                        ${productPrice * quantity}
                       </span>
                       <AiOutlineClose
                         onClick={() => removeFromCart(_id)}
@@ -366,7 +366,7 @@ const Header = () => {
                   Subtotal
                 </span>
                 <span className="text-lg font-medium text-textColor">
-                  ${calculateTotal()}
+                  ${calculateSubTotal()}
                 </span>
               </div>
 

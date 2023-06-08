@@ -62,7 +62,7 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  const calculateTotal = () => {
+  const calculateSubTotal = () => {
     let total = 0;
 
     for (const item of cart) {
@@ -73,6 +73,10 @@ const ContextProvider = ({ children }) => {
     return total;
   };
 
+  const calculateTotal = (_shippingCharge) => {
+    return calculateSubTotal() + _shippingCharge;
+  };
+
   const context = {
     cart,
     setCart,
@@ -80,6 +84,7 @@ const ContextProvider = ({ children }) => {
     removeFromCart,
     increment,
     decrement,
+    calculateSubTotal,
     calculateTotal,
   };
   return <Context.Provider value={context}>{children}</Context.Provider>;

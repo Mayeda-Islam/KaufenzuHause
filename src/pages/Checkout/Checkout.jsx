@@ -1,9 +1,9 @@
 import React from "react";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import TotalOrder from "../Cart/TotalOrder";
 
 const Checkout = () => {
-  useEffect(() => {
+  React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
@@ -189,51 +189,7 @@ const Checkout = () => {
             </div>
           </div>
 
-          <div className="w-full md:w-full lg:w-5/12">
-            <div className="m-4 ">
-              <h3 className="text-2xl md:text-2xl font-medium text-textColor">
-                Total Order
-              </h3>
-              <div className="p-6 bg-white relative shadow shadow-gray-200 my-4 rounded-md">
-                <table className=" w-full text-[13px] text-left text-gray-500 dark:text-gray-400 ">
-                  <tbody>
-                    <tr className=" border-b border-gray-300 mb-5">
-                      <th
-                        scope="row"
-                        className=" px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white capitalize text-base"
-                      >
-                        SubTotal
-                      </th>
-                      <td className="px-6 py-4">$521</td>
-                    </tr>
-                    <tr className="bg-white border-b border-gray-300 mb-5">
-                      <th
-                        scope="row"
-                        className=" px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white capitalize text-base"
-                      >
-                        Shipping
-                      </th>
-                      <td className="px-6 py-4">$521</td>
-                    </tr>
-                    <tr className="bg-white  mb-5">
-                      <th
-                        scope="row"
-                        className=" px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white capitalize text-base"
-                      >
-                        total
-                      </th>
-                      <td className="px-6 py-4">$521</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="my-3 text-center">
-                  <button className=" text-white py-2.5 px-14 bg-primary hover:bg-secondary  text-base  rounded-md hover:text-textPrimary  capilatize ">
-                    Place Order
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <TotalOrder />
         </div>
       </div>
     </section>
