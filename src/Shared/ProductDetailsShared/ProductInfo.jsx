@@ -3,7 +3,9 @@ import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Context } from "../../ContextProvider/ContextProvider";
 const ProductInfo = ({ product }) => {
+
   const { handleAddToCart, cart } = useContext(Context);
+
   const {
     productTitle,
     productPrice,
@@ -158,7 +160,7 @@ const ProductInfo = ({ product }) => {
 
         {/* add to cart button */}
         <button
-          onClick={() => handleAddToCart(product, cartQuantity)}
+          onClick={() => addToCart(product, cartQuantity)}
           className=" text-white py-2 px-7  hover: rounded text-sm  bg-primary   border-2 border-transparent hover:border-textColor  hover:bg-transparent hover:text-textColor capitalize"
         >
           {cart?.find((item) => item?._id === product?._id)
