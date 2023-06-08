@@ -25,8 +25,8 @@ const CategorySlider = ({ sliderImages }) => {
         className="mySwiper"
       >
         {sliderImages?.map((sliderImage, i) => (
-          <SwiperSlide key={i} className="my-4">
-            <img className=" h-3/5" src={sliderImage} alt="" />
+          <SwiperSlide key={i} className="my-2">
+            <img className="w-full lg:h-[760px] xxl:h-[760px] rounded-md object-cover" src={sliderImage?.imageURL} alt="slider image" />
           </SwiperSlide>
         ))}
         {/* <SwiperSlide>
