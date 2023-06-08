@@ -305,7 +305,7 @@ const Header = () => {
           <h2 className="text-xl font-medium text-textColor capitalize my-4">
             Shopping cart
           </h2>
-          {cart.length > 0 ? (
+          {cart?.length > 0 ? (
             cart?.map((item) => {
               const { _id, images, productTitle, quantity, productPrice } =
                 item;
@@ -313,23 +313,28 @@ const Header = () => {
                 <>
                   <div
                     key={_id}
-                    className="flex  gap-16 justify-center items-center my-2 "
+                    className="flex gap-5 w-11/12 mx-auto items-center justify-between my-2 "
                   >
-                    <img
-                      src={images[0]}
-                      className="w-[65px] h-[70px] rounded-md"
-                      alt=""
-                    />
-                    <div className="w-40">
-                      <span className="text-sm text-textColor mb-3 block">
-                        {productTitle.slice(0, 30)}
-                      </span>
-                      <span className="text-sm text-textColor mb-3">
-                        ${productPrice * quantity}
-                      </span>
+                    <div className="flex gap-x-4 item-center justify-center">
+                      <img
+                        src={images[0]}
+                        className="w-20 h-20 rounded-md"
+                        alt=""
+                      />
+
+                      <div className="flex flex-col items-center justify-center text-start">
+                        <div>
+                          <p className="text-sm  text-textColor  ">
+                            {productTitle.slice(0, 30)}
+                          </p>
+                          <p className="text-sm text-textColor ">
+                            ${productPrice * quantity}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="">
-                      <div className="flex items-center justify-center gap-1">
+                    <div className="flex gap-4 items-center justify-center">
+                      <div className="flex  justify-center gap-1">
                         <button
                           onClick={() => increment(_id)}
                           className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
@@ -346,12 +351,12 @@ const Header = () => {
                           -
                         </button>
                       </div>
-                    </div>
 
-                    <AiOutlineClose
-                      onClick={() => removeFromCart(_id)}
-                      className="text-xl text-gray-500 cursor-pointer"
-                    />
+                      <AiOutlineClose
+                        onClick={() => removeFromCart(_id)}
+                        className="text-xl text-red-500  cursor-pointer "
+                      />
+                    </div>
                   </div>
                 </>
               );
@@ -391,6 +396,7 @@ const Header = () => {
                   <h1 className="text-xl my-4 text-center font-semibold text-gray-700 ">
                     Please add some{" "}
                     <Link
+                      onClick={handleToggle}
                       className="underline text-primary font-bold "
                       to={"/products"}
                     >
@@ -402,7 +408,7 @@ const Header = () => {
             </section>
           )}
 
-          {cart.length > 0 && (
+          {cart?.length > 0 && (
             <>
               <hr className="my-4 border-0.5 border-gray-300" />
               <div className="flex items-center justify-between">
