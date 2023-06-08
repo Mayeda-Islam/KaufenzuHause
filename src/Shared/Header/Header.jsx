@@ -313,13 +313,13 @@ const Header = () => {
                   <>
                     <div key={_id} className="flex  gap-6 justify-center my-2 ">
                       <img
-                        src={images[0]}
+                        src={images && images[0]}
                         className="w-[65px] h-[70px] rounded-md"
                         alt=""
                       />
                       <div className="">
                         <span className="text-sm text-textColor mb-3 block">
-                          {productTitle.slice(0, 30)}
+                          {productTitle && productTitle.slice(0, 30)}
                         </span>
                         <div className="flex items-center justify-center gap-1">
                           <button

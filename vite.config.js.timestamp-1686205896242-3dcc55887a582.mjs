@@ -1,0 +1,13 @@
+// vite.config.js
+import { defineConfig } from "file:///C:/Team%20Project/Dutch-E-commerce/node_modules/vite/dist/node/index.js";
+import react from "file:///C:/Team%20Project/Dutch-E-commerce/node_modules/@vitejs/plugin-react/dist/index.mjs";
+var vite_config_default = defineConfig({
+  // optimizeDeps: {
+  //   exclude: ['react-image-magnifiers']
+  // },
+  plugins: [react()]
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJDOlxcXFxUZWFtIFByb2plY3RcXFxcRHV0Y2gtRS1jb21tZXJjZVwiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiQzpcXFxcVGVhbSBQcm9qZWN0XFxcXER1dGNoLUUtY29tbWVyY2VcXFxcdml0ZS5jb25maWcuanNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL0M6L1RlYW0lMjBQcm9qZWN0L0R1dGNoLUUtY29tbWVyY2Uvdml0ZS5jb25maWcuanNcIjtpbXBvcnQgeyBkZWZpbmVDb25maWcgfSBmcm9tICd2aXRlJ1xyXG5pbXBvcnQgcmVhY3QgZnJvbSAnQHZpdGVqcy9wbHVnaW4tcmVhY3QnXHJcblxyXG5cclxuXHJcbmV4cG9ydCBkZWZhdWx0IGRlZmluZUNvbmZpZyh7XHJcbiAgLy8gb3B0aW1pemVEZXBzOiB7XHJcbiAgLy8gICBleGNsdWRlOiBbJ3JlYWN0LWltYWdlLW1hZ25pZmllcnMnXVxyXG4gIC8vIH0sXHJcblxyXG5cclxuICBwbHVnaW5zOiBbcmVhY3QoKV0sXHJcbn0pXHJcbiJdLAogICJtYXBwaW5ncyI6ICI7QUFBMFIsU0FBUyxvQkFBb0I7QUFDdlQsT0FBTyxXQUFXO0FBSWxCLElBQU8sc0JBQVEsYUFBYTtBQUFBO0FBQUE7QUFBQTtBQUFBLEVBTTFCLFNBQVMsQ0FBQyxNQUFNLENBQUM7QUFDbkIsQ0FBQzsiLAogICJuYW1lcyI6IFtdCn0K

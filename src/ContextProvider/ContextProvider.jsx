@@ -6,9 +6,17 @@ export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [cart, setCart] = React.useState([]);
-  console.log("CART: ", cart);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const handleAddToCart = (_product, _cartQuantity) => {
     if (_cartQuantity === 0) {
