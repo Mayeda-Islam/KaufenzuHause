@@ -41,12 +41,11 @@ const LogoSection = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="w-11/12 md:w-1/2 mx-auto border border-gray-300 p-10 my-10 rounded-lg bg-slate-100">
-
       <form className=" py-5" onSubmit={handleSubmit}>
         <div className="grid lg:grid-cols-4 gap-4 items-center  my-3 lg:my-5">
           <div className="flex justify-center items-center">
@@ -72,7 +71,6 @@ const LogoSection = () => {
               onChange={handleFileChangeHeader}
               type="file"
               className="mt-1 px-3 py-3 border-2 shadow-sm focus:outline-none border-lightGray bg-transparent placeholder-black  block w-full rounded-md sm:text-sm"
-              required
             />
           </label>
         </div>
@@ -101,7 +99,6 @@ const LogoSection = () => {
               onChange={handleFileChangeFooter}
               type="file"
               className="mt-1 px-3 py-3 border-2 shadow-sm focus:outline-none border-lightGray bg-transparent placeholder-black  block w-full rounded-md sm:text-sm"
-              required
             />
           </label>
         </div>

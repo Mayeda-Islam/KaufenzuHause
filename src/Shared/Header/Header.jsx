@@ -14,6 +14,7 @@ import "./Header.css";
 import Sidenav from "./Sidenav";
 import GetAPI from "../../APIHooks/GetAPI";
 import { Context } from "../../ContextProvider/ContextProvider";
+import { Badge } from "@mui/material";
 
 const Header = () => {
   const { cart, removeFromCart, increment, decrement, calculateSubTotal } =
@@ -281,15 +282,9 @@ const Header = () => {
             onClick={handleToggle}
             className="text-2xl text-white cursor-pointer"
           >
-            <div className="relative">
-              <CgShoppingCart className="text-4xl " />
-
-              <div className="absolute h-7 w-7 right-[-5px] top-[-5px]  bg-red-500 rounded-full">
-                <span className="text-xs flex justify-center items-center text-white ">
-                  12
-                </span>
-              </div>
-            </div>
+            <Badge badgeContent={cart?.length} color="primary">
+              <CgShoppingCart color="action" />
+            </Badge>
           </span>
         </div>
       </nav>
@@ -494,15 +489,9 @@ const Header = () => {
             {/* shopping cart */}
             <span className="text-2xl text-white mr-2">
               <Link to={"/cart"}>
-                <div className="relative">
-                  <CgShoppingCart className="text-4xl " />
-
-                  <div className="absolute right-[-10px] top-[-10px]  bg-red-500 rounded-full">
-                    <span className="text-base text-white rounded-full  px-1.5">
-                      12
-                    </span>
-                  </div>
-                </div>
+                <Badge badgeContent={cart?.length} color="primary">
+                  <CgShoppingCart color="action" />
+                </Badge>
               </Link>
             </span>
 
