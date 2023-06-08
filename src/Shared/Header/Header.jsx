@@ -305,53 +305,102 @@ const Header = () => {
           <h2 className="text-xl font-medium text-textColor capitalize my-4">
             Shopping cart
           </h2>
-          {cart.length > 0
-            ? cart?.map((item) => {
-                const { _id, images, productTitle, quantity, productPrice } =
-                  item;
-                return (
-                  <>
-                    <div key={_id} className="flex  gap-6 justify-center my-2 ">
-                      <img
-                        src={images[0]}
-                        className="w-[65px] h-[70px] rounded-md"
-                        alt=""
-                      />
-                      <div className="">
-                        <span className="text-sm text-textColor mb-3 block">
-                          {productTitle.slice(0, 30)}
-                        </span>
-                        <div className="flex items-center justify-center gap-1">
-                          <button
-                            onClick={() => increment(_id)}
-                            className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
-                          >
-                            +
-                          </button>
-                          <span className="w-8 h-8 rounded border border-gray-300 bg-bgOne flex items-center justify-center">
-                            {quantity}
-                          </span>
-                          <button
-                            onClick={() => decrement(_id)}
-                            className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
-                          >
-                            -
-                          </button>
-                        </div>
-                      </div>
-
+          {cart.length > 0 ? (
+            cart?.map((item) => {
+              const { _id, images, productTitle, quantity, productPrice } =
+                item;
+              return (
+                <>
+                  <div
+                    key={_id}
+                    className="flex  gap-16 justify-center items-center my-2 "
+                  >
+                    <img
+                      src={images[0]}
+                      className="w-[65px] h-[70px] rounded-md"
+                      alt=""
+                    />
+                    <div className="w-40">
+                      <span className="text-sm text-textColor mb-3 block">
+                        {productTitle.slice(0, 30)}
+                      </span>
                       <span className="text-sm text-textColor mb-3">
                         ${productPrice * quantity}
                       </span>
-                      <AiOutlineClose
-                        onClick={() => removeFromCart(_id)}
-                        className="text-xl text-gray-500 cursor-pointer"
-                      />
                     </div>
-                  </>
-                );
-              })
-            : "Cart is empty"}
+                    <div className="">
+                      <div className="flex items-center justify-center gap-1">
+                        <button
+                          onClick={() => increment(_id)}
+                          className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
+                        >
+                          +
+                        </button>
+                        <span className="w-8 h-8 rounded border border-gray-300 bg-bgOne flex items-center justify-center">
+                          {quantity}
+                        </span>
+                        <button
+                          onClick={() => decrement(_id)}
+                          className="w-8 h-8 rounded  bg-gray-100 border border-gray-300"
+                        >
+                          -
+                        </button>
+                      </div>
+                    </div>
+
+                    <AiOutlineClose
+                      onClick={() => removeFromCart(_id)}
+                      className="text-xl text-gray-500 cursor-pointer"
+                    />
+                  </div>
+                </>
+              );
+            })
+          ) : (
+            <section className="flex items-center h-full sm:p-16">
+              <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8 space-y-8 ">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  className="w-40 h-40 text-gray-700"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M256,16C123.452,16,16,123.452,16,256S123.452,496,256,496,496,388.548,496,256,388.548,16,256,16ZM403.078,403.078a207.253,207.253,0,1,1,44.589-66.125A207.332,207.332,0,0,1,403.078,403.078Z"
+                  ></path>
+                  <rect
+                    width="176"
+                    height="32"
+                    x="168"
+                    y="320"
+                    fill="currentColor"
+                  ></rect>
+                  <polygon
+                    fill="currentColor"
+                    points="210.63 228.042 186.588 206.671 207.958 182.63 184.042 161.37 162.671 185.412 138.63 164.042 117.37 187.958 141.412 209.329 120.042 233.37 143.958 254.63 165.329 230.588 189.37 251.958 210.63 228.042"
+                  ></polygon>
+                  <polygon
+                    fill="currentColor"
+                    points="383.958 182.63 360.042 161.37 338.671 185.412 314.63 164.042 293.37 187.958 317.412 209.329 296.042 233.37 319.958 254.63 341.329 230.588 365.37 251.958 386.63 228.042 362.588 206.671 383.958 182.63"
+                  ></polygon>
+                </svg>
+                <div>
+                  <h1 className="text-3xl my-4 text-center font-extrabold text-gray-700 tracking-widest">
+                    Cart is empty.
+                  </h1>
+                  <h1 className="text-xl my-4 text-center font-semibold text-gray-700 ">
+                    Please add some{" "}
+                    <Link
+                      className="underline text-primary font-bold "
+                      to={"/products"}
+                    >
+                      Products
+                    </Link>
+                  </h1>
+                </div>
+              </div>
+            </section>
+          )}
 
           {cart.length > 0 && (
             <>
