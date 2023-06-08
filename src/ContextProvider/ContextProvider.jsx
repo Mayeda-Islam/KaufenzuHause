@@ -18,7 +18,7 @@ const ContextProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const handleAddToCart = (_product, _cartQuantity) => {
+  const addToCart = (_product, _cartQuantity) => {
     if (_cartQuantity === 0) {
       swal("warning", "Please increase quantity", "warning");
       return;
@@ -88,7 +88,7 @@ const ContextProvider = ({ children }) => {
   const context = {
     cart,
     setCart,
-    handleAddToCart,
+    addToCart,
     removeFromCart,
     increment,
     decrement,
