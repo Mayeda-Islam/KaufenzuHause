@@ -3,7 +3,7 @@ import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Context } from "../../ContextProvider/ContextProvider";
 const ProductInfo = ({ product }) => {
-  const { handleAddToCart } = useContext(Context);
+  const { handleAddToCart, cart } = useContext(Context);
   const {
     productTitle,
     productPrice,
@@ -15,6 +15,8 @@ const ProductInfo = ({ product }) => {
     sizes,
     model,
   } = product;
+  console.log(product?._id);
+  console.log(cart[0]?._id);
   //save the color and size data
   const [cartQuantity, setCartQuantity] = React.useState(1);
 
@@ -159,7 +161,9 @@ const ProductInfo = ({ product }) => {
           onClick={() => handleAddToCart(product, cartQuantity)}
           className=" text-white py-2 px-7  hover: rounded text-sm  bg-primary   border-2 border-transparent hover:border-textColor  hover:bg-transparent hover:text-textColor capitalize"
         >
-          Add to Cart
+          {cart?.find((item) => item?._id === product?._id)
+            ? "Already added"
+            : "Add to cart"}
         </button>
         {/* add to wishlist */}
       </div>

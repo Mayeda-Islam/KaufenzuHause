@@ -16,6 +16,7 @@ const ContextProvider = ({ children }) => {
       return;
     }
     const itemIndex = cart.findIndex((item) => item._id === _product._id);
+
     if (itemIndex >= 0) {
       swal("warning", "The item already added to cart", "warning");
       return;
