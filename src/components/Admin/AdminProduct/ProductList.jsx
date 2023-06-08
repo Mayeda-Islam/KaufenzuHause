@@ -1,6 +1,7 @@
 import parse from "html-react-parser";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteItems from "../../../APIHooks/DeleteItems";
 const ProductList = ({ products, setProducts }) => {
   const handleDelete = (_id) => {
@@ -8,6 +9,9 @@ const ProductList = ({ products, setProducts }) => {
   };
   const handleUpdateProduct = (id) => {
     console.log(id);
+  };
+  const handleViewProductDetails = (data) => {
+    console.log(data);
   };
   return (
     <div className="overflow-x-auto">
@@ -19,15 +23,10 @@ const ProductList = ({ products, setProducts }) => {
             <th className="px-6 py-4  ">Product Name</th>
 
             <th className="px-6 py-4  ">Price</th>
-            <th className="px-6 py-4  ">Previous price</th>
-            <th className="px-6 py-4  ">Description</th>
-            <th className="px-6 py-4  ">Sizes</th>
-            <th className="px-6 py-4  ">Colors</th>
-            <th className="px-6 py-4  ">Total product</th>
             <th className="px-6 py-4  ">Category</th>
+            <th className="px-6 py-4  ">Total product</th>
 
-            <th className="px-6 py-4  ">Brand</th>
-            <th className="px-6 py-4  ">Shipping</th>
+            <th className="px-6 py-4  ">View</th>
 
             <th className="px-6 py-4  ">Delete</th>
             <th className="px-6 py-4  ">Edit</th>
@@ -46,37 +45,41 @@ const ProductList = ({ products, setProducts }) => {
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
                 {product.productPrice}
               </td>
-              <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
-                {product.previousPrice}
-              </td>
-              <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
+
+              {/* <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
                 {parse(
                   product?.description.length > 100
                     ? product?.description.slice(0, 100) + "..."
                     : product?.description
                 )}
-              </td>
-              <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
+              </td> */}
+              {/* <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
                 {product?.sizes.map((size) => `${size + " "}`)}
-              </td>
-              <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
+              </td> */}
+              {/* <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
                 {product?.colors.map((color) => `${color + " "}`)}
-              </td>
-              <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
-                {product.totalProduct}
-              </td>
+              </td> */}
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
                 {product.category}
               </td>
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
-                {product.brand}
+                {product.totalProduct}
               </td>
-              <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
+              {/* <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
+                {product.brand}
+              </td> */}
+              {/* <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
                 {parse(
                   product.shipping.length > 100
                     ? product.shipping.slice(0, 100) + "..."
                     : product.shipping
                 )}
+              </td> */}
+              <td
+                className="border border-gray-400 py-2 px-4 sm:px-6 text-gray-700"
+                onClick={() => handleViewProductDetails(product)}
+              >
+                <VisibilityIcon />
               </td>
               <td
                 className="border border-gray-400 py-2 px-4 sm:px-6 text-red-400"
