@@ -1,94 +1,101 @@
-import { Box, Modal } from '@mui/material';
-import React from 'react';
-
-const ViewProductModal = () => {
-    return (
-        <div>
-             <Modal
-        keepMounted
-        open={editOpen}
-        onClose={() => setEditOpen(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div className="outline-none focus:outline-none ">
-            {/* <div className=" w-full ">
-              <div className="border-0 rounded-lg shadow-lg  flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-4 border-b-0.5 border-gray-300">
-                  <button
-                    className="text-center flex items-center justify-center w-[40px] h-[40px] rounded-lg ml-auto bg-gray-800 text-white text-xl font-medium hover:bg-gray-900"
-                    onClick={() => setEditOpen(false)}
-                  >
-                    <IoClose />
-                  </button>
-                </div>
-                {/* body */}
-                <div className=" p-6 flex-auto w-full border-2 border-gray-200 rounded mt-[1rem]">
-                  <form onSubmit={handleUpdateCategory}>
-                    <label
-                      // for="default"
-                      className="block mb-2 font-semibold after:content-['*'] after:ml-0.5 after:text-red-500  text-sm  text-gray-900"
-                    >
-                      Add Category
-                    </label>
-                    <select
-                      name='category'
-                      className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
-                      defaultValue={category}
-                    >
-
-                      {categories?.map((categoryProduct) => (
-
-                        <option value={categoryProduct.categoryTitle} key={categoryProduct?._id}
-                          selected={category === categoryProduct.categoryTitle}
-                        >
-                          {categoryProduct.categoryTitle}
-                        </option>
-
-                      ))}
-                    </select>
-
-                    <div className=" md:flex md:justify-center md:items-center md:gap-8">
-                      <div className='my-3'>
-                        {
-                          !image ?
-                            <img src={imageURL} alt="images" className='w-64' />
-                            :
-                            <img src={image} alt="images" className='w-64' />
-                        }
-                      </div>
-                      <div className="h-20 w-full">
-                        <label className="after:content-['*'] after:ml-0.5 text-sm after:text-red-500 font-semibold">
-                          Image
-                        </label>
-                        <input
-                          type="file"
-                          onChange={handleImage}
-                          accept="image/*"
-                          required
-                          className="mt-2 w-full px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400 rounded-md sm:text-sm"
-                          placeholder="slider image"
-                        />
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="py-2 px-7 w-full bg-[#55c3c1f7]  text-sm font-medium text-white rounded-sm border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee]"
-                    >
-                      Submit
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div> */}
+import { Box, Modal } from "@mui/material";
+import parse from "html-react-parser";
+import React from "react";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: { md: "60%", xs: "98%" },
+  maxHeight: { md: "80%", xs: "98%" },
+  boxShadow: 24,
+  overflowY: "scroll",
+  bgcolor: "white",
+};
+const ViewProductModal = ({ open, setOpen, product }) => {
+  console.log(product);
+  const {
+    brand,
+    category,
+    colors,
+    delivery,
+    description,
+    images,
+    previousPrice,
+    productPrice,
+    productTitle,
+    shipping,
+    sizes,
+    totalProduct,
+    _id,
+  } = product;
+  console.log(delivery);
+  return (
+    <Modal
+      keepMounted
+      open={open}
+      onClose={() => setOpen(false)}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        <div className="p-4">
+          <div className=" flex justify-center items-center">
+            <div className="flex flex-wrap gap-x-4">
+              {images?.map((image) => (
+                <>
+                  <img src={image} className=" w-20 h-20" alt="" />
+                </>
+              ))}
+            </div>
           </div>
-
-        </Box>
-      </Modal>
+          <div className="my-4">
+            <h1 className="uppercase">
+              Brand Name: <span>{brand}</span>{" "}
+            </h1>
+            <h1 className="uppercase">
+              Products Name: <span>{productTitle}</span>{" "}
+            </h1>
+            <h1 className="uppercase">
+              Category Name: <span>{category}</span>{" "}
+            </h1>
+            <h1 className="uppercase">
+              Previous price: <span>{previousPrice}</span>{" "}
+            </h1>
+            <h1 className="uppercase">
+              Present price: <span>{productPrice}</span>{" "}
+            </h1>
+            <h1 className="uppercase">
+              Total product: <span>{totalProduct}</span>{" "}
+            </h1>
+            <h1>
+              Colors :{" "}
+              {colors?.map((color) => (
+                <>
+                  <span>{color} </span>
+                </>
+              ))}
+            </h1>
+            <h1>
+              Sizes :{" "}
+              {sizes?.map((size) => (
+                <>
+                  <span>{size} </span>
+                </>
+              ))}
+            </h1>
+            <h1>
+              Delivery: <span> {delivery ? parse(delivery) : ""} </span>
+            </h1>
+            <br />
+            <h1>
+              Description:<span> {description ? parse(description) : ""}</span>
+            </h1>
+          </div>
         </div>
-    );
+      </Box>
+    </Modal>
+  );
 };
 
 export default ViewProductModal;

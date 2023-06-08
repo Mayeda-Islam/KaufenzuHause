@@ -1,9 +1,12 @@
-import parse from "html-react-parser";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteItems from "../../../APIHooks/DeleteItems";
+import { useState } from "react";
+import ViewProductModal from "./ViewProductModal";
 const ProductList = ({ products, setProducts }) => {
+  const [open, setOpen] = useState(false);
+  const [product, setProduct] = useState({});
   const handleDelete = (_id) => {
     DeleteItems(`product/${_id}`, setProducts);
   };
@@ -11,7 +14,8 @@ const ProductList = ({ products, setProducts }) => {
     console.log(id);
   };
   const handleViewProductDetails = (data) => {
-    console.log(data);
+    setOpen(true);
+    setProduct(data);
   };
   return (
     <div className="overflow-x-auto">
@@ -46,19 +50,6 @@ const ProductList = ({ products, setProducts }) => {
                 {product.productPrice}
               </td>
 
-              {/* <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
-                {parse(
-                  product?.description.length > 100
-                    ? product?.description.slice(0, 100) + "..."
-                    : product?.description
-                )}
-              </td> */}
-              {/* <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
-                {product?.sizes.map((size) => `${size + " "}`)}
-              </td> */}
-              {/* <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
-                {product?.colors.map((color) => `${color + " "}`)}
-              </td> */}
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-md font-medium">
                 {product.category}
               </td>
@@ -96,6 +87,11 @@ const ProductList = ({ products, setProducts }) => {
           ))}
         </tbody>
       </table>
+      <ViewProductModal
+        open={open}
+        setOpen={setOpen}
+        product={product}
+      ></ViewProductModal>
     </div>
   );
 };
