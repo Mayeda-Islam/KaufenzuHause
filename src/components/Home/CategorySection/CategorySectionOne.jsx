@@ -6,7 +6,6 @@ const CategorySectionOne = ({ products, sliders, title }) => {
     <div className="shadow-md pb-14">
       <div className="mx-auto w-[95%] lg:w-[90%]">
         {" "}
-
         <div className="flex my-7 items-center justify-between">
           <h1 className=" text-xl lg:text-2xl font-semibold">{title}</h1>
           {/* view all button  */}
@@ -22,7 +21,7 @@ const CategorySectionOne = ({ products, sliders, title }) => {
             </div>
           </div>
           <div className="w-full lg:w-8/12">
-            <div className="grid grid-cols-3 gap-3 ">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 ">
               {products?.slice(0, 6)?.map((product, i) => (
                 // <ProductCard product={product} key={i}></ProductCard>
                 <SingleProduct product={product} key={i} />
