@@ -317,6 +317,7 @@ const Header = () => {
                   >
                     <div className="flex gap-x-4 item-center justify-center">
                       <img
+
                         src={images[0]}
                         className="w-20 h-20 rounded-md"
                         alt=""
@@ -330,6 +331,7 @@ const Header = () => {
                           <p className="text-sm text-textColor ">
                             ${productPrice * quantity}
                           </p>
+
                         </div>
                       </div>
                     </div>

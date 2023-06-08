@@ -46,7 +46,7 @@ const Cart = () => {
                       </thead>
                       <tbody>
                         {cart.length > 0 &&
-                          cart?.map((item) => {
+                          cart.map((item) => {
                             const {
                               _id,
                               images,
@@ -55,7 +55,7 @@ const Cart = () => {
                               productPrice,
                             } = item;
                             return (
-                              <tr key={_id} className=" border-b mb-3">
+                              <tr key={_id} className="border-b mb-3">
                                 <th
                                   scope="row"
                                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
@@ -66,15 +66,17 @@ const Cart = () => {
                                         onClick={() => removeFromCart(_id)}
                                       />
                                     </button>
-                                    <img
-                                      src={images[0]}
-                                      className="md:w-[100px] md:h-[100px] lg:w-[90px] lg:h-[90px]"
-                                    />
+                                    {images && images[0] && (
+                                      <img
+                                        src={images[0]}
+                                        className="md:w-[100px] md:h-[100px] lg:w-[90px] lg:h-[90px]"
+                                      />
+                                    )}
                                   </div>
                                 </th>
                                 <td className="px-6 py-4">
                                   <h3 className="text-base font-medium text-textPrimary mb-3">
-                                    {productTitle.slice(0, 30)}
+                                    {productTitle && productTitle.slice(0, 30)}
                                   </h3>
                                 </td>
                                 <td className="px-6 py-4">
