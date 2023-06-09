@@ -39,58 +39,142 @@ const ViewProductModal = ({ open, setOpen, product }) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <div className="p-4">
-          <div className=" flex justify-center items-center">
-            <div className="flex flex-wrap gap-x-4">
-              {images?.map((image) => (
-                <>
-                  <img src={image} className=" w-20 h-20" alt="" />
-                </>
-              ))}
+        <div className="outline-none focus:outline-none ">
+          <div className=" ">
+            <div className="border-0 rounded-lg shadow-lg  flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="flex items-start justify-between p-5 border-b-0.5 border-gray-300">
+                <div className="p-36">
+                  <div className=" flex justify-center items-center">
+                    <div className="flex flex-wrap gap-4">
+                      {images?.map((image) => (
+                        <>
+                          <img src={image} className=" w-20 h-20" alt="" />
+                        </>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="relative my-8  overflow-x-auto shadow-md sm:rounded-lg">
+                    <table className="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
+                      <tbody className="p-8">
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Brand Name
+                          </td>
+                          <td>{brand}</td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Product Name
+                          </td>
+                          <td>{productTitle}</td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Category Name
+                          </td>
+                          <td>{category}</td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Total Product
+                          </td>
+                          <td>{totalProduct}</td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Previous Price
+                          </td>
+                          <td>{previousPrice}</td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Present Price
+                          </td>
+                          <td>{productPrice}</td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Colors
+                          </td>
+                          <td>
+                            {" "}
+                            {colors?.map((color) => (
+                              <>
+                                <span>{color} </span>
+                              </>
+                            ))}
+                          </td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Sizes
+                          </td>
+                          <td>
+                            {" "}
+                            {sizes?.map((size) => (
+                              <>
+                                <span>{size} </span>
+                              </>
+                            ))}
+                          </td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 flex justify-items-start py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Description
+                          </td>
+                          <td className="text-justify px-6 py-4">
+                            {description
+                              ? parse(description)
+                              : " No Description available"}
+                          </td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 flex justify-items-start py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Delivery
+                          </td>
+                          <td className="text-justify px-6 py-4">
+                            {delivery
+                              ? parse(delivery)
+                              : "No Delivery description available"}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="my-4">
-            <h1 className="uppercase">
-              Brand Name: <span>{brand}</span>{" "}
-            </h1>
-            <h1 className="uppercase">
-              Products Name: <span>{productTitle}</span>{" "}
-            </h1>
-            <h1 className="uppercase">
-              Category Name: <span>{category}</span>{" "}
-            </h1>
-            <h1 className="uppercase">
-              Previous price: <span>{previousPrice}</span>{" "}
-            </h1>
-            <h1 className="uppercase">
-              Present price: <span>{productPrice}</span>{" "}
-            </h1>
-            <h1 className="uppercase">
-              Total product: <span>{totalProduct}</span>{" "}
-            </h1>
-            <h1>
-              Colors :{" "}
-              {colors?.map((color) => (
-                <>
-                  <span>{color} </span>
-                </>
-              ))}
-            </h1>
-            <h1>
-              Sizes :{" "}
-              {sizes?.map((size) => (
-                <>
-                  <span>{size} </span>
-                </>
-              ))}
-            </h1>
-            <h1>
-              Delivery: <span> {delivery ? parse(delivery) : ""} </span>
-            </h1>
-            <br />
-            <h1>
-              Description:<span> {description ? parse(description) : ""}</span>
-            </h1>
           </div>
         </div>
       </Box>
