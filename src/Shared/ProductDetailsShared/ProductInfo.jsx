@@ -4,7 +4,7 @@ import { MdClose } from "react-icons/md";
 import { Context } from "../../ContextProvider/ContextProvider";
 const ProductInfo = ({ product }) => {
 
-  const { handleAddToCart, cart } = useContext(Context);
+  const { addToCart, cart } = useContext(Context);
 
   const {
     productTitle,
