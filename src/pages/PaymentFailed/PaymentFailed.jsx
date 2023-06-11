@@ -5,9 +5,9 @@ import errorLogo from "../../images/logo/error.png";
 
 const PaymentFailed = () => {
   return (
-    <section className="flex items-center h-full sm:p-16">
+    <section className="flex items-center h-screen  sm:p-16">
       <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8 space-y-8 ">
-        <img src={errorLogo} alt="" />
+        <img src={errorLogo} className="w-1/5" alt="" />
         <div>
           <h1 className="text-5xl mb-8 text-center font-extrabold text-gray-700 tracking-widest">
             Payment Failed.

@@ -4,7 +4,7 @@ import paymentSuccessLogo from "../../images/logo/paymentSuccessfull.png";
 
 const PaymentSuccess = () => {
   return (
-    <section className="flex items-center h-full sm:p-16">
+    <section className="flex h-screen items-center h-full sm:p-16">
       <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8 space-y-8 ">
         <img src={paymentSuccessLogo} alt="" />
         <div>
