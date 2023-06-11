@@ -1,9 +1,10 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { Context } from "../../ContextProvider/ContextProvider";
 
 const TotalOrder = () => {
   const { cart, calculateSubTotal, calculateTotal } = useContext(Context);
+
+  const handlePayment = () => {};
   return (
     <>
       {cart.length > 0 && (
@@ -45,11 +46,12 @@ const TotalOrder = () => {
                 </tbody>
               </table>
               <div className="my-3 text-center">
-                <Link to={"/checkout"}>
-                  <button className=" text-white py-2.5 px-14 bg-primary hover:bg-secondary  text-base  rounded-md hover:text-textPrimary  capilatize ">
-                    Proceed To checkout
-                  </button>
-                </Link>
+                <button
+                  onClick={handlePayment}
+                  className=" text-white py-2.5 px-14 bg-primary hover:bg-secondary  text-base  rounded-md hover:text-textPrimary  capilatize "
+                >
+                  Proceed To checkout
+                </button>
               </div>
             </div>
           </div>
