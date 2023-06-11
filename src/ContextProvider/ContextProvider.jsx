@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import swal from "sweetalert";
 
@@ -6,6 +6,7 @@ export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [cart, setCart] = React.useState([]);
+  const [language, setLanguage] = useState('english')
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -95,6 +96,8 @@ const ContextProvider = ({ children }) => {
     decrement,
     calculateSubTotal,
     calculateTotal,
+    setLanguage,
+    language
   };
   return <Context.Provider value={context}>{children}</Context.Provider>;
 };

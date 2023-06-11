@@ -9,25 +9,7 @@ const Checkout = () => {
   return (
     <section className="py-8 lg:pt-10 lg:pb-14 bg-[#f7f7f7] relative">
       <div className=" w-[95%] lg:w-[94%] mx-auto">
-        {/* login and coupon request */}
-        <div className="m-4">
-          <div className="flex items-center gap-4 mb-4">
-            <span className="text-[15px] font-medium text-textColor">
-              Returning Customer?
-            </span>
-            <span className="text-[15px] font-medium text-blue-400 underline">
-              <Link>Click here to login</Link>
-            </span>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="text-[15px] font-medium text-textColor">
-              Have a Coupon?
-            </span>
-            <span className="text-[15px] font-medium text-blue-400 underline">
-              <Link>Click here to Enter your Code?</Link>
-            </span>
-          </div>
-        </div>
+
         <div className="flex justify-center flex-wrap">
           <div className="w-full md:w-full lg:w-7/12">
             <div className="m-4">
@@ -189,7 +171,7 @@ const Checkout = () => {
             </div>
           </div>
 
-          <TotalOrder />
+          <TotalOrder state={'process'} />
         </div>
       </div>
     </section>
