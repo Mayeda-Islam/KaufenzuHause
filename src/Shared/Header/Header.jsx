@@ -17,12 +17,12 @@ import { Context } from "../../ContextProvider/ContextProvider";
 import { Badge } from "@mui/material";
 
 const Header = () => {
-  const { cart, removeFromCart, increment, decrement, calculateSubTotal } =
+  const { cart, removeFromCart, increment, decrement, calculateSubTotal, language } =
     useContext(Context);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
   const [anchorE3, setAnchorE3] = React.useState(null);
-
+  console.log(language);
   //sticky nav on scroll
   const [logo, setLogo] = useState([]);
   //sticky nav
@@ -130,11 +130,10 @@ const Header = () => {
       {/* web nav */}
 
       <nav
-        className={`py-4 px-[25px] md:px-[40px] w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${
-          stickyNav
-            ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
-            : "bg-darkNavy"
-        }`}
+        className={`py-4 px-[25px] md:px-[40px] w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${stickyNav
+          ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
+          : "bg-darkNavy"
+          }`}
       >
         <div className="flex items-center gap-3">
           {/* hamburger icon */}
@@ -157,8 +156,8 @@ const Header = () => {
 
           {/* brand logo */}
           <span className="">
-            <Link>
-              <img src={logo[0]?.headerLogoURL} className="w-36" alt="" />
+            <Link to={'/'}>
+              <img src={logo[0]?.headerLogoURL} className="w-36 cursor-pointer" alt="logo" />
             </Link>
           </span>
         </div>
@@ -291,9 +290,8 @@ const Header = () => {
       {/* cart sidebar */}
       <div
         ref={wrapper}
-        className={`cart_nav shadow-lg shadow-gray-300 ${
-          display == true ? "active" : ""
-        }`}
+        className={`cart_nav shadow-lg shadow-gray-300 ${display == true ? "active" : ""
+          }`}
       >
         <button
           className="absolute right-[15px] top-[15px] bg-none outline-none border-none text-[#444] hover:text-[#111] text-[2rem] p-[0.5rem] cursor-pointer transition-all duration-[0.3s] "
@@ -449,11 +447,10 @@ const Header = () => {
 
       {/* mobile nav */}
       <nav
-        className={`md:block block lg:hidden pt-3 pb-4 px-[25px] md:px-[35px] top-0 right-0 left-0 z-[10]  ${
-          stickyNav
-            ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
-            : "bg-darkNavy"
-        }`}
+        className={`md:block block lg:hidden pt-3 pb-4 px-[25px] md:px-[35px] top-0 right-0 left-0 z-[10]  ${stickyNav
+          ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
+          : "bg-darkNavy"
+          }`}
       >
         <div className=" flex items-center justify-between">
           <div className="flex items-center gap-3">

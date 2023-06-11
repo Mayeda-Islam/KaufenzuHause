@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -84,10 +84,10 @@ export const router = createBrowserRouter([
         path: "aboutUs",
         element: <AboutUs />,
       },
-      {
-        path: "error",
-        element: <Error />,
-      },
+      // {
+      //   path: "error",
+      //   element: <Error />,
+      // },
       {
         path: "payment-success",
         element: <PaymentSuccess />,
@@ -97,7 +97,7 @@ export const router = createBrowserRouter([
         element: <PaymentFailed />,
       },
       {
-        path: "*",
+        path: "error",
         element: <NotFound />,
       },
     ],
@@ -105,6 +105,7 @@ export const router = createBrowserRouter([
   {
     path: "/admin/",
     element: <AdminLayOut></AdminLayOut>,
+    errorElement: <Error />,
     children: [
       {
         path: "",
