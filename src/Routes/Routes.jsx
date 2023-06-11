@@ -37,6 +37,9 @@ import FooterSection from "../components/Admin/SyestemSetting/FooterSection/Foot
 import LogoSection from "../components/Admin/SyestemSetting/LogoSection.jsx/LogoSection";
 import ProductSection from "../components/Admin/SyestemSetting/ProductSection/ProductSection";
 import AllProducts from "../pages/AllProducts/AllProducts";
+import Error from "../pages/Error/Error";
+import PaymentSuccess from "../pages/PaymentSuccess/PaymentSuccess";
+import PaymentFailed from "../pages/PaymentFailed/PaymentFailed";
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +51,6 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
-
       {
         path: "/productDetails/:id",
         element: <ProductDetails />,
@@ -81,6 +83,18 @@ export const router = createBrowserRouter([
       {
         path: "aboutUs",
         element: <AboutUs />,
+      },
+      {
+        path: "error",
+        element: <Error />,
+      },
+      {
+        path: "payment-success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "payment-failed",
+        element: <PaymentFailed />,
       },
       {
         path: "*",
