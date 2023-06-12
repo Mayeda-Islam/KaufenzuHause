@@ -20,6 +20,7 @@ const ContextProvider = ({ children }) => {
   }, [cart]);
 
   const addToCart = (_product, _cartQuantity) => {
+
     if (_cartQuantity === 0) {
       swal("warning", "Please increase quantity", "warning");
       return;

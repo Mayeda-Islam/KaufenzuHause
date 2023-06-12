@@ -15,7 +15,7 @@ const NotFound = () => {
                         Your payment was not successfully processed.{" "}
                         <Link
                             className="underline text-primary font-bold "
-                            to={"/checkout"}
+                            to={"/payment"}
                         >
                             Try again
                         </Link>{" "}

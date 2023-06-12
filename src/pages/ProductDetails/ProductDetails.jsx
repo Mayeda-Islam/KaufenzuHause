@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
-import { MdClose } from 'react-icons/md';
+import React, { useEffect, useState } from 'react'
+
 import ProductDetailsTabs from '../../Shared/ProductDetailsShared/ProductDetailsTabs';
 import ProductSliderGallery from '../../Shared/ProductDetailsShared/ProductSliderGallery';
 import ProductInfo from '../../Shared/ProductDetailsShared/ProductInfo';
@@ -10,15 +9,20 @@ import { useParams } from 'react-router-dom';
 
 
 const ProductDetails = () => {
+
+
     const { id } = useParams()
-    console.log(id)
     const [product, setProduct] = React.useState({})
+    const [orders, setOrders] = useState([])
+
+
 
     useEffect(() => {
         GetAPI(`products/${id}`, setProduct)
+        GetAPI(`orders`, setOrders)
     }, [id])
 
-    console.log(product);
+    console.log(orders);
 
     useEffect(() => {
         window.scrollTo(0, 0)

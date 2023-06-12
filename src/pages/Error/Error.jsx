@@ -15,7 +15,7 @@ const Error = () => {
             Are you sure the website URL is correct.{" "}
           </h1>
           <p className="text-xl mt-11 text-center">
-            <Link className="underline  text-primary font-bold " to={"/"}>
+            <Link className="underline  text-primary font-bold " to={"/product"}>
               Go Back
             </Link>{" "}
           </p>

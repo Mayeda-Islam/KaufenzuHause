@@ -16,7 +16,7 @@ const PaymentFailed = () => {
             Your payment was not successfully processed.{" "}
             <Link
               className="underline text-primary font-bold "
-              to={"/products"}
+              to={"/payment"}
             >
               Try again
             </Link>{" "}

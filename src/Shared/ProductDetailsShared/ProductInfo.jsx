@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Context } from "../../ContextProvider/ContextProvider";
+// import swal from "sweetalert";
 const ProductInfo = ({ product }) => {
 
   const { addToCart, cart } = useContext(Context);
@@ -17,6 +18,8 @@ const ProductInfo = ({ product }) => {
     sizes,
     model,
   } = product;
+
+
   console.log(product?._id);
   console.log(cart[0]?._id);
   //save the color and size data
@@ -36,6 +39,25 @@ const ProductInfo = ({ product }) => {
       setCartQuantity(cartQuantity - 1);
     }
   };
+
+  // const handleProduct = () => {
+  //   if (colors && selectedColor === '') {
+  //     return swal("Warning!", "Choose a Color", "error");
+  //   }
+  //   if (sizes && selectedSize === '') {
+  //     return swal("Warning!", "Choose a Size!", "error");
+  //   }
+  //   const formData = {
+  //     productTitle,
+  //     productPrice,
+  //     previousPrice,
+  //     totalProduct,
+  //     category,
+  //     brand,
+  //     model,
+  //   }
+  //   addToCart(formData, cartQuantity)
+  // }
 
   return (
     <div>
@@ -171,7 +193,7 @@ const ProductInfo = ({ product }) => {
       </div>
       <hr className="my-3 border-0.5 border-gray-200" />
       {/* product others info */}
-    </div>
+    </div >
   );
 };
 

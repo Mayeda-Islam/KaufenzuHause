@@ -10,7 +10,7 @@ const Cart = () => {
 
   const { cart, removeFromCart, increment, decrement } =
     React.useContext(Context);
-
+    
   return (
     <section className="pt-10 pb-14 bg-[#fff] relative">
       <div className=" w-[95%] lg:w-[94%] mx-auto">
@@ -76,7 +76,7 @@ const Cart = () => {
                                 </th>
                                 <td className="px-6 py-4">
                                   <h3 className="text-base font-medium text-textPrimary mb-3">
-                                    {productTitle && productTitle.slice(0, 30)}
+                                    {productTitle && productTitle?.slice(0, 30)}
                                   </h3>
                                 </td>
                                 <td className="px-6 py-4">

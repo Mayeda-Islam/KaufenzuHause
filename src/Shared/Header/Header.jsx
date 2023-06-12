@@ -313,13 +313,16 @@ const Header = () => {
                     key={_id}
                     className="flex gap-5 w-11/12 mx-auto items-center justify-between my-2 "
                   >
-                    <div className="flex gap-x-4 item-center justify-center">
-                      <img
 
-                        src={images[0]}
-                        className="w-20 h-20 rounded-md"
-                        alt=""
-                      />
+                    <div className="flex gap-x-4 item-center justify-center">
+                      {
+                        images &&
+                        <img
+                          src={images[0]}
+                          className="w-20 h-20 rounded-md"
+                          alt=""
+                        />
+                      }
 
                       <div className="flex flex-col items-center justify-center text-start">
                         <div>
