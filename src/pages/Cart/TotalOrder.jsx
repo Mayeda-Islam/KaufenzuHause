@@ -5,12 +5,10 @@ import { Link } from "react-router-dom";
 const TotalOrder = ({ state }) => {
   const { cart, calculateSubTotal, calculateTotal } = useContext(Context);
 
-  const handlePayment = () => {
 
-  };
   return (
     <>
-      {cart.length > 0 && (
+      {cart?.length > 0 && (
         <div className="w-full md:w-full lg:w-4/12">
           <div className="m-4">
             <h3 className="text-2xl md:text-2xl font-medium text-textColor">
@@ -51,11 +49,11 @@ const TotalOrder = ({ state }) => {
               <div className="my-3 text-center">
                 {
                   state ?
-                    <button
-                      onClick={handlePayment}
+                    <Link
+                      to={'/payment'}
                       className=" text-white py-2.5 px-14 bg-primary hover:bg-secondary  text-base  rounded-md hover:text-textPrimary  capitalize ">
                       Payment Proceed
-                    </button>
+                    </Link>
                     :
 
                     <Link
