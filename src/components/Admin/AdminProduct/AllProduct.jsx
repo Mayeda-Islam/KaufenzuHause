@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import GetAPI from "../../../APIHooks/GetAPI";
 import ProductList from "./ProductList";
-import ViewProductModal from "./ViewProductModal";
 
 const AllProduct = () => {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     GetAPI("products", setProducts);
   }, []);
 

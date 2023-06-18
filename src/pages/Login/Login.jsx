@@ -1,9 +1,7 @@
-import { MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { useEffect } from 'react';
 
 const Login = () => {
 
@@ -15,7 +13,7 @@ const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    useEffect(() => {
+    React.useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
 

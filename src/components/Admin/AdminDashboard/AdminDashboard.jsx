@@ -2,7 +2,6 @@ import {
   BsWalletFill,
   BsCurrencyExchange,
   BsCart4,
-  BsCalendar3,
 } from "react-icons/bs";
 import { GiTwoCoins } from "react-icons/gi";
 import { BiTask } from "react-icons/bi";

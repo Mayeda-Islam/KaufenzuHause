@@ -6,7 +6,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: { md: "60%", xs: "98%" },
+  maxWidth: { md: "50%", xs: "98%" },
   maxHeight: { md: "80%", xs: "98%" },
   boxShadow: 24,
   overflowY: "scroll",
@@ -24,12 +24,9 @@ const ViewProductModal = ({ open, setOpen, product }) => {
     previousPrice,
     productPrice,
     productTitle,
-    shipping,
     sizes,
     totalProduct,
-    _id,
   } = product;
-  console.log(delivery);
   return (
     <Modal
       keepMounted
@@ -41,9 +38,9 @@ const ViewProductModal = ({ open, setOpen, product }) => {
       <Box sx={style}>
         <div className="outline-none focus:outline-none ">
           <div className=" ">
-            <div className="border-0 rounded-lg shadow-lg  flex flex-col w-full bg-white outline-none focus:outline-none">
+            <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none focus:outline-none">
               <div className="flex items-start justify-between p-5 border-b-0.5 border-gray-300">
-                <div className="p-36">
+                <div className="p-5">
                   <div className=" flex justify-center items-center">
                     <div className="flex flex-wrap gap-4">
                       {images?.map((image) => (

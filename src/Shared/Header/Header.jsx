@@ -253,29 +253,38 @@ const Header = () => {
           </div>
           {/* button group */}
 
-          <Link to={"/admin/dashboard"}>
-            <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
-              Dashboard
-            </button>
-          </Link>
 
-          <Link>
-            <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
-              Logout
-            </button>
-          </Link>
+          {/* {
+            user?.email ?
+              <>
+                <Link to={"/admin/dashboard"}>
+                  <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
+                    Dashboard
+                  </button>
+                </Link>
+                <Link>
+                  <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
+                    Logout
+                  </button>
+                </Link>
+              </>
 
-          {/* <Link to={'/register'}>
-            <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
-              Register
-            </button>
-          </Link> */}
+              :
+              <> */}
+                <Link to={'/register'}>
+                  <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
+                    Register
+                  </button>
+                </Link>
 
-          {/* <Link to={'/login'}>
-            <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
-              Login
-            </button>
-          </Link> */}
+                <Link to={'/login'}>
+                  <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
+                    Login
+                  </button>
+                </Link>
+              {/* </>
+          } */}
+
           {/* shopping cart */}
           <span
             onClick={handleToggle}
