@@ -8,6 +8,8 @@ const ContextProvider = ({ children }) => {
   const [cart, setCart] = React.useState([]);
   const [language, setLanguage] = useState('english')
 
+  // Jahed vai, Header JSX er 256-273 And 285-286 number line khule dilei user diye conditionally dashboard and logout dekhate parben 
+
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {

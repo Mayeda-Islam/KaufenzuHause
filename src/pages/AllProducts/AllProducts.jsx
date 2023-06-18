@@ -2,7 +2,6 @@ import React from 'react';
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import GetAPI from '../../APIHooks/GetAPI';
 import { useLocation } from 'react-router-dom';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import RangeSlider from '../../Shared/RangeSlider/RangeSlider';
