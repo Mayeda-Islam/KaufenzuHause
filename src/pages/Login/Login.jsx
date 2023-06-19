@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import serverUrl from '../../config/Config';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Context } from '../../ContextProvider/ContextProvider';
 
@@ -33,6 +33,7 @@ const Login = () => {
                 }
             });
     }
+
 
 
 
@@ -95,7 +96,9 @@ const Login = () => {
                         <p className="text-red-500 ">Password should be 8 character or more</p>
                     )}
 
-
+                    <Link to={'/forgot-password'} className='flex justify-end mt-3'>
+                        <p className=' cursor-pointer border-b-2 hover:border-b-2 border-darkNavy text-darkNavy hover:border-blue-500 font-semibold' >Forgot Password?</p>
+                    </Link>
                 </label>
 
 

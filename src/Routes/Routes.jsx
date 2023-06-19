@@ -42,6 +42,8 @@ import PaymentSuccess from "../pages/PaymentSuccess/PaymentSuccess";
 import PaymentFailed from "../pages/PaymentFailed/PaymentFailed";
 import Payment from "../pages/Payment.js/Payment";
 import MyOrders from "../components/Users/MyOrders";
+import ForgotPassword from "../pages/Login/ForgotPassword";
+import PasswordChange from "../components/Admin/PasswordChange/PasswordChange";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
       },
 
       {
@@ -105,7 +111,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/admin/",
+    path: "/dashboard/",
     element: <AdminLayOut></AdminLayOut>,
     errorElement: <Error />,
     children: [
@@ -113,10 +119,7 @@ export const router = createBrowserRouter([
         path: "",
         element: <AdminDashboard></AdminDashboard>,
       },
-      {
-        path: "dashboard",
-        element: <AdminDashboard></AdminDashboard>,
-      },
+
       {
         path: "profile",
         element: <AdminProfile></AdminProfile>,
@@ -124,6 +127,10 @@ export const router = createBrowserRouter([
       {
         path: "myOrders",
         element: <MyOrders></MyOrders>,
+      },
+      {
+        path: "passwordSetting",
+        element: <PasswordChange />,
       },
       {
         path: "orders/orderedProducts",

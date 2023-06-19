@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { SingleImageUploader } from "../../../APIHooks/SingleImageUploader";
 import { useEffect } from "react";
+import { Context } from "../../../ContextProvider/ContextProvider";
+import GetAPI from "../../../APIHooks/GetAPI";
+import UpdatedApi from "../../../APIHooks/UpdatedItem";
 
 const AdminProfile = () => {
   const [image, setImage] = React.useState(null);
   const [countries, setCountries] = useState([]);
+  const { user } = useContext(Context)
+  const [currentUser, setCurrentUser] = useState({})
+
+  useEffect(() => {
+    GetAPI(`users/${user?._id}`, setCurrentUser)
+  }, [user?._id, setCurrentUser])
+
 
   const {
     register,
@@ -13,7 +23,21 @@ const AdminProfile = () => {
     // watch,
     formState: { errors },
   } = useForm();
-  const handleUpdateProfile = (data) => console.log(data);
+  const handleUpdateProfile = (data) => {
+    const formData = {
+      image: image || currentUser?.image,
+      fullName: data?.fullName || currentUser?.fullName,
+      email: data?.email || currentUser?.email,
+      phoneNumber: data?.phoneNumber || currentUser?.phoneNumber,
+      gender: data?.gender || currentUser?.gender,
+      address: data?.address || currentUser?.address,
+      city: data?.city || currentUser?.city,
+      zipCode: data?.zipCode || currentUser?.zipCode,
+      country: data?.country || currentUser?.country,
+    }
+
+    UpdatedApi(`users/update-profile/${user?._id}`, setCurrentUser, formData,)
+  };
   const handleImageUpload = async (event) => {
     const imageData = event.target.files[0];
     const formData = new FormData();
@@ -26,7 +50,12 @@ const AdminProfile = () => {
   const uri = `https://restcountries.com/v3.1/all`;
   fetch(uri)
     .then((res) => res.json())
-    .then((data) => setCountries(data));
+    .then((data) => {
+      const countries = data?.map(country => country?.name?.common);
+      // Sort the array of country names in alphabetical order
+      const sortedCountries = countries.sort((a, b) => a.localeCompare(b));
+      setCountries(sortedCountries)
+    });
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -36,15 +65,15 @@ const AdminProfile = () => {
       <div className="grid grid-cols-12 w-fit mx-auto md:gap-10">
         <div className="col-span-12 lg:col-span-4 flex justify-center">
           <div className="mt-12">
-            {image ? (
+            {currentUser?.image || image ? (
               <img
-                className="rounded-full w-72 h-72 object-cover border-4 border-[#f5f8ff] mx-auto"
-                src={image}
+                className="rounded-full w-32 h-32 lg:w-72 lg:h-72 object-cover border-4 border-[#f5f8ff] mx-auto"
+                src={image || currentUser?.image}
                 alt="This is profile pic"
               />
             ) : (
               <img
-                className="rounded-full w-72 border-4 border-[#f5f8ff] mx-auto"
+                className="rounded-full w-32 h-32 lg:w-72 lg:h-72 border-4 border-[#f5f8ff] mx-auto"
                 src={
                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXnHCfhPKKAy1zSl8__FmI1hsMmSR-MVgh5IcfD_-43Q&s"
                 }
@@ -55,20 +84,20 @@ const AdminProfile = () => {
           </div>
         </div>
 
-        <div className="col-span-12 mt-12  lg:col-span-8 w-fit lg:w-full mx-auto ">
-          <h2 className="text-4xl font-medium pt-5">Profile </h2>
+        <div className="col-span-12 mt-4 lg:mt-12  lg:col-span-8 w-fit lg:w-full mx-auto ">
+          <h2 className="text-2xl lg:text-4xl font-medium pt-5">Profile</h2>
           <p className="text-xl text-blue-400 my-2">
-            rayn@gmail.com{" "}
-            <span className="text-xl text-gray-500">- Admin</span>
+            {currentUser?.email}{" "}
+            <span className="text-xl text-gray-500">- {currentUser?.fullName}</span>
           </p>
           <p className="text-md text-gray-400">Upload your own image ...</p>
 
-          <div className="  my-2">
+          <div className=" my-2">
             <label
               htmlFor="dropzone-file"
-              className="flex flex-col items-center justify-center   border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              className="flex flex-col items-center justify-center  border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50   hover:bg-gray-100 "
             >
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <div className="flex flex-col items-center px-4 justify-center pt-5 pb-6">
                 <svg
                   aria-hidden="true"
                   className="w-10 h-10 mb-3 text-gray-400"
@@ -113,8 +142,8 @@ const AdminProfile = () => {
             </span>
             <input
               type="fullName"
-              {...register("fullName", { required: true })}
-              // defaultValue={user?.email}
+              {...register("fullName", { required: false })}
+              defaultValue={currentUser?.fullName}
 
               className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
               placeholder="your name"
@@ -129,8 +158,8 @@ const AdminProfile = () => {
             </span>
             <input
               type="email"
-              {...register("email", { required: true })}
-              // defaultValue={user?.email}
+              {...register("email", { required: false })}
+              defaultValue={currentUser?.email}
 
               className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
               placeholder="you@example.com"
@@ -148,9 +177,9 @@ const AdminProfile = () => {
                 </span>
                 <input
                   type="tel"
-                  {...register("number", { required: true })}
+                  {...register("phoneNumber", { required: false })}
                   pattern="^(?:(?:\+|00)88|01)?\d{11}$"
-                  // defaultValue={user?.number}
+                  defaultValue={currentUser?.phoneNumber}
                   className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
                   placeholder="01934****39"
                 />
@@ -162,7 +191,7 @@ const AdminProfile = () => {
               </label>
             </div>
 
-            <div>
+            <div className="mt-4 lg:mt-0">
               <label
                 // for="default"
                 className="block mb-2 text-sm font-medium text-gray-900"
@@ -172,26 +201,26 @@ const AdminProfile = () => {
               <select
                 {...register("gender", { required: false })}
                 // defaultValue={user?.gender}
-                className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
+                className="border-2 text-gray-900 mb-2 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
               >
                 <option selected disabled hidden>
                   Choose One
                 </option>
                 <option
                   value="male"
-                //  selected={user?.gender === "male"}
+                  selected={currentUser?.gender === "male"}
                 >
                   Male
                 </option>
                 <option
                   value="female"
-                //  selected={user?.gender === "female"}
+                  selected={currentUser?.gender === "female"}
                 >
                   Female
                 </option>
                 <option
                   value="other"
-                // selected={user?.gender === "other"}
+                  selected={currentUser?.gender === "other"}
                 >
                   Other
                 </option>
@@ -207,11 +236,10 @@ const AdminProfile = () => {
             </label>
             <input
               type="address"
-              {...register("address", { required: true })}
-              // defaultValue={user?.email}
-              disabled
+              {...register("address", { required: false })}
+              defaultValue={currentUser?.address}
               className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
-              placeholder="house:a,road:b,block:x"
+              placeholder="house: a ,road: b ,block: x"
             />
             {errors?.address && (
               <p className="text-red-500 text-sm ">Your address is required</p>
@@ -230,29 +258,27 @@ const AdminProfile = () => {
 
               <input
                 type="text"
-                {...register("city", { required: true })}
-                // defaultValue={user?.email}
+                {...register("city", { required: false })}
+                defaultValue={currentUser?.city}
 
                 className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
                 placeholder="example city"
               />
-              {errors?.email && (
+              {errors?.city && (
                 <p className="text-red-500 text-sm ">Your city is required</p>
               )}
             </div>
             {/*********************  zip code input ****************/}
-            <label className="block">
+            <label className="block mt-4 lg:mt-0">
               <span className=" block text-sm font-medium">Zip Code</span>
               <input
                 type="number"
-                {...register("zipCode", { required: true })}
-                // defaultValue={user?.zipCode}
+                {...register("zipCode", { required: false })}
+                defaultValue={currentUser?.zipCode}
                 className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
                 placeholder="Enter your zip code"
               />
-              {errors?.zipCode && (
-                <p className="text-red-500 text-sm ">Zip code is required</p>
-              )}
+
             </label>
           </div>
           {/**************************  country  ***********************/}
@@ -266,17 +292,20 @@ const AdminProfile = () => {
             </label>
             <select
               {...register("country", { required: false })}
-              // defaultValue={user?.country}
+              defaultValue={currentUser?.country}
               className="border-2 text-black mb-6 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
             >
               <option selected hidden>
                 Choose One
               </option>
-              {countries.map((country) => (
+              {countries.map((country, index) => (
                 <>
                   {" "}
-                  <option value={country?.name?.common}>
-                    {country?.name?.common}
+                  <option
+                    key={index}
+                    selected={currentUser.country === country}
+                    value={country}>
+                    {country}
                   </option>
                 </>
               ))}

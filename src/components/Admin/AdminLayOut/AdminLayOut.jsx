@@ -26,6 +26,8 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useEffect } from "react";
 import GetAPI from "../../../APIHooks/GetAPI";
 import { useState } from "react";
+import { Context } from "../../../ContextProvider/ContextProvider";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const drawerWidth = 300;
 
@@ -104,6 +106,14 @@ export default function AdminLayOut() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [nestedOpen, setNestedOpen] = React.useState([]);
+  const { user } = React.useContext(Context)
+  const [currentUser, setCurrentUser] = useState({})
+
+  useEffect(() => {
+    GetAPI(`users/${user?._id}`, setCurrentUser)
+  }, [user?._id, setCurrentUser])
+  console.log(currentUser);
+
   const handleClick = (index) => {
     setNestedOpen((prev) => {
       const newState = [...prev];
@@ -129,24 +139,27 @@ export default function AdminLayOut() {
     {
       title: "Dashboard",
       icon: <DashboardIcon />,
-      linkPath: "dashboard",
+      linkPath: "/dashboard/",
     },
     {
       title: "Profile",
       icon: <AccountCircleIcon />,
       linkPath: "profile",
     },
-    {
-      title: "My Orders",
-      icon: <AddShoppingCartIcon />,
-      link: "myOrders",
-    },
+    // {
+    //   title: "My Orders",
+    //   icon: <AddShoppingCartIcon />,
+    //   link: "myOrders",
+    // },
     {
       title: "Orders",
       icon: <AddShoppingCartIcon />,
 
       items: [
-        { title: "Ordered Product", linkPath: "/orders/orderedProducts" },
+        {
+          title: "Ordered Product",
+          linkPath: "/orders/orderedProducts"
+        },
         {
           title: "Delivered Product",
           linkPath: "orders/deliveredProducts",
@@ -202,7 +215,32 @@ export default function AdminLayOut() {
         },
       ],
     },
+    {
+      title: "Password Setting",
+      icon: <SettingsIcon />,
+      linkPath: "passwordSetting",
+    },
   ];
+
+  const userMenu = [
+    {
+      title: "My Orders",
+      icon: <AddShoppingCartIcon />,
+      linkPath: "myOrders",
+    },
+    {
+      title: "Profile",
+      icon: <AccountCircleIcon />,
+      linkPath: "profile",
+    },
+    {
+      title: "Password Setting",
+      icon: <SettingsIcon />,
+      linkPath: "passwordSetting",
+    },
+  ]
+
+
   return (
     <Box sx={{ display: "flex" }}>
       {/* <CssBaseline /> */}
@@ -233,7 +271,13 @@ export default function AdminLayOut() {
               }}
               component="div"
             >
-              <AccountCircleIcon style={{ fontSize: "4rem" }} />
+
+              {
+                currentUser?.image ?
+                  <img src={currentUser?.image} alt="" className="w-[3.5rem] rounded-full mr-2" /> :
+                  <AccountCircleIcon style={{ fontSize: "4rem" }} />
+              }
+
               <div>
                 <Typography
                   variant="h6"
@@ -241,10 +285,10 @@ export default function AdminLayOut() {
                   component="p"
                   sx={{ fontWeight: 600 }}
                 >
-                  Mayeda Islam
+                  {currentUser?.fullName}
                 </Typography>
                 <Typography component="p" sx={{ fontWeight: 600 }}>
-                  mayedakonika@gmail.com
+                  {currentUser?.email}
                 </Typography>
               </div>
             </Typography>
@@ -284,8 +328,8 @@ export default function AdminLayOut() {
         <Divider className=" bg-lightGray shadow-lg" />
 
         <List>
-          {menu.map((text, index) => (
-            <React.Fragment key={text.title}>
+          {user?.role === 'admin' && menu?.map((text, index) => (
+            <React.Fragment key={index}>
               <NavLink
                 activeClassName="active-link"
                 className={({ isActive }) => (isActive ? "text-red" : "")}
@@ -397,6 +441,63 @@ export default function AdminLayOut() {
                   )}
                 </>
               )}
+            </React.Fragment>
+          ))}
+
+
+
+          {user?.role === 'user' && userMenu?.map((text, index) => (
+            <React.Fragment key={text.title}>
+              <Link
+                activeClassName="active-link"
+                className={({ isActive }) => (isActive ? "text-red" : "")}
+                key={index}
+                to={text.linkPath ? text.linkPath : location.pathname}
+                isActive={() => location.pathname === text.linkPath}
+              >
+                <ListItem
+                  onClick={() => handleClick(index)}
+                  disablePadding
+                  sx={{ display: "block" }}
+                >
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        color: "white",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {text.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      className="text-md "
+                      sx={{
+                        opacity: open ? 1 : 0,
+
+                        color: "white",
+                      }}
+                    >
+                      <span className="text-md">{text.title}</span>
+                    </ListItemText>
+                    {open &&
+                      text.items &&
+                      (nestedOpen[index] ? (
+                        <ArrowDropDownIcon className="text-white" />
+                      ) : (
+                        <ArrowDropDownIcon className="text-white" />
+                      ))}
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+
             </React.Fragment>
           ))}
         </List>

@@ -268,11 +268,21 @@ const Header = () => {
           {
             hasUser || user?.email ?
               <>
-                <Link to={"/admin/dashboard"}>
-                  <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
-                    Dashboard
-                  </button>
-                </Link>
+                {
+                  user?.role === 'admin' ?
+                    <Link to={"/dashboard"}>
+                      <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
+                        Dashboard
+                      </button>
+                    </Link>
+                    :
+                    <Link to={"/dashboard/myOrders"}>
+                      <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
+                        Dashboard
+                      </button>
+                    </Link>
+
+                }
                 <Link>
                   <button onClick={handleLogout} className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
                     Logout
@@ -593,22 +603,43 @@ const Header = () => {
               >
                 <Typography>
                   <ul className="p-0 m-0">
-                    <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                      <Link to={"/dashboard"}>Dashboard</Link>
-                    </li>
-                    <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                      <Link>Logout</Link>
-                    </li>
-                    {/* <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                      <Link to={'/register'}>
-                        Register
-                      </Link>
-                    </li>
-                    <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                      <Link to={'/login'}>
-                        Login
-                      </Link>
-                    </li> */}
+                    {hasUser || user?.email ?
+                      <>
+                        {
+                          user?.role === 'admin' ?
+                            <Link to={"/dashboard"}>
+                              <button className="text-sm  bg-transparent  hover:text-darkNavy  border border-white py-2 px-6 rounded-sm ">
+                                Dashboard
+                              </button>
+                            </Link>
+                            :
+                            <Link to={"/dashboard/myOrders"}>
+                              <button className="text-sm  bg-transparent  hover:text-darkNavy  border border-white py-2 px-6 rounded-sm ">
+                                Dashboard
+                              </button>
+                            </Link>
+
+                        }
+                        <li className="text-sm text-textColor  px-10 w-full py-3 text-start " onClick={handleLogout}>
+                          Logout
+                        </li>
+                      </>
+                      :
+                      <>
+                        <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                          <Link to={'/register'}>
+                            Register
+                          </Link>
+                        </li>
+                        <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                          <Link to={'/login'}>
+                            Login
+                          </Link>
+                        </li>
+                      </>
+                    }
+
+
                   </ul>
                 </Typography>
               </Popover>
