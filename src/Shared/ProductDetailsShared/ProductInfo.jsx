@@ -1,32 +1,37 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Context } from "../../ContextProvider/ContextProvider";
 // import swal from "sweetalert";
 const ProductInfo = ({ product }) => {
-
   const { addToCart, cart } = useContext(Context);
 
   const {
+    _id,
     productTitle,
     productPrice,
     previousPrice,
     totalProduct,
     category,
     brand,
-    colors,
-    sizes,
     model,
   } = product;
 
-
-  console.log(product?._id);
-  console.log(cart[0]?._id);
   //save the color and size data
   const [cartQuantity, setCartQuantity] = React.useState(1);
 
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  useEffect(() => {
+    if (product?.colors?.length > 0) {
+      setSelectedColor(product?.colors[0]);
+    }
+
+    if (product?.sizes?.length > 0) {
+      setSelectedSize(product?.colors[0]);
+    }
+  }, [product]);
 
   const incrementQuantity = () => {
     if (cartQuantity < totalProduct) {
@@ -98,7 +103,7 @@ const ProductInfo = ({ product }) => {
       {/* color and size slider */}
       <div className=" my-4">
         {/* color   slide */}
-        {colors?.length > 0 && (
+        {product?.colors?.length > 0 && (
           <div>
             <span className="block text-sm font-normal text-textColor">
               Color : {selectedColor ? selectedColor : "No Color Selected"}{" "}
@@ -106,7 +111,7 @@ const ProductInfo = ({ product }) => {
             <div className="flex items-center gap-3 mt-2">
               {/* color item */}
 
-              {colors?.map((color, index) => (
+              {product?.colors?.map((color, index) => (
                 <button
                   onClick={(e) => setSelectedColor(e.target.value)}
                   key={index}
@@ -130,14 +135,14 @@ const ProductInfo = ({ product }) => {
         )}
 
         {/* choose a  size  */}
-        {sizes?.length > 0 && (
+        {product?.sizes?.length > 0 && (
           <div className="mt-4">
             <span className="block text-sm font-normal text-textColor">
               Size : {selectedSize ? selectedSize : "No Size Selected"}{" "}
             </span>
             <div className="flex items-center gap-3 mt-2">
               {/* size item */}
-              {sizes?.map((size, index) => (
+              {product?.sizes?.map((size, index) => (
                 <button
                   onClick={(e) => setSelectedSize(e.target.value)}
                   key={index}
@@ -182,7 +187,22 @@ const ProductInfo = ({ product }) => {
 
         {/* add to cart button */}
         <button
-          onClick={() => addToCart(product, cartQuantity)}
+          onClick={() =>
+            addToCart(
+              {
+                _id,
+                productTitle,
+                productPrice,
+                model,
+                brand,
+                color: selectedColor,
+                size: selectedSize,
+                quantity: cartQuantity,
+              },
+              product?.colors?.length > 0,
+              product?.sizes?.length > 0
+            )
+          }
           className=" text-white py-2 px-7  hover: rounded text-sm  bg-primary   border-2 border-transparent hover:border-textColor  hover:bg-transparent hover:text-textColor capitalize"
         >
           {cart?.find((item) => item?._id === product?._id)
@@ -193,7 +213,7 @@ const ProductInfo = ({ product }) => {
       </div>
       <hr className="my-3 border-0.5 border-gray-200" />
       {/* product others info */}
-    </div >
+    </div>
   );
 };
 
