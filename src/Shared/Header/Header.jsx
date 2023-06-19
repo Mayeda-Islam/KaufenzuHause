@@ -17,7 +17,7 @@ import { Context } from "../../ContextProvider/ContextProvider";
 import { Badge } from "@mui/material";
 
 const Header = () => {
-  const { cart, removeFromCart, increment, decrement, calculateSubTotal, language } =
+  const { setHasUser, hasUser, user, setUser, cart, removeFromCart, increment, decrement, calculateSubTotal, language } =
     useContext(Context);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
@@ -31,6 +31,16 @@ const Header = () => {
   useEffect(() => {
     GetAPI("logo", setLogo);
   }, []);
+
+
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser({});
+    setHasUser(false)
+  }
+
+
   useEffect(() => {
     window.onscroll = () => {
       setStickyNav(window.pageYOffset === 0 ? false : true);
@@ -46,6 +56,7 @@ const Header = () => {
   const handleClickLang = (event) => {
     setAnchorE2(event.currentTarget);
   };
+
   // language state mobile screen
   const handleClickLangMobile = (event) => {
     setAnchorE3(event.currentTarget);
@@ -254,8 +265,8 @@ const Header = () => {
           {/* button group */}
 
 
-          {/* {
-            user?.email ?
+          {
+            hasUser || user?.email ?
               <>
                 <Link to={"/admin/dashboard"}>
                   <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
@@ -263,14 +274,14 @@ const Header = () => {
                   </button>
                 </Link>
                 <Link>
-                  <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
+                  <button onClick={handleLogout} className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
                     Logout
                   </button>
                 </Link>
               </>
 
               :
-              <> */}
+              <>
                 <Link to={'/register'}>
                   <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
                     Register
@@ -282,8 +293,8 @@ const Header = () => {
                     Login
                   </button>
                 </Link>
-              {/* </>
-          } */}
+              </>
+          }
 
           {/* shopping cart */}
           <span

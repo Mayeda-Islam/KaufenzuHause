@@ -7,8 +7,22 @@ export const Context = createContext();
 const ContextProvider = ({ children }) => {
   const [cart, setCart] = React.useState([]);
   const [language, setLanguage] = useState("english");
+  const [user, setUser] = useState(null)
+  const [hasUser, setHasUser] = useState({})
 
-  // Jahid vai, Header JSX er 256-273 And 285-286 number line khule dilei user diye conditionally dashboard and logout dekhate parben
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      setUser(JSON.parse(loggedInUser));
+      setHasUser(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (user?.email) {
+      setHasUser(true)
+    }
+  }, [user?.email])
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -111,6 +125,10 @@ const ContextProvider = ({ children }) => {
     calculateTotal,
     setLanguage,
     language,
+    user,
+    setUser,
+    hasUser,
+    setHasUser
   };
   return <Context.Provider value={context}>{children}</Context.Provider>;
 };

@@ -1,17 +1,40 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import serverUrl from '../../config/Config';
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+import { Context } from '../../ContextProvider/ContextProvider';
 
 const Login = () => {
-
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [showPassword, setShowPassword] = useState(false);
+    const { setUser } = useContext(Context)
 
     const handleLoginData = (data) => {
-        console.log(data)
+        fetch(`${serverUrl}/users/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data?.status === "success") {
+                    localStorage.setItem("user", JSON.stringify(data?.data));
+                    setUser(data?.data)
+                    navigate('/')
+                    // window.location.reload()
+                } else {
+                    swal("Oops!", data?.message, "error");
+                }
+            });
     }
 
-    const [showPassword, setShowPassword] = useState(false);
+
 
     React.useEffect(() => {
         window.scrollTo(0, 0)
