@@ -6,9 +6,9 @@ export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [cart, setCart] = React.useState([]);
-  const [language, setLanguage] = useState('english')
+  const [language, setLanguage] = useState("english");
 
-  // Jahed vai, Header JSX er 256-273 And 285-286 number line khule dilei user diye conditionally dashboard and logout dekhate parben 
+  // Jahid vai, Header JSX er 256-273 And 285-286 number line khule dilei user diye conditionally dashboard and logout dekhate parben
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -21,12 +21,22 @@ const ContextProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (_product, _cartQuantity) => {
-
-    if (_cartQuantity === 0) {
+  const addToCart = (_product, hasColor, hasSizes) => {
+    if (_product?.quantity === 0) {
       swal("warning", "Please increase quantity", "warning");
       return;
     }
+
+    if (hasColor && _product?.color === null) {
+      swal("warning", "Please select a color", "warning");
+      return;
+    }
+
+    if (hasSizes && _product?.size === null) {
+      swal("warning", "Please select a size", "warning");
+      return;
+    }
+
     const itemIndex = cart.findIndex((item) => item._id === _product._id);
 
     if (itemIndex >= 0) {
@@ -34,7 +44,7 @@ const ContextProvider = ({ children }) => {
       return;
     }
 
-    setCart([...cart, { ..._product, quantity: _cartQuantity }]);
+    setCart([...cart, { ..._product }]);
   };
 
   const removeFromCart = (_id) => {
@@ -100,7 +110,7 @@ const ContextProvider = ({ children }) => {
     calculateSubTotal,
     calculateTotal,
     setLanguage,
-    language
+    language,
   };
   return <Context.Provider value={context}>{children}</Context.Provider>;
 };

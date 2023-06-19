@@ -11,7 +11,7 @@ const Register = () => {
   } = useForm();
 
   const handleRegistrationData = (data) => {
-    console.log(data);
+    console.log("data", data);
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -19,10 +19,9 @@ const Register = () => {
   const phoneNumberPattern =
     /^\+?[0-9]{1,4}[\s.-]?(\(\d{1,3}\)|\d{1,3})[\s.-]?\d{1,5}[\s.-]?\d{1,9}$/;
 
-
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="my-10 flex justify-center items-center">
       <form
