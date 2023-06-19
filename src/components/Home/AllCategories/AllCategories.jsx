@@ -63,15 +63,15 @@ const AllCategories = () => {
                 <hr className="border border-gray-300 mt-6 mb-8" />
                 <div className="flex items-center justify-center md:gap-4 lg:gap-6 flex-wrap lg:flex-nowrap">
                     {
-                        categories.map((category) => (
-                            <div className="w-6/12 md:w-3/12 xl:w-2/12 " key={category._id}>
+                        categories?.map((category) => (
+                            <div className="w-6/12 md:w-3/12 xl:w-2/12 " key={category?._id}>
                                 <Link to={`/categoryProducts/${category?._id}`}>
-                                    <div className="m-3 xxl:h-[160px] md:m-0 rounded shadow-lg bg-white shadow-gray-300 px-10 py-6 text-center">
+                                    <div className="m-3 max-h-[140px] lg:h-[160px] xxl:h-[160px] md:m-0 rounded shadow-lg bg-white shadow-gray-300 p-2 lg:px-10 lg:py-6 text-center">
                                         <div className="flex justify-center items-center">
-                                            <img src={category.image} className="w-[50px]" alt="" />
+                                            <img src={category?.image} className="w-[50px]" alt="" />
                                         </div>
                                         <h3 className="text-textColor font-medium text-lg  capitalize py-3">
-                                            {category.categoryTitle}
+                                            {category?.categoryTitle}
                                         </h3>
                                     </div>
                                 </Link>

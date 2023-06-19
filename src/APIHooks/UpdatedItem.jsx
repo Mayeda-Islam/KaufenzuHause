@@ -1,4 +1,4 @@
-import SuccessSweetAlert from "../Shared/SuccessSweetAlert/SuccessSweetAlert";
+import swal from "sweetalert";
 import serverUrl from "../config/Config";
 
 const UpdatedApi = (url, setState, updatedData) => {
@@ -12,9 +12,13 @@ const UpdatedApi = (url, setState, updatedData) => {
   })
     .then((response) => response.json())
     .then((result) => {
+      console.log(result);
       if (result.status == "success") {
-        SuccessSweetAlert();
+        swal('Success', result?.message, 'success')
         setState(result?.data);
+      }
+      else {
+        swal('Oops!', result?.message, 'error')
       }
     });
 };

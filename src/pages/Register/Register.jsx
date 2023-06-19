@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Register = () => {
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const phoneNumberPattern = /^\+?[0-9]{1,4}[\s.-]?(\(\d{1,3}\)|\d{1,3})[\s.-]?\d{1,5}[\s.-]?\d{1,9}$/;
 
@@ -153,8 +153,8 @@ const Register = () => {
             {...register("password", {
               required: true,
               pattern: {
-                value: /^.{8,}$/,
-                message: "Password should be at least 8 character",
+                value: /^(?=.*\d)(?=.*[A-Z])(?=.*\W).{8,}$/,
+                message: "Password should be at least 8 character with Capital Letter, Number and Symbol",
               },
             })}
             placeholder="Password must be 8 character or more"
