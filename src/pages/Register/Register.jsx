@@ -2,8 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import serverUrl from "../../config/Config";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const phoneNumberPattern = /^\+?[0-9]{1,4}[\s.-]?(\(\d{1,3}\)|\d{1,3})[\s.-]?\d{1,5}[\s.-]?\d{1,9}$/;
+
+  const navigate = useNavigate()
+
+
   const {
     register,
     handleSubmit,
@@ -11,13 +22,29 @@ const Register = () => {
   } = useForm();
 
   const handleRegistrationData = (data) => {
-    console.log("data", data);
+    const finalData = {
+      ...data,
+      role: 'user'
+    }
+    fetch(`${serverUrl}/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(finalData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.status === "success") {
+          swal("Congrats!", "Product Added Successfully!", "success");
+          navigate('/login')
+        } else {
+          swal("Oops!", data?.message, "error");
+        }
+      });
   };
 
-  const [showPassword, setShowPassword] = useState(false);
 
-  const phoneNumberPattern =
-    /^\+?[0-9]{1,4}[\s.-]?(\(\d{1,3}\)|\d{1,3})[\s.-]?\d{1,5}[\s.-]?\d{1,9}$/;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -137,12 +164,7 @@ const Register = () => {
               Password should be 8 character or more
             </p>
           )}
-          {/* <span className='flex justify-end mt-2'>
 
-                    <p onClick={() => setShowPassword(!showPassword)} className=' px-2 rounded-md py-1 bg-secondary hover:bg-primary cursor-pointer text-white font-medium rounded-r-md border-none'>
-                        {showPassword ? <VisibilityOffIcon fontSize='small' /> : <VisibilityIcon fontSize='small' />}
-                    </p>
-                </span> */}
         </label>
 
         <p className="text-sm py-3">
