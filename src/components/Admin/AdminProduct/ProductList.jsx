@@ -4,14 +4,18 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteItems from "../../../APIHooks/DeleteItems";
 import { useState } from "react";
 import ViewProductModal from "./ViewProductModal";
+import UpdateProductModal from "./UpdateProductModal";
 const ProductList = ({ products, setProducts }) => {
   const [open, setOpen] = useState(false);
+  const [openUpdateModal, setOpenUpdateModal] = useState(false);
+  const [updatedProduct, setUpdatedProduct] = useState(null);
   const [product, setProduct] = useState({});
   const handleDelete = (_id) => {
     DeleteItems(`product/${_id}`, setProducts);
   };
-  const handleUpdateProduct = (id) => {
-    console.log(id);
+  const handleUpdateProduct = (selectedProduct) => {
+    setOpenUpdateModal(true);
+    setUpdatedProduct(selectedProduct);
   };
   const handleViewProductDetails = (data) => {
     setOpen(true);
@@ -79,7 +83,7 @@ const ProductList = ({ products, setProducts }) => {
                 <DeleteForeverIcon />
               </td>
               <td className="border border-gray-400 py-2 px-4 sm:px-6 text-[#55c3c1f7]">
-                <button onClick={() => handleUpdateProduct(product._id)}>
+                <button onClick={() => handleUpdateProduct(product)}>
                   <BorderColorIcon />
                 </button>
               </td>
@@ -92,6 +96,11 @@ const ProductList = ({ products, setProducts }) => {
         setOpen={setOpen}
         product={product}
       ></ViewProductModal>
+      <UpdateProductModal
+        setOpenUpdateModal={setOpenUpdateModal}
+        openUpdateModal={openUpdateModal}
+        updatedProduct={updatedProduct}
+      ></UpdateProductModal>
     </div>
   );
 };

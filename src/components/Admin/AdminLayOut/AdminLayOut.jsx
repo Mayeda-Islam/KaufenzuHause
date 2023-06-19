@@ -139,7 +139,7 @@ export default function AdminLayOut() {
     {
       title: "My Orders",
       icon: <AddShoppingCartIcon />,
-      link: "myOrders",
+      linkPath: "myOrders",
     },
     {
       title: "Orders",
