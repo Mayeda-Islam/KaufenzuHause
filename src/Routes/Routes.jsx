@@ -41,6 +41,7 @@ import Error from "../pages/Error/Error";
 import PaymentSuccess from "../pages/PaymentSuccess/PaymentSuccess";
 import PaymentFailed from "../pages/PaymentFailed/PaymentFailed";
 import Payment from "../pages/Payment.js/Payment";
+import MyOrders from "../components/Users/MyOrders";
 
 export const router = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <AdminProfile></AdminProfile>,
+      },
+      {
+        path: "myOrders",
+        element: <MyOrders></MyOrders>,
       },
       {
         path: "orders/orderedProducts",

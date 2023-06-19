@@ -111,12 +111,11 @@ export default function AdminLayOut() {
       return newState;
     });
   };
-  const [logo, setLogo] = useState([])
+  const [logo, setLogo] = useState([]);
 
   useEffect(() => {
-    GetAPI('logo', setLogo)
-  }, [])
-
+    GetAPI("logo", setLogo);
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -136,6 +135,11 @@ export default function AdminLayOut() {
       title: "Profile",
       icon: <AccountCircleIcon />,
       linkPath: "profile",
+    },
+    {
+      title: "My Orders",
+      icon: <AddShoppingCartIcon />,
+      link: "myOrders",
     },
     {
       title: "Orders",
@@ -186,11 +190,6 @@ export default function AdminLayOut() {
 
           linkPath: "systemSetting/heroSlider",
         },
-        // {
-        //   title: "Hero Banner",
-
-        //   linkPath: "systemSetting/headerBanner",
-        // },
         {
           title: "Logo Section",
 
@@ -209,8 +208,6 @@ export default function AdminLayOut() {
       {/* <CssBaseline /> */}
       <AppBar className="shadow-none border-none" position="fixed" open={open}>
         <Toolbar className="bg-white text-black inline">
-
-
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -224,7 +221,6 @@ export default function AdminLayOut() {
           >
             <MenuIcon />
           </IconButton>
-
 
           <div className="ml-auto ">
             <Typography
@@ -266,8 +262,12 @@ export default function AdminLayOut() {
         open={open}
       >
         <div className="flex justify-between items-center mb-3">
-          <Link to={'/'}>
-            <img src={`${logo[0]?.headerLogoURL}`} alt="logo" className="w-36 ml-4" />
+          <Link to={"/"}>
+            <img
+              src={`${logo[0]?.headerLogoURL}`}
+              alt="logo"
+              className="w-36 ml-4"
+            />
           </Link>
           <DrawerHeader>
             <div>
@@ -279,7 +279,6 @@ export default function AdminLayOut() {
                 )}
               </IconButton>
             </div>
-
           </DrawerHeader>
         </div>
         <Divider className=" bg-lightGray shadow-lg" />
