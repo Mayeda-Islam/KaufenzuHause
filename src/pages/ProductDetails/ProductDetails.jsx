@@ -1,75 +1,65 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
-import ProductDetailsTabs from '../../Shared/ProductDetailsShared/ProductDetailsTabs';
-import ProductSliderGallery from '../../Shared/ProductDetailsShared/ProductSliderGallery';
-import ProductInfo from '../../Shared/ProductDetailsShared/ProductInfo';
-import GetAPI from '../../APIHooks/GetAPI';
-import { useParams } from 'react-router-dom';
-
-
+import ProductDetailsTabs from "../../Shared/ProductDetailsShared/ProductDetailsTabs";
+import ProductSliderGallery from "../../Shared/ProductDetailsShared/ProductSliderGallery";
+import ProductInfo from "../../Shared/ProductDetailsShared/ProductInfo";
+import GetAPI from "../../APIHooks/GetAPI";
+import { useParams } from "react-router-dom";
+import ProductSideGalleryMobile from "../../Shared/ProductDetailsShared/ProductSideGalleryMobile";
 
 const ProductDetails = () => {
+  const { id } = useParams();
+  const [product, setProduct] = React.useState({});
+  //   const [orders, setOrders] = useState([]);
 
+  useEffect(() => {
+    GetAPI(`products/${id}`, setProduct);
+    // GetAPI(`orders`, setOrders);
+  }, [id]);
 
-    const { id } = useParams()
-    const [product, setProduct] = React.useState({})
-    const [orders, setOrders] = useState([])
+  //   console.log(orders);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      {/* product thumbnail slider section */}
+      <section className="pt-12 pb-6">
+        <div className="w-11/12 mx-auto">
+          <div className="grid lg:grid-cols-2 gap-5">
+            <div className="w-full">
+              <div className="">
+                <ProductSliderGallery product={product} />
+                <ProductSideGalleryMobile product={product} />
+              </div>
+            </div>
+            {/* product info */}
+            <div className=" m-3">
+              <ProductInfo product={product} />
+            </div>
+          </div>
+        </div>
+      </section>
 
+      {/* product tabs section*/}
+      <hr className="my-5 border-0.5 border-gray-200" />
+      <section>
+        <div className="w-[94%] lg:w-[90%] mx-auto ">
+          <ProductDetailsTabs product={product} />
+        </div>
+      </section>
 
-    useEffect(() => {
-        GetAPI(`products/${id}`, setProduct)
-        GetAPI(`orders`, setOrders)
-    }, [id])
+      <hr className="my-9 border-0.5 border-gray-200" />
 
-    console.log(orders);
-
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
-    return (
-        <>
-            {/* product thumbnail slider section */}
-            <section className="pt-12 pb-6">
-                <div className="w-11/12 mx-auto">
-                    <div className="grid lg:grid-cols-2 gap-5">
-                        <div className='w-full'>
-                            <div className='hidden lg:block'>
-                                <ProductSliderGallery product={product} />
-                            </div>
-                        </div>
-                        {/* product info */}
-                        <div className=" m-3">
-                            <ProductInfo
-                                product={product}
-                            />
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section >
-
-
-            {/* product tabs section*/}
-            <hr className="my-5 border-0.5 border-gray-200" />
-            <section>
-                <div className="w-[94%] lg:w-[90%] mx-auto ">
-                    <ProductDetailsTabs product={product} />
-                </div>
-            </section>
-
-            <hr className="my-9 border-0.5 border-gray-200" />
-
-            {/* related production section */}
-            <section className="py-6 ">
-                <div className="w-[94%] lg:w-[93%] mx-auto ">
-                    <h2 className="text-2xl text-textColor font-semibold text-left capitalize mb-3 ml-3">
-                        Related Products
-                    </h2>
-                    {/* section title */}
-                    {/* <div className="flex items-center justify-between">
+      {/* related production section */}
+      <section className="py-6 ">
+        <div className="w-[94%] lg:w-[93%] mx-auto ">
+          <h2 className="text-2xl text-textColor font-semibold text-left capitalize mb-3 ml-3">
+            Related Products
+          </h2>
+          {/* section title */}
+          {/* <div className="flex items-center justify-between">
 
                         <div className="flex items-center  flex-wrap">
                             {
@@ -84,12 +74,10 @@ const ProductDetails = () => {
 
                         </div>
                     </div> */}
-                </div>
-            </section>
+        </div>
+      </section>
+    </>
+  );
+};
 
-        </>
-
-    )
-}
-
-export default ProductDetails
+export default ProductDetails;
