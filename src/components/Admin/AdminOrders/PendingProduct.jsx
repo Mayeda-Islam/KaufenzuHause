@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import GetAPI from '../../../APIHooks/GetAPI';
+import moment from 'moment';
 
 const PendingProduct = () => {
     const [orders, setOrders] = React.useState([]);
@@ -62,7 +63,7 @@ const PendingProduct = () => {
                                             {order?.userInfo?.phoneNumber}
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
-                                            {order?.userInfo?.email}
+                                        {moment(order?.date).format('LLL')}
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
                                             {order?.transactionId}

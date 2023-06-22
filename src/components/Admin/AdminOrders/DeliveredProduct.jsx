@@ -4,33 +4,34 @@ import { useEffect } from "react";
 import GetAPI from "../../../APIHooks/GetAPI";
 import { Link } from "react-router-dom";
 import TakeActionModal from "./TakeActionModal";
+import moment from "moment";
 
 const DeliveredProduct = () => {
-  const [orders, setOrders] = React.useState([]);
-  const [singleId, setSingleId] = useState(null)
-  const [open, setOpen] = useState(false)
-  useEffect(() => {
-    GetAPI("orders/status/delivered", setOrders);
-  }, []);
+    const [orders, setOrders] = React.useState([]);
+    const [singleId, setSingleId] = useState(null)
+    const [open, setOpen] = useState(false)
+    useEffect(() => {
+        GetAPI("orders/status/delivered", setOrders);
+    }, []);
 
-  const handleModal = (_id) => {
-    setSingleId(_id)
-    setOpen(true)
-  }
+    const handleModal = (_id) => {
+        setSingleId(_id)
+        setOpen(true)
+    }
 
 
 
-  React.useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-  return (
-    <div className="mt-8 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
-      <h1 className="text-2xl my-4 font-semibold">Delivered Order List</h1>
-      <hr className="mb-5" />
+    React.useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    return (
+        <div className="mt-8 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
+            <h1 className="text-2xl my-4 font-semibold">Delivered Order List</h1>
+            <hr className="mb-5" />
 
-      {/* table  */}
+            {/* table  */}
 
-      {
+            {
                 orders?.length > 0 ?
                     <div className=" mb-10">
                         <table className="border-collapse border border-gray-400 w-full overflow-x-auto">
@@ -62,7 +63,7 @@ const DeliveredProduct = () => {
                                             {order?.userInfo?.phoneNumber}
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
-                                            {order?.userInfo?.email}
+                                            {moment(order?.date).format('LLL')}
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
                                             {order?.transactionId}
@@ -96,22 +97,22 @@ const DeliveredProduct = () => {
                     </div>
             }
 
-      {
-        open &&
-        <>
-          <TakeActionModal
-            setOpen={setOpen}
-            open={open}
-            setOrders={setOrders}
-            orders={orders}
-            singleId={singleId}
+            {
+                open &&
+                <>
+                    <TakeActionModal
+                        setOpen={setOpen}
+                        open={open}
+                        setOrders={setOrders}
+                        orders={orders}
+                        singleId={singleId}
 
-          />
-        </>
-      }
+                    />
+                </>
+            }
 
-    </div>
-  );
+        </div>
+    );
 };
 
 export default DeliveredProduct;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TakeActionModal from './TakeActionModal';
 import { Link } from 'react-router-dom';
 import GetAPI from '../../../APIHooks/GetAPI';
+import moment from 'moment';
 
 const CanceledProduct = () => {
     const [orders, setOrders] = React.useState([]);
@@ -59,7 +60,7 @@ const CanceledProduct = () => {
                                             {order?.userInfo?.phoneNumber}
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
-                                            {order?.userInfo?.email}
+                                        {moment(order?.date).format('LLL')}
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
                                             {order?.transactionId}

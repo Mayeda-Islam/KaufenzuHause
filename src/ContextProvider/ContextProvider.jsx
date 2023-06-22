@@ -9,7 +9,7 @@ const ContextProvider = ({ children }) => {
   const [language, setLanguage] = useState(null);
   const [verified, setVerified] = useState(false)
   const [user, setUser] = useState(null)
-  const [hasUser, setHasUser] = useState({})
+  const [hasUser, setHasUser] = useState(null)
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");

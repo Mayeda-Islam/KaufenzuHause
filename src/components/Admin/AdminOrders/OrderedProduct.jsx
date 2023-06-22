@@ -4,6 +4,7 @@ import { useState } from "react";
 import GetAPI from "../../../APIHooks/GetAPI";
 import { Link } from "react-router-dom";
 import TakeActionModal from "./TakeActionModal";
+import moment from "moment";
 
 const OrderedProduct = () => {
   const [orders, setOrders] = useState([]);
@@ -42,7 +43,7 @@ const OrderedProduct = () => {
 
                   <th className="px-4 py-4 ">Phone</th>
 
-                  <th className="px-4 py-4 ">Email</th>
+                  <th className="px-4 py-4 ">Ordered Date</th>
                   <th className="px-4 py-4 ">Transaction ID</th>
                   <th className="px-4 py-4 ">Status</th>
                   <th className="px-4 py-4 ">Action</th>
@@ -62,7 +63,7 @@ const OrderedProduct = () => {
                       {order?.userInfo?.phoneNumber}
                     </td>
                     <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
-                      {order?.userInfo?.email}
+                      {moment(order?.date).format('LLL')}
                     </td>
                     <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
                       {order?.transactionId}
