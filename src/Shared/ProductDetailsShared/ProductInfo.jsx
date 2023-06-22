@@ -2,10 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Context } from "../../ContextProvider/ContextProvider";
+import { Link } from "react-router-dom";
 // import swal from "sweetalert";
 const ProductInfo = ({ product }) => {
-  const { addToCart, cart } = useContext(Context);
-
+  const { addToCart, cart, user } = useContext(Context);
   const {
     _id,
     productTitle,
@@ -165,52 +165,67 @@ const ProductInfo = ({ product }) => {
         )}
       </div>
       {/* cart button and increment */}
-      <div className="flex items-center my-4 gap-5">
-        {/* increment and decrement btn */}
-        <div className="flex ">
-          <button
-            className="py-1 px-2 rounded  bg-gray-100 border border-gray-300"
-            onClick={() => decrementQuantity(product._id)}
-          >
-            -
-          </button>
-          <span className="py-1 px-4 rounded border border-gray-300 bg-bgOne flex items-center justify-center ">
-            {cartQuantity}
-          </span>
-          <button
-            className="py-1 px-2 rounded  bg-gray-100 border border-gray-300"
-            onClick={() => incrementQuantity(product._id)}
-          >
-            +
-          </button>
-        </div>
 
-        {/* add to cart button */}
-        <button
-          onClick={() =>
-            addToCart(
-              {
-                _id,
-                productTitle,
-                productPrice,
-                model,
-                brand,
-                color: selectedColor,
-                size: selectedSize,
-                quantity: cartQuantity,
-              },
-              product?.colors?.length > 0,
-              product?.sizes?.length > 0
-            )
+      {
+        user?.email ? <>
+
+          {
+            (totalProduct > 0) ?
+              <div className="flex items-center my-4 gap-5">
+                {/* increment and decrement btn */}
+                <div className="flex ">
+                  <button
+                    className="py-1 px-2 rounded  bg-gray-100 border border-gray-300"
+                    onClick={() => decrementQuantity(product._id)}
+                  >
+                    -
+                  </button>
+                  <span className="py-1 px-4 rounded border border-gray-300 bg-bgOne flex items-center justify-center ">
+                    {cartQuantity}
+                  </span>
+                  <button
+                    className="py-1 px-2 rounded  bg-gray-100 border border-gray-300"
+                    onClick={() => incrementQuantity(product._id)}
+                  >
+                    +
+                  </button>
+                </div>
+
+                {/* add to cart button */}
+                <button
+                  onClick={() =>
+                    addToCart(
+                      {
+                        _id,
+                        productTitle,
+                        productPrice,
+                        model,
+                        brand,
+                        color: selectedColor,
+                        size: selectedSize,
+                        quantity: cartQuantity,
+                      },
+                      product?.colors?.length > 0,
+                      product?.sizes?.length > 0
+                    )
+                  }
+                  className=" text-white py-2 px-7  hover: rounded text-sm  bg-primary   border-2 border-transparent hover:border-textColor  hover:bg-transparent hover:text-textColor capitalize"
+                >
+                  {cart?.find((item) => item?._id === product?._id)
+                    ? "Already added"
+                    : "Add to cart"}
+                </button>
+                {/* add to wishlist */}
+              </div>
+              :
+              <p className="my-4 text-sm font-semibold">This Product is Out of Stock Now</p>
           }
-          className=" text-white py-2 px-7  hover: rounded text-sm  bg-primary   border-2 border-transparent hover:border-textColor  hover:bg-transparent hover:text-textColor capitalize"
-        >
-          {cart?.find((item) => item?._id === product?._id)
-            ? "Already added"
-            : "Add to cart"}
-        </button>
-        {/* add to wishlist */}
-      </div>
+        </>
+          :
+          <>
+            <p>Please <Link className="text-blue-500 hover:underline font-semibold" to={'/login'}> Login</Link> to Purchase the Product</p>
+          </>
+      }
       <hr className="my-3 border-0.5 border-gray-200" />
       {/* product others info */}
     </div>

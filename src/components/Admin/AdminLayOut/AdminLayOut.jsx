@@ -162,8 +162,16 @@ export default function AdminLayOut() {
           linkPath: "/dashboard/orders/orderedProducts"
         },
         {
+          title: "Pending Product",
+          linkPath: "/dashboard/orders/pendingProducts"
+        },
+        {
           title: "Delivered Product",
           linkPath: "/dashboard/orders/deliveredProducts",
+        },
+        {
+          title: "Canceled Product",
+          linkPath: "/dashboard/orders/canceledProducts",
         },
       ],
     },

@@ -1,17 +1,17 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import GetAPI from "../../../APIHooks/GetAPI";
-import { Link } from "react-router-dom";
-import TakeActionModal from "./TakeActionModal";
-import moment from "moment";
+import React from 'react';
+import TakeActionModal from './TakeActionModal';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import GetAPI from '../../../APIHooks/GetAPI';
+import moment from 'moment';
 
-const DeliveredProduct = () => {
+const PendingProduct = () => {
     const [orders, setOrders] = React.useState([]);
     const [singleId, setSingleId] = useState(null)
     const [open, setOpen] = useState(false)
     useEffect(() => {
-        GetAPI("orders/status/delivered", setOrders);
+        GetAPI("orders/status/pending", setOrders);
     }, []);
 
     const handleModal = (_id) => {
@@ -26,7 +26,7 @@ const DeliveredProduct = () => {
     }, [])
     return (
         <div className="mt-8 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
-            <h1 className="text-2xl my-4 font-semibold">Delivered Order List</h1>
+            <h1 className="text-2xl my-4 font-semibold">Pending Order List</h1>
             <hr className="mb-5" />
 
             {/* table  */}
@@ -63,7 +63,7 @@ const DeliveredProduct = () => {
                                             {order?.userInfo?.phoneNumber}
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
-                                            {moment(order?.date).format('LLL')}
+                                        {moment(order?.date).format('LLL')}
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
                                             {order?.transactionId}
@@ -115,4 +115,4 @@ const DeliveredProduct = () => {
     );
 };
 
-export default DeliveredProduct;
+export default PendingProduct;
