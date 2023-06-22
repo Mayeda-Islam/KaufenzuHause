@@ -88,7 +88,9 @@ const PaymentForm = () => {
                 price,
                 transactionId: paymentIntent.id,
                 cart,
-                userInfo
+                userInfo,
+                status: 'pending',
+                date: new Date()
             }
             fetch(`${serverUrl}/order`, {
                 method: 'POST',

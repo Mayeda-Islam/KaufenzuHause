@@ -11,20 +11,16 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import CategorisedProducts from "../pages/CategoriedProducts/CategorisedProducts";
 import Checkout from "../pages/Checkout/Checkout";
 import AboutUs from "../pages/AboutUS/AboutUs";
-// import HeaderLogo from "../components/Admin/SyestemSetting/HeaderLogo/HeaderLogo";
-// import HeroSlider from "../components/Admin/SyestemSetting/HeroSlider/HeroSlider";
-// import FooterSection from "../components/Admin/SyestemSetting/FooterSection/FooterSection";
-// import FooterLogo from "../components/Admin/SyestemSetting/FooterLogo/FooterLogo";
-//import SyestemSettings from "../components/Admin/SyestemSetting/SyestemSettings";
+
 
 import AdminLayOut from "../components/Admin/AdminLayOut/AdminLayOut";
 import AdminDashboard from "../components/Admin/AdminDashboard/AdminDashboard";
 import AdminProfile from "../components/Admin/AdminProfile/AdminProfile";
-// import AdminProduct from "../components/Admin/AdminProduct/AddProduct";
+
 
 import AdminSystemSetting from "../components/Admin/AdminSystemSetting/AdminSystemSetting";
 
-// import AddCategory from "../components/Admin/AdminCategory/AddCategory";
+
 import CategoryList from "../components/Admin/AdminCategory/CategoryList";
 import AddProduct from "../components/Admin/AdminProduct/AddProduct";
 import AllProduct from "../components/Admin/AdminProduct/AllProduct";
@@ -45,6 +41,9 @@ import MyOrders from "../components/Users/MyOrders";
 import ForgotPassword from "../pages/Login/ForgotPassword";
 import PasswordChange from "../components/Admin/PasswordChange/PasswordChange";
 import InputOTP from "../pages/Login/InputOTP";
+import OrderDetails from "../components/Admin/AdminOrders/orderDetails";
+import PendingProduct from "../components/Admin/AdminOrders/PendingProduct";
+import CanceledProduct from "../components/Admin/AdminOrders/CanceledProduct";
 
 export const router = createBrowserRouter([
   {
@@ -142,8 +141,20 @@ export const router = createBrowserRouter([
         element: <OrderedProduct></OrderedProduct>,
       },
       {
+        path: "orderDetails/:id",
+        element: <OrderDetails />,
+      },
+      {
         path: "orders/deliveredProducts",
         element: <DeliveredProduct></DeliveredProduct>,
+      },
+      {
+        path: "orders/pendingProducts",
+        element: <PendingProduct></PendingProduct>,
+      },
+      {
+        path: "orders/canceledProducts",
+        element: <CanceledProduct></CanceledProduct>,
       },
       {
         path: "category",

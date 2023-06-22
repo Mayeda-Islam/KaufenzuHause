@@ -23,7 +23,7 @@ const PaymentSuccess = () => {
               </Link>{" "}
             </p>
             <p className="text-xl mt-11 text-center">
-              <Link className="underline  text-primary font-bold " to={"/userDashboard/myOrder"}>
+              <Link className="underline  text-primary font-bold " to={"/dashboard/myOrder"}>
                 Check Progress
               </Link>{" "}
             </p>

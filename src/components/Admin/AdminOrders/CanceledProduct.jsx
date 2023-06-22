@@ -1,36 +1,33 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import GetAPI from "../../../APIHooks/GetAPI";
-import { Link } from "react-router-dom";
-import TakeActionModal from "./TakeActionModal";
+import React, { useEffect, useState } from 'react';
+import TakeActionModal from './TakeActionModal';
+import { Link } from 'react-router-dom';
+import GetAPI from '../../../APIHooks/GetAPI';
 
-const DeliveredProduct = () => {
-  const [orders, setOrders] = React.useState([]);
-  const [singleId, setSingleId] = useState(null)
-  const [open, setOpen] = useState(false)
-  useEffect(() => {
-    GetAPI("orders/status/delivered", setOrders);
-  }, []);
+const CanceledProduct = () => {
+    const [orders, setOrders] = React.useState([]);
+    const [singleId, setSingleId] = useState(null)
+    const [open, setOpen] = useState(false)
+    useEffect(() => {
+        GetAPI("orders/status/canceled", setOrders);
+    }, []);
 
-  const handleModal = (_id) => {
-    setSingleId(_id)
-    setOpen(true)
-  }
+    const handleModal = (_id) => {
+        setSingleId(_id)
+        setOpen(true)
+    }
 
 
 
-  React.useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-  return (
-    <div className="mt-8 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
-      <h1 className="text-2xl my-4 font-semibold">Delivered Order List</h1>
-      <hr className="mb-5" />
+    React.useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    return (
+        <div className="mt-8 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
+            <h1 className="text-2xl my-4 font-semibold">Pending Order List</h1>
+            <hr className="mb-5" />
 
-      {/* table  */}
-
-      {
+            {/* table  */}
+            {
                 orders?.length > 0 ?
                     <div className=" mb-10">
                         <table className="border-collapse border border-gray-400 w-full overflow-x-auto">
@@ -96,22 +93,22 @@ const DeliveredProduct = () => {
                     </div>
             }
 
-      {
-        open &&
-        <>
-          <TakeActionModal
-            setOpen={setOpen}
-            open={open}
-            setOrders={setOrders}
-            orders={orders}
-            singleId={singleId}
+            {
+                open &&
+                <>
+                    <TakeActionModal
+                        setOpen={setOpen}
+                        open={open}
+                        setOrders={setOrders}
+                        orders={orders}
+                        singleId={singleId}
 
-          />
-        </>
-      }
+                    />
+                </>
+            }
 
-    </div>
-  );
+        </div>
+    );
 };
 
-export default DeliveredProduct;
+export default CanceledProduct;
