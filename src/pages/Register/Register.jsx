@@ -36,7 +36,7 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.status === "success") {
-          swal("Congrats!", "Product Added Successfully!", "success");
+          swal("Congrats!", data?.message, "success");
           navigate('/login')
         } else {
           swal("Oops!", data?.message, "error");
@@ -173,7 +173,7 @@ const Register = () => {
         </p>
 
         <input
-          className="py-3 w-full bg-secondary hover:bg-primary my-3 border-2 border-white rounded-md text-white font-medium cursor-pointer"
+          className="py-3 w-full bg-orange-500 hover:bg-primary my-3 border-2 border-white rounded-md text-white font-medium cursor-pointer"
           type="submit"
           value={`Register`}
         />

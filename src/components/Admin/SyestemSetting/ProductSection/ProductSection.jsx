@@ -33,14 +33,14 @@ const ProductSection = () => {
     <div className="grid grid-cols-1 ">
       <div className="m-4">
         <h2 className="text-xl lg:text-2xl  font-medium text-textColor my-5 border-l-2 border-[#55c3c1f7] pl-4">
-          Add category here
+          Add Product Category Slider Here
         </h2>
         <div>
           <button
             onClick={() => setOpen(true)}
             className="px-10 py-2 bg-[#55c3c1f7] text-white rounded-full"
           >
-            Add category
+            Add Product Slider
           </button>
         </div>
       </div>

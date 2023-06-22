@@ -10,6 +10,14 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
+/* number arrow hidden */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 /* body,
 html {
   overflow-x: hidden !important;

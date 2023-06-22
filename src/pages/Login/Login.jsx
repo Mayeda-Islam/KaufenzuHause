@@ -24,9 +24,17 @@ const Login = () => {
             .then((res) => res.json())
             .then((data) => {
                 if (data?.status === "success") {
-                    localStorage.setItem("user", JSON.stringify(data?.data));
-                    setUser(data?.data)
-                    navigate('/')
+                    if (data?.data?.isVerified) {
+                        localStorage.setItem("user", JSON.stringify(data?.data));
+                        setUser(data?.data)
+                        navigate('/')
+                    }
+                    else {
+                        swal('Attention', data?.message, 'info')
+                        localStorage.setItem("user", JSON.stringify(data?.data));
+                        setUser(data?.data)
+                        navigate('/verifyOTP')
+                    }
                     // window.location.reload()
                 } else {
                     swal("Oops!", data?.message, "error");
@@ -43,7 +51,6 @@ const Login = () => {
 
     return (
         <div className='my-10 flex justify-center items-center'>
-
             <form onSubmit={handleSubmit(handleLoginData)} className='w-11/12 md:w-3/4 lg:w-5/12  xl:w-1/3 mx-auto p-3 lg:p-10 bg-lightGray/10 shadow-gray-300 border border-gray-200 rounded-xl shadow-xl'>
                 <h1 className='text-2xl font-semibold text-center my-5'>Login With Kaufenzu Hause</h1>
 
@@ -95,16 +102,18 @@ const Login = () => {
                     {errors?.password && (
                         <p className="text-red-500 ">Password should be 8 character or more</p>
                     )}
+                    <div className='flex justify-end mt-3'>
 
-                    <Link to={'/forgot-password'} className='flex justify-end mt-3'>
-                        <p className=' cursor-pointer border-b-2 hover:border-b-2 border-darkNavy text-darkNavy hover:border-blue-500 font-semibold' >Forgot Password?</p>
-                    </Link>
+                        <Link to={'/forgot-password'} className=' cursor-pointer border-b-2 hover:border-b-2 border-darkNavy text-darkNavy hover:border-blue-500 font-semibold'>
+                            Forgot Password?
+                        </Link>
+                    </div>
                 </label>
 
 
 
                 <input
-                    className="py-3 w-full bg-secondary hover:bg-primary my-3 border-2 border-white rounded-md text-white font-medium cursor-pointer"
+                    className="py-3 w-full bg-orange-500 hover:bg-primary my-3 border-2 border-white rounded-md text-white font-medium cursor-pointer"
                     type="submit"
                     value={`Login`}
                 />

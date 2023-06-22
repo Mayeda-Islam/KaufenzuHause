@@ -17,12 +17,11 @@ import { Context } from "../../ContextProvider/ContextProvider";
 import { Badge } from "@mui/material";
 
 const Header = () => {
-  const { setHasUser, hasUser, user, setUser, cart, removeFromCart, increment, decrement, calculateSubTotal, language } =
+  const { verified, setHasUser, hasUser, user, setUser, cart, removeFromCart, increment, decrement, calculateSubTotal, changeLanguage, language } =
     useContext(Context);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
   const [anchorE3, setAnchorE3] = React.useState(null);
-  console.log(language);
   //sticky nav on scroll
   const [logo, setLogo] = useState([]);
   //sticky nav
@@ -225,10 +224,22 @@ const Header = () => {
               aria-describedby={id}
               onClick={handleClickLang}
             >
-              <img src={engFlag} alt="" className="w-[20px]" />
-              <span className="text-base uppercase font-medium text-white">
-                EN
-              </span>
+              {
+                language === 'english' ?
+                  <>
+                    <img src={engFlag} alt="" className="w-[20px]" />
+                    <span className="text-base uppercase font-medium text-white">
+                      EN
+                    </span>
+                  </>
+                  :
+                  <>
+                    <img src={germanFlag} alt="" className="w-[23px]" />
+                    <span className="text-base uppercase font-medium text-white">
+                      DE
+                    </span>
+                  </>
+              }
               {/* shopping cart */}
               <p className="text-sm text-gray-400 cursor-pointer">
                 <AiOutlineCaretDown />
@@ -245,18 +256,18 @@ const Header = () => {
               }}
             >
               <Typography>
-                <ul className="p-0 m-0">
-                  <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                    <Link to={""} className="flex items-center gap-3">
+                <ul className="p-0 m-0 cursor-pointer">
+                  <li onClick={() => changeLanguage('english')} className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                    <div className="flex items-center gap-3">
                       <img src={engFlag} className="w-[16px]" alt="" />
                       <span> English</span>
-                    </Link>
+                    </div>
                   </li>
-                  <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-9 w-full py-3 text-center">
-                    <Link to={""} className="flex items-center gap-2">
+                  <li onClick={() => changeLanguage('german')} className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-9 w-full py-3 text-center">
+                    <div className="flex items-center gap-2">
                       <img src={germanFlag} className="w-[23px]" alt="" />
                       <span> German</span>
-                    </Link>
+                    </div>
                   </li>
                 </ul>
               </Typography>
@@ -266,7 +277,7 @@ const Header = () => {
 
 
           {
-            hasUser || user?.email ?
+            (hasUser || user?.email) && verified ?
               <>
                 {
                   user?.role === 'admin' ?
@@ -603,40 +614,41 @@ const Header = () => {
               >
                 <Typography>
                   <ul className="p-0 m-0">
-                    {hasUser || user?.email ?
-                      <>
-                        {
-                          user?.role === 'admin' ?
-                            <Link to={"/dashboard"}>
-                              <button className="text-sm  bg-transparent  hover:text-darkNavy  border border-white py-2 px-6 rounded-sm ">
-                                Dashboard
-                              </button>
-                            </Link>
-                            :
-                            <Link to={"/dashboard/myOrders"}>
-                              <button className="text-sm  bg-transparent  hover:text-darkNavy  border border-white py-2 px-6 rounded-sm ">
-                                Dashboard
-                              </button>
-                            </Link>
+                    {
+                      (hasUser || user?.email) && verified ?
+                        <>
+                          {
+                            user?.role === 'admin' ?
+                              <Link to={"/dashboard"}>
+                                <button className="text-sm  bg-transparent  hover:text-darkNavy  border border-white py-2 px-6 rounded-sm ">
+                                  Dashboard
+                                </button>
+                              </Link>
+                              :
+                              <Link to={"/dashboard/myOrders"}>
+                                <button className="text-sm  bg-transparent  hover:text-darkNavy  border border-white py-2 px-6 rounded-sm ">
+                                  Dashboard
+                                </button>
+                              </Link>
 
-                        }
-                        <li className="text-sm text-textColor  px-10 w-full py-3 text-start " onClick={handleLogout}>
-                          Logout
-                        </li>
-                      </>
-                      :
-                      <>
-                        <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                          <Link to={'/register'}>
-                            Register
-                          </Link>
-                        </li>
-                        <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                          <Link to={'/login'}>
-                            Login
-                          </Link>
-                        </li>
-                      </>
+                          }
+                          <li className="text-sm text-textColor  px-10 w-full py-3 text-start " onClick={handleLogout}>
+                            Logout
+                          </li>
+                        </>
+                        :
+                        <>
+                          <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                            <Link to={'/register'}>
+                              Register
+                            </Link>
+                          </li>
+                          <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                            <Link to={'/login'}>
+                              Login
+                            </Link>
+                          </li>
+                        </>
                     }
 
 

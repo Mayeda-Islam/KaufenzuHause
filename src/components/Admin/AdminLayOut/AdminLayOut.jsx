@@ -160,11 +160,11 @@ export default function AdminLayOut() {
       items: [
         {
           title: "Ordered Product",
-          linkPath: "/orders/orderedProducts"
+          linkPath: "/dashboard/orders/orderedProducts"
         },
         {
           title: "Delivered Product",
-          linkPath: "orders/deliveredProducts",
+          linkPath: "/dashboard/orders/deliveredProducts",
         },
       ],
     },
