@@ -14,7 +14,7 @@ const style = {
     width: { md: "60%", xs: "98%" },
     maxHeight: { md: "80%", xs: "98%" },
     boxShadow: 24,
-    overflowY: "scroll",
+    overflowY: "auto",
     bgcolor: "white",
 };
 const AddProductSliderModal = ({ open, setOpen, setProductSliders }) => {
@@ -60,7 +60,10 @@ const AddProductSliderModal = ({ open, setOpen, setProductSliders }) => {
                 <div className="outline-none focus:outline-none ">
                     <div className=" w-full ">
                         <div className="border-0 rounded-lg shadow-lg  flex flex-col w-full bg-white outline-none focus:outline-none">
-                            <div className="flex items-start justify-between p-4 border-b-0.5 border-gray-300">
+                            <div className="flex items-center justify-between p-4 border-b-0.5 border-gray-300">
+                                <h1 className='text-gray-900 font-semibold text-2xl'>
+                                    Add Product Slider
+                                </h1>
                                 <button
                                     className="text-center flex items-center justify-center w-[40px] h-[40px] rounded-lg ml-auto bg-gray-800 text-white text-xl font-medium hover:bg-gray-900"
                                     onClick={() => setOpen(false)}

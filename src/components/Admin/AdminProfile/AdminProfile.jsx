@@ -13,8 +13,8 @@ const AdminProfile = () => {
   const [currentUser, setCurrentUser] = useState({})
 
   useEffect(() => {
-    GetAPI(`users/${user?._id}`, setCurrentUser)
-  }, [user?._id, setCurrentUser])
+    GetAPI(`users/${user?.email}`, setCurrentUser)
+  }, [user?.email, setCurrentUser])
 
 
   const {
@@ -36,7 +36,7 @@ const AdminProfile = () => {
       country: data?.country || currentUser?.country,
     }
 
-    UpdatedApi(`users/update-profile/${user?._id}`, setCurrentUser, formData,)
+    UpdatedApi(`users/update-profile/${user?.email}`, setCurrentUser, formData,)
   };
   const handleImageUpload = async (event) => {
     const imageData = event.target.files[0];
@@ -45,7 +45,6 @@ const AdminProfile = () => {
 
     SingleImageUploader(formData, setImage);
   };
-
   // countries api
   const uri = `https://restcountries.com/v3.1/all`;
   fetch(uri)
@@ -144,7 +143,7 @@ const AdminProfile = () => {
               type="fullName"
               {...register("fullName", { required: false })}
               defaultValue={currentUser?.fullName}
-
+              readOnly
               className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
               placeholder="your name"
             />
@@ -160,7 +159,7 @@ const AdminProfile = () => {
               type="email"
               {...register("email", { required: false })}
               defaultValue={currentUser?.email}
-
+              readOnly
               className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
               placeholder="you@example.com"
             />

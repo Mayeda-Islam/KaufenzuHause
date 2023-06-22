@@ -1,8 +1,5 @@
-
-
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import serverUrl from '../../../config/Config';
@@ -16,7 +13,7 @@ const PasswordChange = () => {
     const [showPassword, setShowPassword] = React.useState(false);
     const [showPassword1, setShowPassword1] = React.useState(false);
 
-    const handleForgotPassword = (value) => {
+    const handlePasswordChange = (value) => {
 
         const formData = {
             _id: user?._id,
@@ -43,7 +40,7 @@ const PasswordChange = () => {
 
     return (
         <div className='my-10'>
-            <form onSubmit={handleSubmit(handleForgotPassword)} className='w-full lg:w-3/4 mx-auto'>
+            <form onSubmit={handleSubmit(handlePasswordChange)} className='w-full lg:w-3/4 mx-auto'>
 
                 <h1 className='text-2xl lg:text-4xl font-semibold my-5'>
 
@@ -80,7 +77,7 @@ const PasswordChange = () => {
                 <label className="block my-3 ">
                     <div className='flex items-center justify-between'>
                         <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium ">
-                            Password
+                            New  Password
                         </span>
                         <p onClick={() => setShowPassword1(!showPassword1)} className=' px-2 rounded-md py-1  cursor-pointer  font-medium rounded-r-md border-none'>
                             {showPassword1 ? <VisibilityOffIcon fontSize='small' /> : <VisibilityIcon fontSize='small' />}
@@ -115,7 +112,7 @@ const PasswordChange = () => {
                 <input
                     className="py-3 w-full bg-secondary hover:bg-primary my-3 border-2 border-white rounded-md text-white font-medium cursor-pointer"
                     type="submit"
-                    value={`Login`}
+                    value={`Submit`}
                 />
             </form >
         </div>

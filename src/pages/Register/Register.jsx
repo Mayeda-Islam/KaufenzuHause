@@ -5,8 +5,11 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import serverUrl from "../../config/Config";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { CircularProgress } from "@mui/material";
 
 const Register = () => {
+  const [isLoading, setIsLoading] = useState(false)
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -22,6 +25,7 @@ const Register = () => {
   } = useForm();
 
   const handleRegistrationData = (data) => {
+    setIsLoading(true)
     const finalData = {
       ...data,
       role: 'user'
@@ -36,7 +40,8 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.status === "success") {
-          swal("Congrats!", "Product Added Successfully!", "success");
+          swal("Congrats!", 'Account Created Successfully!', "success");
+          setIsLoading(false)
           navigate('/login')
         } else {
           swal("Oops!", data?.message, "error");
@@ -172,11 +177,12 @@ const Register = () => {
           condition and privacy policy.
         </p>
 
-        <input
-          className="py-3 w-full bg-secondary hover:bg-primary my-3 border-2 border-white rounded-md text-white font-medium cursor-pointer"
-          type="submit"
-          value={`Register`}
-        />
+        <button
+          className="py-3 w-full bg-orange-500 hover:bg-primary my-3 border-2 border-white rounded-md text-white font-medium cursor-pointer"
+          type="submit">
+          {isLoading ? <CircularProgress size={20} /> : 'Register'}
+        </button>
+
       </form>
     </div>
   );

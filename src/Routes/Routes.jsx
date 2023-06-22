@@ -44,6 +44,7 @@ import Payment from "../pages/Payment.js/Payment";
 import MyOrders from "../components/Users/MyOrders";
 import ForgotPassword from "../pages/Login/ForgotPassword";
 import PasswordChange from "../components/Admin/PasswordChange/PasswordChange";
+import InputOTP from "../pages/Login/InputOTP";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/verifyOTP",
+        element: <InputOTP />,
       },
       {
         path: "/forgot-password",

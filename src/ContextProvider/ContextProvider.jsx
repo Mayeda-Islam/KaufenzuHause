@@ -6,15 +6,22 @@ export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [cart, setCart] = React.useState([]);
-  const [language, setLanguage] = useState("english");
+  const [language, setLanguage] = useState(null);
+  const [verified, setVerified] = useState(false)
   const [user, setUser] = useState(null)
   const [hasUser, setHasUser] = useState({})
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
+
+    if (JSON.parse(loggedInUser)?.isVerified) {
       setUser(JSON.parse(loggedInUser));
+      setVerified(true)
       setHasUser(true)
+    }
+    else {
+      setUser(JSON.parse(loggedInUser));
+      setVerified(false)
     }
   }, [])
 
@@ -22,7 +29,10 @@ const ContextProvider = ({ children }) => {
     if (user?.email) {
       setHasUser(true)
     }
-  }, [user?.email])
+    if (user?.isVerified) {
+      setVerified(true)
+    }
+  }, [user?.email, user?.isVerified])
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -114,6 +124,29 @@ const ContextProvider = ({ children }) => {
     return calculateSubTotal() + _shippingCharge;
   };
 
+
+
+  const changeLanguage = (_lang) => {
+    setLanguage(_lang)
+  }
+
+  useEffect(() => {
+    if (language !== null) {
+      localStorage.setItem('language', JSON.stringify(language))
+    }
+
+  }, [language])
+  useEffect(() => {
+    const currentLanguage = localStorage.getItem("language");
+    if (currentLanguage) {
+      setLanguage(JSON.parse(currentLanguage))
+    }
+    else {
+      localStorage.setItem('language', JSON.stringify('english'))
+      setLanguage('english')
+    }
+  }, [])
+
   const context = {
     cart,
     setCart,
@@ -123,12 +156,14 @@ const ContextProvider = ({ children }) => {
     decrement,
     calculateSubTotal,
     calculateTotal,
-    setLanguage,
-    language,
+    changeLanguage,
     user,
     setUser,
     hasUser,
-    setHasUser
+    setHasUser,
+    verified,
+    language
+
   };
   return <Context.Provider value={context}>{children}</Context.Provider>;
 };
