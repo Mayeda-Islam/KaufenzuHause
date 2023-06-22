@@ -10,7 +10,7 @@ const Category = () => {
     GetAPI("categories", setCategories);
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
   return (
@@ -25,14 +25,14 @@ const Category = () => {
             onClick={() => setOpen(true)}
             className="px-10 py-2 bg-[#55c3c1f7] text-white rounded-full"
           >
-            Add
+            Add Category
           </button>
         </div>
       </div>
       <AddCategory setCategories={setCategories}></AddCategory>
-      <div className="mt-16 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
+      <div className="mt-8 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
         <h1 className="text-2xl my-4 font-semibold">Category List</h1>
-        <hr className="mb-12" />
+        <hr className="mb-5" />
         <CategoryList categories={categories} setCategories={setCategories}></CategoryList>
       </div>
 

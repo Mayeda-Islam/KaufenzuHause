@@ -110,9 +110,8 @@ export default function AdminLayOut() {
   const [currentUser, setCurrentUser] = useState({})
 
   useEffect(() => {
-    GetAPI(`users/${user?._id}`, setCurrentUser)
-  }, [user?._id, setCurrentUser])
-  console.log(currentUser);
+    GetAPI(`users/${user?.email}`, setCurrentUser)
+  }, [user?.email, setCurrentUser])
 
   const handleClick = (index) => {
     setNestedOpen((prev) => {
@@ -333,11 +332,11 @@ export default function AdminLayOut() {
           {user?.role === 'admin' && menu?.map((text, index) => (
             <React.Fragment key={index}>
               <NavLink
-                activeClassName="active-link"
-                className={({ isActive }) => (isActive ? "text-red" : "")}
+                activeclassname="active-link"
+                // className={({ isactive }) => (isactive ? "text-red" : "")}
                 key={index}
                 to={text.linkPath ? text.linkPath : location.pathname}
-                isActive={() => location.pathname === text.linkPath}
+              // isactive={() => location.pathname === text.linkPath}
               >
                 <ListItem
                   onClick={() => handleClick(index)}
@@ -393,9 +392,9 @@ export default function AdminLayOut() {
                       <List component="div" disablePadding>
                         {text.items.map((subText, subIndex) => (
                           <NavLink
-                            className={({ isActive, isPending }) =>
-                              isPending ? "pending" : isActive ? "text-red" : ""
-                            }
+                            // className={({ isactive, isPending }) =>
+                            //   isPending ? "pending" : isactive ? "text-red" : ""
+                            // }
                             key={index}
                             to={text.linkPath}
                           >
@@ -451,11 +450,11 @@ export default function AdminLayOut() {
           {user?.role === 'user' && userMenu?.map((text, index) => (
             <React.Fragment key={text.title}>
               <Link
-                activeClassName="active-link"
-                className={({ isActive }) => (isActive ? "text-red" : "")}
+                activeclassname="active-link"
+                // className={({ isactive }) => (isactive ? "text-red" : "")}
                 key={index}
                 to={text.linkPath ? text.linkPath : location.pathname}
-                isActive={() => location.pathname === text.linkPath}
+              // isactive={() => location.pathname === text.linkPath}
               >
                 <ListItem
                   onClick={() => handleClick(index)}

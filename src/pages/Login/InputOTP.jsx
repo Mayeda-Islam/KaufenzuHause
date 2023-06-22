@@ -24,7 +24,6 @@ const InputOTP = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 if (data?.status === "success") {
                     localStorage.setItem("user", JSON.stringify(data?.data));
                     setUser(data?.data)
@@ -51,7 +50,6 @@ const InputOTP = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 if (data?.status === "success") {
                     swal("Congrats!", data?.message, "success");
                 } else {
