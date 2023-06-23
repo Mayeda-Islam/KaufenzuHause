@@ -62,7 +62,6 @@ const AddProduct = () => {
       );
     }
 
-
     if (shipping.length < 15) {
       return Swal.fire(
         "Oops!",
@@ -105,8 +104,8 @@ const AddProduct = () => {
           setSizes([]);
           setColors([]);
           setImages([]);
-          setDescriptionGerman("")
-          setShippingGerman("")
+          setDescriptionGerman("");
+          setShippingGerman("");
           reset();
           navigate("/admin/product/allProduct");
           Swal.fire("Congrats!", "Product Added Successfully!", "success");
@@ -117,8 +116,8 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <h1 className="text-3xl w-11/12 mx-auto font-medium">Add Product</h1>
@@ -176,7 +175,6 @@ const AddProduct = () => {
           )}
         </label>
 
-
         <div className=" mt-4">
           <label className="block ">
             <span className="after:content-['(Optional)'] after:ml-0.5 after:text-green-400 block text-sm font-medium">
@@ -201,16 +199,13 @@ const AddProduct = () => {
             className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
             placeholder="model name"
           />
-
         </label>
 
         <div className="my-4">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium my-1">
             Product Description
           </span>
-          <Jodit
-            setContent={setDescription}
-            content={description} />
+          <Jodit setContent={setDescription} content={description} />
         </div>
         <div className="my-4">
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium my-1">
@@ -218,7 +213,8 @@ const AddProduct = () => {
           </span>
           <Jodit
             setContent={setDescriptionGerman}
-            content={descriptionGerman} />
+            content={descriptionGerman}
+          />
         </div>
         <div className="my-4">
           <span className="my-2 block text-sm font-medium">Sizes</span>
@@ -288,7 +284,10 @@ const AddProduct = () => {
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium my-1">
             Shipping (In German)
           </span>
-          <Jodit setContent={setShippingGerman} content={shippingGerman}></Jodit>
+          <Jodit
+            setContent={setShippingGerman}
+            content={shippingGerman}
+          ></Jodit>
         </div>
 
         <div>
