@@ -11,10 +11,11 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import { AiOutlineClose } from "react-icons/ai";
 import "./Header.css";
-import Sidenav from "./Sidenav";
+import MenuIcon from "@mui/icons-material/Menu";
+
 import GetAPI from "../../APIHooks/GetAPI";
 import { Context } from "../../ContextProvider/ContextProvider";
-import { Badge } from "@mui/material";
+import { Badge, Drawer } from "@mui/material";
 
 const Header = () => {
   const { verified, setHasUser, hasUser, user, setUser, cart, removeFromCart, increment, decrement, calculateSubTotal, changeLanguage, language } =
@@ -26,19 +27,20 @@ const Header = () => {
   const [logo, setLogo] = useState([]);
   //sticky nav
   const [stickyNav, setStickyNav] = useState(false);
+  const [categories, setCategories] = React.useState([])
 
+  useEffect(() => {
+    GetAPI('categories', setCategories)
+  }, [])
   useEffect(() => {
     GetAPI("logo", setLogo);
   }, []);
-
-
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser({});
     setHasUser(false)
   }
-
 
   useEffect(() => {
     window.onscroll = () => {
@@ -92,35 +94,51 @@ const Header = () => {
     display === true ? setDisplay(false) : setDisplay(true);
   };
 
-  //close sidenav when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        display &&
-        wrapper.current &&
-        !wrapper.current.contains(event.target)
-      ) {
-        setDisplay(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
+  const [state, setState] = useState({
+    left: false,
+  });
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-
-    //return wrapper.current;
-  }, [display]);
-
-  // mui sidenav
-  const cateWrapper = useRef();
-  const [sidebar, setSidebar] = useState(false);
-
-  const toggleSidebar = () => {
-    sidebar === true ? setSidebar(false) : setSidebar(true);
+  const toggleDrawer = (side, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [side]: open });
   };
 
-  //search text state
+  const sideList = (side) => <>
+    <div
+      className="w-72 bg-darkNavy h-screen"
+      role="presentation"
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <ul className=" text-white my-5">
+        {
+          categories?.map((category, index) => <>
+            <Link
+              className=""
+              onClick={() => setState(false)}
+              key={index}
+              to={`/categoryProducts/${category?._id}`}>
+              <li className="my-1 font-medium text-xl px-8 py-2 border-y-2 2 border-white hover:text-white hover:bg-transparent bg-white text-darkNavy rounded hover:border-y-2 hover:border-primary  flex gap-3">
+                <img src={category?.image} className="w-6 h-6" alt="" />
+                <span>
+                  {category?.categoryTitle}
+                </span>
+
+              </li>
+            </Link>
+            <p></p>
+          </>
+          )
+        }
+      </ul>
+
+    </div>
+  </>
+
 
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -140,29 +158,23 @@ const Header = () => {
       {/* web nav */}
 
       <nav
-        className={`py-4 px-[25px] md:px-[40px] w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${stickyNav
+        className={`py-4 px-4 w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${stickyNav
           ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
           : "bg-darkNavy"
           }`}
       >
         <div className="flex items-center gap-3">
           {/* hamburger icon */}
-          <button onClick={toggleSidebar} className="border-none outline-none">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="#fff"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          </button>
+          <div>
+            <button className="text-white" onClick={toggleDrawer("left", true)}>
+              <MenuIcon />
+            </button>
+            <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+
+              {sideList("left")}
+
+            </Drawer>
+          </div>
 
           {/* brand logo */}
           <span className="">
@@ -171,13 +183,6 @@ const Header = () => {
             </Link>
           </span>
         </div>
-        {/* category sidebar */}
-        <Sidenav
-          cateWrapper={cateWrapper}
-          sidebar={sidebar}
-          setSidebar={setSidebar}
-          toggleSidebar={toggleSidebar}
-        />
 
         {/* search bar */}
         <form onSubmit={handleSearchSubmit}>
@@ -234,7 +239,7 @@ const Header = () => {
                   </>
                   :
                   <>
-                    <img src={germanFlag} alt="" className="w-[23px]" />
+                    <img src={germanFlag} alt="" className="w-[20px]" />
                     <span className="text-base uppercase font-medium text-white">
                       DE
                     </span>
@@ -491,33 +496,24 @@ const Header = () => {
 
       {/* mobile nav */}
       <nav
-        className={`md:block block lg:hidden pt-3 pb-4 px-[25px] md:px-[35px] top-0 right-0 left-0 z-[10]  ${stickyNav
+        className={`md:block block lg:hidden pt-3 pb-4 px-[10px] md:px-[35px] top-0 right-0 left-0 z-[10]  ${stickyNav
           ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
           : "bg-darkNavy"
           }`}
       >
         <div className=" flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
             {/* hamburger icon */}
-            <button
-              onClick={toggleSidebar}
-              className="border-none outline-none"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="#fff"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
-            </button>
+            <div>
+              <button className="text-white" onClick={toggleDrawer("left", true)}>
+                <MenuIcon />
+              </button>
+              <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+
+                {sideList("left")}
+
+              </Drawer>
+            </div>
             {/* brand logo */}
             <span className="">
               <Link to={'/'}>
@@ -526,13 +522,8 @@ const Header = () => {
             </span>
           </div>
 
-          {/* category sidebar */}
-          <Sidenav
-            cateWrapper={cateWrapper}
-            sidebar={sidebar}
-            setSidebar={setSidebar}
-            toggleSidebar={toggleSidebar}
-          />
+
+
 
           <div className="flex items-center gap-3">
             {/* language dropdown */}
