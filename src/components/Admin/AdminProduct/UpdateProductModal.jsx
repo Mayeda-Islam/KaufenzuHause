@@ -4,12 +4,15 @@ import { useForm } from "react-hook-form";
 import Jodit from "../../../Shared/JodIt/Jodit";
 import ColorAndSizeOptions from "../../../Shared/ColorAndSizeOptions/ColorAndSizeOptions";
 import GetAPI from "../../../APIHooks/GetAPI";
+import Swal from "sweetalert2";
+import serverUrl from "../../../config/Config";
+import UpdatedApi from "../../../APIHooks/UpdatedItem";
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  maxWidth: { md: "50%", xs: "98%" },
+  width: { md: "80%", xs: "98%" },
   maxHeight: { md: "80%", xs: "98%" },
   boxShadow: 24,
   overflowY: "scroll",
@@ -20,6 +23,7 @@ const UpdateProductModal = ({
   openUpdateModal,
   updatedProduct,
 }) => {
+  const [selectUpdatedProduct, setSelectUpdatedProduct] = useState({});
   const [updateDescription, setUpdateDescription] = useState("");
   const [updateDescriptionGerman, setUpdateDescriptionGerman] = useState("");
 
@@ -29,7 +33,7 @@ const UpdateProductModal = ({
   const [updateColors, setUpdateColors] = useState([]);
 
   const updateAvailableColors = updatedProduct?.colors;
-  console.log(updateAvailableColors);
+
   const updateAvailableSizes = updatedProduct?.sizes;
   const [categories, setCategories] = useState([]);
 
@@ -43,9 +47,56 @@ const UpdateProductModal = ({
     formState: { errors },
   } = useForm();
   const handleUpdateProduct = (data) => {
-    console.log(data);
+    console.log(data, "updated product");
+    // if (updateDescription.length < 15) {
+    //   return Swal.fire(
+    //     "Oops!",
+    //     "Description must need at least 10 characters",
+    //     "error"
+    //   );
+    // }
+    // if (updateDescriptionGerman.length < 15) {
+    //   return Swal.fire(
+    //     "Oops!",
+    //     "Description must need at least 10 characters",
+    //     "error"
+    //   );
+    // }
+
+    // if (updateShipping.length < 15) {
+    //   return Swal.fire(
+    //     "Oops!",
+    //     "Shipping must need at least 10 characters",
+    //     "error"
+    //   );
+    // }
+    // if (updateShippingGerman.length < 15) {
+    //   return Swal.fire(
+    //     "Oops!",
+    //     "Shipping must need at least 10 characters",
+    //     "error"
+    //   );
+    // }
+    // if (!images.length) {
+    //   return Swal.fire("Oops!", "Images must need", "error");
+    // }
+    const productData = {
+      ...data,
+      updateDescription,
+      updateDescriptionGerman,
+      updateShipping,
+      updateShippingGerman,
+      updateColors,
+      updateSizes,
+      // images: images,
+    };
+    UpdatedApi(
+      `product/${updatedProduct?._id}`,
+      setSelectUpdatedProduct,
+      productData
+    );
+    setOpenUpdateModal(false);
   };
-  console.log(updatedProduct);
   return (
     <div>
       <Modal
@@ -57,13 +108,13 @@ const UpdateProductModal = ({
       >
         <Box sx={style}>
           <div className="outline-none focus:outline-none ">
-            <div className=" w-full ">
+            <div className="w-full">
               <div className="border-0 rounded-lg shadow-lg flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b-0.5 border-gray-300">
                   <div className="w-full p-5">
                     <div>
-                      <h1 className="text-3xl w-11/12 mx-auto font-medium">
-                        Add Product
+                      <h1 className="text-3xl text-center w-11/12 mx-auto font-medium">
+                        Updated Product
                       </h1>
                       <form
                         onSubmit={handleSubmit(handleUpdateProduct)}

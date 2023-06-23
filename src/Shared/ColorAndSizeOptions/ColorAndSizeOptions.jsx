@@ -2,7 +2,6 @@ import React from "react";
 import Chip from "@mui/material/Chip";
 import { Autocomplete, Stack, TextField } from "@mui/material";
 const ColorAndSizeOptions = ({ setState, productsOptions }) => {
-  console.log(productsOptions);
   return (
     <Stack spacing={3} className="w-full">
       <Autocomplete
