@@ -14,10 +14,7 @@ const PaymentFailed = () => {
           </h1>
           <h1 className="text-xl my-4 text-center font-semibold text-gray-700 ">
             Your payment was not successfully processed.{" "}
-            <Link
-              className="underline text-primary font-bold "
-              to={"/payment"}
-            >
+            <Link className="underline text-primary font-bold " to={"/payment"}>
               Try again
             </Link>{" "}
             again later or use another payment method.
