@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import ProductDetailsTabs from "../../Shared/ProductDetailsShared/ProductDetailsTabs";
-import ProductSliderGallery from "../../Shared/ProductDetailsShared/ProductSliderGallery";
 import ProductInfo from "../../Shared/ProductDetailsShared/ProductInfo";
 import GetAPI from "../../APIHooks/GetAPI";
 import { useParams } from "react-router-dom";
 import ProductSideGalleryMobile from "../../Shared/ProductDetailsShared/ProductSideGalleryMobile";
+import ImagesGallery from "../../Shared/ProductDetailsShared/ImagesGallery";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = React.useState({});
-  //   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     GetAPI(`products/${id}`, setProduct);
-    // GetAPI(`orders`, setOrders);
   }, [id]);
 
-  //   console.log(orders);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,7 +27,7 @@ const ProductDetails = () => {
           <div className="grid lg:grid-cols-2 gap-5">
             <div className="w-full">
               <div className="">
-                <ProductSliderGallery product={product} />
+                <ImagesGallery product={product} />
                 <ProductSideGalleryMobile product={product} />
               </div>
             </div>
