@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import userImage from "../../images/user-images/2.jpg";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { ImReply } from "react-icons/im";
@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import UpdatedApi from "../../APIHooks/UpdatedItem";
 import { Context } from "../../ContextProvider/ContextProvider";
+import moment from "moment";
+import serverUrl from "../../config/Config";
+
 const ProductReviews = ({ product, setProduct }) => {
   const { user } = useContext(Context);
   const {
@@ -15,6 +18,7 @@ const ProductReviews = ({ product, setProduct }) => {
   } = useForm();
 
   const [reviewText, setReviewText] = useState("");
+  const [userMap, setUserMap] = useState({});
 
   const submitReview = (e) => {
     e.preventDefault();
@@ -30,6 +34,61 @@ const ProductReviews = ({ product, setProduct }) => {
     });
   };
 
+  useEffect(() => {
+    const fetchUserInformation = async () => {
+      try {
+        const uniqueEmails = [
+          ...new Set(product?.reviews.map((review) => review.email)),
+        ];
+
+        const response = await fetch(
+          `${serverUrl}/users/reviews/bulkUser?emails=${uniqueEmails.join(",")}`
+        );
+        const userInformation = await response.json();
+
+        if (Array.isArray(userInformation)) {
+          const userMap = {};
+          userInformation.forEach((user) => {
+            userMap[user.email] = {
+              name: user?.fullName,
+              image: user?.image,
+            };
+          });
+
+          setUserMap(userMap);
+        } else {
+          console.log("Invalid user information format");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUserInformation();
+  }, [product?.reviews]);
+
+  const deleteReview = async (productId, reviewIndex) => {
+    try {
+      const response = await fetch(
+        `${serverUrl}/products/${productId}/reviews/${reviewIndex}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        swal("Success", `${data?.message}`, "success");
+        setProduct(data?.data);
+      } else {
+        swal("Error", `${data?.message}`, "error");
+      }
+    } catch (error) {
+      swal("Error", "Error deleting review", "error");
+    }
+  };
+
   return (
     <div className="pt-5 flex flex-wrap lg:flex-nowrap">
       <div className="w-full sm:w-full lg:w-6/12">
@@ -38,8 +97,8 @@ const ProductReviews = ({ product, setProduct }) => {
         </div>
         <div className="mx-2 border-b border-blue-500 shadow-md px-5 py-4 rounded-md  mb-4">
           {product?.reviews?.map((review, index) => {
-            const { text } = review;
-
+            const { email, text, createdAt } = review;
+            const userInformation = userMap[email];
             return (
               <div
                 key={index}
@@ -48,61 +107,41 @@ const ProductReviews = ({ product, setProduct }) => {
                 <div className="flex justify-center">
                   <img
                     className="object-cover w-20 lg:w-16 lg:h-16 rounded-full bg-gray-500"
-                    src={userImage}
+                    src={
+                      userInformation?.image ||
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXnHCfhPKKAy1zSl8__FmI1hsMmSR-MVgh5IcfD_-43Q&s"
+                    }
                     alt="profile img"
                   />
-                  {/* {userImage ? (
-                                <img
-                                    className="object-cover w-20 md:w-16 md:h-16 rounded-full bg-gray-500"
-                                    src={userImage}
-                                    alt="profile img"
-                                />
-                            ) : (
-                                <FaUserCircle className="text-3xl text-[#6069d3ef]" />
-                            )} */}
-
                   <div className="flex  justify-between ml-4">
                     <div className="flex flex-col my-4 md:my-0">
                       <div className="flex flex-col ">
-                        <h4 className="font-bold">Jakia Sultana asdas</h4>
+                        <h4 className="font-bold">
+                          {userInformation?.name || "Anonymous"}
+                        </h4>
                         <span className="text-xs text-gray-400">
-                          1 days ago {text}
+                          {moment().diff(createdAt, "days") === 0
+                            ? "Today"
+                            : `${moment().diff(createdAt, "days")} days age`}
                         </span>
                       </div>
 
                       <div className="hidden md:block lg:block mt-3">
-                        <p className="text-sm text-gray-600">
-                          {
-                            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime molliti"
-                          }
-                        </p>
+                        <p className="text-sm text-gray-600">{text}</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div>
-                  <div className="flex justify-around gap-4">
-                    {/* <span className="mr-3 cursor-pointer">
-                        <EditTwoToneIcon color='yellow' fontSize='small' />
-                    </span> */}
-                    {/* reply icon */}
-                    <span
-                      className=" cursor-pointer text-lg text-blue-500"
-                      title="Reply Comment "
-                      // onClick={handleReplyModalOpen}
-                    >
-                      <ImReply />
-                    </span>
-                    {/* deleteIcon icon */}
-                    <span
-                      className="cursor-pointer text-lg text-red-500"
-                      // onClick={() => handlecommentDelete(_id)}
-                    >
-                      <RiDeleteBin6Line />
+                {email === user?.email && (
+                  <div className="flex justify-around">
+                    <span className="cursor-pointer text-lg text-red-500">
+                      <RiDeleteBin6Line
+                        onClick={() => deleteReview(product?._id, index)}
+                      />
                     </span>
                   </div>
-                </div>
+                )}
               </div>
             );
           })}
