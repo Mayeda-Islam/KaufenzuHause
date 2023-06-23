@@ -5,10 +5,11 @@ import { Context } from "../../ContextProvider/ContextProvider";
 import { Link } from "react-router-dom";
 // import swal from "sweetalert";
 const ProductInfo = ({ product }) => {
-  const { addToCart, cart, user } = useContext(Context);
+  const { addToCart, cart, user, language } = useContext(Context);
   const {
     _id,
     productTitle,
+    productTitleGerman,
     productPrice,
     previousPrice,
     totalProduct,
@@ -45,30 +46,20 @@ const ProductInfo = ({ product }) => {
     }
   };
 
-  // const handleProduct = () => {
-  //   if (colors && selectedColor === '') {
-  //     return swal("Warning!", "Choose a Color", "error");
-  //   }
-  //   if (sizes && selectedSize === '') {
-  //     return swal("Warning!", "Choose a Size!", "error");
-  //   }
-  //   const formData = {
-  //     productTitle,
-  //     productPrice,
-  //     previousPrice,
-  //     totalProduct,
-  //     category,
-  //     brand,
-  //     model,
-  //   }
-  //   addToCart(formData, cartQuantity)
-  // }
-
   return (
     <div>
-      <h2 className="text-textPrimary font-semibold text-xl md:text-3xl mb-2">
-        {productTitle}
-      </h2>
+      {
+        language === 'english' ?
+          <h2 className="text-textPrimary font-semibold text-xl md:text-3xl mb-2">
+            {productTitle}
+          </h2>
+          :
+
+          <h2 className="text-textPrimary font-semibold text-xl md:text-3xl mb-2">
+            {productTitleGerman}
+          </h2>
+      }
+
       <div className="flex items-center gap-2 text-textPrimary py-1    text-base  bg-white ">
         <span className="line-through text-gray-500">€{previousPrice}</span>
         <span className="text-black text-2xl font-semibold">
@@ -218,7 +209,13 @@ const ProductInfo = ({ product }) => {
                 {/* add to wishlist */}
               </div>
               :
-              <p className="my-4 text-sm font-semibold">This Product is Out of Stock Now</p>
+              <p className="my-4 text-sm font-semibold">
+                {language === 'english' ? ' This Product is Out of Stock Now' :
+                  'Dieses Produkt ist derzeit nicht vorrätig'}
+
+
+
+              </p>
           }
         </>
           :

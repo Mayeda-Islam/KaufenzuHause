@@ -49,20 +49,34 @@ const Home = () => {
   return (
     <>
       <BannerSlider />
+
       <AllCategories />
-      {products?.length > 0 && <TopratedProducts products={products} />}
-      {headphones?.length > 0 && (
-        <CategorySectionOne
-          products={headphones}
-          sliders={headphonesSlider}
-          title={"Headphones and Accessories"}
-        ></CategorySectionOne>
-      )}
+
+      {
+        products?.length > 0 &&
+        <TopratedProducts
+          products={products}
+        />
+      }
+
+      {
+        headphones?.length > 0 &&
+        (
+          <CategorySectionOne
+            products={headphones}
+            sliders={headphonesSlider}
+            title={"Headphones and Accessories"}
+            titleGerman={"Kopfhörer und Zubehör"}
+          >
+          </CategorySectionOne>
+        )
+      }
       {watches?.length > 0 && (
         <CategorySectionOne
           products={watches}
           sliders={watchesSlider}
           title={"Watches and Accessories"}
+          titleGerman={"Uhren und Zubehör"}
         ></CategorySectionOne>
       )}
       {electronics?.length > 0 && (
@@ -70,6 +84,7 @@ const Home = () => {
           products={electronics}
           sliders={electronicsSlider}
           title={"Electronics & Appliances"}
+          titleGerman={"Elektronik und Haushaltsgeräte"}
         ></CategorySectionOne>
       )}
       {lifeStyles?.length > 0 && (
@@ -77,6 +92,7 @@ const Home = () => {
           products={lifeStyles}
           sliders={lifeStylesSlider}
           title={"Lifestyles"}
+          titleGerman={"Lebensstile"}
         ></CategorySectionOne>
       )}
     </>

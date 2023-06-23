@@ -56,7 +56,7 @@ const Sidenav = ({ toggleSidebar, cateWrapper, sidebar, setSidebar }) => {
                         {
                             categories?.map((cat) => (
                                 <li key={cat?._id} className={`py-4 px-4 m-0 ${cat.borderClass} `}>
-                                    <Link className={`  px-5  capitalize block m-0`}>
+                                    <Link to={`/categoryProducts/${cat?._id}`} className={`  px-5  capitalize block m-0`}>
                                         <div className="flex  items-center gap-5">
                                             <img src={cat?.image} className='w-[22px] h-[22px] ' />
                                             <span className='hover:text-white transition-all duration-300 focus:text-white'>{cat?.categoryTitle}</span>

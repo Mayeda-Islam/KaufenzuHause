@@ -520,8 +520,8 @@ const Header = () => {
             </button>
             {/* brand logo */}
             <span className="">
-              <Link>
-                <img src={logo} className="w-20" alt="" />
+              <Link to={'/'}>
+                <img src={logo[0]?.headerLogoURL} className="w-20" alt="" />
               </Link>
             </span>
           </div>
