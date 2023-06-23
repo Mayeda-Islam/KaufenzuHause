@@ -1,21 +1,31 @@
 
+import { Link } from "react-router-dom";
 import CategorySlider from "../../../Shared/CategorySlider/CategorySlider";
 import SingleProduct from "../../../Shared/SingleProduct/SingleProduct";
 import { Pagination, Navigation, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useContext } from "react";
+import { Context } from "../../../ContextProvider/ContextProvider";
 
 
-const CategorySectionOne = ({ products, sliders, title }) => {
+const CategorySectionOne = ({ products, sliders, title, titleGerman }) => {
+  const { language } = useContext(Context)
   return (
     <div className="shadow-md pb-14">
       <div className="mx-auto w-[95%] lg:w-[90%]">
         {" "}
         <div className="flex my-7 items-center justify-between">
-          <h1 className=" text-xl lg:text-2xl font-semibold">{title}</h1>
+          {
+            language === 'english' ?
+              <h1 className=" text-xl lg:text-2xl font-semibold">{title}</h1> :
+              <h1 className=" text-xl lg:text-2xl font-semibold">{titleGerman}</h1>
+          }
           {/* view all button  */}
-          <button className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
-            View All
-          </button>
+          <Link to={``}>
+            <button className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
+              View All
+            </button>
+          </Link>
         </div>
         <hr className="my-4" />
         <div className="flex  justify-center">

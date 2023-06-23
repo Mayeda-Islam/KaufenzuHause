@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { Context } from '../../ContextProvider/ContextProvider';
 const SingleProduct = ({ product }) => {
-    const { _id, images, category, productTitle, totalProduct, productPrice, previousPrice, colors, brand, model } = product;
-
+    const { _id, images, category, productTitle, totalProduct, productPrice, previousPrice, colors, brand, model, productTitleGerman } = product;
+    const { language } = React.useContext(Context)
     return (
         <Link to={`/productDetails/${_id}`} key={_id} className="lg:h-[360px]">
             <div >
@@ -35,18 +36,18 @@ const SingleProduct = ({ product }) => {
                         </div>
 
 
-                        {/* quick view button */}
-                        {/* <div className="absolute -bottom-[100%] w-full left-0 right-0 bg-[#191919] text-center py-3 quick_view cursor-pointer">
-                            <Link to={`/productDetails/${_id}`}>
-                                <span className='text-white text-base font-medium uppercase'>Add To cart</span>
-                            </Link>
 
-                        </div> */}
                     </div>
                     {/* card body */}
                     <div className="p-4 overflow-hidden">
                         <span className="text-sm text-gray-600 my-2 capitalize">{category}</span>
-                        <h3 className="text-base font-semibold text-textPrimary mb-1">{productTitle.length > 20 ? productTitle?.slice(0, 20) : productTitle}</h3>
+                        {
+                            language === 'english' ?
+                                <h3 className="text-base font-semibold text-textPrimary mb-1">{productTitle?.length > 25 ? productTitle?.slice(0, 25) + '..' : productTitle}</h3>
+                                :
+
+                                <h3 className="text-base font-semibold text-textPrimary mb-1">{productTitleGerman?.length > 25 ? productTitleGerman?.slice(0, 25) : productTitleGerman}</h3>
+                        }
                         <p className='text-xs'>Model: <span className='text-sm font-medium text-gray-500'> {model}</span></p>
                         <p className='text-xs'>Brand: <span className='text-sm font-medium text-gray-500'> {brand}</span></p>
 

@@ -9,16 +9,25 @@ import "./TopRatedProducts.css";
 import SwiperCustomArrow from '../../Shared/SwiperCustomArrow/SwiperCustomArrow';
 import SingleProduct from '../../Shared/SingleProduct/SingleProduct';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Context } from '../../ContextProvider/ContextProvider';
 
 
 const TopratedProducts = ({ products }) => {
+    const { language } = useContext(Context)
     return (
         <section className="pt-10 pb-14 bg-[#f7f7f7] relative">
             <div className=" w-[95%] lg:w-[90%] mx-auto">
                 {/* section title  */}
                 <div className="flex items-center justify-between">
                     <h2 className="text-xl md:text-2xl text-textColor font-semibold text-left capitalize">
-                        Top Rated Products
+                        {
+                            language === 'english' ? ' Checkout Our Products' :
+                                'Sehen Sie sich unsere Produkte an'
+                        }
+
+
+
                     </h2>
                     {/* view all button  */}
                     <Link to={'products'} className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">

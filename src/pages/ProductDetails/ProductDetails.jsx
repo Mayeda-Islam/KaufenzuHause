@@ -6,15 +6,21 @@ import GetAPI from "../../APIHooks/GetAPI";
 import { useParams } from "react-router-dom";
 import ProductSideGalleryMobile from "../../Shared/ProductDetailsShared/ProductSideGalleryMobile";
 import ImagesGallery from "../../Shared/ProductDetailsShared/ImagesGallery";
+import SingleProduct from "../../Shared/SingleProduct/SingleProduct";
+import { Pagination, Navigation, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = React.useState({});
+  const [products, setProducts] = React.useState([]);
 
   useEffect(() => {
     GetAPI(`products/${id}`, setProduct);
   }, [id]);
-
+  useEffect(() => {
+    GetAPI(`product/${product?.category}`, setProducts);
+  }, [product])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -56,21 +62,79 @@ const ProductDetails = () => {
             Related Products
           </h2>
           {/* section title */}
-          {/* <div className="flex items-center justify-between">
+          <div className="">
 
-                        <div className="flex items-center  flex-wrap">
-                            {
-                                products.slice(0, 8).map((product) => (
 
-                                    <div className="w-full sm:w-6/12 md:w-4/12 lg:w-3/12 xxl:w-1/5" key={product._id}>
-                                        <SingleProduct product={product} />
-                                    </div>
+            <Swiper
 
-                                ))
-                            }
+              breakpoints={{
+                // when window width is >= 320px
+                320: {
 
-                        </div>
-                    </div> */}
+                  slidesPerView: 1,
+                },
+                // when window width is >= 400px
+                400: {
+
+                  slidesPerView: 2,
+                },
+
+                // when window width is >= 640px
+                640: {
+
+                  slidesPerView: 2,
+                },
+                // when window width is >= 768px
+                768: {
+
+                  slidesPerView: 3,
+                },
+                // when window width is >= 1024px
+                1024: {
+                  width: 1024,
+                  slidesPerView: 4,
+                },
+                1400: {
+                  width: 1400,
+                  slidesPerView: 5,
+                },
+                1916: {
+                  width: 1916,
+                  slidesPerView: 5,
+                },
+              }}
+              slidesPerView={4}
+              // slidesPerView="auto"
+              // loop={true}
+              loopfillgroupwithblank="false"
+
+              // navigation={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: true,
+                // loop: true
+              }}
+
+              // centeredSlides={true}
+              modules={[Pagination, Navigation, Autoplay]}
+
+              // freeMode={true}
+              // modules={[FreeMode, Pagination]}
+              className="mySwiper"
+            >
+              {
+                products?.slice(0, 5)?.map((product) => {
+                  const { _id } = product;
+                  return (
+                    <SwiperSlide key={_id}>
+                      <SingleProduct product={product} />
+                    </SwiperSlide>
+                  )
+                })
+              }
+
+            </Swiper>
+          </div>
         </div>
       </section>
     </>

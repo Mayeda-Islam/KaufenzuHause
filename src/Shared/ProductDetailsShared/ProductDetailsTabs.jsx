@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import parse from 'html-react-parser'
 import ProductReviews from './ProductReviews';
+import { Context } from '../../ContextProvider/ContextProvider';
 
 
 function TabPanel(props) {
@@ -43,7 +44,7 @@ function a11yProps(index) {
 
 const ProductDetailsTabs = ({ product }) => {
     const [value, setValue] = React.useState(0);
-
+    const { language } = useContext(Context)
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -84,7 +85,17 @@ const ProductDetailsTabs = ({ product }) => {
                 </Box>
                 <TabPanel value={value} index={0}>
                     <div className="text-sm text-gray-500 leading-7 pt-5">
-                        {parse(`${product?.description}`)}
+                        {
+                            language === 'english' ?
+                                <>
+
+                                    {parse(`${product?.description}`)}
+                                </>
+                                :
+                                <>
+                                    {parse(`${product?.descriptionGerman}`)}
+                                </>
+                        }
 
                     </div>
                 </TabPanel>
@@ -93,7 +104,17 @@ const ProductDetailsTabs = ({ product }) => {
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <div className="pt-5">
-                        {parse(`${product?.shipping}`)}
+                        {
+                            language === 'english' ?
+                                <>
+                                    {parse(`${product?.shipping}`)}
+                                </>
+                                :
+                                <>
+                                    {parse(`${product?.shippingGerman}`)}
+                                </>
+
+                        }
                     </div>
 
                 </TabPanel>

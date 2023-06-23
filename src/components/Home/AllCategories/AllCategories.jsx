@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import laptop from '../../../images/categoryIcons/laptop.png';
-import mobile from '../../../images/categoryIcons/mobile.png';
-import tv from '../../../images/categoryIcons/tv.png';
-import camera from '../../../images/categoryIcons/camera.png';
-import headPhones from '../../../images/categoryIcons/headphones.png';
-import smartwatch from '../../../images/categoryIcons/smartwatch.png';
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import GetAPI from '../../../APIHooks/GetAPI';
+import { useContext } from 'react';
+import { Context } from '../../../ContextProvider/ContextProvider';
 
 const AllCategories = () => {
     // const categories = [
@@ -47,8 +43,8 @@ const AllCategories = () => {
 
     //     }
     // ]
-
-    const [categories, setCategories] = useState([])
+    const { language } = useContext(Context)
+    const [categories, setCategories] = React.useState([])
 
     useEffect(() => {
         GetAPI('categories', setCategories)
@@ -58,7 +54,10 @@ const AllCategories = () => {
             <div className=" w-[95%] lg:w-[90%] mx-auto">
                 {/* section title */}
                 <h2 className="text-2xl text-textColor font-semibold text-left capitalize">
-                    All Categories
+                    {
+                        language === 'english' ? 'All Categories' : 'Alle Kategorien'
+                    }
+
                 </h2>
                 <hr className="border border-gray-300 mt-6 mb-8" />
                 <div className="flex items-center justify-center md:gap-4 lg:gap-6 flex-wrap lg:flex-nowrap">
