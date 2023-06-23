@@ -14,14 +14,14 @@ const Home = () => {
 
   const [categoriesSlider, setCategoriesSlider] = useState([]);
 
-  const headphones = products?.filter((data) => data?.category === "Headphone");
+  const headphones = products?.filter((data) => data?.category === ("Headphone" || "Headphone Accessories"));
   const headphonesSlider = categoriesSlider?.filter(
-    (data) => data?.category == "Headphone"
+    (data) => data?.category === ("Headphone" || "Headphone Accessories")
   );
 
-  const watches = products?.filter((data) => data?.category === "Watch");
+  const watches = products?.filter((data) => data?.category === ("Watch" || "Smart Watch"));
   const watchesSlider = categoriesSlider?.filter(
-    (data) => data?.category === "Watch"
+    (data) => data?.category === ("Watch" || "Smart Watch")
   );
 
   const electronics = products?.filter(
@@ -32,10 +32,10 @@ const Home = () => {
   );
 
   const lifeStyles = products?.filter(
-    (data) => data?.category === ("Shirts" || "Pants" || "Shoes" || "wallet")
+    (data) => data?.category === ("Shirts" || "Pants" || "Shoes" || "Wallet")
   );
   const lifeStylesSlider = categoriesSlider?.filter(
-    (data) => data?.category === ("Shirts" || "Pants" || "Shoes" || "wallet")
+    (data) => data?.category === ("Shirts" || "Pants" || "Shoes" || "Wallet")
   );
   console.log(lifeStyles, "from category product");
   useEffect(() => {

@@ -20,10 +20,13 @@ const ViewProductModal = ({ open, setOpen, product }) => {
     colors,
     delivery,
     description,
+    descriptionGerman,
+    shippingGerman,
     images,
     previousPrice,
     productPrice,
     productTitle,
+    productTitleGerman,
     sizes,
     totalProduct,
   } = product;
@@ -71,6 +74,15 @@ const ViewProductModal = ({ open, setOpen, product }) => {
                             Product Name
                           </td>
                           <td>{productTitle}</td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Product Name In German
+                          </td>
+                          <td>{productTitleGerman}</td>
                         </tr>
                         <tr className="bg-white border-b  border-[#D0D2DA]">
                           <td
@@ -158,12 +170,38 @@ const ViewProductModal = ({ open, setOpen, product }) => {
                             scope="row"
                             className="px-6 flex justify-items-start py-4 font-medium text-gray-900 whitespace-nowrap "
                           >
-                            Delivery
+                            Description In German
+                          </td>
+                          <td className="text-justify px-6 py-4">
+                            {descriptionGerman
+                              ? parse(descriptionGerman)
+                              : " No Description available"}
+                          </td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 flex justify-items-start py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Shipping And Delivery
                           </td>
                           <td className="text-justify px-6 py-4">
                             {delivery
                               ? parse(delivery)
                               : "No Delivery description available"}
+                          </td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 flex justify-items-start py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Shipping And Delivery In German
+                          </td>
+                          <td className="text-justify px-6 py-4">
+                            {shippingGerman
+                              ? parse(shippingGerman)
+                              : "No Shipping And Delivery description available"}
                           </td>
                         </tr>
                       </tbody>
