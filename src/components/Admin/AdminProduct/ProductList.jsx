@@ -96,11 +96,13 @@ const ProductList = ({ products, setProducts }) => {
         setOpen={setOpen}
         product={product}
       ></ViewProductModal>
-      <UpdateProductModal
-        setOpenUpdateModal={setOpenUpdateModal}
-        openUpdateModal={openUpdateModal}
-        updatedProduct={updatedProduct}
-      ></UpdateProductModal>
+      <div>
+        <UpdateProductModal
+          setOpenUpdateModal={setOpenUpdateModal}
+          openUpdateModal={openUpdateModal}
+          updatedProduct={updatedProduct}
+        ></UpdateProductModal>
+      </div>
     </div>
   );
 };

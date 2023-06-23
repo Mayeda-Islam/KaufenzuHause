@@ -8,7 +8,8 @@ const ColorAndSizeOptions = ({ setState, productsOptions }) => {
         onChange={(event, selectedValue) => setState(selectedValue)}
         multiple
         id="tags-filled"
-        options={productsOptions?.map((option) => option?.title)}
+        options={productsOptions?.map((option) => option)}
+        defaultValue={productsOptions?.forEach((option) => option)}
         freeSolo
         renderTags={(value, getTagProps) =>
           value?.map((option, index) => (
