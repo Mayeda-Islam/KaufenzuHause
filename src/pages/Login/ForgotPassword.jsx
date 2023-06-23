@@ -215,7 +215,7 @@ const ForgotPassword = () => {
                         <label className="block my-3">
                             <div className='flex items-center justify-between'>
                                 <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block font-medium ">
-                                    Old  Password
+                                    New  Password
                                 </span>
                                 <p onClick={() => setShowPassword(!showPassword)} className=' px-2 rounded-md py-1  cursor-pointer  font-medium rounded-r-md border-none'>
                                     {showPassword ? <VisibilityOffIcon fontSize='small' /> : <VisibilityIcon fontSize='small' />}
@@ -232,7 +232,7 @@ const ForgotPassword = () => {
                                         message: "Password should be at least 8 character with Capital Letter, Number and Symbol"
                                     },
                                 })}
-                                placeholder='Type Your Old Password'
+                                placeholder='Type Your New Password'
                             />
                             {errors?.newPassword && (
                                 <p className="text-red-500 ">Password should be at least 8 character with Capital Letter, Number and Symbol</p>

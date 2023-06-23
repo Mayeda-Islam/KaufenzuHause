@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../../ContextProvider/ContextProvider";
 
 const Checkout = () => {
-  const { calculateSubTotal, calculateTotal } = useContext(Context);
+  const { calculateSubTotal, calculateTotal, user } = useContext(Context);
   const navigate = useNavigate()
   const [countries, setCountries] = useState([])
   const uri = `https://restcountries.com/v3.1/all`;
@@ -82,7 +82,7 @@ const Checkout = () => {
                     <select
                       name="country"
                       className="border text-sm border-gray box-border px-4 leading-6 py-2 outline-0 w-full">
-                      {countries.map((country) => (
+                      {countries?.map((country) => (
                         <>
                           {" "}
                           <option
@@ -150,9 +150,10 @@ const Checkout = () => {
                         Email address <span className="text-red-400">*</span>
                       </label>
                       <input
+                        readOnly
                         type="text"
                         name="email"
-                        id=""
+                        defaultValue={user?.email}
                         className="border border-gray box-border px-4 leading-6 py-2 outline-0 w-full"
                         required
                       />

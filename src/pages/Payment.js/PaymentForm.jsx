@@ -117,6 +117,7 @@ const PaymentForm = () => {
                     // }
                     if (data?.status === 'success') {
                         navigate('/payment-success')
+                        localStorage.removeItem('info')
                     }
                 })
         }

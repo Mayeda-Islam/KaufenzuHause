@@ -55,7 +55,7 @@ const OrderDetails = () => {
                     </h1>
                     <h1 className='my-2'>Order Status : <span className='font-semibold'>{orderInfo?.status}</span>
                     </h1>
-                    <h1 className='my-2'>Courier Sent Link : <span className='font-semibold'>{orderInfo?.courierLink}</span>
+                    <h1 className='my-2'>Courier Sent Link : <span className='font-semibold'>{orderInfo?.courierLink ? orderInfo?.courierLink : 'Order accepted but not delivered to courier yet!'}</span>
                     </h1>
                     <h1 className='my-2'>Order Date : <span className='font-semibold'>
                         {moment(orderInfo?.date).format('LLL')}

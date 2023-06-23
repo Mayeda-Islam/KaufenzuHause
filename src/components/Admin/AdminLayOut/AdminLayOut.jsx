@@ -283,7 +283,7 @@ export default function AdminLayOut() {
 
               {
                 currentUser?.image ?
-                  <img src={currentUser?.image} alt="" className="w-[3.5rem] rounded-full mr-2" /> :
+                  <img src={currentUser?.image} alt="" className="w-[3.5rem] h-[3.5rem] rounded-full mr-2" /> :
                   <AccountCircleIcon style={{ fontSize: "4rem" }} />
               }
 
