@@ -76,7 +76,7 @@ const AddProduct = () => {
         "error"
       );
     }
-    if (!images.length) {
+    if (!images?.length) {
       return Swal.fire("Oops!", "Images must need", "error");
     }
     const productData = {

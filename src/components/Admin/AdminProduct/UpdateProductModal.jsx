@@ -4,42 +4,98 @@ import { useForm } from "react-hook-form";
 import Jodit from "../../../Shared/JodIt/Jodit";
 import ColorAndSizeOptions from "../../../Shared/ColorAndSizeOptions/ColorAndSizeOptions";
 import GetAPI from "../../../APIHooks/GetAPI";
-import Swal from "sweetalert2";
-import serverUrl from "../../../config/Config";
+
 import UpdatedApi from "../../../APIHooks/UpdatedItem";
+import serverUrl from "../../../config/Config";
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: { md: "80%", xs: "98%" },
+  maxWidth: { md: "80%", xs: "98%" },
   maxHeight: { md: "80%", xs: "98%" },
   boxShadow: 24,
   overflowY: "scroll",
   bgcolor: "white",
 };
+
+
 const UpdateProductModal = ({
   setOpenUpdateModal,
   openUpdateModal,
   updatedProduct,
+  setProducts
 }) => {
-  const [selectUpdatedProduct, setSelectUpdatedProduct] = useState({});
-  const [updateDescription, setUpdateDescription] = useState("");
+  const [imageList, setImageList] = useState([])
+  const [updateDescription, setUpdateDescription] = React.useState("");
   const [updateDescriptionGerman, setUpdateDescriptionGerman] = useState("");
-
   const [updateShipping, setUpdateShipping] = useState("");
   const [updateShippingGerman, setUpdateShippingGerman] = useState("");
+
   const [updateSizes, setUpdateSizes] = useState([]);
   const [updateColors, setUpdateColors] = useState([]);
 
-  const updateAvailableColors = updatedProduct?.colors;
-
-  const updateAvailableSizes = updatedProduct?.sizes;
   const [categories, setCategories] = useState([]);
+
+  const updateAvailableColors = updatedProduct?.colors;
+  const updateAvailableSizes = updatedProduct?.sizes;
+
+  useEffect(() => {
+    setUpdateDescription(updatedProduct?.description)
+    setUpdateDescriptionGerman(updatedProduct?.descriptionGerman)
+    setUpdateShipping(updatedProduct?.shipping)
+    setUpdateShippingGerman(updatedProduct?.shippingGerman)
+    setImageList(updatedProduct?.images)
+  }, [
+    updatedProduct?.description,
+    updatedProduct?.descriptionGerman,
+    updatedProduct?.shipping,
+    updatedProduct?.shippingGerman,
+    updatedProduct?.images
+  ])
 
   useEffect(() => {
     GetAPI("categories", setCategories);
   }, []);
+
+
+  const handleImage = async (event) => {
+    const imageData = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", imageData);
+
+
+    fetch(`${serverUrl}/singleImageUpload`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Data: ", data)
+        if (data.status === "success") {
+          console.log("Response:", data)
+          setImageList((prevState) => [...prevState, data?.url]);
+        }
+      })
+
+  };
+
+
+  const handleRemoveImage = (index) => {
+    setImageList((prevState) => {
+      const updatedImageList = [...prevState];
+      updatedImageList.splice(index, 1);
+      return updatedImageList;
+    });
+  };
+
+
+
+
+
+
+
+
   const {
     register,
     handleSubmit,
@@ -48,51 +104,36 @@ const UpdateProductModal = ({
   } = useForm();
   const handleUpdateProduct = (data) => {
     console.log(data, "updated product");
-    // if (updateDescription.length < 15) {
-    //   return Swal.fire(
-    //     "Oops!",
-    //     "Description must need at least 10 characters",
-    //     "error"
-    //   );
-    // }
-    // if (updateDescriptionGerman.length < 15) {
-    //   return Swal.fire(
-    //     "Oops!",
-    //     "Description must need at least 10 characters",
-    //     "error"
-    //   );
-    // }
 
-    // if (updateShipping.length < 15) {
-    //   return Swal.fire(
-    //     "Oops!",
-    //     "Shipping must need at least 10 characters",
-    //     "error"
-    //   );
-    // }
-    // if (updateShippingGerman.length < 15) {
-    //   return Swal.fire(
-    //     "Oops!",
-    //     "Shipping must need at least 10 characters",
-    //     "error"
-    //   );
-    // }
-    // if (!images.length) {
-    //   return Swal.fire("Oops!", "Images must need", "error");
-    // }
     const productData = {
-      ...data,
-      updateDescription,
-      updateDescriptionGerman,
-      updateShipping,
-      updateShippingGerman,
-      updateColors,
-      updateSizes,
-      // images: images,
+      productTitle: data?.productTitle || updatedProduct?.productTitle,
+
+      productTitleGerman: data?.productTitleGerman || updatedProduct?.productTitleGerman,
+
+      productPrice: data?.productPrice || updatedProduct?.productPrice,
+
+      previousPrice: data?.previousPrice || updatedProduct?.previousPrice,
+      totalProduct: data?.totalProduct || updatedProduct?.totalProduct,
+      model: data?.model || updatedProduct?.model,
+
+      description: updateDescription || updatedProduct?.description,
+
+      descriptionGerman: updateDescriptionGerman || updatedProduct?.descriptionGerman,
+
+      shipping: updateShipping || updatedProduct?.shipping,
+
+      shippingGerman: updateShippingGerman || updatedProduct?.shippingGerman,
+
+      colors: updateColors || updatedProduct?.colors,
+
+      sizes: updateSizes || updatedProduct?.sizes,
+
+      images: imageList || updatedProduct?.images,
     };
+    console.log(productData);
     UpdatedApi(
-      `product/${updatedProduct?._id}`,
-      setSelectUpdatedProduct,
+      `productPatch/${updatedProduct?._id}`,
+      setProducts,
       productData
     );
     setOpenUpdateModal(false);
@@ -126,7 +167,7 @@ const UpdateProductModal = ({
                           </span>
                           <input
                             type="text"
-                            {...register("productTitle", { required: true })}
+                            {...register("productTitle", { required: false })}
                             defaultValue={updatedProduct?.productTitle}
                             className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
                             placeholder="Product title"
@@ -145,7 +186,7 @@ const UpdateProductModal = ({
                           <input
                             type="text"
                             {...register("productTitleGerman", {
-                              required: true,
+                              required: false,
                             })}
                             defaultValue={updatedProduct?.productTitleGerman}
                             className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
@@ -163,7 +204,7 @@ const UpdateProductModal = ({
                           </span>
                           <input
                             type="number"
-                            {...register("productPrice", { required: true })}
+                            {...register("productPrice", { required: false })}
                             defaultValue={updatedProduct?.productPrice}
                             className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
                             placeholder="price"
@@ -198,6 +239,7 @@ const UpdateProductModal = ({
                             type="text"
                             {...register("model")}
                             className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block w-full rounded-md sm:text-sm "
+                            defaultValue={updatedProduct?.model}
                             placeholder="model name"
                           />
                         </label>
@@ -261,14 +303,14 @@ const UpdateProductModal = ({
                             Add Category
                           </label>
                           <select
-                            {...register("category", { required: true })}
+                            {...register("category", { required: false })}
                             defaultValue={updatedProduct?.category}
                             className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
                           >
                             {categories?.map((categoryProduct) => (
                               <>
-                                <option value={categoryProduct.categoryTitle}>
-                                  {categoryProduct.categoryTitle}
+                                <option value={categoryProduct?.categoryTitle} selected={categoryProduct?.categoryTitle === updatedProduct?.category}>
+                                  {categoryProduct?.categoryTitle}
                                 </option>
                               </>
                             ))}
@@ -312,12 +354,13 @@ const UpdateProductModal = ({
                             <h1 className="text-lg font-medium">
                               Image preview :{" "}
                             </h1>
-                            <div className="flex gap-2">
-                              {/* {images?.map((image, index) => (
-                              <div key={index}>
-                                <img src={image} alt="" className="w-24 h-24" />
-                              </div>
-                            ))} */}
+                            <div className="flex gap-3 relative" >
+                              {imageList?.map((image, index) => (
+                                <div key={index} className='relative'>
+                                  <img src={image} alt="" className="w-24 h-24" />
+                                  <p onClick={() => handleRemoveImage(index)} className='text-red-500 text-xl font-semibold rounded-full p-2 -top-3 -right-2 absolute'>x</p>
+                                </div>
+                              ))}
                             </div>
                           </div>
 
@@ -327,11 +370,10 @@ const UpdateProductModal = ({
                           <div className="flex flex-col w-full">
                             <input
                               type="file"
-                              // onChange={handleImage}
+                              onChange={handleImage}
                               accept="image/*"
-                              multiple
-                              // defaultValue={user?.email}
 
+                              // defaultValue={user?.email}
                               className="mt-2 w-full px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block  rounded-md sm:text-sm "
                               placeholder="category title"
                             />
