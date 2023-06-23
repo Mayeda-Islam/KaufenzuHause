@@ -8,6 +8,7 @@ import UpdatedApi from "../../APIHooks/UpdatedItem";
 import { Context } from "../../ContextProvider/ContextProvider";
 import moment from "moment";
 import serverUrl from "../../config/Config";
+import { Link } from "react-router-dom";
 
 const ProductReviews = ({ product, setProduct }) => {
   const { user } = useContext(Context);
@@ -96,55 +97,63 @@ const ProductReviews = ({ product, setProduct }) => {
           <h3 className="text-xl  text-textColor font-semibold">All Reviews</h3>
         </div>
         <div className="mx-2 border-b border-blue-500 shadow-md px-5 py-4 rounded-md  mb-4">
-          {product?.reviews?.map((review, index) => {
-            const { email, text, createdAt } = review;
-            const userInformation = userMap[email];
-            return (
-              <div
-                key={index}
-                className="m-4 flex  md:flex-row md:space-x-6 justify-between "
-              >
-                <div className="flex justify-center">
-                  <img
-                    className="object-cover w-20 lg:w-16 lg:h-16 rounded-full bg-gray-500"
-                    src={
-                      userInformation?.image ||
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXnHCfhPKKAy1zSl8__FmI1hsMmSR-MVgh5IcfD_-43Q&s"
-                    }
-                    alt="profile img"
-                  />
-                  <div className="flex  justify-between ml-4">
-                    <div className="flex flex-col my-4 md:my-0">
-                      <div className="flex flex-col ">
-                        <h4 className="font-bold">
-                          {userInformation?.name || "Anonymous"}
-                        </h4>
-                        <span className="text-xs text-gray-400">
-                          {moment().diff(createdAt, "days") === 0
-                            ? "Today"
-                            : `${moment().diff(createdAt, "days")} days age`}
-                        </span>
-                      </div>
+          {product?.reviews?.length > 0 ?
 
-                      <div className="hidden md:block lg:block mt-3">
-                        <p className="text-sm text-gray-600">{text}</p>
+            product?.reviews?.map((review, index) => {
+              const { email, text, createdAt } = review;
+              const userInformation = userMap[email];
+              return (
+                <div
+                  key={index}
+                  className="m-4 flex  md:flex-row md:space-x-6 justify-between "
+                >
+                  <div className="flex justify-center">
+                    <img
+                      className="object-cover w-20 lg:w-16 lg:h-16 rounded-full bg-gray-500"
+                      src={
+                        userInformation?.image ||
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXnHCfhPKKAy1zSl8__FmI1hsMmSR-MVgh5IcfD_-43Q&s"
+                      }
+                      alt="profile img"
+                    />
+                    <div className="flex  justify-between ml-4">
+                      <div className="flex flex-col my-4 md:my-0">
+                        <div className="flex flex-col ">
+                          <h4 className="font-bold">
+                            {userInformation?.name || "Anonymous"}
+                          </h4>
+                          <span className="text-xs text-gray-400">
+                            {moment().diff(createdAt, "days") === 0
+                              ? "Today"
+                              : `${moment().diff(createdAt, "days")} days age`}
+                          </span>
+                        </div>
+
+                        <div className="hidden md:block lg:block mt-3">
+                          <p className="text-sm text-gray-600">{text}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {email === user?.email && (
-                  <div className="flex justify-around">
-                    <span className="cursor-pointer text-lg text-red-500">
-                      <RiDeleteBin6Line
-                        onClick={() => deleteReview(product?._id, index)}
-                      />
-                    </span>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+                  {email === user?.email && (
+                    <div className="flex justify-around">
+                      <span className="cursor-pointer text-lg text-red-500">
+                        <RiDeleteBin6Line
+                          onClick={() => deleteReview(product?._id, index)}
+                        />
+                      </span>
+                    </div>
+                  )}
+                </div>
+              );
+            })
+            :
+            <span>
+              <p className="my-10 text-center font-semibold text-lg">No Review Yet</p>
+            </span>
+          }
+
 
           <div className="block md:hidden lg:hidden mt-3">
             <p className="text-sm text-gray-600">
@@ -154,6 +163,8 @@ const ProductReviews = ({ product, setProduct }) => {
             </p>
           </div>
         </div>
+        :
+
       </div>
       <div className="w-full sm:w-full lg:w-6/12">
         <div className="mx-4  border-0 rounded-md sm:w-[95%]  lg:w-[97%] bg-white outline-none focus:outline-none">
@@ -163,29 +174,39 @@ const ProductReviews = ({ product, setProduct }) => {
             </h3>
           </div>
           {/*body*/}
-          <div className=" px-6 py-8   w-full shadow-sm shadow-gray-200 border border-gray-200 rounded-md">
-            <form onSubmit={submitReview}>
-              <div className="mb-3">
-                <label className="block mb-2 text-sm font-medium text-gray-900 ">
-                  Your Review
-                </label>
-                <textarea
-                  rows="4"
-                  className=" mb-5 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-lightGray"
-                  value={reviewText}
-                  onChange={(e) => setReviewText(e.target.value)}
-                  placeholder="Write your Review here..."
-                  required
-                ></textarea>
-              </div>
-              <input
-                value="Submit"
-                type="submit"
-                className=" my-2 px-4 md:px-8 py-2 md:text-lg font-medium text-white bg-primary hover:bg-secondary rounded-lg  
+
+          {
+            user?.email ?
+              <div className=" px-6 py-8   w-full shadow-sm shadow-gray-200 border border-gray-200 rounded-md">
+                <form onSubmit={submitReview}>
+                  <div className="mb-3">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                      Your Review
+                    </label>
+                    <textarea
+                      rows="4"
+                      className=" mb-5 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-lightGray"
+                      value={reviewText}
+                      onChange={(e) => setReviewText(e.target.value)}
+                      placeholder="Write your Review here..."
+                      required
+                    ></textarea>
+                  </div>
+                  <input
+                    value="Submit"
+                    type="submit"
+                    className=" my-2 px-4 md:px-8 py-2 md:text-lg font-medium text-white bg-primary hover:bg-secondary rounded-lg  
                                flex items-center"
-              />
-            </form>
-          </div>
+                  />
+                </form>
+              </div>
+              :
+              <div>
+                <p>
+                  Please <Link to={'/login'} className="text-blue-500 font-medium underline">Login</Link> to give a review.
+                </p>
+              </div>
+          }
         </div>
       </div>
     </div>

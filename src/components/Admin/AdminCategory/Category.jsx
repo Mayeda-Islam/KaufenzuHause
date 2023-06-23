@@ -16,17 +16,35 @@ const Category = () => {
   return (
     <div className="w-full lg:w-5/6 mx-auto lg:mt-12">
 
-      <div className="m-4">
-        <h2 className="text-xl lg:text-2xl  font-medium text-textColor my-5 border-l-2 border-[#55c3c1f7] pl-4">
-          Add Category Here
-        </h2>
+      <div className="m-4 flex items-center flex-col lg: lg:flex-row justify-between">
         <div>
-          <button
-            onClick={() => setOpen(true)}
-            className="px-10 py-2 bg-[#55c3c1f7] text-white rounded-full"
-          >
-            Add Category
-          </button>
+          <h2 className="text-xl lg:text-2xl  font-medium text-textColor my-5 border-l-2 border-[#55c3c1f7] pl-4">
+            Add Category Here
+          </h2>
+          <div className="">
+            <button
+              onClick={() => setOpen(true)}
+              className="px-10 py-2 bg-[#55c3c1f7] text-white rounded-full"
+            >
+              Add Category
+            </button>
+
+          </div>
+        </div>
+        <div>
+          <h1 className="text-xl font-semibold"> Must Category</h1>
+          <div>
+
+            <p>Headphone, Headphone Accessories</p>
+            <hr />
+            <p>Watch, Smart Watch</p>
+            <hr />
+            <p>Electronics , Mobile Accessories</p>
+            <hr />
+            <p>Shirts ,Pants, Shoes, Wallet</p>
+            <hr />
+
+          </div>
         </div>
       </div>
       <AddCategory setCategories={setCategories}></AddCategory>

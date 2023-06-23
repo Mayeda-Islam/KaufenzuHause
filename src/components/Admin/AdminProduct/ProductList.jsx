@@ -101,6 +101,7 @@ const ProductList = ({ products, setProducts }) => {
           setOpenUpdateModal={setOpenUpdateModal}
           openUpdateModal={openUpdateModal}
           updatedProduct={updatedProduct}
+          setProducts={setProducts}
         ></UpdateProductModal>
       </div>
     </div>
