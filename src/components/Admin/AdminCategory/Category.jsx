@@ -41,7 +41,7 @@ const Category = () => {
             <hr />
             <p>Electronics , Mobile Accessories</p>
             <hr />
-            <p>Shirts ,Pants, Shoes, Wallet</p>
+            <p>Shirt ,Pant, Shoes, Wallet</p>
             <hr />
 
           </div>

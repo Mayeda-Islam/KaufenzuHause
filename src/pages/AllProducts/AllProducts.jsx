@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import SingleProduct from "../../Shared/SingleProduct/SingleProduct";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -6,12 +6,15 @@ import { useLocation } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
 import RangeSlider from "../../Shared/RangeSlider/RangeSlider";
 import CategoryFilter from "../../Shared/CategoryFilter/CategoryFilter";
-import BrandFilter from "../../Shared/BrandFilter/BrandFilter";
+// import BrandFilter from "../../Shared/BrandFilter/BrandFilter";
 import { TbFilter } from "react-icons/tb";
 import { useRef } from "react";
 import serverUrl from "../../config/Config";
+import { Context } from "../../ContextProvider/ContextProvider";
+import { Box, CircularProgress } from "@mui/material";
 
 const AllProducts = () => {
+  const { products, isLoading } = useContext(Context)
   const navWrapper = useRef();
   //state for filter nav
   const [isOpen, setIsOpen] = React.useState(false);
@@ -83,9 +86,8 @@ const AllProducts = () => {
         <div className="flex items-center justify-center lg:hidden mb-5 relative">
           <div
             ref={navWrapper}
-            className={`side_nav shadow-lg shadow-gray-300 ${
-              isOpen == true ? "active" : ""
-            }`}
+            className={`side_nav shadow-lg shadow-gray-300 ${isOpen == true ? "active" : ""
+              }`}
           >
             <button className="close_btn " onClick={handleToggle}>
               <AiFillCloseCircle />
@@ -113,17 +115,20 @@ const AllProducts = () => {
                 <hr className="my-5 border0.5 border-gray-300" />
 
                 {/* Brand filter */}
-                <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
+                {/* <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
                   {" "}
                   Filter by Brands
                 </h2>
-                <BrandFilter />
+                <BrandFilter /> */}
 
                 {/* <hr className="my-5 border0.5 border-gray-300" /> */}
               </div>
             </div>
           </div>
         </div>
+
+
+
 
         {/* left and right content */}
         <div className="flex justify-center flex-wrap">
@@ -142,16 +147,18 @@ const AllProducts = () => {
                 {" "}
                 Filter by Category
               </h2>
-              <CategoryFilter />
+              <CategoryFilter
+                setProductData={setProductData}
+                products={allProductData} />
 
               <hr className="my-5 border0.5 border-gray-300" />
 
               {/* Brand filter */}
-              <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
+              {/* <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
                 {" "}
                 Filter by Brands
               </h2>
-              <BrandFilter />
+              <BrandFilter /> */}
 
               {/* <hr className="my-5 border0.5 border-gray-300" /> */}
             </div>
@@ -176,11 +183,33 @@ const AllProducts = () => {
             </div>
 
             {/* product cards */}
-            <div className="grid md:grid-cols-3 lg:grid-cols-4">
-              {productData?.map((product) => (
-                <SingleProduct product={product} key={product?._id} />
-              ))}
-            </div>
+            {
+              !isLoading ?
+                <>
+                  {
+                    products?.length > 0 ?
+                      <div className="grid md:grid-cols-3 lg:grid-cols-4">
+                        {products?.map((product) => (
+                          <SingleProduct product={product} key={product?._id} />
+                        ))}
+                      </div>
+                      :
+                      <div className="my-32  justify-center items-center flex">
+                        <p className="text-lg font-semibold text-center">No Products Available</p>
+                      </div>
+                  }
+                </>
+                :
+                <>
+                  <div className="text-center h-screen flex justify-center items-center">
+                    <Box sx={{ display: 'flex' }}>
+                      <CircularProgress />
+                    </Box>
+
+                  </div>
+                </>
+            }
+
           </div>
         </div>
       </div>
