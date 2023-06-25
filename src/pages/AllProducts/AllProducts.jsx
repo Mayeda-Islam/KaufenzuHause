@@ -14,7 +14,7 @@ import { Context } from "../../ContextProvider/ContextProvider";
 import { Box, CircularProgress } from "@mui/material";
 
 const AllProducts = () => {
-  const { products, isLoading } = useContext(Context)
+  const { products, isLoading } = useContext(Context);
   const navWrapper = useRef();
   //state for filter nav
   const [isOpen, setIsOpen] = React.useState(false);
@@ -56,8 +56,6 @@ const AllProducts = () => {
         if (result?.status == "success") {
           setProductData(result?.data);
           setAllProductData(result?.data);
-
-          console.log("ALLLLLLLLLLLLLLL", result?.data);
         }
       });
   }, []);
@@ -86,8 +84,9 @@ const AllProducts = () => {
         <div className="flex items-center justify-center lg:hidden mb-5 relative">
           <div
             ref={navWrapper}
-            className={`side_nav shadow-lg shadow-gray-300 ${isOpen == true ? "active" : ""
-              }`}
+            className={`side_nav shadow-lg shadow-gray-300 ${
+              isOpen == true ? "active" : ""
+            }`}
           >
             <button className="close_btn " onClick={handleToggle}>
               <AiFillCloseCircle />
@@ -105,11 +104,11 @@ const AllProducts = () => {
                 {/* category filter */}
                 <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
                   {" "}
-                  Filter by Category
+                  Filter by Category 1
                 </h2>
                 <CategoryFilter
-                  setProductData={setProductData}
-                  products={allProductData}
+                  products={productData}
+                  setProducts={setProductData}
                 />
 
                 <hr className="my-5 border0.5 border-gray-300" />
@@ -127,9 +126,6 @@ const AllProducts = () => {
           </div>
         </div>
 
-
-
-
         {/* left and right content */}
         <div className="flex justify-center flex-wrap">
           <div className="w-3/12 hidden md:hidden lg:block">
@@ -145,11 +141,12 @@ const AllProducts = () => {
               {/* category filter */}
               <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
                 {" "}
-                Filter by Category
+                Filter by Category 2
               </h2>
               <CategoryFilter
-                setProductData={setProductData}
-                products={allProductData} />
+                products={productData}
+                setProducts={setProductData}
+              />
 
               <hr className="my-5 border0.5 border-gray-300" />
 
@@ -183,33 +180,31 @@ const AllProducts = () => {
             </div>
 
             {/* product cards */}
-            {
-              !isLoading ?
-                <>
-                  {
-                    products?.length > 0 ?
-                      <div className="grid md:grid-cols-3 lg:grid-cols-4">
-                        {products?.map((product) => (
-                          <SingleProduct product={product} key={product?._id} />
-                        ))}
-                      </div>
-                      :
-                      <div className="my-32  justify-center items-center flex">
-                        <p className="text-lg font-semibold text-center">No Products Available</p>
-                      </div>
-                  }
-                </>
-                :
-                <>
-                  <div className="text-center h-screen flex justify-center items-center">
-                    <Box sx={{ display: 'flex' }}>
-                      <CircularProgress />
-                    </Box>
-
+            {!isLoading ? (
+              <>
+                {products?.length > 0 ? (
+                  <div className="grid md:grid-cols-3 lg:grid-cols-4">
+                    {products?.map((product) => (
+                      <SingleProduct product={product} key={product?._id} />
+                    ))}
                   </div>
-                </>
-            }
-
+                ) : (
+                  <div className="my-32  justify-center items-center flex">
+                    <p className="text-lg font-semibold text-center">
+                      No Products Available
+                    </p>
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <div className="text-center h-screen flex justify-center items-center">
+                  <Box sx={{ display: "flex" }}>
+                    <CircularProgress />
+                  </Box>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -11,31 +11,31 @@ const ContextProvider = ({ children }) => {
   const [verified, setVerified] = useState(false);
   const [user, setUser] = useState(null);
   const [hasUser, setHasUser] = useState(null);
-  const [allProducts, setAllProducts] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [allProductsForSearch, setAllProductsForSearch] = useState([]);
+  const [productsForSearch, setProductsForSearch] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     fetch(`${serverUrl}/products`)
       .then((response) => response.json())
       .then((result) => {
         if (result?.status == "success") {
-          setAllProducts(result?.data);
-          setProducts(result?.data);
-          setIsLoading(false)
+          setAllProductsForSearch(result?.data);
+          setProductsForSearch(result?.data);
+          setIsLoading(false);
         }
       });
   }, []);
 
   const handleSearch = (_searchInput) => {
-    setIsLoading(true)
-    setProducts(
-      allProducts?.filter((item) =>
+    setIsLoading(true);
+    setProductsForSearch(
+      allProductsForSearch?.filter((item) =>
         item?.productTitle.toLowerCase().includes(_searchInput.toLowerCase())
       )
     );
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -159,6 +159,7 @@ const ContextProvider = ({ children }) => {
       localStorage.setItem("language", JSON.stringify(language));
     }
   }, [language]);
+
   useEffect(() => {
     const currentLanguage = localStorage.getItem("language");
     if (currentLanguage) {
@@ -186,8 +187,8 @@ const ContextProvider = ({ children }) => {
     verified,
     language,
     handleSearch,
-    products,
-    isLoading
+    productsForSearch,
+    isLoading,
   };
   return <Context.Provider value={context}>{children}</Context.Provider>;
 };

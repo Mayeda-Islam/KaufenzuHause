@@ -42,35 +42,50 @@ const CategorisedProducts = () => {
   }, [isOpen]);
 
   const [category, setCategory] = useState({});
+  const [filterInputs, setFilterInputs] = useState([]);
+  const [allProductData, setAllProductData] = useState([]);
+
   const [productData, setProductData] = useState([]);
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     GetAPI(`categories/${id}`, setCategory);
   }, [id]);
 
   useEffect(() => {
-    setLoading(true)
-    GetAPI(`product/${category?.categoryTitle}`, setProductData);
-    setLoading(false)
+    setLoading(true);
+    GetAPI(`product/${category?.categoryTitle}`, setAllProductData);
+    setLoading(false);
   }, [category?.categoryTitle]);
-
-  const location = useLocation();
-  useEffect(() => {
-    const text = location.state?.searchState;
-    if (text) {
-      const filteredProducts = productData.filter((prod) =>
-        prod.categoryName?.toLowerCase().includes(text?.toLowerCase())
-      );
-      setProductData(filteredProducts);
-    } else {
-      setProductData(productData);
-    }
-  }, [productData, location.state?.searchState]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleFilterProducts = (_value) => {
+    if (filterInputs.includes(_value)) {
+      const filterResult = filterInputs.filter((data) => data !== _value);
+      setFilterInputs(filterResult);
+    } else {
+      setFilterInputs([...filterInputs, _value]);
+    }
+  };
+
+  useEffect(() => {
+    setProductData(allProductData);
+  }, [allProductData]);
+
+  useEffect(() => {
+    if (filterInputs.length > 0) {
+      const filterResult = allProductData.filter((data) =>
+        filterInputs.includes(data.category)
+      );
+      setProductData(filterResult);
+    } else {
+      setProductData(allProductData);
+    }
+  }, [filterInputs]);
 
   return (
     <section className="pt-6 lg:pt-10 pb-14 bg-[#f7f7f7] relative">
@@ -79,8 +94,9 @@ const CategorisedProducts = () => {
         <div className="flex items-center justify-center lg:hidden mb-5 relative">
           <div
             ref={navWrapper}
-            className={`side_nav shadow-lg shadow-gray-300 ${isOpen == true ? "active" : ""
-              }`}
+            className={`side_nav shadow-lg shadow-gray-300 ${
+              isOpen == true ? "active" : ""
+            }`}
           >
             <button className="close_btn " onClick={handleToggle}>
               <AiFillCloseCircle />
@@ -98,9 +114,12 @@ const CategorisedProducts = () => {
                 {/* category filter */}
                 <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
                   {" "}
-                  Filter by Category
+                  Filter by Category 3
                 </h2>
-                <CategoryFilter />
+                <CategoryFilter
+                  filterInputs={filterInputs}
+                  handleFilterProducts={handleFilterProducts}
+                />
 
                 <hr className="my-5 border0.5 border-gray-300" />
 
@@ -125,9 +144,12 @@ const CategorisedProducts = () => {
               {/* category filter */}
               <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
                 {" "}
-                Filter by Category
+                Filter by Category 4
               </h2>
-              <CategoryFilter />
+              <CategoryFilter
+                filterInputs={filterInputs}
+                handleFilterProducts={handleFilterProducts}
+              />
 
               <hr className="my-5 border0.5 border-gray-300" />
 
@@ -161,36 +183,33 @@ const CategorisedProducts = () => {
             </div>
 
             {/* product cards */}
-            <div className="grid md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid md:grid-cols-3 lg:grid-cols-4"></div>
 
-            </div>
-
-            {
-              !loading ?
-                <>
-                  {
-                    productData?.length > 0 ?
-                      <div className="grid md:grid-cols-3 lg:grid-cols-4">
-                        {productData?.map((product) => (
-                          <SingleProduct product={product} key={product?._id} />
-                        ))}
-                      </div>
-                      :
-                      <div className="my-32  justify-center items-center flex">
-                        <p className="text-lg font-semibold text-center">No Products Available</p>
-                      </div>
-                  }
-                </>
-                :
-                <>
-                  <div className="text-center h-screen flex justify-center items-center">
-                    <Box sx={{ display: 'flex' }}>
-                      <CircularProgress />
-                    </Box>
-
+            {!loading ? (
+              <>
+                {productData?.length > 0 ? (
+                  <div className="grid md:grid-cols-3 lg:grid-cols-4">
+                    {productData?.map((product) => (
+                      <SingleProduct product={product} key={product?._id} />
+                    ))}
                   </div>
-                </>
-            }
+                ) : (
+                  <div className="my-32  justify-center items-center flex">
+                    <p className="text-lg font-semibold text-center">
+                      No Products Available
+                    </p>
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <div className="text-center h-screen flex justify-center items-center">
+                  <Box sx={{ display: "flex" }}>
+                    <CircularProgress />
+                  </Box>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
