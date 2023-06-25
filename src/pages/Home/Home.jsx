@@ -32,10 +32,10 @@ const Home = () => {
   );
 
   const lifeStyles = products?.filter(
-    (data) => data?.category === ("Shirts" || "Pants" || "Shoes" || "Wallet")
+    (data) => data?.category === ("Shirt" || "Pant" || "Shoes" || "Wallet")
   );
   const lifeStylesSlider = categoriesSlider?.filter(
-    (data) => data?.category === ("Shirts" || "Pants" || "Shoes" || "Wallet")
+    (data) => data?.category === ("Shirt" || "Pant" || "Shoes" || "Wallet")
   );
   console.log(lifeStyles, "from category product");
   useEffect(() => {

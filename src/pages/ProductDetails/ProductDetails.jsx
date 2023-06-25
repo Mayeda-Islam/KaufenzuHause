@@ -22,9 +22,11 @@ const ProductDetails = () => {
     GetAPI(`product/${product?.category}`, setProducts);
   }, [product]);
 
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <>
       {/* product thumbnail slider section */}

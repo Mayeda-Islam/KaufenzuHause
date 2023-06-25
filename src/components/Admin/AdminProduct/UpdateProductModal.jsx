@@ -117,7 +117,7 @@ const UpdateProductModal = ({
       model: data?.model || updatedProduct?.model,
 
       description: updateDescription || updatedProduct?.description,
-
+      category: data?.category || updatedProduct?.category,
       descriptionGerman: updateDescriptionGerman || updatedProduct?.descriptionGerman,
 
       shipping: updateShipping || updatedProduct?.shipping,
