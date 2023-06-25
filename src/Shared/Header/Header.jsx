@@ -202,10 +202,7 @@ const Header = () => {
               placeholder="Search for products, brands and more..."
               required
             />
-            <button
-              type="submit"
-              className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-[#7ED957] rounded-r-lg  hover:bg-[#7ed9579a]"
-            >
+            <button className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-[#7ED957] rounded-r-lg  hover:bg-[#7ed9579a]">
               <svg
                 aria-hidden="true"
                 className="w-5 h-5"

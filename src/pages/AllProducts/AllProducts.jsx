@@ -144,7 +144,6 @@ const AllProducts = () => {
               <RangeSlider
                 priceRange={priceRange}
                 setPriceRange={setPriceRange}
-                handlePriceRange={handlePriceRange}
               />
               <hr className="my-5 border0.5 border-gray-300" />
 
