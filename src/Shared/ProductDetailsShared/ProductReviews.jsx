@@ -1,8 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import userImage from "../../images/user-images/2.jpg";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { ImReply } from "react-icons/im";
-import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import UpdatedApi from "../../APIHooks/UpdatedItem";
 import { Context } from "../../ContextProvider/ContextProvider";
@@ -12,11 +9,6 @@ import { Link } from "react-router-dom";
 
 const ProductReviews = ({ product, setProduct }) => {
   const { user } = useContext(Context);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
   const [reviewText, setReviewText] = useState("");
   const [userMap, setUserMap] = useState({});
