@@ -34,6 +34,14 @@ const Header = () => {
     productsForSearch,
   } = useContext(Context);
 
+  const [currentUser, setCurrentUser] = useState({})
+
+  useEffect(() => {
+    GetAPI(`users/${user?.email}`, setCurrentUser)
+  }, [user?.email, setCurrentUser])
+
+  console.log(products);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
   const [anchorE3, setAnchorE3] = React.useState(null);
@@ -224,8 +232,10 @@ const Header = () => {
         </div>
 
         {/* search Result start */}
-        {searchValue?.length > 0 && (
-          <div className="absolute top-16 left-[24.5%] w-[600px] mx-auto z-10">
+
+        {
+          searchValue?.length > 0 &&
+          <div className="absolute top-16 border-4 lg:left-[18.5%] xl:left-[24.5%] xxl:left-[32%] xxxl:left-[35.3%] w-[600px] mx-auto z-10">
             <ul className="flex flex-col pt-2 space-y-2 bg-white text-gray-900 rounded">
               {productsForSearch?.length > 0 ? (
                 productsForSearch?.map((product, index) => (
@@ -644,13 +654,22 @@ const Header = () => {
             </span>
 
             {/* user dropdown */}
-            <div>
+            <div className="flex items-center">
               <button aria-describedby={id} onClick={handleClickUser}>
-                <img
-                  src={userImg}
-                  className="w-[50px] h-[50px] rounded-full"
-                  alt=""
-                />
+
+                {
+                  currentUser?.image ?
+                    <img src={currentUser?.image} alt="" className=" w-10 h-10 border-2 border-[#f5f8ff] mx-auto" /> :
+                    <img
+                      className="rounded-full w-10 h-10 border-2 border-[#f5f8ff] mx-auto"
+                      src={
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXnHCfhPKKAy1zSl8__FmI1hsMmSR-MVgh5IcfD_-43Q&s"
+                      }
+                      alt="This is profile pic"
+                    />
+                }
+
+
               </button>
               <Popover
                 id={id}
@@ -663,7 +682,7 @@ const Header = () => {
                 }}
               >
                 <Typography>
-                  <ul className="p-0 m-0">
+                  <ul className="p-0 m-0 ">
                     {(hasUser || user?.email) && verified ? (
                       <>
                         {user?.role === "admin" ? (
@@ -744,6 +763,7 @@ const Header = () => {
           {searchValue?.length > 0 && (
             <div className="absolute top-[27%] left-[0%] p-2.5 w-full mx-auto z-10">
               <ul className="flex flex-col pt-2 space-y-2 bg-white text-gray-900 rounded">
+
                 {productsForSearch?.length > 0 &&
                   productsForSearch?.map((product, index) => (
                     <li
@@ -755,6 +775,7 @@ const Header = () => {
                         onClick={() => handleData("")}
                         className="grid grid-cols-12"
                       >
+
                         <div className="flex items-center justify-center col-span-2">
                           <img
                             src={`${product?.images[0]}`}
@@ -782,11 +803,19 @@ const Header = () => {
                           </p>
                         </div>
                       </Link>
-                    </li>
-                  ))}
+                    </li> )
+                  :
+                  <>
+                    <div className="my-2  justify-center items-center flex">
+                      <p className="text-lg font-semibold text-center">No Products Available</p>
+                    </div>
+                  </>
+                }
+
               </ul>
             </div>
-          )}
+
+          }
         </form>
       </nav>
     </header>

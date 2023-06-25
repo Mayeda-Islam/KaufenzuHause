@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import Jodit from "../../../Shared/JodIt/Jodit";
-import ColorAndSizeOptions from "../../../Shared/ColorAndSizeOptions/ColorAndSizeOptions";
 
 import serverUrl from "../../../config/Config";
 import Swal from "sweetalert2";
 import MultiImagesUpload from "../../../APIHooks/MultipleImagesUpload";
 import { useNavigate } from "react-router";
 import GetAPI from "../../../APIHooks/GetAPI";
+import AddColorAndSize from "../../../Shared/ColorAndSizeOptions/AddColorAndSize";
 // import { color } from "jodit/types/plugins/color/color";
 
 const AddProduct = () => {
@@ -218,18 +218,18 @@ const AddProduct = () => {
         </div>
         <div className="my-4">
           <span className="my-2 block text-sm font-medium">Sizes</span>
-          <ColorAndSizeOptions
+          <AddColorAndSize
             productsOptions={availableSizes}
             setState={setSizes}
-          ></ColorAndSizeOptions>
+          ></AddColorAndSize>
         </div>
         <div className="my-4">
           <span className="my-2 block text-sm font-medium">Colors</span>
-          <ColorAndSizeOptions
+          <AddColorAndSize
             productsOptions={availableColors}
             setState={setColors}
             state={colors}
-          ></ColorAndSizeOptions>
+          ></AddColorAndSize>
         </div>
         <div className=" mt-4">
           <label className="block ">
