@@ -44,7 +44,6 @@ const CategorisedProducts = () => {
   const [category, setCategory] = useState({});
   const [filterInputs, setFilterInputs] = useState([]);
   const [allProductData, setAllProductData] = useState([]);
-
   const [productData, setProductData] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -56,7 +55,6 @@ const CategorisedProducts = () => {
   useEffect(() => {
     setLoading(true);
     GetAPI(`product/${category?.categoryTitle}`, setAllProductData);
-    setLoading(false);
   }, [category?.categoryTitle]);
 
   useEffect(() => {
@@ -74,6 +72,7 @@ const CategorisedProducts = () => {
 
   useEffect(() => {
     setProductData(allProductData);
+    setLoading(false);
   }, [allProductData]);
 
   useEffect(() => {
@@ -84,6 +83,7 @@ const CategorisedProducts = () => {
       setProductData(filterResult);
     } else {
       setProductData(allProductData);
+      setLoading(false);
     }
   }, [filterInputs]);
 
@@ -114,7 +114,7 @@ const CategorisedProducts = () => {
                 {/* category filter */}
                 <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
                   {" "}
-                  Filter by Category 3
+                  Filter by Category
                 </h2>
                 <CategoryFilter
                   filterInputs={filterInputs}
@@ -144,7 +144,7 @@ const CategorisedProducts = () => {
               {/* category filter */}
               <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
                 {" "}
-                Filter by Category 4
+                Filter by Category
               </h2>
               <CategoryFilter
                 filterInputs={filterInputs}
