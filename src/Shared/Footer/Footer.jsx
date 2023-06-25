@@ -79,16 +79,7 @@ const Footer = () => {
                             About
                         </h2>
                         <ul className="text-gray-300 flex flex-col gap-y-2 text-sm font-normal capitalize mb-6">
-                            <li className="">
-                                <Link to={'aboutUs'} className="hover:underline">
-                                    About Us
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="" className="hover:underline">
-                                    Contact Us
-                                </Link>
-                            </li>
+
                             <li>
                                 <Link to="" className="hover:underline">
                                     Privacy Policy
@@ -111,16 +102,7 @@ const Footer = () => {
                             Help
                         </h2>
                         <ul className="text-gray-300 flex flex-col gap-y-2 text-sm font-normal capitalize mb-6">
-                            <li>
-                                <a to="" className="hover:underline">
-                                    Payment
-                                </a>
-                            </li>
-                            <li>
-                                <a to="" className="hover:underline">
-                                    Shiping
-                                </a>
-                            </li>
+                           
                             <li>
                                 <a to="" className="hover:underline">
                                     Return and Placement
@@ -130,7 +112,8 @@ const Footer = () => {
                                 <a to="" className="hover:underline">
                                     Chat with us
                                 </a>
-                            </li> <li>
+                            </li> 
+                            <li>
                                 <a to="" className="hover:underline">
                                     Our support
                                 </a>

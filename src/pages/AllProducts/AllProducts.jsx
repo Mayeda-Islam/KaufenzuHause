@@ -166,7 +166,7 @@ const AllProducts = () => {
           <div className="w-full md:w-full lg:w-9/12">
             {/* product sorting */}
 
-            <div className="flex items-center justify-between mx-2 mb-3">
+            {/* <div className="flex items-center justify-between mx-2 mb-3">
               <button
                 onClick={handleToggle}
                 className=" md:flex lg:invisible bg-white py-1.5 rounded-md px-4 text-textColor hover:text-white text-[16px] border border-textColor flex items-center gap-2 hover:bg-textColor hover:border-textColor"
@@ -180,7 +180,7 @@ const AllProducts = () => {
                 <option value="">Sort By: Price low to high</option>
                 <option value="">Sort By: Price low to high</option>
               </select>
-            </div>
+            </div> */}
 
             {/* product cards */}
             {
