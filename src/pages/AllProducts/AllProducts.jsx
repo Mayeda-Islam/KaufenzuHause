@@ -14,7 +14,7 @@ import { Context } from "../../ContextProvider/ContextProvider";
 import { Box, CircularProgress } from "@mui/material";
 
 const AllProducts = () => {
-  const { products, isLoading } = useContext(Context)
+  const { isLoading } = useContext(Context);
   const navWrapper = useRef();
   //state for filter nav
   const [isOpen, setIsOpen] = React.useState(false);
@@ -43,37 +43,50 @@ const AllProducts = () => {
 
     //return wrapper.current;
   }, [isOpen]);
-
-  const [productData, setProductData] = useState([]);
+  const [filterInputs, setFilterInputs] = useState([]);
   const [allProductData, setAllProductData] = useState([]);
-
-  console.log("productData", productData);
+  const [productData, setProductData] = useState([]);
+  const [priceRange, setPriceRange] = React.useState([0, 1000]);
 
   useEffect(() => {
     fetch(`${serverUrl}/products`)
       .then((response) => response.json())
       .then((result) => {
         if (result?.status == "success") {
-          setProductData(result?.data);
           setAllProductData(result?.data);
-
-          console.log("ALLLLLLLLLLLLLLL", result?.data);
         }
       });
   }, []);
 
-  const location = useLocation();
   useEffect(() => {
-    const text = location.state?.searchState;
-    if (text) {
-      const filteredProducts = productData.filter((prod) =>
-        prod.categoryTitle?.toLowerCase().includes(text?.toLowerCase())
-      );
-      setProductData(filteredProducts);
+    setProductData(allProductData);
+  }, [allProductData]);
+
+  const handleFilterProducts = (_value) => {
+    if (filterInputs.includes(_value)) {
+      const filterResult = filterInputs.filter((data) => data !== _value);
+      setFilterInputs(filterResult);
     } else {
-      setProductData(productData);
+      setFilterInputs([...filterInputs, _value]);
     }
-  }, [productData, location.state?.searchState]);
+  };
+
+  const handlePriceRange = (_min, _max) => {
+    console.log(_min, _max);
+  };
+
+  useEffect(() => {
+    if (filterInputs.length > 0 || priceRange[1] > 0) {
+      const filterResult = allProductData.filter(
+        (data) =>
+          (filterInputs.length === 0 || filterInputs.includes(data.category)) &&
+          (priceRange[1] === 0 ||
+            (data.productPrice >= priceRange[0] &&
+              data.productPrice <= priceRange[1]))
+      );
+      setProductData(filterResult);
+    }
+  }, [filterInputs, priceRange]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -86,8 +99,9 @@ const AllProducts = () => {
         <div className="flex items-center justify-center lg:hidden mb-5 relative">
           <div
             ref={navWrapper}
-            className={`side_nav shadow-lg shadow-gray-300 ${isOpen == true ? "active" : ""
-              }`}
+            className={`side_nav shadow-lg shadow-gray-300 ${
+              isOpen == true ? "active" : ""
+            }`}
           >
             <button className="close_btn " onClick={handleToggle}>
               <AiFillCloseCircle />
@@ -97,7 +111,7 @@ const AllProducts = () => {
                 {/* rangle slider */}
                 <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
                   {" "}
-                  Filter by price
+                  Filter by price 99
                 </h2>
                 <RangeSlider />
                 <hr className="my-5 border0.5 border-gray-300" />
@@ -108,27 +122,15 @@ const AllProducts = () => {
                   Filter by Category
                 </h2>
                 <CategoryFilter
-                  setProductData={setProductData}
-                  products={allProductData}
+                  filterInputs={filterInputs}
+                  handleFilterProducts={handleFilterProducts}
                 />
 
                 <hr className="my-5 border0.5 border-gray-300" />
-
-                {/* Brand filter */}
-                {/* <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
-                  {" "}
-                  Filter by Brands
-                </h2>
-                <BrandFilter /> */}
-
-                {/* <hr className="my-5 border0.5 border-gray-300" /> */}
               </div>
             </div>
           </div>
         </div>
-
-
-
 
         {/* left and right content */}
         <div className="flex justify-center flex-wrap">
@@ -137,9 +139,12 @@ const AllProducts = () => {
               {/* rangle slider */}
               <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
                 {" "}
-                Filter by price
+                Filter by price 777
               </h2>
-              <RangeSlider />
+              <RangeSlider
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+              />
               <hr className="my-5 border0.5 border-gray-300" />
 
               {/* category filter */}
@@ -148,19 +153,10 @@ const AllProducts = () => {
                 Filter by Category
               </h2>
               <CategoryFilter
-                setProductData={setProductData}
-                products={allProductData} />
-
+                filterInputs={filterInputs}
+                handleFilterProducts={handleFilterProducts}
+              />
               <hr className="my-5 border0.5 border-gray-300" />
-
-              {/* Brand filter */}
-              {/* <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
-                {" "}
-                Filter by Brands
-              </h2>
-              <BrandFilter /> */}
-
-              {/* <hr className="my-5 border0.5 border-gray-300" /> */}
             </div>
           </div>
           <div className="w-full md:w-full lg:w-9/12">
@@ -183,33 +179,31 @@ const AllProducts = () => {
             </div> */}
 
             {/* product cards */}
-            {
-              !isLoading ?
-                <>
-                  {
-                    products?.length > 0 ?
-                      <div className="grid md:grid-cols-3 lg:grid-cols-4">
-                        {products?.map((product) => (
-                          <SingleProduct product={product} key={product?._id} />
-                        ))}
-                      </div>
-                      :
-                      <div className="my-32  justify-center items-center flex">
-                        <p className="text-lg font-semibold text-center">No Products Available</p>
-                      </div>
-                  }
-                </>
-                :
-                <>
-                  <div className="text-center h-screen flex justify-center items-center">
-                    <Box sx={{ display: 'flex' }}>
-                      <CircularProgress />
-                    </Box>
-
+            {!isLoading ? (
+              <>
+                {productData?.length > 0 ? (
+                  <div className="grid md:grid-cols-3 lg:grid-cols-4">
+                    {productData?.map((product) => (
+                      <SingleProduct product={product} key={product?._id} />
+                    ))}
                   </div>
-                </>
-            }
-
+                ) : (
+                  <div className="my-32  justify-center items-center flex">
+                    <p className="text-lg font-semibold text-center">
+                      No Products Available
+                    </p>
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <div className="text-center h-screen flex justify-center items-center">
+                  <Box sx={{ display: "flex" }}>
+                    <CircularProgress />
+                  </Box>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
