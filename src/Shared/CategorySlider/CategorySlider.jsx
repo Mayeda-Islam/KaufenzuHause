@@ -9,7 +9,6 @@ import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper";
 
 const CategorySlider = ({ sliderImages }) => {
-  console.log(sliderImages);
   return (
     <>
       <Swiper
@@ -26,7 +25,11 @@ const CategorySlider = ({ sliderImages }) => {
       >
         {sliderImages?.map((sliderImage, i) => (
           <SwiperSlide key={i} className="my-2">
-            <img className="w-full lg:h-[760px] xxl:h-[760px] rounded-md object-cover" src={sliderImage?.imageURL} alt="slider image" />
+            <img
+              className="w-full lg:h-[760px] xxl:h-[760px] rounded-md object-cover"
+              src={sliderImage?.imageURL}
+              alt="slider image"
+            />
           </SwiperSlide>
         ))}
         {/* <SwiperSlide>

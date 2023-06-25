@@ -18,8 +18,21 @@ import { Context } from "../../ContextProvider/ContextProvider";
 import { Badge, Drawer } from "@mui/material";
 
 const Header = () => {
-  const { verified, setHasUser, hasUser, user, setUser, cart, removeFromCart, increment, decrement, calculateSubTotal, changeLanguage, language } =
-    useContext(Context);
+  const {
+    verified,
+    setHasUser,
+    hasUser,
+    user,
+    setUser,
+    cart,
+    removeFromCart,
+    increment,
+    decrement,
+    calculateSubTotal,
+    changeLanguage,
+    language,
+    handleSearch,
+  } = useContext(Context);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
   const [anchorE3, setAnchorE3] = React.useState(null);
@@ -27,11 +40,11 @@ const Header = () => {
   const [logo, setLogo] = useState([]);
   //sticky nav
   const [stickyNav, setStickyNav] = useState(false);
-  const [categories, setCategories] = React.useState([])
+  const [categories, setCategories] = React.useState([]);
 
   useEffect(() => {
-    GetAPI('categories', setCategories)
-  }, [])
+    GetAPI("categories", setCategories);
+  }, []);
   useEffect(() => {
     GetAPI("logo", setLogo);
   }, []);
@@ -39,8 +52,8 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser({});
-    setHasUser(false)
-  }
+    setHasUser(false);
+  };
 
   useEffect(() => {
     window.onscroll = () => {
@@ -108,60 +121,45 @@ const Header = () => {
     setState({ ...state, [side]: open });
   };
 
-  const sideList = (side) => <>
-    <div
-      className="w-72 bg-darkNavy h-screen"
-      role="presentation"
-      onKeyDown={toggleDrawer(side, false)}
-    >
-      <ul className=" text-white my-5">
-        {
-          categories?.map((category, index) => <>
-            <Link
-              className=""
-              onClick={() => setState(false)}
-              key={index}
-              to={`/categoryProducts/${category?._id}`}>
-              <li className="my-1 font-medium text-xl px-8 py-2 border-y-2 2 border-white hover:text-white hover:bg-transparent bg-white text-darkNavy rounded hover:border-y-2 hover:border-primary  flex gap-3">
-                <img src={category?.image} className="w-6 h-6" alt="" />
-                <span>
-                  {category?.categoryTitle}
-                </span>
-
-              </li>
-            </Link>
-            <p></p>
-          </>
-          )
-        }
-      </ul>
-
-    </div>
-  </>
-
-
-  const [search, setSearch] = useState("");
-  const navigate = useNavigate();
-
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    navigate("/categoryProducts", { state: { searchState: search } });
-    setSearch("");
-  };
+  const sideList = (side) => (
+    <>
+      <div
+        className="w-72 bg-darkNavy h-screen"
+        role="presentation"
+        onKeyDown={toggleDrawer(side, false)}
+      >
+        <ul className=" text-white my-5">
+          {categories?.map((category, index) => (
+            <>
+              <Link
+                className=""
+                onClick={() => setState(false)}
+                key={index}
+                to={`/categoryProducts/${category?._id}`}
+              >
+                <li className="my-1 font-medium text-xl px-8 py-2 border-y-2 2 border-white hover:text-white hover:bg-transparent bg-white text-darkNavy rounded hover:border-y-2 hover:border-primary  flex gap-3">
+                  <img src={category?.image} className="w-6 h-6" alt="" />
+                  <span>{category?.categoryTitle}</span>
+                </li>
+              </Link>
+              <p></p>
+            </>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
 
   return (
     <header className="bg-darkNavy ">
       {/* web nav */}
 
       <nav
-        className={`py-4 px-4 w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${stickyNav
-          ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
-          : "bg-darkNavy"
-          }`}
+        className={`py-4 px-4 w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${
+          stickyNav
+            ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
+            : "bg-darkNavy"
+        }`}
       >
         <div className="flex items-center gap-3">
           {/* hamburger icon */}
@@ -170,56 +168,57 @@ const Header = () => {
               <MenuIcon />
             </button>
             <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-
               {sideList("left")}
-
             </Drawer>
           </div>
 
           {/* brand logo */}
           <span className="">
-            <Link to={'/'}>
-              <img src={logo[0]?.headerLogoURL} className="w-36 cursor-pointer" alt="logo" />
+            <Link to={"/"}>
+              <img
+                src={logo[0]?.headerLogoURL}
+                className="w-36 cursor-pointer"
+                alt="logo"
+              />
             </Link>
           </span>
         </div>
 
         {/* search bar */}
-        <form onSubmit={handleSearchSubmit}>
-          <div className="flex ">
-            <div className="relative w-full rounded-lg">
-              <input
-                type="text"
-                value={search}
-                onChange={handleSearchChange}
-                className="block p-2.5 w-[600px] rounded-lg z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg outline-none"
-                placeholder="Search for products, brands and more..."
-                required
-              />
-              <button
-                type="submit"
-                className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-[#7ED957] rounded-r-lg  hover:bg-[#7ed9579a]"
+
+        <div className="flex ">
+          <div className="relative w-full rounded-lg">
+            <input
+              type="text"
+              onChange={(e) => handleSearch(e.target.value)}
+              className="block p-2.5 w-[600px] rounded-lg z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg outline-none"
+              placeholder="Search for products, brands and more..."
+              required
+            />
+            <button
+              type="submit"
+              className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-[#7ED957] rounded-r-lg  hover:bg-[#7ed9579a]"
+            >
+              <svg
+                aria-hidden="true"
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  aria-hidden="true"
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  ></path>
-                </svg>
-                <span className="sr-only">Search</span>
-              </button>
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+              </svg>
+              <span className="sr-only">Search</span>
+            </button>
           </div>
-        </form>
+        </div>
+
         <div className="flex items-center gap-5">
           {/* language dropdown */}
 
@@ -229,22 +228,21 @@ const Header = () => {
               aria-describedby={id}
               onClick={handleClickLang}
             >
-              {
-                language === 'english' ?
-                  <>
-                    <img src={engFlag} alt="" className="w-[20px]" />
-                    <span className="text-base uppercase font-medium text-white">
-                      EN
-                    </span>
-                  </>
-                  :
-                  <>
-                    <img src={germanFlag} alt="" className="w-[20px]" />
-                    <span className="text-base uppercase font-medium text-white">
-                      DE
-                    </span>
-                  </>
-              }
+              {language === "english" ? (
+                <>
+                  <img src={engFlag} alt="" className="w-[20px]" />
+                  <span className="text-base uppercase font-medium text-white">
+                    EN
+                  </span>
+                </>
+              ) : (
+                <>
+                  <img src={germanFlag} alt="" className="w-[20px]" />
+                  <span className="text-base uppercase font-medium text-white">
+                    DE
+                  </span>
+                </>
+              )}
               {/* shopping cart */}
               <p className="text-sm text-gray-400 cursor-pointer">
                 <AiOutlineCaretDown />
@@ -262,13 +260,19 @@ const Header = () => {
             >
               <Typography>
                 <ul className="p-0 m-0 cursor-pointer">
-                  <li onClick={() => changeLanguage('english')} className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                  <li
+                    onClick={() => changeLanguage("english")}
+                    className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center"
+                  >
                     <div className="flex items-center gap-3">
                       <img src={engFlag} className="w-[16px]" alt="" />
                       <span> English</span>
                     </div>
                   </li>
-                  <li onClick={() => changeLanguage('german')} className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-9 w-full py-3 text-center">
+                  <li
+                    onClick={() => changeLanguage("german")}
+                    className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-9 w-full py-3 text-center"
+                  >
                     <div className="flex items-center gap-2">
                       <img src={germanFlag} className="w-[23px]" alt="" />
                       <span> German</span>
@@ -280,47 +284,45 @@ const Header = () => {
           </div>
           {/* button group */}
 
-
-          {
-            (hasUser || user?.email) && verified ?
-              <>
-                {
-                  user?.role === 'admin' ?
-                    <Link to={"/dashboard"}>
-                      <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
-                        Dashboard
-                      </button>
-                    </Link>
-                    :
-                    <Link to={"/dashboard/myOrders"}>
-                      <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
-                        Dashboard
-                      </button>
-                    </Link>
-
-                }
-                <Link>
-                  <button onClick={handleLogout} className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
-                    Logout
-                  </button>
-                </Link>
-              </>
-
-              :
-              <>
-                <Link to={'/register'}>
+          {(hasUser || user?.email) && verified ? (
+            <>
+              {user?.role === "admin" ? (
+                <Link to={"/dashboard"}>
                   <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
-                    Register
+                    Dashboard
                   </button>
                 </Link>
+              ) : (
+                <Link to={"/dashboard/myOrders"}>
+                  <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
+                    Dashboard
+                  </button>
+                </Link>
+              )}
+              <Link>
+                <button
+                  onClick={handleLogout}
+                  className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm"
+                >
+                  Logout
+                </button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to={"/register"}>
+                <button className="text-sm text-white bg-transparent  hover:text-darkNavy hover:bg-white border border-white py-2 px-6 rounded-sm ">
+                  Register
+                </button>
+              </Link>
 
-                <Link to={'/login'}>
-                  <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
-                    Login
-                  </button>
-                </Link>
-              </>
-          }
+              <Link to={"/login"}>
+                <button className="text-sm text-darkNavy bg-white hover:text-white hover:bg-transparent border border-white py-2 px-6 rounded-sm">
+                  Login
+                </button>
+              </Link>
+            </>
+          )}
 
           {/* shopping cart */}
           <span
@@ -336,8 +338,9 @@ const Header = () => {
       {/* cart sidebar */}
       <div
         ref={wrapper}
-        className={`cart_nav shadow-lg shadow-gray-300 ${display == true ? "active" : ""
-          }`}
+        className={`cart_nav shadow-lg shadow-gray-300 ${
+          display == true ? "active" : ""
+        }`}
       >
         <button
           className="absolute right-[15px] top-[15px] bg-none outline-none border-none text-[#444] hover:text-[#111] text-[2rem] p-[0.5rem] cursor-pointer transition-all duration-[0.3s] "
@@ -359,16 +362,14 @@ const Header = () => {
                     key={_id}
                     className="flex gap-5 w-11/12 mx-auto items-center justify-between my-2 "
                   >
-
                     <div className="flex gap-x-4 item-center justify-center">
-                      {
-                        images &&
+                      {images && (
                         <img
                           src={images[0]}
                           className="w-20 h-20 rounded-md"
                           alt=""
                         />
-                      }
+                      )}
 
                       <div className="flex flex-col items-center justify-center text-start">
                         <div>
@@ -378,7 +379,6 @@ const Header = () => {
                           <p className="text-sm text-textColor ">
                             ${productPrice * quantity}
                           </p>
-
                         </div>
                       </div>
                     </div>
@@ -496,34 +496,33 @@ const Header = () => {
 
       {/* mobile nav */}
       <nav
-        className={`md:block block lg:hidden pt-3 pb-4 px-[10px] md:px-[35px] top-0 right-0 left-0 z-[10]  ${stickyNav
-          ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
-          : "bg-darkNavy"
-          }`}
+        className={`md:block block lg:hidden pt-3 pb-4 px-[10px] md:px-[35px] top-0 right-0 left-0 z-[10]  ${
+          stickyNav
+            ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
+            : "bg-darkNavy"
+        }`}
       >
         <div className=" flex items-center justify-between">
           <div className="flex items-center gap-1">
             {/* hamburger icon */}
             <div>
-              <button className="text-white" onClick={toggleDrawer("left", true)}>
+              <button
+                className="text-white"
+                onClick={toggleDrawer("left", true)}
+              >
                 <MenuIcon />
               </button>
               <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-
                 {sideList("left")}
-
               </Drawer>
             </div>
             {/* brand logo */}
             <span className="">
-              <Link to={'/'}>
+              <Link to={"/"}>
                 <img src={logo[0]?.headerLogoURL} className="w-20" alt="" />
               </Link>
             </span>
           </div>
-
-
-
 
           <div className="flex items-center gap-3">
             {/* language dropdown */}
@@ -605,44 +604,38 @@ const Header = () => {
               >
                 <Typography>
                   <ul className="p-0 m-0">
-                    {
-                      (hasUser || user?.email) && verified ?
-                        <>
-                          {
-                            user?.role === 'admin' ?
-                              <Link to={"/dashboard"}>
-                                <button className="text-sm  bg-transparent  hover:text-darkNavy  border border-white py-2 px-6 rounded-sm ">
-                                  Dashboard
-                                </button>
-                              </Link>
-                              :
-                              <Link to={"/dashboard/myOrders"}>
-                                <button className="text-sm  bg-transparent  hover:text-darkNavy  border border-white py-2 px-6 rounded-sm ">
-                                  Dashboard
-                                </button>
-                              </Link>
-
-                          }
-                          <li className="text-sm text-textColor  px-10 w-full py-3 text-start " onClick={handleLogout}>
-                            Logout
-                          </li>
-                        </>
-                        :
-                        <>
-                          <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                            <Link to={'/register'}>
-                              Register
-                            </Link>
-                          </li>
-                          <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
-                            <Link to={'/login'}>
-                              Login
-                            </Link>
-                          </li>
-                        </>
-                    }
-
-
+                    {(hasUser || user?.email) && verified ? (
+                      <>
+                        {user?.role === "admin" ? (
+                          <Link to={"/dashboard"}>
+                            <button className="text-sm  bg-transparent  hover:text-darkNavy  border border-white py-2 px-6 rounded-sm ">
+                              Dashboard
+                            </button>
+                          </Link>
+                        ) : (
+                          <Link to={"/dashboard/myOrders"}>
+                            <button className="text-sm  bg-transparent  hover:text-darkNavy  border border-white py-2 px-6 rounded-sm ">
+                              Dashboard
+                            </button>
+                          </Link>
+                        )}
+                        <li
+                          className="text-sm text-textColor  px-10 w-full py-3 text-start "
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </li>
+                      </>
+                    ) : (
+                      <>
+                        <li className="text-sm border-b border-gray-200 text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                          <Link to={"/register"}>Register</Link>
+                        </li>
+                        <li className="text-sm text-textColor bg-white hover:bg-[#f2f2f2] px-10 w-full py-3 text-center">
+                          <Link to={"/login"}>Login</Link>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </Typography>
               </Popover>

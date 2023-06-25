@@ -1,38 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import swal from "sweetalert";
+import serverUrl from "../config/Config";
 
 export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
   const [cart, setCart] = React.useState([]);
   const [language, setLanguage] = useState(null);
-  const [verified, setVerified] = useState(false)
-  const [user, setUser] = useState(null)
-  const [hasUser, setHasUser] = useState(null)
+  const [verified, setVerified] = useState(false);
+  const [user, setUser] = useState(null);
+  const [hasUser, setHasUser] = useState(null);
+  const [allProducts, setAllProducts] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(`${serverUrl}/products`)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result?.status == "success") {
+          setAllProducts(result?.data);
+          setProducts(result?.data);
+        }
+      });
+  }, []);
+
+  const handleSearch = (_searchInput) => {
+    setProducts(
+      allProducts.filter((item) =>
+        item?.productTitle.toLowerCase().includes(_searchInput.toLowerCase())
+      )
+    );
+  };
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
 
     if (JSON.parse(loggedInUser)?.isVerified) {
       setUser(JSON.parse(loggedInUser));
-      setVerified(true)
-      setHasUser(true)
-    }
-    else {
+      setVerified(true);
+      setHasUser(true);
+    } else {
       setUser(JSON.parse(loggedInUser));
-      setVerified(false)
+      setVerified(false);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (user?.email) {
-      setHasUser(true)
+      setHasUser(true);
     }
     if (user?.isVerified) {
-      setVerified(true)
+      setVerified(true);
     }
-  }, [user?.email, user?.isVerified])
+  }, [user?.email, user?.isVerified]);
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -124,28 +145,24 @@ const ContextProvider = ({ children }) => {
     return calculateSubTotal() + _shippingCharge;
   };
 
-
-
   const changeLanguage = (_lang) => {
-    setLanguage(_lang)
-  }
+    setLanguage(_lang);
+  };
 
   useEffect(() => {
     if (language !== null) {
-      localStorage.setItem('language', JSON.stringify(language))
+      localStorage.setItem("language", JSON.stringify(language));
     }
-
-  }, [language])
+  }, [language]);
   useEffect(() => {
     const currentLanguage = localStorage.getItem("language");
     if (currentLanguage) {
-      setLanguage(JSON.parse(currentLanguage))
+      setLanguage(JSON.parse(currentLanguage));
+    } else {
+      localStorage.setItem("language", JSON.stringify("english"));
+      setLanguage("english");
     }
-    else {
-      localStorage.setItem('language', JSON.stringify('english'))
-      setLanguage('english')
-    }
-  }, [])
+  }, []);
 
   const context = {
     cart,
@@ -162,8 +179,9 @@ const ContextProvider = ({ children }) => {
     hasUser,
     setHasUser,
     verified,
-    language
-
+    language,
+    handleSearch,
+    products,
   };
   return <Context.Provider value={context}>{children}</Context.Provider>;
 };
