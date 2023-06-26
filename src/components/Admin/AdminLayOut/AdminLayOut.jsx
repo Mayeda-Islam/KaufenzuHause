@@ -222,6 +222,11 @@ export default function AdminLayOut() {
 
           linkPath: "systemSetting/footerSection",
         },
+        {
+          title: "Social Media Links",
+
+          linkPath: "systemSetting/socialMedia",
+        },
       ],
     },
     {

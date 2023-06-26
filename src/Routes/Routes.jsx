@@ -44,6 +44,8 @@ import InputOTP from "../pages/Login/InputOTP";
 import OrderDetails from "../components/Admin/AdminOrders/orderDetails";
 import PendingProduct from "../components/Admin/AdminOrders/PendingProduct";
 import CanceledProduct from "../components/Admin/AdminOrders/CanceledProduct";
+import SocialMediaLinks from "../components/Admin/SyestemSetting/SocialMedia/SocialMediaLinks";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -116,7 +118,9 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard/",
-    element: <AdminLayOut></AdminLayOut>,
+    element: <PrivateRoutes>
+      <AdminLayOut></AdminLayOut>
+    </PrivateRoutes>,
     errorElement: <Error />,
     children: [
       {
@@ -193,6 +197,10 @@ export const router = createBrowserRouter([
       {
         path: "systemSetting/footerSection",
         element: <FooterSection></FooterSection>,
+      },
+      {
+        path: "systemSetting/socialMedia",
+        element: <SocialMediaLinks />,
       },
     ],
   },

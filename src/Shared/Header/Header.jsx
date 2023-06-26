@@ -4,7 +4,6 @@ import { AiOutlineCaretDown } from "react-icons/ai";
 import { CgShoppingCart } from "react-icons/cg";
 import engFlag from "../../images/header/eng.png";
 import germanFlag from "../../images/header/ger2.png";
-import userImg from "../../images/user-images/1.jpg";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
@@ -40,7 +39,6 @@ const Header = () => {
     GetAPI(`users/${user?.email}`, setCurrentUser)
   }, [user?.email, setCurrentUser])
 
-  console.log(products);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
@@ -168,11 +166,10 @@ const Header = () => {
       {/* web nav */}
 
       <nav
-        className={`py-4 px-4 w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${
-          stickyNav
-            ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
-            : "bg-darkNavy"
-        }`}
+        className={`py-4 px-4 w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${stickyNav
+          ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
+          : "bg-darkNavy"
+          }`}
       >
         <div className="flex items-center gap-3">
           {/* hamburger icon */}
@@ -235,57 +232,41 @@ const Header = () => {
 
         {
           searchValue?.length > 0 &&
-          <div className="absolute top-16 border-4 lg:left-[18.5%] xl:left-[24.5%] xxl:left-[32%] xxxl:left-[35.3%] w-[600px] mx-auto z-10">
+          <div className="absolute lg:top-[5%]  xl:top-[7%] lg:left-[17.5%] xxl:top-[5%] xl:left-[24%] xxl:left-[30.5%] xxxl:left-[35%] p-2.5 lg:w-[600px] xl:w-[620px] w-full mx-auto z-10 ">
             <ul className="flex flex-col pt-2 space-y-2 bg-white text-gray-900 rounded">
-              {productsForSearch?.length > 0 ? (
-                productsForSearch?.map((product, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start   border my-1 hover:bg-gray-100"
-                  >
-                    <Link
-                      to={`/productDetails/${product?._id}`}
-                      className="grid grid-cols-12"
-                      onClick={() => handleData("")}
-                    >
+              {productsForSearch?.length > 0 ?
+                productsForSearch?.map((product, index) =>
+                  <li key={index} className="flex items-start   border my-1 hover:bg-gray-100" >
+                    <Link to={`/productDetails/${product?._id}`} onClick={() => handleData('')} className="grid grid-cols-12">
                       <div className="flex items-center justify-center col-span-2">
-                        <img
-                          src={`${product?.images[0]}`}
-                          className="w-20 h-20  "
-                        />
+                        <img src={`${product?.images[0]}`} className='w-20 h-20  ' />
                       </div>
                       <div className="col-span-10">
-                        {language === "english" ? (
-                          <h3 className="text-base font-semibold text-textPrimary mb-1">
-                            {product?.productTitle?.length > 50
-                              ? product?.productTitle?.slice(0, 50) + ".."
-                              : product?.productTitle}
-                          </h3>
-                        ) : (
-                          <h3 className="text-base font-semibold text-textPrimary mb-1">
-                            {product?.productTitleGerman?.length > 50
-                              ? product?.productTitleGerman?.slice(0, 50) + ".."
-                              : product?.productTitleGerman}
-                          </h3>
-                        )}
+                        {
+                          language === 'english' ?
+                            <h3 className="text-base font-semibold text-textPrimary mb-1">{product?.productTitle?.length > 50 ? product?.productTitle?.slice(0, 50) + '..' : product?.productTitle}</h3>
+                            :
+
+                            <h3 className="text-base font-semibold text-textPrimary mb-1">{product?.productTitleGerman?.length > 50 ? product?.productTitleGerman?.slice(0, 50) + '..' : product?.productTitleGerman}</h3>
+                        }
 
                         <p className="my-1">Price : €{product?.productPrice}</p>
                       </div>
                     </Link>
                   </li>
-                ))
-              ) : (
+                )
+                :
                 <>
                   <div className="my-2  justify-center items-center flex">
-                    <p className="text-lg font-semibold text-center">
-                      No Products Available
-                    </p>
+                    <p className="text-lg font-semibold text-center">No Products Available</p>
                   </div>
                 </>
-              )}
+              }
+
             </ul>
           </div>
-        )}
+
+        }
 
         {/* search Result finish */}
 
@@ -408,9 +389,8 @@ const Header = () => {
       {/* cart sidebar */}
       <div
         ref={wrapper}
-        className={`cart_nav shadow-lg shadow-gray-300 ${
-          display == true ? "active" : ""
-        }`}
+        className={`cart_nav shadow-lg shadow-gray-300 ${display == true ? "active" : ""
+          }`}
       >
         <button
           className="absolute right-[15px] top-[15px] bg-none outline-none border-none text-[#444] hover:text-[#111] text-[2rem] p-[0.5rem] cursor-pointer transition-all duration-[0.3s] "
@@ -566,11 +546,10 @@ const Header = () => {
 
       {/* mobile nav */}
       <nav
-        className={`md:block block lg:hidden pt-3 pb-4 px-[10px] md:px-[35px] top-0 right-0 left-0 z-[10]  ${
-          stickyNav
-            ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
-            : "bg-darkNavy"
-        }`}
+        className={`md:block block lg:hidden pt-3 pb-4 px-[10px] md:px-[35px] top-0 right-0 left-0 z-[10]  ${stickyNav
+          ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
+          : "bg-darkNavy"
+          }`}
       >
         <div className=" flex items-center justify-between">
           <div className="flex items-center gap-1">
@@ -760,50 +739,32 @@ const Header = () => {
             </div>
           </div>
 
-          {searchValue?.length > 0 && (
-            <div className="absolute top-[27%] left-[0%] p-2.5 w-full mx-auto z-10">
+          {/* {productsForSearch?.length > 0 && */}
+          {
+            searchValue?.length > 0 &&
+            <div className="absolute top-[10%] left-[0%] p-2.5 w-full mx-auto z-10">
               <ul className="flex flex-col pt-2 space-y-2 bg-white text-gray-900 rounded">
-
-                {productsForSearch?.length > 0 &&
-                  productsForSearch?.map((product, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start   border my-1 hover:bg-gray-100"
-                    >
-                      <Link
-                        to={`/productDetails/${product?._id}`}
-                        onClick={() => handleData("")}
-                        className="grid grid-cols-12"
-                      >
-
+                {productsForSearch?.length > 0 ?
+                  productsForSearch?.map((product, index) =>
+                    <li key={index} className="flex items-start   border my-1 hover:bg-gray-100" >
+                      <Link to={`/productDetails/${product?._id}`} onClick={() => handleData('')} className="grid grid-cols-12">
                         <div className="flex items-center justify-center col-span-2">
-                          <img
-                            src={`${product?.images[0]}`}
-                            className="w-20 h-20  "
-                          />
+                          <img src={`${product?.images[0]}`} className='w-20 h-20  ' />
                         </div>
                         <div className="col-span-10">
-                          {language === "english" ? (
-                            <h3 className="text-base font-semibold text-textPrimary mb-1">
-                              {product?.productTitle?.length > 50
-                                ? product?.productTitle?.slice(0, 50) + ".."
-                                : product?.productTitle}
-                            </h3>
-                          ) : (
-                            <h3 className="text-base font-semibold text-textPrimary mb-1">
-                              {product?.productTitleGerman?.length > 50
-                                ? product?.productTitleGerman?.slice(0, 50) +
-                                  ".."
-                                : product?.productTitleGerman}
-                            </h3>
-                          )}
+                          {
+                            language === 'english' ?
+                              <h3 className="text-base font-semibold text-textPrimary mb-1">{product?.productTitle?.length > 50 ? product?.productTitle?.slice(0, 50) + '..' : product?.productTitle}</h3>
+                              :
 
-                          <p className="my-1">
-                            Price : €{product?.productPrice}
-                          </p>
+                              <h3 className="text-base font-semibold text-textPrimary mb-1">{product?.productTitleGerman?.length > 50 ? product?.productTitleGerman?.slice(0, 50) + '..' : product?.productTitleGerman}</h3>
+                          }
+
+                          <p className="my-1">Price : €{product?.productPrice}</p>
                         </div>
                       </Link>
-                    </li> )
+                    </li>
+                  )
                   :
                   <>
                     <div className="my-2  justify-center items-center flex">

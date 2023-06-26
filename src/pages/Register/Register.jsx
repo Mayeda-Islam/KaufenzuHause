@@ -45,6 +45,7 @@ const Register = () => {
           navigate('/login')
         } else {
           swal("Oops!", data?.message, "error");
+          setIsLoading(false)
         }
       });
   };

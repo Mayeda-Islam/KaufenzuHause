@@ -4,6 +4,7 @@ import GetAPI from "../../../../APIHooks/GetAPI";
 import FooterDescriptionModal from "./FooterDescriptionModal";
 import UpdatedApi from "../../../../APIHooks/UpdatedItem";
 import FooterInfoModal from "./FooterInfoModal";
+import PostAPI from "../../../../APIHooks/PostAPI";
 
 const style = {
   position: "absolute",
@@ -43,23 +44,30 @@ const FooterSection = () => {
     const updatedData = {
       ...data,
     };
-
-    UpdatedApi(
-      `footer-description/${footerDescription[0]?._id}`,
-      setFooterDescription,
-      updatedData
-    );
+    if (footerDescription[0]?._id) {
+      UpdatedApi(
+        `footer-description/${footerDescription[0]?._id}`,
+        setFooterDescription,
+        updatedData
+      );
+    }
+    else {
+      PostAPI('footer-description', updatedData, setFooterDescription)
+    }
   };
   //info
   const handleInfoUpdated = (data) => {
-    console.log(data);
     const updatedData = {
       address: data.address || footerInfo[0]?.address,
       phone: data.phone || footerInfo[0]?.phone,
       email: data.email || footerInfo[0]?.email,
     };
-
-    UpdatedApi(`footer-info/${footerInfo[0]?._id}`, setFooterInfo, updatedData);
+    if (footerInfo[0]?._id) {
+      UpdatedApi(`footer-info/${footerInfo[0]?._id}`, setFooterInfo, updatedData);
+    }
+    else {
+      PostAPI('footer-info', updatedData, setFooterInfo)
+    }
   };
 
   useEffect(() => {

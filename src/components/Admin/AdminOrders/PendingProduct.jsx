@@ -63,7 +63,7 @@ const PendingProduct = () => {
                                             {order?.userInfo?.phoneNumber}
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
-                                        {moment(order?.date).format('LLL')}
+                                            {moment(order?.date).format('LLL')}
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
                                             {order?.transactionId}
@@ -74,14 +74,14 @@ const PendingProduct = () => {
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
                                             <button
                                                 onClick={() => handleModal(order?._id)}
-                                                className="px-4 py-1 bg-orange-500 hover:bg-primary text-white rounded-2xl">
+                                                className="py-2 px-5  text-sm font-medium text-white bg-[#55c3c1f7]  border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee] rounded-lg">
                                                 Take Action
                                             </button>
 
                                         </td>
                                         <td className="border border-gray-400 py-2 px-4 sm:px-4 text-md font-medium">
                                             <Link to={`/dashboard/orderDetails/${order?._id}`} >
-                                                <button className="px-6 py-1 bg-orange-500 hover:bg-primary text-white rounded-2xl">
+                                                <button className="py-2 px-5  text-sm font-medium text-white bg-[#55c3c1f7]  border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee] rounded-lg">
                                                     See Orders
                                                 </button>
                                             </Link>

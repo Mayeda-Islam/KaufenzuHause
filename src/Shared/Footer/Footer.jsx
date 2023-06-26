@@ -1,14 +1,11 @@
 import React from 'react'
-import logo from '../../images/logo/logo.png';
-import paymentImg from '../../images/logo/payment.svg';
-import paymentImg2 from '../../images/logo/payment2.svg';
-import paymentImg3 from '../../images/logo/payment3.svg';
 import { AiOutlineMobile, AiOutlineMail } from 'react-icons/ai';
 import { IoLocationOutline } from 'react-icons/io5';
 
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import GetAPI from '../../APIHooks/GetAPI';
+import ReactWhatsapp from 'react-whatsapp';
 
 const Footer = () => {
     const [logo, setLogo] = React.useState([])
@@ -32,7 +29,7 @@ const Footer = () => {
     return (
 
         <footer className="bg-darkNavy ">
-            <div className="px-8 sm:px-10 lg:px-[103px] pt-10 pb-10">
+            <div className="px-8 sm:px-10 lg:px-[103px] pt-10 pb-5">
                 <div className="flex gap-6 justify-center lg:justify-around  flex-wrap   md1:flex-wrap lg:flex-nowrap">
                     <div className="w-full  lg:w-2/5 ">
                         <div className="">
@@ -74,7 +71,7 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-full  lg:w-1/5 mt-2">
+                    {/* <div className="w-full  lg:w-1/5 mt-2">
                         <h2 className=" uppercase mb-4 text-sm font-semibold text-[#f7f7f7]  dark:text-white">
                             About
                         </h2>
@@ -96,23 +93,24 @@ const Footer = () => {
                                 </Link>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                     <div className="w-full  lg:w-1/5 mt-2">
                         <h2 className="mb-4 text-sm font-semibold text-[#f7f7f7] uppercase dark:text-white">
                             Help
                         </h2>
                         <ul className="text-gray-300 flex flex-col gap-y-2 text-sm font-normal capitalize mb-6">
-                           
+
                             <li>
                                 <a to="" className="hover:underline">
                                     Return and Placement
                                 </a>
                             </li>
                             <li>
-                                <a to="" className="hover:underline">
+                                <ReactWhatsapp number="+4917662058329">
                                     Chat with us
-                                </a>
-                            </li> 
+                                </ReactWhatsapp>
+
+                            </li>
                             <li>
                                 <a to="" className="hover:underline">
                                     Our support
@@ -130,21 +128,13 @@ const Footer = () => {
                                     FaceBook
                                 </Link>
                             </li>
-                            <li>
-                                <Link to="">
-                                    Twitter
-                                </Link>
-                            </li>
+
                             <li>
                                 <Link to="">
                                     Instagram
                                 </Link>
                             </li>
-                            <li>
-                                <Link to="">
-                                    Linkedin
-                                </Link>
-                            </li>
+
                             <li>
                                 <Link to="">
                                     You Tube
@@ -156,26 +146,17 @@ const Footer = () => {
                     </div>
                 </div>
                 <hr className="my-6 border-gray-300 border-1.5 sm:mx-auto  lg:my-6" />
-                <div className="lg:flex lg:items-center lg:justify-between flex-col-reverse md:flex-col-reverse lg:flex-row">
+                <div className="lg:flex lg:items-center lg:justify-center flex-col-reverse md:flex-col-reverse lg:flex-row">
                     <span className="text-sm text-gray-300 sm:text-center dark:text-gray-400 ">
                         © 2023{" "}
                         <Link to={"/"} className="hover:underline">
-                            Kaufanzuhause
+                            Kaufenzuhause
                         </Link>
                         . All Rights Reserved. <a href="https://miskaturs-portfolio.netlify.app/">Developed by Miskat and Team</a>
 
                     </span>
                     {/* footer icon */}
-                    <div className='flex items-center gap-3 mt-3 lg:mt-0'>
-                        <span className="text-sm text-gray-400">
-                            Payment Methods
-                        </span>
-                        <div className="flex gap-2 bg-white py-1 px-2 rounded">
-                            <img src={paymentImg} className='' alt="" />
-                            <img src={paymentImg2} className='' alt="" />
-                            <img src={paymentImg3} className='' alt="" />
-                        </div>
-                    </div>
+
                 </div>
             </div>3
         </footer >

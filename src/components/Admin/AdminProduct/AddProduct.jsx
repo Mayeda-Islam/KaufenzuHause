@@ -107,7 +107,7 @@ const AddProduct = () => {
           setDescriptionGerman("");
           setShippingGerman("");
           reset();
-          navigate("/admin/product/allProduct");
+          navigate("/dashboard/product/allProduct");
           Swal.fire("Congrats!", "Product Added Successfully!", "success");
         }
       });
@@ -247,7 +247,7 @@ const AddProduct = () => {
             // for="default"
             className="block mb-2 text-sm font-medium text-gray-900"
           >
-            Add Category
+            Add Category English
           </label>
           <select
             {...register("category", { required: true })}
@@ -256,8 +256,29 @@ const AddProduct = () => {
           >
             {categories?.map((categoryProduct) => (
               <>
-                <option value={categoryProduct.categoryTitle}>
-                  {categoryProduct.categoryTitle}
+                <option value={categoryProduct?.categoryTitle}>
+                  {categoryProduct?.categoryTitle}
+                </option>
+              </>
+            ))}
+          </select>
+        </div>
+        <div className="my-4">
+          <label
+            // for="default"
+            className="block mb-2 text-sm font-medium text-gray-900"
+          >
+            Add Category German
+          </label>
+          <select
+            {...register("categoryGerman", { required: true })}
+            // defaultValue={user?.gender}
+            className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
+          >
+            {categories?.map((categoryProduct) => (
+              <>
+                <option value={categoryProduct?.categoryTitleGerman}>
+                  {categoryProduct?.categoryTitleGerman}
                 </option>
               </>
             ))}
@@ -326,7 +347,7 @@ const AddProduct = () => {
 
         <button
           type="submit"
-          className="bg-[#55c3c1f7] py-2 px-7  text-white font-medium rounded-md mt-4 ml-auto block"
+          className="py-2 px-5  text-sm font-medium text-white bg-[#55c3c1f7]  border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee] rounded-lg block ml-auto my-5"
         >
           Save changes
         </button>

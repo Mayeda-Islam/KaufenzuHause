@@ -1,7 +1,5 @@
-import { Style } from "@mui/icons-material";
 import { Box, Modal } from "@mui/material";
 import React from "react";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 
@@ -19,7 +17,7 @@ const FooterDescriptionModal = ({
   } = useForm();
   //open information form
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
   return (
@@ -68,7 +66,7 @@ const FooterDescriptionModal = ({
                       )}
                       <button
                         type="submit"
-                        className="py-2 px-7  text-sm font-medium text-white bg-primary rounded-sm border-[3px] border-primary hover:bg-secondary hover:border-secondary "
+                        className="py-2 px-5  text-sm font-medium text-white bg-[#55c3c1f7] rounded-sm border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee] "
                         onClick={() => setOpenDescription(false)}
                       >
                         Submit

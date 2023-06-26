@@ -37,11 +37,13 @@ const AddCategory = ({ setCategories, setOpen, open }) => {
   const onSubmit = (data) => {
     const formData = {
       categoryTitle: data.categoryTitle,
+      categoryTitleGerman: data.categoryTitleGerman,
       image: image,
     };
     console.log(formData);
     // reset();
     PostAPI(`category`, formData, setCategories);
+    setOpen(false)
   };
 
   useEffect(() => {
@@ -84,10 +86,26 @@ const AddCategory = ({ setCategories, setOpen, open }) => {
                         type="text"
                         {...register("categoryTitle", { required: true })}
                         className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400 w-full rounded-md sm:text-sm"
-                        placeholder="your name"
+                        placeholder="your category name"
                       />
                       {errors?.categoryTitle && (
                         <p className="text-red-500 text-sm">Category title is required</p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-start gap-4 mb-4">
+                    <label className="font-semibold text-lg md:text-xl">
+                      Category Title:
+                    </label>
+                    <div className="flex flex-col w-full">
+                      <input
+                        type="text"
+                        {...register("categoryTitleGerman", { required: true })}
+                        className="mt-2 px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400 w-full rounded-md sm:text-sm"
+                        placeholder="your category name in German"
+                      />
+                      {errors?.categoryTitleGerman && (
+                        <p className="text-red-500 text-sm">Category title in German is required</p>
                       )}
                     </div>
                   </div>

@@ -67,6 +67,7 @@ const Home = () => {
             sliders={headphonesSlider}
             title={"Headphones and Accessories"}
             titleGerman={"Kopfhörer und Zubehör"}
+            category={"Headphone"}
           >
           </CategorySectionOne>
         )

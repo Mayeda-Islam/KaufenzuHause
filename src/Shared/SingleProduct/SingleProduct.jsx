@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { Context } from '../../ContextProvider/ContextProvider';
 const SingleProduct = ({ product }) => {
-    const { _id, images, category, productTitle, totalProduct, productPrice, previousPrice, colors, brand, model, productTitleGerman } = product;
+    const { _id, images, category, categoryGerman, productTitle, totalProduct, productPrice, previousPrice, colors, brand, model, productTitleGerman } = product;
     const { language } = React.useContext(Context)
     return (
         <Link to={`/productDetails/${_id}`} key={_id} className="lg:h-[360px]">
@@ -40,7 +40,8 @@ const SingleProduct = ({ product }) => {
                     </div>
                     {/* card body */}
                     <div className="p-4 overflow-hidden">
-                        <span className="text-sm text-gray-600 my-2 capitalize">{category}</span>
+                        <span className="text-sm text-gray-600 my-2 capitalize">{language === 'english' ? category : categoryGerman}</span>
+
                         {
                             language === 'english' ?
                                 <h3 className="text-base font-semibold text-textPrimary mb-1">{productTitle?.length > 25 ? productTitle?.slice(0, 25) + '..' : productTitle}</h3>

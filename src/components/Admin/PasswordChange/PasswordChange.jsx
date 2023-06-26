@@ -40,7 +40,7 @@ const PasswordChange = () => {
 
     return (
         <div className='my-10'>
-            <form onSubmit={handleSubmit(handlePasswordChange)} className='w-full lg:w-3/4 mx-auto'>
+            <form onSubmit={handleSubmit(handlePasswordChange)} className='w-full lg:w-2/4 mx-auto'>
 
                 <h1 className='text-2xl lg:text-4xl font-semibold my-5'>
 

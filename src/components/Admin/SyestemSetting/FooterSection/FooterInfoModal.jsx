@@ -1,6 +1,5 @@
 import { Box, Modal } from "@mui/material";
 import React from "react";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 
@@ -17,7 +16,7 @@ const FooterInfoModal = ({
     handleSubmit,
   } = useForm();
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
   return (
@@ -46,7 +45,7 @@ const FooterInfoModal = ({
                   <div className="  p-6 flex-auto w-full border-2 border-gray-200 rounded =">
                     <form action="" onSubmit={handleSubmit(handleInfoUpdated)}>
                       <div className="mb-3">
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 ">
                           Address
                         </label>
 
@@ -67,7 +66,7 @@ const FooterInfoModal = ({
                       </div>
                       {/* phone field */}
                       <div className="mb-3">
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 ">
                           Phone Number
                         </label>
 
@@ -87,7 +86,7 @@ const FooterInfoModal = ({
                         )}
                       </div>
                       <div className="mb-3">
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 ">
                           Email
                         </label>
                         <input
@@ -112,7 +111,7 @@ const FooterInfoModal = ({
                       </div>
                       <button
                         type="submit"
-                        className="disabled:opacity-25 mt-3 py-2 px-7  text-sm font-medium text-white bg-primary rounded-sm border-[3px] border-primary hover:bg-secondary hover:border-secondary "
+                        className="py-2 px-5  text-sm font-medium text-white bg-[#55c3c1f7] rounded-sm border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee] "
                         onClick={() => setOpenInfo(false)}
                       >
                         Submit

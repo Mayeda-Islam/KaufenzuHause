@@ -12,6 +12,8 @@ import { Box, CircularProgress } from "@mui/material";
 
 const CategorisedProducts = () => {
   const { id } = useParams();
+  const { state } = useLocation();
+  const { cat } = state || {};
   const navWrapper = useRef();
   //state for filter nav
   const [isOpen, setIsopen] = React.useState(false);
@@ -49,13 +51,24 @@ const CategorisedProducts = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    GetAPI(`categories/${id}`, setCategory);
+    if (id) {
+      GetAPI(`categories/${id}`, setCategory);
+    }
   }, [id]);
 
   useEffect(() => {
-    setLoading(true);
-    GetAPI(`product/${category?.categoryTitle}`, setAllProductData);
-  }, [category?.categoryTitle]);
+    if (id) {
+      setLoading(true);
+      GetAPI(`product/${category?.categoryTitle}`, setAllProductData)
+    }
+  }, [category?.categoryTitle, id]);
+
+  useEffect(() => {
+    if (cat) {
+      setLoading(true);
+      GetAPI(`product/${cat}`, setAllProductData);
+    }
+  }, [cat]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -94,9 +107,8 @@ const CategorisedProducts = () => {
         <div className="flex items-center justify-center lg:hidden mb-5 relative">
           <div
             ref={navWrapper}
-            className={`side_nav shadow-lg shadow-gray-300 ${
-              isOpen == true ? "active" : ""
-            }`}
+            className={`side_nav shadow-lg shadow-gray-300 ${isOpen == true ? "active" : ""
+              }`}
           >
             <button className="close_btn " onClick={handleToggle}>
               <AiFillCloseCircle />
