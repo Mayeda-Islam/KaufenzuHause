@@ -8,6 +8,7 @@ import "./CategorisedProducts.css";
 import { useParams } from "react-router-dom";
 import GetAPI from "../../APIHooks/GetAPI";
 import { Box, CircularProgress } from "@mui/material";
+import { TbFilter } from "react-icons/tb";
 
 const CategorisedProducts = () => {
   const { id } = useParams();
@@ -184,7 +185,21 @@ const CategorisedProducts = () => {
           </div>
           <div className="w-full md:w-full lg:w-9/12">
             {/* product sorting */}
-
+            <div className="flex items-center justify-between mx-2 mb-3">
+              <button
+                onClick={handleToggle}
+                className=" md:flex lg:invisible bg-white py-1.5 rounded-md px-4 text-textColor hover:text-white text-[16px] border border-textColor flex items-center gap-2 hover:bg-textColor hover:border-textColor"
+              >
+                <TbFilter className="text-blue-500 text-lg" />
+                <span>Filter</span>
+              </button>
+              {/* <select name="" id="" className="px-4 py-3">
+                <option value="">Sort By: Popularity</option>
+                <option value="">Sort By: Latest</option>
+                <option value="">Sort By: Price low to high</option>
+                <option value="">Sort By: Price low to high</option>
+              </select> */}
+            </div>
 
 
             {/* product cards */}
