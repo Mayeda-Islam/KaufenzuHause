@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CategorySectionOne from "../../components/Home/CategorySection/CategorySectionOne";
 
 import BannerSlider from "../../components/Home/BannerSlider/BannerSlider";
 import AllCategories from "../../components/Home/AllCategories/AllCategories";
 import TopratedProducts from "../../components/TopRatedProducts/TopratedProducts";
 import GetAPI from "../../APIHooks/GetAPI";
+import { useContext } from "react";
+import { Context } from "../../ContextProvider/ContextProvider";
+import { Box, CircularProgress } from "@mui/material";
 
 const Home = () => {
-  const [products, setProducts] = React.useState([]);
-  useEffect(() => {
-    GetAPI("products", setProducts);
-  }, []);
+  const { products } = useContext(Context)
 
-  const [categoriesSlider, setCategoriesSlider] = useState([]);
+  console.log('products in home', products);
+  const [categoriesSlider, setCategoriesSlider] = React.useState([]);
 
   const headphones = products?.filter((data) => data?.category === ("Headphone" || "Headphone Accessories"));
   const headphonesSlider = categoriesSlider?.filter(
@@ -46,6 +47,13 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  if (products?.length === 0) {
+    return <div className="text-center h-screen flex justify-center items-center">
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    </div>
+  }
   return (
     <>
       <BannerSlider />

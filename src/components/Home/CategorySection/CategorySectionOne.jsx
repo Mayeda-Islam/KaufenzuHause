@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import CategorySlider from "../../../Shared/CategorySlider/CategorySlider";
 import SingleProduct from "../../../Shared/SingleProduct/SingleProduct";
 import { Pagination, Navigation, Autoplay } from 'swiper';
@@ -10,6 +10,10 @@ import { Context } from "../../../ContextProvider/ContextProvider";
 
 const CategorySectionOne = ({ products, sliders, title, titleGerman }) => {
   const { language } = useContext(Context)
+  // const navigate = useNavigate()
+  // const handleNavigate = () => {
+  //   navigate(`/categoryProducts/${category}`, { state: { cat: category } })
+  // }
   return (
     <div className="shadow-md pb-14">
       <div className="mx-auto w-[95%] lg:w-[90%]">
@@ -21,11 +25,11 @@ const CategorySectionOne = ({ products, sliders, title, titleGerman }) => {
               <h1 className=" text-xl lg:text-2xl font-semibold">{titleGerman}</h1>
           }
           {/* view all button  */}
-          <Link to={``}>
-            <button className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
-              View All
-            </button>
-          </Link>
+
+          {/* <button onClick={handleNavigate} className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
+            View All
+          </button> */}
+
         </div>
         <hr className="my-4" />
         <div className="flex  justify-center">

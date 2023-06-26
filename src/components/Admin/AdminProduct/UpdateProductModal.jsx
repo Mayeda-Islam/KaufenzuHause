@@ -118,6 +118,7 @@ const UpdateProductModal = ({
 
       description: updateDescription || updatedProduct?.description,
       category: data?.category || updatedProduct?.category,
+      categoryGerman: data?.categoryGerman || updatedProduct?.categoryGerman,
       descriptionGerman: updateDescriptionGerman || updatedProduct?.descriptionGerman,
 
       shipping: updateShipping || updatedProduct?.shipping,
@@ -316,6 +317,28 @@ const UpdateProductModal = ({
                             ))}
                           </select>
                         </div>
+
+                        <div className="my-4">
+                          <label
+                            // for="default"
+                            className="block mb-2 text-sm font-medium text-gray-900"
+                          >
+                            Add Category In German
+                          </label>
+                          <select
+                            {...register("categoryGerman", { required: false })}
+                            defaultValue={updatedProduct?.categoryGerman}
+                            className="border-2 text-gray-900 mb-4 text-sm rounded-lg block w-full p-2.5 focus:outline-none border-[#55c3c1f7] bg-transparent"
+                          >
+                            {categories?.map((categoryProduct) => (
+                              <>
+                                <option value={categoryProduct?.categoryTitleGerman} selected={categoryProduct?.categoryTitleGerman === updatedProduct?.categoryGerman}>
+                                  {categoryProduct?.categoryTitleGerman}
+                                </option>
+                              </>
+                            ))}
+                          </select>
+                        </div>
                         <div className=" mt-4">
                           <label className="block ">
                             <span className=" block text-sm font-medium">
@@ -372,16 +395,9 @@ const UpdateProductModal = ({
                               type="file"
                               onChange={handleImage}
                               accept="image/*"
-
-                              // defaultValue={user?.email}
                               className="mt-2 w-full px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400  block  rounded-md sm:text-sm "
-                              placeholder="category title"
                             />
-                            {errors?.categoryImage && (
-                              <p className="text-red-500 text-sm ">
-                                Category image/svg/icon is required
-                              </p>
-                            )}
+
                           </div>
                         </div>
 

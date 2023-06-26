@@ -2,20 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import SingleProduct from "../../Shared/SingleProduct/SingleProduct";
 import RangeSlider from "../../Shared/RangeSlider/RangeSlider";
 import CategoryFilter from "../../Shared/CategoryFilter/CategoryFilter";
-import { TbFilter } from "react-icons/tb";
 
 import { AiFillCloseCircle } from "react-icons/ai";
 import "./CategorisedProducts.css";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import GetAPI from "../../APIHooks/GetAPI";
 import { Box, CircularProgress } from "@mui/material";
+import { TbFilter } from "react-icons/tb";
 
 const CategorisedProducts = () => {
   const { id } = useParams();
+  // const { state } = useLocation();
+  // const { cat } = state || {};
   const navWrapper = useRef();
   //state for filter nav
   const [isOpen, setIsopen] = React.useState(false);
-
   const handleToggle = () => {
     //alert('clicked')
     isOpen === true ? setIsopen(false) : setIsopen(true);
@@ -47,15 +48,22 @@ const CategorisedProducts = () => {
   const [productData, setProductData] = useState([]);
 
   const [loading, setLoading] = useState(false);
+  const [priceRange, setPriceRange] = React.useState([0, 1000]);
 
   useEffect(() => {
-    GetAPI(`categories/${id}`, setCategory);
+    if (id) {
+      GetAPI(`categories/${id}`, setCategory);
+    }
   }, [id]);
 
   useEffect(() => {
-    setLoading(true);
-    GetAPI(`product/${category?.categoryTitle}`, setAllProductData);
-  }, [category?.categoryTitle]);
+    if (id) {
+      setLoading(true);
+      GetAPI(`product/${category?.categoryTitle}`, setAllProductData)
+    }
+  }, [category?.categoryTitle, id]);
+
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,6 +77,19 @@ const CategorisedProducts = () => {
       setFilterInputs([...filterInputs, _value]);
     }
   };
+
+  useEffect(() => {
+    if (filterInputs.length > 0 || priceRange[1] > 0) {
+      const filterResult = allProductData.filter(
+        (data) =>
+          (filterInputs.length === 0 || filterInputs.includes(data.category)) &&
+          (priceRange[1] === 0 ||
+            (data.productPrice >= priceRange[0] &&
+              data.productPrice <= priceRange[1]))
+      );
+      setProductData(filterResult);
+    }
+  }, [filterInputs, priceRange]);
 
   useEffect(() => {
     setProductData(allProductData);
@@ -94,9 +115,8 @@ const CategorisedProducts = () => {
         <div className="flex items-center justify-center lg:hidden mb-5 relative">
           <div
             ref={navWrapper}
-            className={`side_nav shadow-lg shadow-gray-300 ${
-              isOpen == true ? "active" : ""
-            }`}
+            className={`side_nav shadow-lg shadow-gray-300 ${isOpen == true ? "active" : ""
+              }`}
           >
             <button className="close_btn " onClick={handleToggle}>
               <AiFillCloseCircle />
@@ -108,7 +128,9 @@ const CategorisedProducts = () => {
                   {" "}
                   Filter by price
                 </h2>
-                <RangeSlider />
+                <RangeSlider
+                  priceRange={priceRange}
+                  setPriceRange={setPriceRange} />
                 <hr className="my-5 border0.5 border-gray-300" />
 
                 {/* category filter */}
@@ -138,7 +160,10 @@ const CategorisedProducts = () => {
                 {" "}
                 Filter by price
               </h2>
-              <RangeSlider />
+              <RangeSlider
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+              />
               <hr className="my-5 border0.5 border-gray-300" />
 
               {/* category filter */}
@@ -153,19 +178,13 @@ const CategorisedProducts = () => {
 
               <hr className="my-5 border0.5 border-gray-300" />
 
-              {/* Brand filter */}
-              {/* <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
-                {" "}
-                Filter by Brands
-              </h2>
-              <BrandFilter /> */}
+
 
               {/* <hr className="my-5 border0.5 border-gray-300" /> */}
             </div>
           </div>
           <div className="w-full md:w-full lg:w-9/12">
             {/* product sorting */}
-
             <div className="flex items-center justify-between mx-2 mb-3">
               <button
                 onClick={handleToggle}
@@ -174,13 +193,14 @@ const CategorisedProducts = () => {
                 <TbFilter className="text-blue-500 text-lg" />
                 <span>Filter</span>
               </button>
-              <select name="" id="" className="px-4 py-3">
+              {/* <select name="" id="" className="px-4 py-3">
                 <option value="">Sort By: Popularity</option>
                 <option value="">Sort By: Latest</option>
                 <option value="">Sort By: Price low to high</option>
                 <option value="">Sort By: Price low to high</option>
-              </select>
+              </select> */}
             </div>
+
 
             {/* product cards */}
             <div className="grid md:grid-cols-3 lg:grid-cols-4"></div>

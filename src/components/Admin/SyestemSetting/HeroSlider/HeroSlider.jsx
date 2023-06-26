@@ -30,7 +30,8 @@ const HeroSlider = () => {
   const handleSliderImageSubmit = (event) => {
     event.preventDefault()
     const image = {
-      imageURL: sliderImageBE
+      imageURL: sliderImageBE,
+      url: event.target.url.value
     };
     PostAPI(`hero-slider`, image, setSliderImage);
     setSliderImageBE(null)
@@ -55,7 +56,8 @@ const HeroSlider = () => {
   const handleBannerImageSubmit = (event) => {
     event.preventDefault()
     const image = {
-      imageURL: bannerImageBE
+      imageURL: bannerImageBE,
+      url: event.target.url.value
     };
     PostAPI(`banner-slider`, image, setBannerImage);
     setBannerImageBE(null)
@@ -92,24 +94,45 @@ const HeroSlider = () => {
                     />
                   }
                 </div>
-                <div className="flex items-center   ">
-                  <div className=" w-full">
-                    <input
-                      type="file"
-                      // value={sliderImage}
-                      onChange={handleImageChange}
-                      className="w-full p-2 border-[1px] border-[#55c3c1f7]  rounded-lg z-20 text-sm text-gray-900 bg-gray-50  "
-                      placeholder="Add Hero Slider image..."
-                      required
-                    />
+                <div className=" ">
+                  <div className="w-full">
+                    <div className=" w-full">
+                      <input
+                        type="file"
+                        // value={sliderImage}
+                        onChange={handleImageChange}
+                        className="w-full p-2 border-[1px] border-[#55c3c1f7]  rounded-lg z-20 text-sm text-gray-900 bg-gray-50  "
+                        placeholder="Add Hero Slider image..."
+                        required
+                      />
+                    </div>
 
+                    <div className="my-3 ">
+                      <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                        Product URL
+                      </label>
+
+                      <input
+                        type="text"
+
+                        className={`bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none  block w-full p-2.5 border border-gray-300`}
+                        placeholder="Product URL"
+                        name="url"
+                      />
+
+                    </div>
                   </div>
-                  <button
-                    type="submit"
-                    className="py-2 px-3 ml-2 text-sm font-medium text-white bg-[#55c3c1f7] rounded-lg border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee]"
-                  >
-                    Add
-                  </button>
+
+                  {sliderImageBE &&
+
+                    <button
+                      type="submit"
+                      className="py-2 px-3 ml-2 text-sm font-medium text-white bg-[#55c3c1f7] rounded-lg border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee]"
+                    >
+                      Add
+                    </button>
+                  }
+
                 </div>
               </form>
 
@@ -144,7 +167,7 @@ const HeroSlider = () => {
               </div>
               {/* banner image form */}
               <form onSubmit={handleBannerImageSubmit} >
-                <div className="flex items-center   ">
+                <div className="  ">
                   <div className=" w-full">
                     <input
                       onChange={handleBannerImage}
@@ -154,12 +177,29 @@ const HeroSlider = () => {
                       required
                     />
                   </div>
-                  <button
-                    type="submit"
-                    className="py-2 px-3 ml-2 text-sm font-medium text-white bg-[#55c3c1f7] rounded-lg border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee]"
-                  >
-                    Add
-                  </button>
+                  <div className="my-3 ">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                      Product URL
+                    </label>
+
+                    <input
+                      type="text"
+
+                      className={`bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none  block w-full p-2.5 border border-gray-300`}
+                      placeholder="Product URL"
+                      name="url"
+                    />
+
+                  </div>
+                  {
+                    bannerImageBE &&
+                    <button
+                      type="submit"
+                      className="py-2 px-3 ml-2 text-sm font-medium text-white bg-[#55c3c1f7] rounded-lg border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee]"
+                    >
+                      Add
+                    </button>
+                  }
                 </div>
               </form>
 

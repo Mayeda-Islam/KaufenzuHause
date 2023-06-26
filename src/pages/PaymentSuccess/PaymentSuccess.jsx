@@ -12,8 +12,7 @@ const PaymentSuccess = () => {
             Your payment is successful
           </h1>
           <h1 className="text-xl my-0 text-center font-semibold text-gray-700 ">
-            Thank you for your payment.An automated payment receipt will be sent
-            to your registered email.{" "}
+            Thank you for your payment. We will process your order as soon as possible.{" "}
           </h1>
 
           <div className="flex justify-center items-center gap-10">

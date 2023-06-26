@@ -14,6 +14,7 @@ const ProductInfo = ({ product }) => {
     previousPrice,
     totalProduct,
     category,
+    categoryGerman,
     brand,
     model,
   } = product;
@@ -71,7 +72,7 @@ const ProductInfo = ({ product }) => {
           Category :{" "}
         </span>
         <span className="block text-sm font-normal text-textColor">
-          {category}
+          {language === 'english' ? category : categoryGerman}
         </span>
       </div>
       <div className="flex items-center gap-3 mb-2">

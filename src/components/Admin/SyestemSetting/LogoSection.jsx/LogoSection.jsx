@@ -4,6 +4,7 @@ import GetAPI from "../../../../APIHooks/GetAPI";
 import { SingleImageUploader } from "../../../../APIHooks/SingleImageUploader";
 import { useState } from "react";
 import UpdatedApi from "../../../../APIHooks/UpdatedItem";
+import PostAPI from "../../../../APIHooks/POSTAPI";
 
 const LogoSection = () => {
   const [logos, setLogos] = React.useState([]);
@@ -35,8 +36,12 @@ const LogoSection = () => {
       headerLogoURL: selectedFileHeader || logos[0]?.headerLogoURL,
       footerLogoURL: selectedFileFooter || logos[0]?.footerLogoURL,
     };
-
-    UpdatedApi(`logo/${logos[0]?._id}`, setLogos, formData);
+    if (logos[0]?._id) {
+      UpdatedApi(`logo/${logos[0]?._id}`, setLogos, formData);
+    }
+    else {
+      PostAPI('logo', formData, setLogos)
+    }
     form.reset();
   };
 

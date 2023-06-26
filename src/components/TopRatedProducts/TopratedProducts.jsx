@@ -26,11 +26,9 @@ const TopratedProducts = ({ products }) => {
                                 'Sehen Sie sich unsere Produkte an'
                         }
 
-
-
                     </h2>
                     {/* view all button  */}
-                    <Link to={'products'} className="hidden sm:hidden md:block text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor py-2 px-4 rounded-sm hover:border-primary">
+                    <Link to={'products'} className=" text-sm font-[400] text-textColor bg-transparent  hover:text-white hover:bg-primary border-2 border-textColor lg:py-2 p-1 lg:px-4 rounded-sm hover:border-primary">
                         View All
                     </Link>
                 </div>

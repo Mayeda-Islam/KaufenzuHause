@@ -13,10 +13,10 @@ const style = {
   bgcolor: "white",
 };
 const ViewProductModal = ({ open, setOpen, product }) => {
-  console.log(product);
   const {
     brand,
     category,
+    categoryGerman,
     colors,
     delivery,
     description,
@@ -92,6 +92,15 @@ const ViewProductModal = ({ open, setOpen, product }) => {
                             Category Name
                           </td>
                           <td>{category}</td>
+                        </tr>
+                        <tr className="bg-white border-b  border-[#D0D2DA]">
+                          <td
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          >
+                            Category Name In German
+                          </td>
+                          <td>{categoryGerman}</td>
                         </tr>
                         <tr className="bg-white border-b  border-[#D0D2DA]">
                           <td

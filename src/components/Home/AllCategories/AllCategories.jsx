@@ -70,7 +70,8 @@ const AllCategories = () => {
                                             <img src={category?.image} className="w-[50px]" alt="" />
                                         </div>
                                         <h3 className="text-textColor font-medium text-lg  capitalize py-3">
-                                            {category?.categoryTitle}
+                                            {language === 'english' ? category.categoryTitle : category.categoryTitleGerman}
+
                                         </h3>
                                     </div>
                                 </Link>

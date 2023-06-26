@@ -11,9 +11,12 @@ const ContextProvider = ({ children }) => {
   const [verified, setVerified] = useState(false);
   const [user, setUser] = useState(null);
   const [hasUser, setHasUser] = useState(null);
-  const [allProductsForSearch, setAllProductsForSearch] = useState([]);
+  const [products, setProducts] = useState([]);
   const [productsForSearch, setProductsForSearch] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+
+  console.log('products in context', products);
 
   useEffect(() => {
     setIsLoading(true);
@@ -21,7 +24,7 @@ const ContextProvider = ({ children }) => {
       .then((response) => response.json())
       .then((result) => {
         if (result?.status == "success") {
-          setAllProductsForSearch(result?.data);
+          setProducts(result?.data);
           setProductsForSearch(result?.data);
           setIsLoading(false);
         }
@@ -31,7 +34,7 @@ const ContextProvider = ({ children }) => {
   const handleSearch = (_searchInput) => {
     setIsLoading(true);
     setProductsForSearch(
-      allProductsForSearch?.filter((item) =>
+      products?.filter((item) =>
         item?.productTitle.toLowerCase().includes(_searchInput.toLowerCase())
       )
     );
@@ -189,6 +192,7 @@ const ContextProvider = ({ children }) => {
     handleSearch,
     productsForSearch,
     isLoading,
+    products
   };
   return <Context.Provider value={context}>{children}</Context.Provider>;
 };

@@ -1,15 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import TakeActionModal from './TakeActionModal';
-import { Link } from 'react-router-dom';
-import GetAPI from '../../../APIHooks/GetAPI';
-import moment from 'moment';
+// import React from 'react';
 
-const CanceledProduct = () => {
+// const OnProcessing = () => {
+//     return (
+//         <div>
+
+//         </div>
+//     );
+// };
+
+// export default OnProcessing;
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import GetAPI from "../../../APIHooks/GetAPI";
+import { Link } from "react-router-dom";
+import TakeActionModal from "./TakeActionModal";
+import moment from "moment";
+
+const OnProcessing = () => {
     const [orders, setOrders] = React.useState([]);
     const [singleId, setSingleId] = useState(null)
     const [open, setOpen] = useState(false)
     useEffect(() => {
-        GetAPI("orders/status/canceled", setOrders);
+        GetAPI("orders/status/on-Process", setOrders);
     }, []);
 
     const handleModal = (_id) => {
@@ -24,10 +37,11 @@ const CanceledProduct = () => {
     }, [])
     return (
         <div className="mt-8 w-full sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto xl:overflow-x-auto">
-            <h1 className="text-2xl my-4 font-semibold">Pending Order List</h1>
+            <h1 className="text-2xl my-4 font-semibold">Delivered Order List</h1>
             <hr className="mb-5" />
 
             {/* table  */}
+
             {
                 orders?.length > 0 ?
                     <div className=" mb-10">
@@ -112,4 +126,4 @@ const CanceledProduct = () => {
     );
 };
 
-export default CanceledProduct;
+export default OnProcessing;

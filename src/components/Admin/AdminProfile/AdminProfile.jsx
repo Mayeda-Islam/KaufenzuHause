@@ -309,7 +309,8 @@ const AdminProfile = () => {
 
           <button
             type="submit"
-            className="bg-[#55c3c1f7] py-2 px-7  text-white font-medium rounded-md mt-4 ml-auto block"
+           
+            className="py-2 px-7   text-sm font-medium text-white bg-[#55c3c1f7] rounded-sm border-[3px] border-[#55c3c1f7] hover:bg-[#031f4bee] hover:border-[#031f4bee] ml-auto block"
           >
             Save changes
           </button>
