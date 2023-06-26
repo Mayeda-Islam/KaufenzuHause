@@ -22,7 +22,7 @@ const UpdateCategoryModal = ({ editOpen, setEditOpen, setProductSliders, selecte
   const [categories, setCategories] = React.useState([])
   const [image, setImage] = useState(null)
   const [slider, setSlider] = useState({})
-  const { category, imageURL } = slider;
+  const { category, imageURL, url } = slider;
   useEffect(() => {
     GetAPI('categories', setCategories)
   }, [])
@@ -43,7 +43,9 @@ const UpdateCategoryModal = ({ editOpen, setEditOpen, setProductSliders, selecte
     const form = event.target
     const formData = {
       category: form.category.value || category,
-      imageURL: image || imageURL
+      imageURL: image || imageURL,
+      url: form.url.value || url
+
     }
     UpdatedApi(`category-slider/${selectedId}`, setProductSliders, formData);
     setEditOpen(false)
@@ -117,11 +119,26 @@ const UpdateCategoryModal = ({ editOpen, setEditOpen, setProductSliders, selecte
                           type="file"
                           onChange={handleImage}
                           accept="image/*"
-                          required
+
                           className="mt-2 w-full px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400 rounded-md sm:text-sm"
                           placeholder="slider image"
                         />
                       </div>
+                    </div>
+
+                    <div className="my-3 ">
+                      <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                        Product URL
+                      </label>
+
+                      <input
+                        type="text"
+                        defaultValue={url}
+                        className={`bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none  block w-full p-2.5 border border-gray-300`}
+                        placeholder="Product URL"
+                        name="url"
+                      />
+
                     </div>
 
                     <button

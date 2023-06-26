@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination, Autoplay } from "swiper";
+import { Link } from "react-router-dom";
 
 const CategorySlider = ({ sliderImages }) => {
   return (
@@ -25,11 +26,13 @@ const CategorySlider = ({ sliderImages }) => {
       >
         {sliderImages?.map((sliderImage, i) => (
           <SwiperSlide key={i} className="my-2">
-            <img
-              className="w-full lg:h-[760px] xxl:h-[760px] rounded-md object-cover"
-              src={sliderImage?.imageURL}
-              alt="slider image"
-            />
+            <Link to={sliderImage?.url}>
+              <img
+                className="w-full lg:h-[760px] xxl:h-[760px] rounded-md object-cover"
+                src={sliderImage?.imageURL}
+                alt="slider image"
+              />
+            </Link>
           </SwiperSlide>
         ))}
         {/* <SwiperSlide>

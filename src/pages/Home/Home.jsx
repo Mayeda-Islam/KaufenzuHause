@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CategorySectionOne from "../../components/Home/CategorySection/CategorySectionOne";
 
 import BannerSlider from "../../components/Home/BannerSlider/BannerSlider";
@@ -11,7 +11,7 @@ import { Context } from "../../ContextProvider/ContextProvider";
 const Home = () => {
   const { products } = useContext(Context)
   console.log('products in home', products);
-  const [categoriesSlider, setCategoriesSlider] = useState([]);
+  const [categoriesSlider, setCategoriesSlider] = React.useState([]);
 
   const headphones = products?.filter((data) => data?.category === ("Headphone" || "Headphone Accessories"));
   const headphonesSlider = categoriesSlider?.filter(

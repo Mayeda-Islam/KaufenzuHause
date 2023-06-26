@@ -36,7 +36,8 @@ const AddProductSliderModal = ({ open, setOpen, setProductSliders }) => {
         const form = event.target;
         const formData = {
             category: form.category.value,
-            imageURL: image
+            imageURL: image,
+            url: event.target.url.value
         }
         PostAPI('category-slider', formData, setProductSliders)
         form.reset()
@@ -112,10 +113,25 @@ const AddProductSliderModal = ({ open, setOpen, setProductSliders }) => {
                                                 onChange={handleImage}
                                                 accept="image/*"
                                                 required
-                                                className="mt-2 w-full px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-400 rounded-md sm:text-sm"
+                                                className="mt-2 w-full px-3 py-2 border-2 shadow-sm focus:outline-none border-[#55c3c1f7] bg-transparent placeholder-slate-700 rounded-md sm:text-sm"
                                                 placeholder="slider image"
                                             />
                                         </div>
+                                    </div>
+
+                                    <div className="my-3 ">
+                                        <label className="block mb-2 text-sm font-medium text-gray-900 ">
+                                            Product URL
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            required
+                                            className={`bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none  block w-full p-2.5 border border-gray-300`}
+                                            placeholder="Product URL"
+                                            name="url"
+                                        />
+
                                     </div>
 
                                     <button
