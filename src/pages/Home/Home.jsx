@@ -7,9 +7,11 @@ import TopratedProducts from "../../components/TopRatedProducts/TopratedProducts
 import GetAPI from "../../APIHooks/GetAPI";
 import { useContext } from "react";
 import { Context } from "../../ContextProvider/ContextProvider";
+import { Box, CircularProgress } from "@mui/material";
 
 const Home = () => {
   const { products } = useContext(Context)
+
   console.log('products in home', products);
   const [categoriesSlider, setCategoriesSlider] = React.useState([]);
 
@@ -45,6 +47,13 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  if (products?.length === 0) {
+    return <div className="text-center h-screen flex justify-center items-center">
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    </div>
+  }
   return (
     <>
       <BannerSlider />
