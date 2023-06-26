@@ -84,6 +84,11 @@ const TakeActionModal = ({ open, setOpen, setOrders, singleId }) => {
                                                     Pending
                                                 </option>
                                                 <option
+                                                    selected={singleData?.status === 'on-Process'}
+                                                    value="on-Process">
+                                                    On-Process
+                                                </option>
+                                                <option
                                                     selected={singleData?.status === 'delivered'}
                                                     value="delivered">
                                                     Delivered

@@ -1,27 +1,32 @@
 import {
-  BsWalletFill,
   BsCurrencyExchange,
-  BsCart4,
+
 } from "react-icons/bs";
-import { GiTwoCoins } from "react-icons/gi";
-import { BiTask } from "react-icons/bi";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import { BiTask, BiTaskX } from "react-icons/bi";
 // import DashboardChart from "./DashboardChart";
 import { useEffect, useState } from "react";
 import GetAPI from "../../../APIHooks/GetAPI";
+import { RiListOrdered, RiListUnordered } from "react-icons/ri";
+import { MdPendingActions } from "react-icons/md";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { FaUsers } from "react-icons/fa";
 
 const AdminDashboard = () => {
 
   const [totalOrder, setTotalOrder] = useState([])
   const [orderPending, setOrderPending] = useState([])
+  const [orderProcessing, setOrderProcessing] = useState([])
   const [orderCanceled, setOrderCanceled] = useState([])
   const [orderDelivered, setOrderDelivered] = useState([])
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
     GetAPI("orders", setTotalOrder);
     GetAPI("orders/status/pending", setOrderPending);
     GetAPI("orders/status/canceled", setOrderCanceled);
     GetAPI("orders/status/delivered", setOrderDelivered);
+    GetAPI("orders/status/on-Process", setOrderProcessing);
+    GetAPI("users", setUsers);
 
   }, [])
   const today = new Date();
@@ -38,34 +43,44 @@ const AdminDashboard = () => {
 
   const sellsIncome = [
     {
-      icon: <BsWalletFill />,
+      icon: <BsCurrencyExchange />,
       title: "Total income",
       amount: totalPrice,
     },
     {
-      icon: <FaRegCalendarAlt />,
+      icon: <RiListOrdered />,
       title: "Total Order",
       amount: totalOrder?.length
     },
     {
-      icon: <BsCart4 />,
+      icon: <RiListUnordered />,
       title: "Today's Orders",
       amount: todayOrders?.length
     },
     {
-      icon: <GiTwoCoins />,
+      icon: <AiOutlineQuestionCircle />,
       title: "Order Pending",
       amount: orderPending?.length,
     },
     {
-      icon: <BsCurrencyExchange />,
+      icon: <MdPendingActions />,
+      title: "Order Processing",
+      amount: orderProcessing?.length,
+    },
+    {
+      icon: <BiTask />,
       title: "Order Delivered",
       amount: orderDelivered?.length,
     },
     {
-      icon: <BiTask />,
+      icon: < BiTaskX />,
       title: "Order Canceled",
       amount: orderCanceled?.length
+    },
+    {
+      icon: <FaUsers />,
+      title: "Total Users",
+      amount: users?.length
     },
 
 

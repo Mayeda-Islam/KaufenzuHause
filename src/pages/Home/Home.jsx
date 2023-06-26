@@ -5,13 +5,12 @@ import BannerSlider from "../../components/Home/BannerSlider/BannerSlider";
 import AllCategories from "../../components/Home/AllCategories/AllCategories";
 import TopratedProducts from "../../components/TopRatedProducts/TopratedProducts";
 import GetAPI from "../../APIHooks/GetAPI";
+import { useContext } from "react";
+import { Context } from "../../ContextProvider/ContextProvider";
 
 const Home = () => {
-  const [products, setProducts] = React.useState([]);
-  useEffect(() => {
-    GetAPI("products", setProducts);
-  }, []);
-
+  const { products } = useContext(Context)
+  console.log('products in home', products);
   const [categoriesSlider, setCategoriesSlider] = useState([]);
 
   const headphones = products?.filter((data) => data?.category === ("Headphone" || "Headphone Accessories"));
@@ -67,7 +66,6 @@ const Home = () => {
             sliders={headphonesSlider}
             title={"Headphones and Accessories"}
             titleGerman={"Kopfhörer und Zubehör"}
-            category={"Headphone"}
           >
           </CategorySectionOne>
         )

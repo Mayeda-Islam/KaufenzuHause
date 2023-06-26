@@ -71,9 +71,6 @@ const AllProducts = () => {
     }
   };
 
-  const handlePriceRange = (_min, _max) => {
-    console.log(_min, _max);
-  };
 
   useEffect(() => {
     if (filterInputs.length > 0 || priceRange[1] > 0) {
@@ -99,9 +96,8 @@ const AllProducts = () => {
         <div className="flex items-center justify-center lg:hidden mb-5 relative">
           <div
             ref={navWrapper}
-            className={`side_nav shadow-lg shadow-gray-300 ${
-              isOpen == true ? "active" : ""
-            }`}
+            className={`side_nav shadow-lg shadow-gray-300 ${isOpen == true ? "active" : ""
+              }`}
           >
             <button className="close_btn " onClick={handleToggle}>
               <AiFillCloseCircle />
@@ -113,7 +109,10 @@ const AllProducts = () => {
                   {" "}
                   Filter by price 99
                 </h2>
-                <RangeSlider />
+                <RangeSlider
+                  priceRange={priceRange}
+                  setPriceRange={setPriceRange}
+                />
                 <hr className="my-5 border0.5 border-gray-300" />
 
                 {/* category filter */}

@@ -166,7 +166,7 @@ const Header = () => {
       {/* web nav */}
 
       <nav
-        className={`py-4 px-4 w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${stickyNav
+        className={`py-4 px-10 w-full  top-0 right-0 left-0 z-[10]  md:py-2 text-[#FFF]  hidden md:hidden lg:flex items-center justify-between   ${stickyNav
           ? "transition-all delay-700 ease-in-out bg-darkNavy fixed shadow-md shadow-gray-200"
           : "bg-darkNavy"
           }`}
@@ -203,7 +203,7 @@ const Header = () => {
               onChange={(e) => {
                 handleSearch(e.target.value), handleData(e.target.value);
               }}
-              className="block p-2.5 w-[600px] rounded-lg z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg outline-none"
+              className="block py-2.5 px-6 w-[600px] rounded-lg z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg outline-none"
               placeholder="Search for products, brands and more..."
               required
             />
@@ -233,18 +233,18 @@ const Header = () => {
         {
           searchValue?.length > 0 &&
           <div className="absolute lg:top-[5%]  xl:top-[7%] lg:left-[17.5%] xxl:top-[5%] xl:left-[24%] xxl:left-[30.5%] xxxl:left-[35%] p-2.5 lg:w-[600px] xl:w-[620px] w-full mx-auto z-10 ">
-            <ul className="flex flex-col pt-2 space-y-2 bg-white text-gray-900 rounded">
+            <ul className="flex flex-col p-2 space-y-2  text-gray-900 rounded bg-gray-100 max-h-[600px] overflow-y-auto ">
               {productsForSearch?.length > 0 ?
                 productsForSearch?.map((product, index) =>
-                  <li key={index} className="flex items-start   border my-1 hover:bg-gray-100" >
-                    <Link to={`/productDetails/${product?._id}`} onClick={() => handleData('')} className="grid grid-cols-12">
+                  <li key={index} className="flex items-start border rounded my-1 hover:bg-primary/20" >
+                    <Link to={`/productDetails/${product?._id}`} onClick={() => handleData('')} className="grid grid-cols-12 gap-x-4 items-center">
                       <div className="flex items-center justify-center col-span-2">
                         <img src={`${product?.images[0]}`} className='w-20 h-20  ' />
                       </div>
-                      <div className="col-span-10">
+                      <div className="col-span-10 ">
                         {
                           language === 'english' ?
-                            <h3 className="text-base font-semibold text-textPrimary mb-1">{product?.productTitle?.length > 50 ? product?.productTitle?.slice(0, 50) + '..' : product?.productTitle}</h3>
+                            <h3 className="text-base font-semibold text-textPrimary  mb-1">{product?.productTitle?.length > 50 ? product?.productTitle?.slice(0, 50) + '..' : product?.productTitle}</h3>
                             :
 
                             <h3 className="text-base font-semibold text-textPrimary mb-1">{product?.productTitleGerman?.length > 50 ? product?.productTitleGerman?.slice(0, 50) + '..' : product?.productTitleGerman}</h3>
@@ -257,7 +257,7 @@ const Header = () => {
                 )
                 :
                 <>
-                  <div className="my-2  justify-center items-center flex">
+                  <div className="my-2  justify-center items-center flex h-64">
                     <p className="text-lg font-semibold text-center">No Products Available</p>
                   </div>
                 </>

@@ -111,13 +111,9 @@ const AddProduct = () => {
           Swal.fire("Congrats!", "Product Added Successfully!", "success");
         }
       });
-
-    console.log(productData);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
   return (
     <div>
       <h1 className="text-3xl w-11/12 mx-auto font-medium">Add Product</h1>

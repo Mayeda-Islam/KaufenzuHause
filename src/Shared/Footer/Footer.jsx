@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiOutlineMobile, AiOutlineMail } from 'react-icons/ai';
 import { IoLocationOutline } from 'react-icons/io5';
 
@@ -11,12 +11,16 @@ const Footer = () => {
     const [logo, setLogo] = React.useState([])
     const [information, setInformation] = React.useState([])
     const [description, setDescription] = React.useState([])
+    const [socialLink, setSocialLink] = useState({})
 
     // footer logo 
     useEffect(() => {
         GetAPI('logo', setLogo)
     }, [])
 
+    React.useEffect(() => {
+        GetAPI(`socialMedia`, setSocialLink);
+    }, []);
 
     // footer information
     useEffect(() => {
@@ -65,35 +69,13 @@ const Footer = () => {
 
                                     </span>
                                     <h3 className="text-sm text-white">
-                                        Email:  {information[0]?.email}
+                                        {information[0]?.email}
                                     </h3>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {/* <div className="w-full  lg:w-1/5 mt-2">
-                        <h2 className=" uppercase mb-4 text-sm font-semibold text-[#f7f7f7]  dark:text-white">
-                            About
-                        </h2>
-                        <ul className="text-gray-300 flex flex-col gap-y-2 text-sm font-normal capitalize mb-6">
 
-                            <li>
-                                <Link to="" className="hover:underline">
-                                    Privacy Policy
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/refound-return" className="hover:underline">
-                                    Terms and Conditions
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/terms-conditions" className="hover:underline">
-                                    Why Shop with us
-                                </Link>
-                            </li>
-                        </ul>
-                    </div> */}
                     <div className="w-full  lg:w-1/5 mt-2">
                         <h2 className="mb-4 text-sm font-semibold text-[#f7f7f7] uppercase dark:text-white">
                             Help
@@ -101,20 +83,20 @@ const Footer = () => {
                         <ul className="text-gray-300 flex flex-col gap-y-2 text-sm font-normal capitalize mb-6">
 
                             <li>
-                                <a to="" className="hover:underline">
+                                <Link to="/returnAndPlacement" className="hover:underline">
                                     Return and Placement
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <ReactWhatsapp number="+4917662058329">
+                                <ReactWhatsapp number="+4917662058329" className='hover:underline'>
                                     Chat with us
                                 </ReactWhatsapp>
 
                             </li>
                             <li>
-                                <a to="" className="hover:underline">
+                                <Link to="/support" className="hover:underline">
                                     Our support
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -124,21 +106,21 @@ const Footer = () => {
                         </h2>
                         <ul className="text-gray-300 flex flex-col gap-y-2 text-sm font-normal capitalize mb-8">
                             <li>
-                                <Link to="">
+                                <a href={socialLink[0]?.facebookURL} target='_blank' rel='noreferrer' className="hover:underline">
                                     FaceBook
-                                </Link>
+                                </a>
                             </li>
 
                             <li>
-                                <Link to="">
+                                <a href={socialLink[0]?.instagramURL} target='_blank' rel='noreferrer' className="hover:underline">
                                     Instagram
-                                </Link>
+                                </a>
                             </li>
 
                             <li>
-                                <Link to="">
+                                <a href={socialLink[0]?.youtubeURL} target='_blank' rel='noreferrer' className="hover:underline">
                                     You Tube
-                                </Link>
+                                </a>
                             </li>
 
 
@@ -152,7 +134,7 @@ const Footer = () => {
                         <Link to={"/"} className="hover:underline">
                             Kaufenzuhause
                         </Link>
-                        . All Rights Reserved. <a href="https://miskaturs-portfolio.netlify.app/">Developed by Miskat and Team</a>
+                        . All Rights Reserved. <a href="https://miskaturs-portfolio.netlify.app/" target='_blank' rel='noreferrer'>Developed by Miskat and Team</a>
 
                     </span>
                     {/* footer icon */}

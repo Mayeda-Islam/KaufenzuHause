@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import UpdatedApi from '../../../../APIHooks/UpdatedItem';
-import PostAPI from '../../../../APIHooks/PostAPI';
 import GetAPI from '../../../../APIHooks/GetAPI';
+import OnlyPostAPI from '../../../../APIHooks/OnlyPostAPI';
 
 const SocialMediaLinks = () => {
 
@@ -26,7 +26,7 @@ const SocialMediaLinks = () => {
             UpdatedApi(`socialMedia/${socialLink[0]?._id}`, setSocialLink, updatedData);
         }
         else {
-            PostAPI('socialMedia', updatedData, setSocialLink)
+            OnlyPostAPI('socialMedia', updatedData)
         }
     }
     return (

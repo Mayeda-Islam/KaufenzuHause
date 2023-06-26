@@ -5,6 +5,7 @@ import FooterDescriptionModal from "./FooterDescriptionModal";
 import UpdatedApi from "../../../../APIHooks/UpdatedItem";
 import FooterInfoModal from "./FooterInfoModal";
 import PostAPI from "../../../../APIHooks/PostAPI";
+import OnlyPostAPI from "../../../../APIHooks/OnlyPostAPI";
 
 const style = {
   position: "absolute",
@@ -52,7 +53,7 @@ const FooterSection = () => {
       );
     }
     else {
-      PostAPI('footer-description', updatedData, setFooterDescription)
+      OnlyPostAPI('footer-description', updatedData)
     }
   };
   //info
@@ -66,7 +67,7 @@ const FooterSection = () => {
       UpdatedApi(`footer-info/${footerInfo[0]?._id}`, setFooterInfo, updatedData);
     }
     else {
-      PostAPI('footer-info', updatedData, setFooterInfo)
+      OnlyPostAPI('footer-info', updatedData)
     }
   };
 

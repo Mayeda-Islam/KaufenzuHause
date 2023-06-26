@@ -16,7 +16,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Collapse, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CategoryIcon from "@mui/icons-material/Category";
@@ -28,7 +28,8 @@ import GetAPI from "../../../APIHooks/GetAPI";
 import { useState } from "react";
 import { Context } from "../../../ContextProvider/ContextProvider";
 import SettingsIcon from '@mui/icons-material/Settings';
-
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 const drawerWidth = 300;
 
 const openedMixin = (theme) => ({
@@ -106,9 +107,9 @@ export default function AdminLayOut() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [nestedOpen, setNestedOpen] = React.useState([]);
-  const { user } = React.useContext(Context)
+  const { user, setUser, setHasUser } = React.useContext(Context)
   const [currentUser, setCurrentUser] = useState({})
-
+  const navigate = useNavigate()
   useEffect(() => {
     GetAPI(`users/${user?.email}`, setCurrentUser)
   }, [user?.email, setCurrentUser])
@@ -134,6 +135,13 @@ export default function AdminLayOut() {
     setOpen(false);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser({});
+    setHasUser(false);
+    navigate('/')
+  };
+
   const menu = [
     {
       title: "Dashboard",
@@ -145,12 +153,11 @@ export default function AdminLayOut() {
       icon: <AccountCircleIcon />,
       linkPath: "profile",
     },
-
-    // {
-    //   title: "My Orders",
-    //   icon: <AddShoppingCartIcon />,
-    //   link: "myOrders",
-    // },
+    {
+      title: "All Users",
+      icon: <PeopleAltIcon />,
+      linkPath: "users",
+    },
 
     {
       title: "Orders",
@@ -164,6 +171,10 @@ export default function AdminLayOut() {
         {
           title: "Pending Product",
           linkPath: "/dashboard/orders/pendingProducts"
+        },
+        {
+          title: "On-Processed Product",
+          linkPath: "/dashboard/orders/on-Process"
         },
         {
           title: "Delivered Product",
@@ -226,6 +237,11 @@ export default function AdminLayOut() {
           title: "Social Media Links",
 
           linkPath: "systemSetting/socialMedia",
+        },
+        {
+          title: "Return Policy and Placement",
+
+          linkPath: "systemSetting/returnPolicy",
         },
       ],
     },
@@ -513,7 +529,45 @@ export default function AdminLayOut() {
               </Link>
 
             </React.Fragment>
+
           ))}
+          <>
+            <ListItem
+              disablePadding
+              sx={{ display: "block" }}
+              onClick={handleLogout}
+            >
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    color: "white",
+                    justifyContent: "center",
+                  }}
+                >
+                  <PowerSettingsNewIcon />
+                </ListItemIcon>
+                <ListItemText
+                  className="text-md "
+                  sx={{
+                    opacity: open ? 1 : 0,
+
+                    color: "white",
+                  }}
+                >
+                  <span className="text-md">Logout</span>
+                </ListItemText>
+
+              </ListItemButton>
+            </ListItem>
+          </>
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

@@ -2,22 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import SingleProduct from "../../Shared/SingleProduct/SingleProduct";
 import RangeSlider from "../../Shared/RangeSlider/RangeSlider";
 import CategoryFilter from "../../Shared/CategoryFilter/CategoryFilter";
-import { TbFilter } from "react-icons/tb";
 
 import { AiFillCloseCircle } from "react-icons/ai";
 import "./CategorisedProducts.css";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import GetAPI from "../../APIHooks/GetAPI";
 import { Box, CircularProgress } from "@mui/material";
 
 const CategorisedProducts = () => {
   const { id } = useParams();
-  const { state } = useLocation();
-  const { cat } = state || {};
+  // const { state } = useLocation();
+  // const { cat } = state || {};
   const navWrapper = useRef();
   //state for filter nav
   const [isOpen, setIsopen] = React.useState(false);
-
   const handleToggle = () => {
     //alert('clicked')
     isOpen === true ? setIsopen(false) : setIsopen(true);
@@ -49,6 +47,7 @@ const CategorisedProducts = () => {
   const [productData, setProductData] = useState([]);
 
   const [loading, setLoading] = useState(false);
+  const [priceRange, setPriceRange] = React.useState([0, 1000]);
 
   useEffect(() => {
     if (id) {
@@ -63,12 +62,7 @@ const CategorisedProducts = () => {
     }
   }, [category?.categoryTitle, id]);
 
-  useEffect(() => {
-    if (cat) {
-      setLoading(true);
-      GetAPI(`product/${cat}`, setAllProductData);
-    }
-  }, [cat]);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -82,6 +76,19 @@ const CategorisedProducts = () => {
       setFilterInputs([...filterInputs, _value]);
     }
   };
+
+  useEffect(() => {
+    if (filterInputs.length > 0 || priceRange[1] > 0) {
+      const filterResult = allProductData.filter(
+        (data) =>
+          (filterInputs.length === 0 || filterInputs.includes(data.category)) &&
+          (priceRange[1] === 0 ||
+            (data.productPrice >= priceRange[0] &&
+              data.productPrice <= priceRange[1]))
+      );
+      setProductData(filterResult);
+    }
+  }, [filterInputs, priceRange]);
 
   useEffect(() => {
     setProductData(allProductData);
@@ -120,7 +127,9 @@ const CategorisedProducts = () => {
                   {" "}
                   Filter by price
                 </h2>
-                <RangeSlider />
+                <RangeSlider
+                  priceRange={priceRange}
+                  setPriceRange={setPriceRange} />
                 <hr className="my-5 border0.5 border-gray-300" />
 
                 {/* category filter */}
@@ -150,7 +159,10 @@ const CategorisedProducts = () => {
                 {" "}
                 Filter by price
               </h2>
-              <RangeSlider />
+              <RangeSlider
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+              />
               <hr className="my-5 border0.5 border-gray-300" />
 
               {/* category filter */}
@@ -165,12 +177,7 @@ const CategorisedProducts = () => {
 
               <hr className="my-5 border0.5 border-gray-300" />
 
-              {/* Brand filter */}
-              {/* <h2 className="text-[16px] uppercase text-textColor font-semibold mb-5">
-                {" "}
-                Filter by Brands
-              </h2>
-              <BrandFilter /> */}
+
 
               {/* <hr className="my-5 border0.5 border-gray-300" /> */}
             </div>
@@ -178,21 +185,7 @@ const CategorisedProducts = () => {
           <div className="w-full md:w-full lg:w-9/12">
             {/* product sorting */}
 
-            <div className="flex items-center justify-between mx-2 mb-3">
-              <button
-                onClick={handleToggle}
-                className=" md:flex lg:invisible bg-white py-1.5 rounded-md px-4 text-textColor hover:text-white text-[16px] border border-textColor flex items-center gap-2 hover:bg-textColor hover:border-textColor"
-              >
-                <TbFilter className="text-blue-500 text-lg" />
-                <span>Filter</span>
-              </button>
-              <select name="" id="" className="px-4 py-3">
-                <option value="">Sort By: Popularity</option>
-                <option value="">Sort By: Latest</option>
-                <option value="">Sort By: Price low to high</option>
-                <option value="">Sort By: Price low to high</option>
-              </select>
-            </div>
+
 
             {/* product cards */}
             <div className="grid md:grid-cols-3 lg:grid-cols-4"></div>

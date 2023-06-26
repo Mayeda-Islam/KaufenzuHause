@@ -46,6 +46,11 @@ import PendingProduct from "../components/Admin/AdminOrders/PendingProduct";
 import CanceledProduct from "../components/Admin/AdminOrders/CanceledProduct";
 import SocialMediaLinks from "../components/Admin/SyestemSetting/SocialMedia/SocialMediaLinks";
 import PrivateRoutes from "./PrivateRoutes";
+import OnProcessing from "../components/Admin/AdminOrders/OnProcessing";
+import AllUser from "../components/Admin/AllUser/AllUser";
+import ReturnAndPlacement from "../pages/ReturnAndPlacement/ReturnAndPlacement";
+import Support from "../pages/Support/Support";
+import ReturnPolicy from "../components/Admin/SyestemSetting/ReturnPolicy/ReturnPolicy";
 
 export const router = createBrowserRouter([
   {
@@ -114,6 +119,14 @@ export const router = createBrowserRouter([
         path: "error",
         element: <NotFound />,
       },
+      {
+        path: "returnAndPlacement",
+        element: <ReturnAndPlacement />,
+      },
+      {
+        path: "support",
+        element: <Support />,
+      },
     ],
   },
   {
@@ -131,6 +144,11 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <AdminProfile></AdminProfile>,
+      },
+
+      {
+        path: "users",
+        element: <AllUser></AllUser>,
       },
       {
         path: "myOrders",
@@ -151,6 +169,10 @@ export const router = createBrowserRouter([
       {
         path: "orders/deliveredProducts",
         element: <DeliveredProduct></DeliveredProduct>,
+      },
+      {
+        path: "orders/on-Process",
+        element: <OnProcessing></OnProcessing>,
       },
       {
         path: "orders/pendingProducts",
@@ -201,6 +223,10 @@ export const router = createBrowserRouter([
       {
         path: "systemSetting/socialMedia",
         element: <SocialMediaLinks />,
+      },
+      {
+        path: "systemSetting/returnPolicy",
+        element: <ReturnPolicy />,
       },
     ],
   },
