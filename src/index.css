@@ -4,8 +4,64 @@
 
 /******google font******/
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap");
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
+
+/* number arrow hidden */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+/* body,
+html {
+  overflow-x: hidden !important;
+} */
+
+/* .swiper-nav-btns button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #031f4b;
+  color: #fff;
+  margin: 0px 0.5rem;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  margin-top: 30px;
+  transition: all 0.5s;
+  z-index: 99999;
+} */
+/*  */
+/* ******slider design******* */
+
+/* .slide {
+  display: inline-block;
+
+  height: 450px;
+  width: 100%;
+  border-radius: 40px;
+} */
+
+/* .point_r {
+  cursor: pointer !important;
+} */
+
+/*******swiper custom arrow*******/
+/* .mySwiper:nth-child(2) {
+  margin-bottom: 50px !important;
+} */
+
+/********mui tabs padding*******/
+/* .css-19kzrtu {
+  padding: 0 !important;
+} */

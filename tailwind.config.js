@@ -5,7 +5,9 @@ export default {
     extend: {
       colors: {
         darkNavy: "#232f3e",
-        primary: "#FFC312",
+        primary: "#7ED957",
+        secondary: "#FFC312",
+
         textColor: "#191919",
         lightGray: "#9ca3af",
         darkGray: "#374151"
@@ -14,9 +16,11 @@ export default {
       screens: {
         xs: "320px",
         sm: "480px",
-        md: "768px",
+        md: "850px",
         lg: "1024px",
         xl: "1440px",
+        xxl: "1916px",
+        xxxl: "2400px",
       },
     },
   },

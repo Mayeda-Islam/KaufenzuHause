@@ -1,10 +1,11 @@
 {
-  "name": "vite-project",
+  "name": "kaufenzuhauze",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -12,11 +13,27 @@
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@mollie/api-client": "^3.7.0",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.1",
+    "@stripe/react-stripe-js": "^2.1.0",
+    "@stripe/stripe-js": "^1.54.0",
+    "axios": "^1.4.0",
+    "html-react-parser": "^3.0.16",
+    "jodit": "^4.0.0-beta.50",
+    "jodit-react": "^1.3.39",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
-    "react-router-dom": "^6.11.1"
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.11.1",
+    "react-whatsapp": "^0.3.0",
+    "recharts": "^2.6.2",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.7.8",
+    "swiper": "^9.3.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
